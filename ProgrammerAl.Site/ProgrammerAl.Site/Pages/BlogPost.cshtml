@@ -1,0 +1,26 @@
+﻿@page "/blog/posts/{PostUrl}"
+
+@inherits ProgrammerAl.Site.PageModels.BlogPostModel
+
+@if (PostEntry != null)
+{
+    <h1>
+        @PostEntry.Title
+    </h1>
+    <p>
+        <i>Posted on: @PostEntry.ReleaseDate.ToLongDateString()</i>
+    </p>
+
+    @*<div class="tags">
+        @foreach (var tag in PostEntry.Tags)
+        {
+            <a class="btn btn-default btn-xs">@tag</a>
+        }
+    </div>*@
+
+    <div id="content" class="col-md-12">
+        @BlogPostContent
+    </div>
+}
+
+<DiscusJs />
