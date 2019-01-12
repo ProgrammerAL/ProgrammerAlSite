@@ -10,6 +10,8 @@ namespace ProgrammerAl.Site.PageModels
 {
     public class BlogPostModel : BlazorComponent
     {
+        private const string BlogPostRelativeLinkTemplate = "BlogPosts/{0}.md";
+
         [Inject]
         private HttpClient HttpClient { get; set; }
 
@@ -25,7 +27,7 @@ namespace ProgrammerAl.Site.PageModels
         protected override async Task OnInitAsync()
         {
             var downloader = new FileDownloader();
-            var pathToBlogPost = "posts/" + PostUrl + ".md";
+            var pathToBlogPost = string.Format(BlogPostRelativeLinkTemplate, PostUrl);
             var response = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, pathToBlogPost, "text/x-markdown");
 
             PostEntry = new BlogPostParser(Config).ParseFromMarkdown(response);
