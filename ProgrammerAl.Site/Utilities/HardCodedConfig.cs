@@ -5,7 +5,7 @@
         string SiteContentUrl { get; }
     }
 
-    public class Config : IConfig
+    public class HardCodedConfig : IConfig
     {
         public string SiteContentUrl => "https://programmeralsitecontent.blob.core.windows.net/sitecontent/";
     }

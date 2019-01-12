@@ -8,7 +8,7 @@ namespace ProgrammerAl.Site
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IConfig>(new Config());
+            services.AddSingleton<IConfig>(new HardCodedConfig());
         }
 
         public void Configure(IBlazorApplicationBuilder app)
