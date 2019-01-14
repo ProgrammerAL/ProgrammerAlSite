@@ -23,7 +23,7 @@ namespace ProgrammerAl.Site.PageModels
             var downloader = new FileDownloader();
             var response = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, "BlogPosts.json", "application/json");
 
-            //https://developersidequests.blob.core.windows.net/content/BlogPosts.json
+            //https://programmeralsitecontent.blob.core.windows.net/sitecontent/BlogPosts.json
             string recentDataText = await HttpClient.GetStringAsync("BlogPosts.json");
 
             BlogPosts = Microsoft.JSInterop.Json.Deserialize<BlogPostSummary[]>(recentDataText);

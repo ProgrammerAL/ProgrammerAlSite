@@ -41,7 +41,7 @@ Turns out it's super easy to add this to an Azure Website. Since I'm no expert i
 There was however one concern I personally had with this whole setup. In order to get SSL support on the Azure App Service I had to move from the cheap $10 per month Shared performance profile, to the higher B1 Basic profile at an estimated cost of $55.80 per month. That's a higher cost than I want to pay for the 3 humans and 60 bots that visit this site every month.
 
 <figure>
-  <img src="__StorageSiteUrl__/assets/images/postimages/04/AppServiceTierCosts.png" alt="Low-End Azure App Service Costs" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/04/AppServiceTierCosts.png" alt="Low-End Azure App Service Costs" class="img-responsive">
   <figcaption>I'm sure the bots will enjoy the faster performance</figcaption>
 </figure>
 
@@ -84,21 +84,21 @@ The code for the Wyam Theme I'm using is hosted on GitHub [here](https://github.
 There were only two changes made to the build for generating the blog output files. I added a step for replacing a token in the cake file to essentially hard-code where the theme is. The second change is to use that hard-coded theme.
 
 <figure>
-  <img src="__StorageSiteUrl__/assets/images/postimages/04/TokenizedCakeTheme.png" alt="Tokenized Cake Field" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/04/TokenizedCakeTheme.png" alt="Tokenized Cake Field" class="img-responsive">
   <figcaption>The _OutputTheme_ token will be replaced with the full path to the theme by the build</figcaption>
 </figure>
 
 The release however was completly changed. It now consists of two tasks. The first is for replacing tokens in the output files. In the below example the text with _StorageSiteUrl_ will be replaced with the value I set as a release variable. The second step in the release is copy/pasting the files to the Azure Storage location.
 
 <figure>
-  <img src="__StorageSiteUrl__/assets/images/postimages/04/HostedSiteUrlTokenExample.png" alt="Hosted Site Url Tokenization Example" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/04/HostedSiteUrlTokenExample.png" alt="Hosted Site Url Tokenization Example" class="img-responsive">
   <figcaption>The _StorageSiteUrl_ token will be replaced by the build</figcaption>
 </figure>
 
 Copying those files to Azure Blob Storage had one gotcha. If you just use the basic Azure Copy Files task, the default content-type returned by the browser will be set to `application/octet-stream`. When you navigate to that with your browser, the file will be downloaded, not display on-screen. There is no way you want that for a website. Basic file storage, sure. But not for a website. So you'll need to add the `/SetContentType` flag as an additional argument to the Azure Copy Files task. This way it'll just default based off the file extensions. 
 
 <figure>
-  <img src="__StorageSiteUrl__/assets/images/postimages/04/CopyFilesAdditionalArguments.png" alt="Hosted Site Url Tokenization Example" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/04/CopyFilesAdditionalArguments.png" alt="Hosted Site Url Tokenization Example" class="img-responsive">
   <figcaption>I lost about a week on this. Don't do the same.</figcaption>
 </figure>
 
@@ -109,7 +109,7 @@ This was probably the easiest part of the whole process. The blog post by Stephe
 I just had to navigate to the Azure Portal and click the button to generate a new Azure Function. Once that was done I added two proxies. The first is to redirect anyone going to the base URL of the function at https://developersidequests.com/ to go to https://developersidequests.blob.core.windows.net/site/index.html. The second proxy is for every other web page. To redirect from https://developersidequests.com/{*url} to https://developersidequests.blob.core.windows.net/site/{url}.html. 
 
 <figure>
-  <img src="__StorageSiteUrl__/assets/images/postimages/04/AzureFunctionProxies.png" alt="Azure Function Proxies" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/04/AzureFunctionProxies.png" alt="Azure Function Proxies" class="img-responsive">
   <figcaption>Keepin' it simple</figcaption>
 </figure>
 
@@ -122,7 +122,7 @@ Before I started this I was paying about $10 per month. After changing the Azure
 Of course I still set a quota to automatically shut off the Function in case the cost gets a little ouf of control.
 
 <figure>
-  <img src="__StorageSiteUrl__/assets/images/postimages/04/Quota.png" alt="Azure Function Quota" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/04/Quota.png" alt="Azure Function Quota" class="img-responsive">
   <figcaption>I have no idea what the number is really representing, so I'll play with the number from time to time until it feels right.</figcaption>
 </figure>
 
