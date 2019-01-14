@@ -51,7 +51,7 @@ But why stop there? Once we have the blog written up, we should use other tools 
 Getting started with Wyam is easy enough. There are a handful of places to get the bits from, but I chose to use the Windows installer [here](https://github.com/Wyamio/Wyam/releases). Just download the Setup.exe and run it on the machine. Now Wyam is installed and you get a cool command prompt in your start menu.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/WyamCommandPrompt.png" alt="Wyam Command Prompt" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/WyamCommandPrompt.png" alt="Wyam Command Prompt" class="img-fluid">
   <figcaption>You know, a command prompt.</figcaption>
 </figure>
 
@@ -85,7 +85,7 @@ My favorite thing about Markdown Monster is that it opened its own SampleMarkdow
 With our trusty new Markdown editor, we can go ahead and start writing out the blog entries. Go ahead and open the file under ``input -> first-post.md``. It's pretty empty, but you'll see something similar to this:
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/first-post-description.png" alt="First Port File Description" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/first-post-description.png" alt="First Port File Description" class="img-fluid">
   <figcaption>Assuming you're using Markdown Monster, you'll see the File text on the left, and the preview on the right.</figcaption>
 </figure>
 
@@ -105,7 +105,7 @@ If you're new to working with VSTS, it's pretty easy to get started. You can cre
 Inside my 'Personal' Team project I added a new Git Repository. Just navigate to your Team Project, go to the 'Code' tab, and add a new repository (or use the default one already there). 
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/VSTSNewRepository.png" alt="VSTS New Repository Menu" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/VSTSNewRepository.png" alt="VSTS New Repository Menu" class="img-fluid">
   <figcaption>I already have a Blog repository, but you can create one from this menu</figcaption>
 </figure>
 
@@ -114,7 +114,7 @@ Now that we have a Git Repo, we can pull it down to our local machine for develo
 Within Visual Studio, find the Team Explorer Tab and click on the Manage Connections button (the green icon that looks like a plug). From there, click on the Manage Connection button link to Connect to Team Project (Yes, two different buttons with a very similar name). From there you'll get a menu like the one below. Choose your Git Repo, give it the path you want to use on your machine and click Connect.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/ConnectingToVSTSInVS.png" alt="Connect to Team Project Menu from Visual Studio" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/ConnectingToVSTSInVS.png" alt="Connect to Team Project Menu from Visual Studio" class="img-fluid">
 </figure>
 
 If you want some better documentation for doing what we just talked about, [try this documentation from Microsoft](https://www.visualstudio.com/en-us/docs/setup-admin/team-services/connect-to-visual-studio-team-services#connect-and-share-code-from-visual-studio).
@@ -122,7 +122,7 @@ If you want some better documentation for doing what we just talked about, [try 
 With your Git Repo on your machine, once you feel like it, go ahead and commit your changes to sync up with the server. I chose to only commit my 'input' folder for now. More files will be added over time, but for now this is good enough.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/BlogCodeInVSTS.png" alt="Code Check-In to VSTS Repo" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/BlogCodeInVSTS.png" alt="Code Check-In to VSTS Repo" class="img-fluid">
   <figcaption>Ignore the extra files for now. We'll be adding those in a bit.</figcaption>
 </figure>
 
@@ -182,28 +182,28 @@ This was saved to a 'build.cake' file at the root of the Git repo. Once you have
 Remember that Build Definition we started with the VSTS web client? Let's go back to it. We'll be adding two build steps. The first one is to run the Cake script for the build. In order to do that, we'll need to add the Cake plugin to our VSTS instance. [Go here and install the plugin](https://marketplace.visualstudio.com/items?itemName=cake-build.cake). Once you have that, you'll have the Cake build step. Just add it to the build definition.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/AddingBuildStep.png" alt="Adding a Cake Build Step" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/AddingBuildStep.png" alt="Adding a Cake Build Step" class="img-fluid">
   <figcaption>3) Eat cake? I swear it's not a lie.</figcaption>
 </figure>
 
 Once you have that, go ahead and specify the right *.cake build script to run for this build task. Click on the ellipsis button for the 'Cake Script' entry and choose your cake build script file from the popup.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/ChoosingBuildScript.png" alt="Adding a Cake Build Step" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/ChoosingBuildScript.png" alt="Adding a Cake Build Step" class="img-fluid">
   <figcaption>Just add the one step for now. This is all we'll need.</figcaption>
 </figure>
 
 Now that we can build the blog, we'll need to ship the built files up to VSTS. Click the button again to add a new build step. Under Utility add the 'Publish Build Artifacts' task and then close the window. Then go ahead and make sure the settings you have match the image below. You'll want to specify that the Path To Publish is the 'output' folder (what's generated by running Wyam), and that the Artifact Type is set to 'Server' (meaning the 'output' folder will be sent up to VSTS instead of some other path on a server we control).
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/PublishTaskSettings.png" alt="Settings for Publish Task" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/PublishTaskSettings.png" alt="Settings for Publish Task" class="img-fluid">
   <figcaption>We're publishing the 'output' folder created by running Wyam.</figcaption>
 </figure>
 
 Lastly, go to the 'Triggers' tab for this build definition. Make sure the Continuous Integration option is checked. Go ahead and save the build definition and fine the 'Queue new build...' button. After some time the build will run and you should get a result summary. In that summary, find the 'Artifacts' tab and click Explore for the specific output. This is exactly what was sent up to VSTS. It should look something like this:
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/BuildArtifacts.png" alt="Output Build Artifacts" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/BuildArtifacts.png" alt="Output Build Artifacts" class="img-fluid">
   <figcaption>If you're missing files, check the settings for the Publish task in your build definition</figcaption>
 </figure>
 
@@ -229,7 +229,7 @@ Before creating our release process, we're going to need to create an Azure App 
 Now that we have our Azure App Service, we can create a new release in VSTS. Navigate to the Releases section and click the 'Create release definition' button. Choose the 'Azure App Service Deployment' option and then use the rest of the defaults. You'll see a single task in the definition that will take out output and send it on over the Azure. Just need to add a few settings so the task knows how to release to your App. Under the 'Package or Folder' option, select the output folder from our build we're release from.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/ReleaseDefinition.png" alt="My Release Definition" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/01/ReleaseDefinition.png" alt="My Release Definition" class="img-fluid">
   <figcaption>Only need a single task</figcaption>
 </figure>
 

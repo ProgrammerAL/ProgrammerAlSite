@@ -29,7 +29,7 @@ So just like any other day I opened up Visual Studio, created a new C++ project,
 At least, that's how I wish I could tell the story. In reality the NuGet package at the time was a lower level version than what I needed. The NuGet package was version 2.Something.SomethingElse but the C++ code generated had a requirement for 3.Something.SomethingElse as you can see here:
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/03/CppProtobufVersionRequirement.png" alt="C++ Protobuf Version Requirement" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/03/CppProtobufVersionRequirement.png" alt="C++ Protobuf Version Requirement" class="img-fluid">
   <figcaption>At least it's a compile time requirement</figcaption>
 </figure>
 
@@ -50,7 +50,7 @@ This was two weeks of wasted time. Granted, it's a side project and wasn't every
 If you're familiar with the 2014 Disney movie Big Hero 6, you'll recognise the scene where Tadashi Hamada helps his little brother think of a solution to a problem by forcing him to think from a new angle. Put another way, stop your current train of thought and think of a different way to solve the problem.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/03/TadashiThinkFromANewAngle.gif" alt="Tadashi helping Hiro think of a new idea" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/03/TadashiThinkFromANewAngle.gif" alt="Tadashi helping Hiro think of a new idea" class="img-fluid">
   <figcaption>I don't know how helpful it is to make someone think of a grand idea on the spot while upside down, but in this case I guess it worked out</figcaption>
 </figure>
 
@@ -60,7 +60,7 @@ If you're familiar with the 2014 Disney movie Big Hero 6, you'll recognise the s
 In the end the solution was staring at me right in the face the entire time. The text on the GitHUb site gave me the answer. Just add a local reference to the code.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/03/HowToReferenceProtobufCpp.png" alt="GitHub Protobuf guide to reference the C++ library" class="img-responsive">
+  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/03/HowToReferenceProtobufCpp.png" alt="GitHub Protobuf guide to reference the C++ library" class="img-fluid">
   <figcaption>It's like being given the answers to a test, but ignoring it because it's written in comic sans</figcaption>
 </figure>
 
