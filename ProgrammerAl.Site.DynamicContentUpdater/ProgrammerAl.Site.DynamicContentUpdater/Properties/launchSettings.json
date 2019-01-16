@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ProgrammerAl.Site.DynamicContentUpdater": {
+      "commandName": "Project",
+      "commandLineArgs": "--ContentPath \"C:\\github\\ProgrammerAlSite\\ProgrammerAl.Site.Content\""
+    }
+  }
+}
