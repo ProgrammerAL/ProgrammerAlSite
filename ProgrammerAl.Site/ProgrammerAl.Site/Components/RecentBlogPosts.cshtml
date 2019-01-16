@@ -1,4 +1,5 @@
 ﻿@using ProgrammerAl.Site.Utilities.Entities
+@using System.Collections.Immutable
 
 @if (Posts != null)
 {
@@ -18,5 +19,5 @@
 
 @functions{
     [Parameter]
-    private BlogPostSummary[] Posts { get; set; }
+    private ImmutableList<BlogPostSummary> Posts { get; set; }
 }

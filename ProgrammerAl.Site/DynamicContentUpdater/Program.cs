@@ -57,6 +57,9 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             WriteOutFile(allBlogPostSummaries, parsedArgs.ContentPath, "BlogPosts.json");
 
             //TODO: Output markdown files as HTML
+            foreach (var blogEntry in parsedBlogEntries)
+            {
+            }
         }
 
         public static ImmutableList<BlogPostInfo> LoadAllBlogPostInfo(string contentPath, BlogPostParser parser)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Blazor;
@@ -16,7 +17,7 @@ namespace ProgrammerAl.Site.PageModels
         [Inject]
         private IConfig Config { get; set; }
 
-        protected BlogPostSummary[] BlogPosts { get; set; }
+        protected ImmutableList<BlogPostSummary> BlogPosts { get; set; }
 
         protected override async Task OnInitAsync()
         {
@@ -26,7 +27,7 @@ namespace ProgrammerAl.Site.PageModels
             //https://programmeralsitecontent.blob.core.windows.net/sitecontent/BlogPosts.json
             string recentDataText = await HttpClient.GetStringAsync("BlogPosts.json");
 
-            BlogPosts = Microsoft.JSInterop.Json.Deserialize<BlogPostSummary[]>(recentDataText);
+            BlogPosts = Microsoft.JSInterop.Json.Deserialize<ImmutableList<BlogPostSummary>>(recentDataText);
 
             await base.OnInitAsync();
         }
