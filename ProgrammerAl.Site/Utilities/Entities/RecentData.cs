@@ -8,6 +8,6 @@ namespace ProgrammerAl.Site.Utilities.Entities
 {
     public class RecentData
     {
-        public ImmutableList<BlogPostSummary> RecentBlogPosts { get; set; }
+        public BlogPostSummary[] RecentBlogPosts { get; set; }
     }
 }

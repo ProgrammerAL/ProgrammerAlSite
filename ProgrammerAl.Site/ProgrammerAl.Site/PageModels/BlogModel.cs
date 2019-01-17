@@ -17,17 +17,17 @@ namespace ProgrammerAl.Site.PageModels
         [Inject]
         private IConfig Config { get; set; }
 
-        protected ImmutableList<BlogPostSummary> BlogPosts { get; set; }
+        protected BlogPostSummary[] BlogPosts { get; set; }
 
         protected override async Task OnInitAsync()
         {
             var downloader = new FileDownloader();
-            var response = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, "BlogPosts.json", "application/json");
+            var response = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, "BlogPosts.json", "*/*");
 
             //https://programmeralsitecontent.blob.core.windows.net/sitecontent/BlogPosts.json
             string recentDataText = await HttpClient.GetStringAsync("BlogPosts.json");
 
-            BlogPosts = Microsoft.JSInterop.Json.Deserialize<ImmutableList<BlogPostSummary>>(recentDataText);
+            BlogPosts = Microsoft.JSInterop.Json.Deserialize<BlogPostSummary[]>(recentDataText);
 
             await base.OnInitAsync();
         }

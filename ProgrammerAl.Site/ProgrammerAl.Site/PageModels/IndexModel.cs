@@ -22,7 +22,7 @@ namespace ProgrammerAl.Site.PageModels
         protected override async Task OnInitAsync()
         {
             var downloader = new FileDownloader();
-            var recentDataText = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, "RecentData.json", "application/json");
+            var recentDataText = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, "RecentData.json", "*/*");
             Recents = Microsoft.JSInterop.Json.Deserialize<RecentData>(recentDataText);
 
             await base.OnInitAsync();

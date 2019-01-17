@@ -37,19 +37,19 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 .ToImmutableList();
 
             int blogPostNumber = 1;
-            ImmutableList<BlogPostSummary> allBlogPostSummaries = parsedBlogEntries.Select(x => new BlogPostSummary
+            BlogPostSummary[] allBlogPostSummaries = parsedBlogEntries.Select(x => new BlogPostSummary
             {
                 Title = x.Entry.Title,
                 PostedDate = x.Entry.ReleaseDate,
                 FirstParagraph = x.Entry.FirstParagraph,
                 PostNumber = blogPostNumber++,
                 TitleLink = x.FileNameWithoutExtension,
-            }).ToImmutableList();
+            }).ToArray();
 
-            ImmutableList<BlogPostSummary> mostRecentBlogPosts = allBlogPostSummaries
+            BlogPostSummary[] mostRecentBlogPosts = allBlogPostSummaries
                                         .OrderByDescending(x => x.PostNumber)
                                         .Take(FrontPageBlogsDisplayed)
-                                        .ToImmutableList();
+                                        .ToArray();
 
             RecentData recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
 
@@ -57,7 +57,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             WriteOutFile(allBlogPostSummaries, parsedArgs.ContentPath, "BlogPosts.json");
 
             //TODO: Output markdown files as HTML
-            foreach (var blogEntry in parsedBlogEntries)
+            foreach (BlogPostInfo blogEntry in parsedBlogEntries)
             {
             }
         }
