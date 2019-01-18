@@ -6,6 +6,8 @@ using System.Collections.Immutable;
 using CommandLine;
 using Newtonsoft.Json;
 using System;
+using RazorLight;
+using System.Threading.Tasks;
 
 namespace ProgrammerAl.Site.DynamicContentUpdater
 {
@@ -15,7 +17,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         private const string BlogPostsFile = "BlogPosts.json";
         private const int FrontPageBlogsDisplayed = 5;
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Options parsedArgs = null;
 
@@ -53,12 +55,32 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
             RecentData recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
 
-            WriteOutFile(recentData, parsedArgs.ContentPath, "RecentData.json");
-            WriteOutFile(allBlogPostSummaries, parsedArgs.ContentPath, "BlogPosts.json");
+            WriteOutFileAsJson(recentData, parsedArgs.ContentPath, "RecentData.json");
+            WriteOutFileAsJson(allBlogPostSummaries, parsedArgs.ContentPath, "BlogPosts.json");
 
-            //TODO: Output markdown files as HTML
+            //Load up the static templating engine
+            var fullPathToTemplates = Path.Combine(Environment.CurrentDirectory, "StaticTemplates");
+            var engine = new RazorLightEngineBuilder()
+              .UseFilesystemProject(fullPathToTemplates)
+              .UseMemoryCachingProvider()
+              .Build();
+
+            string outputfolderPath = Path.Combine(parsedArgs.ContentPath, "BlogPosts") + ".html";
+            if (!Directory.Exists(outputfolderPath))
+            {
+                Directory.CreateDirectory(outputfolderPath);
+            }
+
+            //Create static html files for each blog post entry
             foreach (BlogPostInfo blogEntry in parsedBlogEntries)
             {
+                var htmlContent = Markdig.Markdown.ToHtml(blogEntry.Entry.Post);
+                var blogPostEntryWithHtml = new BlogPostEntry(blogEntry.Entry.Title, blogEntry.Entry.ReleaseDate, blogEntry.Entry.Tags, htmlContent, blogEntry.Entry.FirstParagraph);
+
+                string staticHtml = await engine.CompileRenderAsync<BlogPostEntry>("BlogPost.cshtml", blogPostEntryWithHtml);
+
+                string outputFilePath = Path.Combine(outputfolderPath, blogEntry.FileNameWithoutExtension) + ".html";
+                File.WriteAllText(outputFilePath, staticHtml);
             }
         }
 
@@ -76,7 +98,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 .ToImmutableList();
         }
 
-        private static void WriteOutFile<T>(T obj, string contentPath, string fileName)
+        private static void WriteOutFileAsJson<T>(T obj, string contentPath, string fileName)
         {
             string objJson = JsonConvert.SerializeObject(obj);
             string outputFilePath = Path.Combine(contentPath, fileName);

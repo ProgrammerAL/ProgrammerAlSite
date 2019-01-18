@@ -1,0 +1,19 @@
+﻿@model ProgrammerAl.Site.Utilities.Entities.BlogPostEntry
+
+<h1>
+    @Model.Title
+</h1>
+<p> Posted on: @Model.ReleaseDate.ToLongDateString()</p>
+
+@*<div class="tags">
+        @foreach (var tag in PostEntry.Tags)
+        {
+            <a class="btn btn-default btn-xs">@tag</a>
+        }
+    </div>*@
+
+<div id="content" class="col-md-12">
+    @Raw(Model.Post)
+</div>
+
+<!--TODO: Add Discuss Comments-->
