@@ -2,23 +2,9 @@
 
 @inherits ProgrammerAl.Site.PageModels.BlogPostModel
 
-@if (PostEntry != null)
+@if (!string.IsNullOrWhiteSpace(BlogPostHtml.Value))
 {
-    <h1>
-        @PostEntry.Title
-    </h1>
-    <p>Posted on: @PostEntry.ReleaseDate.ToLongDateString()</p>
-
-    @*<div class="tags">
-            @foreach (var tag in PostEntry.Tags)
-            {
-                <a class="btn btn-default btn-xs">@tag</a>
-            }
-        </div>*@
-
-    <div id="content" class="col-md-12">
-        @BlogPostContent
-    </div>
+    @BlogPostHtml
 }
 
-<DiscusJs />
+@*<DiscusJs />*@

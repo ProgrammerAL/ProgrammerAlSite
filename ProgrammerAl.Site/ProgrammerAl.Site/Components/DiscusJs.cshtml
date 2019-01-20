@@ -1,12 +1,12 @@
 ﻿@*
-    //TODO: Figure out how to include static JS like this on a per-page basis (Blog Posts only for this)
-    //      Until then, it's not so bad that comments aren't enabled
-    <div id="disqus_thread"></div>
+<div id="disqus_thread"></div>
 <script>
 
 /* * * Setup Disqus * * */
 
-var disqus_shortname = 'DeveloperSideQuests'; // required: replace example with your forum shortname
+//TODO: Get the below variables set somehow. Tokenization in HTML file maybe?
+
+var disqus_shortname = 'ProgrammerAl'; // required: replace example with your forum shortname
 var disqus_identifier = '@Model.FilePath(Keys.RelativeFilePath).FileNameWithoutExtension.FullPath';
 var disqus_title = '@Model.String(BlogKeys.Title)';
 var disqus_url = '@Context.GetLink(Model, true)';

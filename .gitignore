@@ -261,4 +261,6 @@ __pycache__/
 *.pyc
 
 **/ProgrammerAl.Site/dist
-**/global.json
+**/ProgrammerAl.Site.Content/BlogPosts/*.html
+**/ProgrammerAl.Site.Content/BlogPosts.json
+**/ProgrammerAl.Site.Content/RecentData.json
