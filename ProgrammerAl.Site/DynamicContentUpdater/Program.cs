@@ -65,7 +65,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
               .UseMemoryCachingProvider()
               .Build();
 
-            string outputfolderPath = Path.Combine(parsedArgs.ContentPath, "BlogPosts") + ".html";
+            string outputfolderPath = Path.Combine(parsedArgs.ContentPath, "BlogPosts");
             if (!Directory.Exists(outputfolderPath))
             {
                 Directory.CreateDirectory(outputfolderPath);
