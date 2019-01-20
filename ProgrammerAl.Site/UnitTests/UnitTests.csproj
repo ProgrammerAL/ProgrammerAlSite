@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProgrammerAl.Site\ProgrammerAl.Site.csproj" />
-    <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
 </Project>
