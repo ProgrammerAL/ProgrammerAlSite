@@ -65,7 +65,6 @@ namespace ProgrammerAl.Site.Utilities
                 return string.Empty;
             }
 
-            //headerStartIndex += headerText.Length;
             int startIndex = post.IndexOf('\n', headerStartIndex) + 1;
             int endIndex = post.IndexOf('\n', startIndex);
             int length = endIndex - startIndex;

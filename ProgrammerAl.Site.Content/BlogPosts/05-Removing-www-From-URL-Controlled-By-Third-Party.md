@@ -19,7 +19,7 @@ For the most part, customizing the web page hosted by Fireside.fm is really easy
 So I bought the domain. Easy enough. Pulled out a credit card, typed in a few words, and then I was the proud owner of a domain. After following some steps in Fireside.fm's Advanced settings, I was able to start using that newly purchased domain and all was perfect in the world (woo!). But a few days later I realized I couldn't get to the site unless I typed the 'www' at the beginning.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/05/www-domain.png" alt="www domain" class="img-fluid">
+  <img src="__StorageSiteUrl__Assets/Images/BlogPostImages/05/www-domain.png" alt="www domain" class="img-fluid">
   <figcaption>Apparently that's not an auatomatic thing. Who knew?</figcaption>
 </figure>
 
@@ -32,17 +32,17 @@ I tried removing the www requirement for the domain a few times but just couldn'
 Since I paid to transfer the domain, and the whole idea was back on my mind, I doubled down and decided to try this out. After some experimentation, I got the steps down.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/05/fireside-custom-domain-field.png" alt="Fireside Custom Domain Field" class="img-fluid">
+  <img src="__StorageSiteUrl__Assets/Images/BlogPostImages/05/fireside-custom-domain-field.png" alt="Fireside Custom Domain Field" class="img-fluid">
   <figcaption>1) In Fireside's advanced settings, make sure the custom domain field had my domain with the 'www' at the beginning</figcaption>
 </figure>
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/05/hover-cname-record.png" alt="Hover CNAME Record" class="img-fluid">
+  <img src="__StorageSiteUrl__Assets/Images/BlogPostImages/05/hover-cname-record.png" alt="Hover CNAME Record" class="img-fluid">
   <figcaption>2) In Hover, add a CNAME record with the Host set to 'www' and the Value set to 'hosted.fireside.fm.' (note the dot at the end)</figcaption>
 </figure>
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/05/hover-domain-forward.png" alt="Hover Domain Forward" class="img-fluid">
+  <img src="__StorageSiteUrl__Assets/Images/BlogPostImages/05/hover-domain-forward.png" alt="Hover Domain Forward" class="img-fluid">
   <figcaption>3) In Hover, create a forward. This is to send everything from '<MyDomain>.com' to 'www.<MyDomain>.com'</figcaption>
 </figure>
 

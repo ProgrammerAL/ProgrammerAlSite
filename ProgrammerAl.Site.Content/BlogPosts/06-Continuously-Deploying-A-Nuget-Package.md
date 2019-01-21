@@ -45,21 +45,21 @@ Since we can't change the version number at deploy time I swallowed some pride a
 - If enabled, push the package to the public NuGet.org package feed
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/06/NuGetBuild.png" alt="VSTS Build generating and publishing a NuGet package" class="img-fluid">
+  <img src="__StorageSiteUrl__Assets/Images/BlogPostImages/06/NuGetBuild.png" alt="VSTS Build generating and publishing a NuGet package" class="img-fluid">
   <figcaption>Those bottom two are the important tasks</figcaption>
 </figure>
 
 The steps are pretty self explanatory. The only one that needs some explanation is the final step. This step will deploy the package to the publicly hosted NuGet.org feed, but it will do so only based off the result of a custom condition. That condition uses a build variable (IsPublishingToPublicFeed) defaulted to false. In order to deploy to the public feed, I will have to manually change it (and remember to change it) at queue time.
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/06/PublishToPublicFeedCondition.png" alt="Condition for when to deploy to public NuGet.org feed is and(succeeded(), eq(variables['IsPublishingToPublicFeed'], true))" class="img-fluid">
+  <img src="__StorageSiteUrl__Assets/Images/BlogPostImages/06/PublishToPublicFeedCondition.png" alt="Condition for when to deploy to public NuGet.org feed is and(succeeded(), eq(variables['IsPublishingToPublicFeed'], true))" class="img-fluid">
   <figcaption>This will only run when I don't mess up at queue time</figcaption>
 </figure>
 
 Some other build variables are used for versioning that can be set at queue time. Specifically NuGetVersionNumMajor, NuGetVersionNumMinor, NuGetVersionNumPatch, and NugetVersionNumPrerelease. 
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/06/BuildVariables.png" alt="Variables used for Build. Most notably NuGetVersionNumber and IsPublishingToPublicFeed" class="img-fluid">
+  <img src="__StorageSiteUrl__Assets/Images/BlogPostImages/06/BuildVariables.png" alt="Variables used for Build. Most notably NuGetVersionNumber and IsPublishingToPublicFeed" class="img-fluid">
   <figcaption></figcaption>
 </figure>
 
