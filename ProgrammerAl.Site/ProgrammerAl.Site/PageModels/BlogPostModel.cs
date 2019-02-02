@@ -21,7 +21,6 @@ namespace ProgrammerAl.Site.PageModels
         [Parameter]
         private string PostUrl { get; set; }
 
-        protected BlogPostEntry PostEntry { get; set; }
         protected MarkupString BlogPostHtml { get; set; }
 
         protected override async Task OnInitAsync()
@@ -30,8 +29,6 @@ namespace ProgrammerAl.Site.PageModels
             var pathToBlogPost = string.Format(BlogPostRelativeLinkTemplate, PostUrl);
             var response = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, pathToBlogPost, "text/x-markdown");
 
-            //PostEntry = new BlogPostParser(Config).ParseFromMarkdown(response);
-            //BlogPostContent = new MarkupString(Markdig.Markdown.ToHtml(PostEntry.Post));
             BlogPostHtml = new MarkupString(response);
 
             await base.OnInitAsync();

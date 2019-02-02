@@ -33,7 +33,7 @@ Using SonarCloud with my already existing CI builds in VSTS was really easy. The
 1. Add the three tasks to my build. "Prepare analysis on SonarCloud", "Run Code Analysis", and "Publish Analysis Result"
 
 <figure>
-  <img src="__StorageSiteUrl__/Assets/Images/BlogPostImages/07/Sonar Cloud Build Tasks.png" alt="VSTS Build with SonarCloud tasks" class="img-fluid">
+  <img src="__StorageSiteUrl__Assets/Images/BlogPostImages/07/Sonar Cloud Build Tasks.png" alt="VSTS Build with SonarCloud tasks" class="img-fluid">
   <figcaption>Almost as easy as copy/paste</figcaption>
 </figure>
 
