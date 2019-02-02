@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using System;
 using RazorLight;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Text;
 
 namespace ProgrammerAl.Site.DynamicContentUpdater
 {
@@ -32,7 +34,9 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             HardCodedConfig config = new HardCodedConfig();
             BlogPostParser parser = new BlogPostParser(config);
 
-            ImmutableList<BlogPostInfo> allPosts = LoadAllBlogPostInfo(parsedArgs.ContentPath, parser);
+            var contentPath = parsedArgs.AppRootPath + "/ProgrammerAl.Site.Content";
+
+            ImmutableList<BlogPostInfo> allPosts = LoadAllBlogPostInfo(contentPath, parser);
 
             ImmutableList<BlogPostInfo> parsedBlogEntries = allPosts
                 .OrderBy(x => x.FileNameWithoutExtension)//All blog posts start with a number. So the higher the number, the newer the post
@@ -55,8 +59,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
             RecentData recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
 
-            WriteOutFileAsJson(recentData, parsedArgs.ContentPath, "RecentData.json");
-            WriteOutFileAsJson(allBlogPostSummaries, parsedArgs.ContentPath, "BlogPosts.json");
+            WriteOutFileAsJson(recentData, contentPath, "RecentData.json");
+            WriteOutFileAsJson(allBlogPostSummaries, contentPath, "BlogPosts.json");
 
             //Load up the static templating engine
             var fullPathToTemplates = Path.Combine(Environment.CurrentDirectory, "StaticTemplates");
@@ -65,7 +69,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
               .UseMemoryCachingProvider()
               .Build();
 
-            string outputfolderPath = Path.Combine(parsedArgs.ContentPath, "BlogPosts");
+            string outputfolderPath = Path.Combine(contentPath, "BlogPosts");
             if (!Directory.Exists(outputfolderPath))
             {
                 Directory.CreateDirectory(outputfolderPath);
@@ -82,6 +86,35 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 string outputFilePath = Path.Combine(outputfolderPath, blogEntry.FileNameWithoutExtension) + ".html";
                 File.WriteAllText(outputFilePath, staticHtml);
             }
+
+            var sitemapFilePath = parsedArgs.AppRootPath + "/ProgrammerAl.Site/ProgrammerAl.Site/wwwroot/sitemap.xml";
+            var sitemapText = GenerateSitemapFile("https://www.programmeral.com/", allPosts);
+            File.WriteAllText(sitemapFilePath, sitemapText);
+        }
+
+        private static string GenerateSitemapFile(string siteUrl, ImmutableList<BlogPostInfo> allPosts)
+        {
+            var xmlDoc = new XmlDocument();
+            var urlSetElement = xmlDoc.CreateElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
+            xmlDoc.AppendChild(urlSetElement);
+
+            var lastModifiedString = DateTime.Now.ToString("YYYY-MM-DD");
+            foreach (var post in allPosts)
+            {
+                var urlNode = xmlDoc.CreateElement("url");
+
+                var locationNode = xmlDoc.CreateElement("loc");
+                locationNode.InnerText = siteUrl + "blog/posts/" + post.FileNameWithoutExtension;
+
+                var lastModifiedNode = xmlDoc.CreateElement("lastmod");
+                lastModifiedNode.InnerText = lastModifiedString;
+
+                urlNode.AppendChild(locationNode);
+                urlNode.AppendChild(lastModifiedNode);
+                urlSetElement.AppendChild(urlNode);
+            }
+
+            return "<?xml version=\"1.0\" encoding=\"UTF - 8\"?>" + Environment.NewLine + xmlDoc.InnerXml;
         }
 
         public static ImmutableList<BlogPostInfo> LoadAllBlogPostInfo(string contentPath, BlogPostParser parser)

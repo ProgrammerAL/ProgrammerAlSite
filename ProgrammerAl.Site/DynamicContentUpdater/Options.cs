@@ -4,7 +4,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 {
     public class Options
     {
-        [Option("ContentPath", Required = true, HelpText = "Path to the site content folder")]
-        public string ContentPath { get; set; }
+        [Option("AppRootPath", Required = true, HelpText = "Path to the root folder holding all files of this application")]
+        public string AppRootPath { get; set; }
     }
 }

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+#Since this is a web assembly site, don't index dlls
+User-agent: *
+Disallow: /*.dll$
+
+Sitemap: http://www.programmeral.com/sitemap.xml
