@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:50737/",
-      "sslPort": 44371
+      "applicationUrl": "http://localhost:57148/",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -13,8 +13,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "BlobStorageBaseUrl": "https://developersidequests.blob.core.windows.net/content"
+      }
     },
     "ProgrammerAl.DeveloperSideQuests.Blog": {
       "commandName": "Project",
@@ -22,7 +21,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:50738/"
+      "applicationUrl": "http://localhost:57149/"
     }
   }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Blazor.Components;
+﻿using Microsoft.AspNetCore.Components;
 using ProgrammerAl.Site.Utilities;
 using ProgrammerAl.Site.Utilities.Entities;
 using System;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProgrammerAl.Site.PageModels
 {
-    public class IndexModel : BlazorComponent
+    public class IndexModel : ComponentBase
     {
         [Inject]
         private HttpClient HttpClient { get; set; }

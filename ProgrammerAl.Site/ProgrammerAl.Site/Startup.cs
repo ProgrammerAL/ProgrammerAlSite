@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Blazor.Builder;
+using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using ProgrammerAl.Site.Utilities;
 
@@ -11,7 +11,7 @@ namespace ProgrammerAl.Site
             services.AddSingleton<IConfig>(new HardCodedConfig());
         }
 
-        public void Configure(IBlazorApplicationBuilder app)
+        public void Configure(IComponentsApplicationBuilder app)
         {
             app.AddComponent<App>("app");
         }

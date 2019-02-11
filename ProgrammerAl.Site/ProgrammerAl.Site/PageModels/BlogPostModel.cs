@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Blazor;
-using Microsoft.AspNetCore.Blazor.Components;
+using Microsoft.AspNetCore.Components;
 using ProgrammerAl.Site.Utilities;
-using ProgrammerAl.Site.Utilities.Entities;
 
 namespace ProgrammerAl.Site.PageModels
 {
-    public class BlogPostModel : BlazorComponent
+    public class BlogPostModel : ComponentBase
     {
         private const string BlogPostRelativeLinkTemplate = "BlogPosts/{0}.html";
 
