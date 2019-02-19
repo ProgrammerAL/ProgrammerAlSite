@@ -98,10 +98,10 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             var urlSetElement = xmlDoc.CreateElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
             xmlDoc.AppendChild(urlSetElement);
 
-            var lastModifiedString = DateTime.Now.ToString("YYYY-MM-DD");
+            var lastModifiedString = DateTime.Now.ToString("yyyy-MM-dd");
             foreach (var post in allPosts)
             {
-                var urlNode = xmlDoc.CreateElement("url");
+                var urlNode = xmlDoc.CreateElement("url", string.Empty);
 
                 var locationNode = xmlDoc.CreateElement("loc");
                 locationNode.InnerText = siteUrl + "blog/posts/" + post.FileNameWithoutExtension;
@@ -114,7 +114,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 urlSetElement.AppendChild(urlNode);
             }
 
-            return "<?xml version=\"1.0\" encoding=\"UTF - 8\"?>" + Environment.NewLine + xmlDoc.InnerXml;
+            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + Environment.NewLine + xmlDoc.InnerXml;
         }
 
         public static ImmutableList<BlogPostInfo> LoadAllBlogPostInfo(string contentPath, BlogPostParser parser)
