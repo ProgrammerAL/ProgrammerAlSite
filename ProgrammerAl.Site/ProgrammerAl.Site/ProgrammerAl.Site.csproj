@@ -20,4 +20,9 @@
     <PackageReference Include="System.Memory" Version="4.5.2" />
   </ItemGroup>
 
+  <!--Temporary: Disable IL Linking because of bug in Blazor preview version 0.8.0. Need to remember to remove this later on-->
+  <PropertyGroup>
+    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+  </PropertyGroup>
+
 </Project>
