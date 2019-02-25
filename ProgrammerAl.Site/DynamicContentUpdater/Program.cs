@@ -18,6 +18,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         private const string RecentDataFile = "RecentData.json";
         private const string BlogPostsFile = "BlogPosts.json";
         private const int FrontPageBlogsDisplayed = 5;
+        private const string SitemapXmlNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
         static async Task Main(string[] args)
         {
@@ -95,18 +96,18 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         private static string GenerateSitemapFile(string siteUrl, ImmutableList<BlogPostInfo> allPosts)
         {
             var xmlDoc = new XmlDocument();
-            var urlSetElement = xmlDoc.CreateElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
+            var urlSetElement = xmlDoc.CreateElement("urlset", SitemapXmlNamespace);
             xmlDoc.AppendChild(urlSetElement);
 
             var lastModifiedString = DateTime.Now.ToString("yyyy-MM-dd");
             foreach (var post in allPosts)
             {
-                var urlNode = xmlDoc.CreateElement("url", "http://www.sitemaps.org/schemas/sitemap/0.9");
+                var urlNode = xmlDoc.CreateElement("url", SitemapXmlNamespace);
 
-                var locationNode = xmlDoc.CreateElement("loc");
+                var locationNode = xmlDoc.CreateElement("loc", SitemapXmlNamespace);
                 locationNode.InnerText = siteUrl + "blog/posts/" + post.FileNameWithoutExtension;
 
-                var lastModifiedNode = xmlDoc.CreateElement("lastmod");
+                var lastModifiedNode = xmlDoc.CreateElement("lastmod", SitemapXmlNamespace);
                 lastModifiedNode.InnerText = lastModifiedString;
 
                 urlNode.AppendChild(locationNode);
