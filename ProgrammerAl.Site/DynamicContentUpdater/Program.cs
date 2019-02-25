@@ -101,7 +101,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             var lastModifiedString = DateTime.Now.ToString("yyyy-MM-dd");
             foreach (var post in allPosts)
             {
-                var urlNode = xmlDoc.CreateElement("url", string.Empty);
+                var urlNode = xmlDoc.CreateElement("url", "http://www.sitemaps.org/schemas/sitemap/0.9");
 
                 var locationNode = xmlDoc.CreateElement("loc");
                 locationNode.InnerText = siteUrl + "blog/posts/" + post.FileNameWithoutExtension;
