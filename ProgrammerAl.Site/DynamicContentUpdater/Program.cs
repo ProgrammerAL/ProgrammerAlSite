@@ -60,8 +60,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
             RecentData recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
 
-            WriteOutFileAsJson(recentData, contentPath, "RecentData.json");
-            WriteOutFileAsJson(allBlogPostSummaries, contentPath, "BlogPosts.json");
+            WriteOutFileAsJson(recentData, contentPath, RecentDataFile);
+            WriteOutFileAsJson(allBlogPostSummaries, contentPath, BlogPostsFile);
 
             //Load up the static templating engine
             var fullPathToTemplates = Path.Combine(Environment.CurrentDirectory, "StaticTemplates");
