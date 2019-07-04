@@ -17,11 +17,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="3.0.0-preview6.19307.2" PrivateAssets="all" />
   </ItemGroup>
 
-<!--<PropertyGroup Condition="$(Configuration) == 'Debug'">
-    <RunArguments>blazor serve -c Debug</RunArguments>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration) == 'Release'">
-    <RunArguments>blazor serve -c Release</RunArguments>
-  </PropertyGroup>-->
-
 </Project>
