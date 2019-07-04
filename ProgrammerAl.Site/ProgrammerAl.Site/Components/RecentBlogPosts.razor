@@ -5,12 +5,14 @@
     <div class="col-sm-8 right-border">
         @foreach (var blogPost in Posts)
         {
+            var paragraphMarkup = new MarkupString(blogPost.FirstParagraph);
+
             <div class="post-preview">
                 <a href="/blog/posts/@blogPost.TitleLink">
                     <h2>@blogPost.Title</h2>
                 </a>
                 <p class="post-meta">Posted on @blogPost.PostedDate.ToLongDateString()</p>
-                <p>@blogPost.FirstParagraph</p>
+                <p>@paragraphMarkup</p>
             </div>
         }
     </div>
