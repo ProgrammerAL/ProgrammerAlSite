@@ -24,7 +24,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         {
             Options parsedArgs = null;
 
-            Parser.Default.ParseArguments<Options>(args)
+            _ = Parser.Default.ParseArguments<Options>(args)
                 .WithParsed(opts => parsedArgs = opts)
                 .WithNotParsed((errs) =>
                 {
@@ -48,7 +48,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             {
                 Title = x.Entry.Title,
                 PostedDate = x.Entry.ReleaseDate,
-                FirstParagraph = x.Entry.FirstParagraph,
+                FirstParagraph = Markdig.Markdown.ToHtml(x.Entry.FirstParagraph),
                 PostNumber = blogPostNumber++,
                 TitleLink = x.FileNameWithoutExtension,
             }).ToArray();
@@ -73,7 +73,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             string outputfolderPath = Path.Combine(contentPath, "BlogPosts");
             if (!Directory.Exists(outputfolderPath))
             {
-                Directory.CreateDirectory(outputfolderPath);
+                _ = Directory.CreateDirectory(outputfolderPath);
             }
 
             //Create static html files for each blog post entry
@@ -97,7 +97,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         {
             var xmlDoc = new XmlDocument();
             var urlSetElement = xmlDoc.CreateElement("urlset", SitemapXmlNamespace);
-            xmlDoc.AppendChild(urlSetElement);
+            _ = xmlDoc.AppendChild(urlSetElement);
 
             var lastModifiedString = DateTime.Now.ToString("yyyy-MM-dd");
             foreach (var post in allPosts)
@@ -110,9 +110,9 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 var lastModifiedNode = xmlDoc.CreateElement("lastmod", SitemapXmlNamespace);
                 lastModifiedNode.InnerText = lastModifiedString;
 
-                urlNode.AppendChild(locationNode);
-                urlNode.AppendChild(lastModifiedNode);
-                urlSetElement.AppendChild(urlNode);
+                _ = urlNode.AppendChild(locationNode);
+                _ = urlNode.AppendChild(lastModifiedNode);
+                _ = urlSetElement.AppendChild(urlNode);
             }
 
             return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + Environment.NewLine + xmlDoc.InnerXml;

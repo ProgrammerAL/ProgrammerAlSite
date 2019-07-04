@@ -69,7 +69,8 @@ namespace ProgrammerAl.Site.Utilities
             int endIndex = post.IndexOf('\n', startIndex);
             int length = endIndex - startIndex;
             ReadOnlySpan<char> firstParagraphSpan = post.AsSpan(startIndex, length).Trim();
-            return firstParagraphSpan.ToString();
+            var firstParagraphMarkdown = firstParagraphSpan.ToString();
+            return firstParagraphMarkdown;
         }
 
         private string SanitizePost(ReadOnlySpan<char> postSpan)
