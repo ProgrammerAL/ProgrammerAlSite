@@ -17,19 +17,19 @@ namespace ProgrammerAl.Site.PageModels
         private IConfig Config { get; set; }
 
         [Parameter]
-        private string PostUrl { get; set; }
+        public string PostUrl { get; set; }
 
         protected MarkupString BlogPostHtml { get; set; }
 
-        protected override async Task OnInitAsync()
+        protected override async Task OnInitializedAsync()
         {
             var downloader = new FileDownloader();
             var pathToBlogPost = string.Format(BlogPostRelativeLinkTemplate, PostUrl);
-            var response = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, pathToBlogPost, "text/x-markdown");
+            var response = await downloader.DownloadFileTextFromSiteContentAsync(HttpClient, Config, pathToBlogPost, "text/x-markdown");
 
             BlogPostHtml = new MarkupString(response);
 
-            await base.OnInitAsync();
+            await base.OnInitializedAsync();
         }
     }
 }

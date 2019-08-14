@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -18,15 +19,15 @@ namespace ProgrammerAl.Site.PageModels
 
         protected BlogPostSummary[] BlogPosts { get; set; }
 
-        protected override async Task OnInitAsync()
+        protected override async Task OnInitializedAsync()
         {
             var downloader = new FileDownloader();
             //https://programmeralsitecontent.blob.core.windows.net/sitecontent/BlogPosts.json
-            var recentDataText = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, "BlogPosts.json", "*/*");
+            var recentDataContent = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, "BlogPosts.json", "*/*");
 
-            BlogPosts = JsonSerializer.Parse<BlogPostSummary[]>(recentDataText);
+            BlogPosts = await JsonSerializer.DeserializeAsync<BlogPostSummary[]>(recentDataContent);
 
-            await base.OnInitAsync();
+            await base.OnInitializedAsync();
         }
     }
 }

@@ -4,6 +4,7 @@ using ProgrammerAl.Site.Utilities.Entities;
 using System;
 using System.IO;
 using System.Net.Http;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
@@ -19,13 +20,13 @@ namespace ProgrammerAl.Site.PageModels
 
         public RecentData Recents { get; set; }
 
-        protected override async Task OnInitAsync()
+        protected override async Task OnInitializedAsync()
         {
             var downloader = new FileDownloader();
-            var recentDataText = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, "RecentData.json", "*/*");
-            Recents = JsonSerializer.Parse<RecentData>(recentDataText);
+            var recentDataContent = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, "RecentData.json", "*/*");
+            Recents = await JsonSerializer.DeserializeAsync<RecentData>(recentDataContent);
 
-            await base.OnInitAsync();
+            await base.OnInitializedAsync();
         }
     }
 }
