@@ -10,7 +10,7 @@ namespace ProgrammerAl.Site
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<HttpClient>((services) => new HttpClient());
+            services.AddTransient<HttpClient>(services => new HttpClient());
             services.AddSingleton<IConfig>(new HardCodedConfig());
         }
 
