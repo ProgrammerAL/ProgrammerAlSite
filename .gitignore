@@ -265,3 +265,5 @@ __pycache__/
 **/ProgrammerAl.Site.Content/BlogPosts.json
 **/ProgrammerAl.Site.Content/RecentData.json
 **/ProgrammerAl.Site/wwwroot/sitemap.xml
+
+**/ProgrammerAl.Site/wwwroot/css/custom-modules/*.css

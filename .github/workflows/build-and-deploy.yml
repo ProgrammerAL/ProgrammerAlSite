@@ -15,6 +15,7 @@ jobs:
       DYNAMIC_CONTENT_UPDATER_PROJECT_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/DynamicContentUpdater/DynamicContentUpdater.csproj
       SITE_PROJECT_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/ProgrammerAl.Site/ProgrammerAl.Site.csproj
       SITE_PUBLISH_OUTPUT_PATH: ${{ github.workspace }}/outputs/ProgrammerAl.Site
+      TAILWIND_MODULE_DIRECTORY: ${{ github.workspace }}/src/ProgrammerAl.Site/CustomNpmModules/tailwind
 
     steps:
       - uses: actions/checkout@v2
@@ -22,14 +23,19 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.3.0
       - name: .NET Restore
         run: dotnet restore ${{ env.SLN_PATH }}
-      # - name: .NET Build Solution
-      #   run: dotnet build ${{ env.SLN_PATH }} --configuration ${{ env.CONFIGURATION }} --no-restore
       - name: .NET Test
         run: dotnet test ${{ env.SLN_PATH }} --no-restore --verbosity normal
       - name: Run Dynamic Content Creator
         run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ github.workspace }}/src"
+      - name: Npm Build Tailwind
+        run: npm run publish
+        working-directory: ${{ env.TAILWIND_MODULE_DIRECTORY }}
       - name: .NET Build Static Site with WASM Runtime
         run: dotnet build ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --no-restore --self-contained --runtime blazor-wasm
       - name: .NET Publish
