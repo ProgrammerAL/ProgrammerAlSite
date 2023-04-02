@@ -24,10 +24,10 @@ jobs:
       - name: .NET Restore
         run: dotnet restore ${{ env.SLN_PATH }}
       - name: .NET Build
-        run: dotnet build ${{ env.SLN_PATH }} --configuration Release --no-restore
+        run: dotnet build ${{ env.SLN_PATH }} --configuration ${{ env.CONFIGURATION }} --no-restore
       - name: .NET Test
         run: dotnet test ${{ env.SLN_PATH }} --no-restore --verbosity normal
       - name: .NET Publish
-        run: dotnet publish ${{ env.SITE_PROJECT_PATH }} --configuration Release --output ${{ env.SITE_PUBLISH_OUTPUT_PATH }}
+        run: dotnet publish ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output ${{ env.SITE_PUBLISH_OUTPUT_PATH }}
 
 
