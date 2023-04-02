@@ -24,8 +24,8 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: .NET Restore
         run: dotnet restore ${{ env.SLN_PATH }}
-      - name: .NET Build Solution
-        run: dotnet build ${{ env.SLN_PATH }} --configuration ${{ env.CONFIGURATION }} --no-restore
+      # - name: .NET Build Solution
+      #   run: dotnet build ${{ env.SLN_PATH }} --configuration ${{ env.CONFIGURATION }} --no-restore
       - name: .NET Test
         run: dotnet test ${{ env.SLN_PATH }} --no-restore --verbosity normal
       - name: Run Dynamic Content Creator
