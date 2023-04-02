@@ -29,7 +29,7 @@ jobs:
       - name: .NET Test
         run: dotnet test ${{ env.SLN_PATH }} --no-restore --verbosity normal
       - name: Run Dynamic Content Creator
-        run: dotnet run ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ github.workspace }}/src"
+        run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ github.workspace }}/src"
       - name: .NET Publish
         run: dotnet publish ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output ${{ env.SITE_PUBLISH_OUTPUT_PATH }}
 
