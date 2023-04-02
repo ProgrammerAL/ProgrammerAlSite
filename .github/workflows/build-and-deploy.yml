@@ -24,14 +24,16 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: .NET Restore
         run: dotnet restore ${{ env.SLN_PATH }}
-      - name: .NET Build
+      - name: .NET Build Solution
         run: dotnet build ${{ env.SLN_PATH }} --configuration ${{ env.CONFIGURATION }} --no-restore
       - name: .NET Test
         run: dotnet test ${{ env.SLN_PATH }} --no-restore --verbosity normal
       - name: Run Dynamic Content Creator
         run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ github.workspace }}/src"
+      - name: .NET Build Static Site with WASM Runtime
+        run: dotnet build ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --no-restore --runtime blazor-wasm
       - name: .NET Publish
-        run: dotnet publish ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output ${{ env.SITE_PUBLISH_OUTPUT_PATH }} --framework browser-wasm
+        run: dotnet publish ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output ${{ env.SITE_PUBLISH_OUTPUT_PATH }}
       - name: Deploy Static Site
         uses: Azure/static-web-apps-deploy@v1
         with:
