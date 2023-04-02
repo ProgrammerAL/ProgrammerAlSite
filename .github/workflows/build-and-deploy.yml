@@ -1,0 +1,33 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    env:
+      CONFIGURATION: Release
+      DOTNET_VERSION: 7.0.x
+      SITE_PROJECT_NAME: ProgrammerAl.Site
+      SLN_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/ProgrammerAl.Site.sln
+      SITE_PROJECT_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/ProgrammerAl.Site/ProgrammerAl.Site.csproj
+      SITE_PUBLISH_OUTPUT_PATH: ${{ github.workspace }}/outputs/ProgrammerAl.Site
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: .NET Restore
+        run: dotnet restore ${{ env.SLN_PATH }}
+      - name: .NET Build
+        run: dotnet build ${{ env.SLN_PATH }} --configuration Release --no-restore
+      - name: .NET Test
+        run: dotnet test ${{ env.SLN_PATH }} --no-restore --verbosity normal
+      - name: .NET Publish
+        run: dotnet publish ${{ env.SITE_PROJECT_PATH }} --configuration Release --output ${{ env.SITE_PUBLISH_OUTPUT_PATH }}
+
+
