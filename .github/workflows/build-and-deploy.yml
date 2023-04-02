@@ -32,5 +32,13 @@ jobs:
         run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ github.workspace }}/src"
       - name: .NET Publish
         run: dotnet publish ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output ${{ env.SITE_PUBLISH_OUTPUT_PATH }}
+      - name: Deploy Static Site
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          app_location: ${{ env.SITE_PUBLISH_OUTPUT_PATH }}
+          skip_app_build: true
+          skip_api_build: true
+
 
 
