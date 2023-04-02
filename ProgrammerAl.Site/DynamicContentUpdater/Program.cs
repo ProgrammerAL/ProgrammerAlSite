@@ -66,7 +66,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             //Load up the static templating engine
             var fullPathToTemplates = Path.Combine(Environment.CurrentDirectory, "StaticTemplates");
             var engine = new RazorLightEngineBuilder()
-              .UseFilesystemProject(fullPathToTemplates)
+              .UseFileSystemProject(fullPathToTemplates)
               .UseMemoryCachingProvider()
               .Build();
 
