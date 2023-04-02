@@ -64,6 +64,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             WriteOutFileAsJson(allBlogPostSummaries, contentPath, BlogPostsFile);
 
             //Load up the static templating engine
+            var staticTemplatesPath = parsedArgs.AppRootPath + "/ProgrammerAl.Site/DynamicContentUpdater/StaticTemplates";
+
             var fullPathToTemplates = Path.Combine(Environment.CurrentDirectory, "StaticTemplates");
             var engine = new RazorLightEngineBuilder()
               .UseFileSystemProject(fullPathToTemplates)
