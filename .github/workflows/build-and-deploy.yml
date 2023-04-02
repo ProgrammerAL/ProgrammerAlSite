@@ -31,7 +31,7 @@ jobs:
       - name: Run Dynamic Content Creator
         run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ github.workspace }}/src"
       - name: .NET Build Static Site with WASM Runtime
-        run: dotnet build ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --no-restore --runtime blazor-wasm
+        run: dotnet build ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --no-restore --self-contained --runtime blazor-wasm
       - name: .NET Publish
         run: dotnet publish ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output ${{ env.SITE_PUBLISH_OUTPUT_PATH }}
       - name: Deploy Static Site
