@@ -49,6 +49,12 @@ jobs:
           output_location: ''          
           skip_app_build: true
           skip_api_build: true
-  
+      - name: Push Content Files
+        uses: bacongobbler/azure-blob-storage-upload@main
+        with:
+          source_dir: '${{ github.workspace }}/src/ProgrammerAl.Site.Content'
+          container_name: 'sitecontent'
+          connection_string: ${{ secrets.PublicBlobStorageConnectionString }}
+          sync: 'true'  
 
 
