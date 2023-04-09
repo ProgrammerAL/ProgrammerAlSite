@@ -1,11 +1,13 @@
 ﻿@model ProgrammerAl.Site.Utilities.Entities.BlogPostEntry
 
-<h1>
-    @Model.Title
-</h1>
-<p> Posted on: @Model.ReleaseDate.ToLongDateString()</p>
+<div id="post-title">
+    <h1>
+        @Model.Title
+    </h1>
+    <p> Posted on: @Model.ReleaseDate.ToLongDateString()</p>
+</div>
 
-<div id="content" class="">
+<div class="post-content">
     @Raw(Model.Post)
 </div>
 

@@ -1,4 +1,18 @@
-body {
+.post-title > h1 {
+    font-size: 2.5em;
+    font-weight: 800;
+    margin: 0;
+}
+
+.post-title > p {
+    margin-top: 2em;
+}
+
+.post-content > p {
+    margin-top: 2em;
+}
+
+/*body {
     font-family: 'Lora', 'Times New Roman', serif;
     font-size: 20px;
     color: #333333;
@@ -108,9 +122,9 @@ hr.small {
     .navbar-custom {
         -webkit-transition: background-color 0.3s;
         -moz-transition: background-color 0.3s;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s;*/
         /* Force Hardware Acceleration in WebKit */
-        -webkit-transform: translate3d(0, 0, 0);
+        /*-webkit-transform: translate3d(0, 0, 0);
         -moz-transform: translate3d(0, 0, 0);
         -ms-transform: translate3d(0, 0, 0);
         -o-transform: translate3d(0, 0, 0);
@@ -119,9 +133,9 @@ hr.small {
         backface-visibility: hidden;
     }
 
-        .navbar-custom.is-fixed {
+        .navbar-custom.is-fixed {*/
             /* when the user scrolls down, we hide the header right above the viewport */
-            position: fixed;
+            /*position: fixed;
             top: -61px;
             background-color: rgba(255, 255, 255, 0.9);
             border-bottom: 1px solid #f2f2f2;
@@ -148,9 +162,9 @@ hr.small {
                     color: #337ab7;
                 }
 
-        .navbar-custom.is-visible {
+        .navbar-custom.is-visible {*/
             /* if the user changes the scrolling direction, we show the header */
-            -webkit-transform: translate3d(0, 100%, 0);
+            /*-webkit-transform: translate3d(0, 100%, 0);
             -moz-transform: translate3d(0, 100%, 0);
             -ms-transform: translate3d(0, 100%, 0);
             -o-transform: translate3d(0, 100%, 0);
@@ -463,4 +477,4 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: #337ab7;
-}
+}*/
