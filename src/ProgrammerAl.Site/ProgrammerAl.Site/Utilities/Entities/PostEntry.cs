@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 
 namespace ProgrammerAl.Site.Utilities.Entities
 {
-    public class BlogPostEntry
+    public class PostEntry
     {
-        public BlogPostEntry(string title, DateTime releaseDate, ReadOnlyCollection<string> tags, string post, string firstParagraph)
+        public PostEntry(string title, DateTime releaseDate, ReadOnlyCollection<string> tags, string post, string firstParagraph)
         {
             Title = title;
             ReleaseDate = releaseDate;

@@ -80,9 +80,9 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             foreach (BlogPostInfo blogEntry in parsedBlogEntries)
             {
                 var htmlContent = Markdig.Markdown.ToHtml(blogEntry.Entry.Post);
-                var blogPostEntryWithHtml = new BlogPostEntry(blogEntry.Entry.Title, blogEntry.Entry.ReleaseDate, blogEntry.Entry.Tags, htmlContent, blogEntry.Entry.FirstParagraph);
+                var blogPostEntryWithHtml = new PostEntry(blogEntry.Entry.Title, blogEntry.Entry.ReleaseDate, blogEntry.Entry.Tags, htmlContent, blogEntry.Entry.FirstParagraph);
 
-                string staticHtml = await engine.CompileRenderAsync<BlogPostEntry>("BlogPost.cshtml", blogPostEntryWithHtml);
+                string staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", blogPostEntryWithHtml);
 
                 string outputFilePath = Path.Combine(outputfolderPath, blogEntry.FileNameWithoutExtension) + ".html";
                 File.WriteAllText(outputFilePath, staticHtml);
@@ -126,7 +126,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 {
                     string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(x);
                     string postContent = File.ReadAllText(x);
-                    BlogPostEntry blogEntry = parser.ParseFromMarkdown(postContent);
+                    PostEntry blogEntry = parser.ParseFromMarkdown(postContent);
                     return new BlogPostInfo(fileNameWithoutExtension, blogEntry);
                 })
                 .ToImmutableList();

@@ -15,7 +15,7 @@ namespace ProgrammerAl.Site.Utilities
             _config = config;
         }
 
-        public BlogPostEntry ParseFromMarkdown(string rawEntry)
+        public PostEntry ParseFromMarkdown(string rawEntry)
         {
             //Assumes a specific schema
             //  Line 1: Title: <TITLE HERE>
@@ -53,7 +53,7 @@ namespace ProgrammerAl.Site.Utilities
 
             string firstParagraphOfPost = GrabFirstParagraphOfPost(post);
 
-            return new BlogPostEntry(title, publishedDate, tags, post, firstParagraphOfPost);
+            return new PostEntry(title, publishedDate, tags, post, firstParagraphOfPost);
         }
 
         private string GrabFirstParagraphOfPost(string post)

@@ -21,7 +21,7 @@ namespace ProgrammerAl.Site.PageModels
         [Parameter]
         public string PostUrl { get; set; }
 
-        protected MarkupString BlogPostHtml { get; set; }
+        protected MarkupString PostHtml { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -29,9 +29,7 @@ namespace ProgrammerAl.Site.PageModels
             var pathToBlogPost = string.Format(BlogPostRelativeLinkTemplate, PostUrl);
             var response = await downloader.DownloadFileTextFromSiteContentAsync(HttpClient, Config, pathToBlogPost, "text/x-markdown");
 
-            response = "<span post-scope>" + response + "</span>";
-
-            BlogPostHtml = new MarkupString(response);
+            PostHtml = new MarkupString(response);
 
             await base.OnInitializedAsync();
         }

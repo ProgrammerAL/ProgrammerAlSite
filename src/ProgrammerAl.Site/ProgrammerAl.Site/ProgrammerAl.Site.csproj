@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Update="Pages\Post.razor.css" CssScope="post-scope" />
+      <None Include="wwwroot\css\post.css" CssScope="post-scope" />
     </ItemGroup>
 
     <ItemGroup>

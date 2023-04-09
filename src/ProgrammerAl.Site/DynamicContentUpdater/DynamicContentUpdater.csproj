@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="StaticTemplates\BlogPost.cshtml" />
-    <Content Include="StaticTemplates\BlogPost.cshtml">
+    <None Remove="StaticTemplates\Post.cshtml" />
+    <Content Include="StaticTemplates\Post.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

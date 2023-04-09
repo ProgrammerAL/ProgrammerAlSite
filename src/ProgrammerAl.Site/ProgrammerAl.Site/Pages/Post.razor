@@ -3,8 +3,7 @@
 
 @inherits ProgrammerAl.Site.PageModels.BlogPostModel
 
-@*@if (!string.IsNullOrWhiteSpace(BlogPostHtml.Value))
+@if (!string.IsNullOrWhiteSpace(PostHtml.Value))
 {
-    @BlogPostHtml
+    @PostHtml
 }
-*@

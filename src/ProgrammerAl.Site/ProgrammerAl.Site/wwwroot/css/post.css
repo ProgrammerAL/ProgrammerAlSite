@@ -1,14 +1,14 @@
-.post-title > h1 {
-    font-size: 2.5em;
+.post-title h1 {
+    font-size: 2em;
     font-weight: 800;
     margin: 0;
 }
 
-.post-title > p {
+.post-title p {
     margin-top: 2em;
 }
 
-.post-content > p {
+.post-content p {
     margin-top: 2em;
 }
 

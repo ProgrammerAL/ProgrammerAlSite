@@ -6,14 +6,14 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
     {
         public class BlogPostInfo
         {
-            public BlogPostInfo(string fileNameWithoutExtension, BlogPostEntry entry)
+            public BlogPostInfo(string fileNameWithoutExtension, PostEntry entry)
             {
                 FileNameWithoutExtension = fileNameWithoutExtension;
                 Entry = entry;
             }
 
             public string FileNameWithoutExtension { get; }
-            public BlogPostEntry Entry { get; }
+            public PostEntry Entry { get; }
         }
     }
 }
