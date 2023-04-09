@@ -1,17 +1,34 @@
 .post-title h1 {
+    text-align: center;
     font-size: 2em;
     font-weight: 800;
     margin: 0;
 }
 
 .post-title p {
+    font-size: 0.875rem; /* 14px */
+    text-align: center;
+}
+
+.post-content {
     margin-top: 2em;
 }
 
 .post-content p {
     margin-top: 2em;
+    font-size: 1.5rem;
+    margin: 0 0 2em 0;
 }
 
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
+}
 /*body {
     font-family: 'Lora', 'Times New Roman', serif;
     font-size: 20px;

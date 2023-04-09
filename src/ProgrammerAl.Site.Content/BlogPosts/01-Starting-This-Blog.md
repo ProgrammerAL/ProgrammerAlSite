@@ -10,7 +10,7 @@ Tags:
 - Continuous Deployment
 ---
 
-### Receiving the Quest
+## Receiving the Quest
 *The town is saved! Thanks to you and the rest of your party, the village no longer need worry about the evil Countess Memorine Leaks, and her trusty adviser, Sir Doesn't Call Dispose. After completing the day's adventure, you and your party have left each other to your own devices. The friendly Barbarian has gone home to his family, while the party leading Paladin has stayed late yet again to answer his long list of Enchanted-Mails. You have gone to an inter-network of fellow Code Wizards.*
 
 *Looking around, you see leagues of other wizards posting updates of their recent quests. Many even with entire tomes chronicling their years of adventuring. You've long thought of learning one of the many Blog-elio spells. But today the thought gnaws at you more than usual. While perusing through small messages brought in by the little blue tweet-tweet birds, you think to yourself how easy a task this really might be. Unlike the many other quests you tend to take on. There really is only one way the find out.*
@@ -24,7 +24,7 @@ Tags:
 *"I accept!" You respond, realizing you said that much louder than you meant to. "Sorry about that, I got a little too excited. I mean, I accept," this time at a much more reasonable volume.*
 
 
-### Why a Blog?
+## Why a Blog?
 
 Now that we've accepted our quest, we need to explore the reasons why we even need one. I don't know about you, but I've been toying with the idea of starting a blog for at least three years. The same thoughts always come up.
 
@@ -40,14 +40,14 @@ Now that we've accepted our quest, we need to explore the reasons why we even ne
 
 The list goes on, but you get the idea. In the end, we can make excuses as long as we want, but in my case I just got fed up with wanting to write one and not doing anything about it. Below are the steps I went to in order to get this blog up and running. Feel free to use it as a starting point for yourself, or ignore it altogether. Remember, choose your own side quests.
 
-### Starting a Blog the Programmer Way
+## Starting a Blog the Programmer Way
 
 I try to follow a lot of other people on Twitter in the software development field. So naturally over the years I got into the habit of seeing some technology and thinking, "Hey, that looks cool. Maybe I could use it in my blog. Maybe now's the time to start a blog. Maybe even...oooh, a shiny thing." Then one day I came across a great post by [Scott Hanselman on using Wyam](http://www.hanselman.com/blog/ExploringWyamANETStaticSiteContentGenerator.aspx). Turns out [Wyam](https://wyam.io/) is a great open source utility described as a *static content toolkit*. This is great! Just write out the posts in Markdown, run a quick command line utility and bam! Instant blog site. 
 
 But why stop there? Once we have the blog written up, we should use other tools to get it deployed easily. I mean, why do things by hand when we can automate it all? Once the blog is created, we'll use tools to automatically build and release the site.
 
 
-### Wyam
+## Wyam
 Getting started with Wyam is easy enough. There are a handful of places to get the bits from, but I chose to use the Windows installer [here](https://github.com/Wyamio/Wyam/releases). Just download the Setup.exe and run it on the machine. Now Wyam is installed and you get a cool command prompt in your start menu.
 
 <figure>
@@ -70,7 +70,7 @@ After running that command we have the 'output' folder. Go ahead and explore tha
 Using that Previewer is simple enough. Go back to your trusty command line and use the command: ``Wyam -r Blog -p``. That new flag ``-p`` will start the small web server and host your site locally. The default site is http://localhost:5080/. Open it up in your browser to look around.
 
 
-### Actually Making a Blog with Wyam
+## Actually Making a Blog with Wyam
 
 Now that we've mastered three commands from Wyam, we need to be able to work with the files themselves. Wyam is very extensible and you can use any combination or Markdown, cshtml razor files, and others too I'm sure I don't know about. I debated for quite a while on what combination to use. In the end I decided to try using only Markdown for content. The deciding factors were a) I want to keep things simple, and b) [I found this blog post by Dave Glick too late](https://daveaglick.com/posts/integrating-wyam-into-an-aspnet-mvc-site).
 
@@ -93,7 +93,7 @@ The first-post.md file is a little different than what we'll actually end up see
 
 This is as far as we'll go with looking at Wyam. As I mentioned earlier, it's pretty extensible and there's a lot you can do with it. If you want more advanced options you can find them online with a quick search.
 
-### Source Control
+## Source Control
 After some writing, we have a blog. Or at least a good enough template. But it's software, so we need some sort of source control. You're nodding your head in agreement right? If not, start now. I'll wait.
 
 There are a lot of places that can host our code for free. Publicly hosting on GitHub is a popular option. It's very easy to setup a new repository with GitHub. As long as it's open source, it's free. Just go to https://github.com/new and make it. This was very tempting, but in the end, I decided to go with Microsoft's Visual Studio Team Services (VSTS). Not because I like long names, or want to keep this code hidden from everyone, but because I use it a lot for my day job and it'll be nice to have an active project I can use to experiment with new features. If you want to use something else, have at it. Plus, this also is free as I'm the only person working on the code.
@@ -126,7 +126,7 @@ With your Git Repo on your machine, once you feel like it, go ahead and commit y
   <figcaption>Ignore the extra files for now. We'll be adding those in a bit.</figcaption>
 </figure>
 
-### Continuous Integration
+## Continuous Integration
 
 Pop Quiz: What's Continuous Integration? 
 
@@ -138,12 +138,12 @@ Go to the Build tab, and create a new build with an empty template (instead of t
 
 So far all of our 'building' has been from the command line with Wyam already installed on the local machine. This is great locally, but causes a problem when we want to use the hosted build. Remember, this will be run on some random machine in Azure that we have zero access to. We can check-in the Wyam executable to the Git repo and call that, but now we have to keep track of the version and update it on a regular basis. Maintaining this will just be too much work. So how do we get this building in the cloud? I'm sure there are other ways, but I decided on using Cake with the NuGet package.
 
-##### Cake
+#### Cake
 I've been wanting to play around with Cake for a while, just haven't had a good enough excuse yet. The general idea behind Cake is to create a single script file with C# syntax and use that for just about everything. Building, Releasing, running tests, etc. It's a great [open source utility hosted on GitHub](https://github.com/cake-build/cake) that recently got into the [.Net Foundation](https://dotnetfoundation.org/blog/cake-welcome), so you can feel a little better about it being continually updated. It's also very extensible with an active community.
 
 The general process is to run a PowerShell script that calls the *.cake script, which then does all the work. The getting started tutorial [here](http://cakebuild.net/docs/tutorials/setting-up-a-new-project) makes it look pretty easy and I was up and running in just a few minutes.
 
-##### NuGet
+#### NuGet
 The basic package manager for .Net. If you haven't worked with it before you can find some tutorials online pretty easily. [This one looks good](https://docs.microsoft.com/en-us/nuget/quickstart/use-a-package). 
 
 If you're new to the concept of package managers, the basic idea is that the manager (NuGet, NPM, etc), keep track of the external packages (libraries, SDKs, whatever you call them) used by your software. Those packages are hosted online and when you need to do a build, the package is downloaded to the machine. Want to update to a newer version? Just click the update button. Want to roll back to an old one? Click that button instead. 
@@ -153,7 +153,7 @@ If you're new to the concept of package managers, the basic idea is that the man
 </div>
 
 
-### Setting up the Build
+## Setting up the Build
 
 On our local machine, we'll need to make a Cake script. Because this was my first Cake script I decided to take a look [at what Dave Glick uses for his blog](https://github.com/daveaglick/daveaglick/blob/master/build.cake). That's pretty in depth. Our script just needs to do a build. Below is what I made for this blog. You can see the first two lines say to use NuGet to download locally the very latest version of Wyam (prerelease version). Then the task named 'Default' is called. This task uses Wyam to run on the local directory with a few options. You'll recognize some of those options from the command line we used earlier.
 
@@ -207,7 +207,7 @@ Lastly, go to the 'Triggers' tab for this build definition. Make sure the Contin
   <figcaption>If you're missing files, check the settings for the Publish task in your build definition</figcaption>
 </figure>
 
-### Continuous Delivery
+## Continuous Delivery
 
 Pop Quiz Part 2: What is Continuous Delivery?
 
@@ -241,12 +241,12 @@ Now that we have a release, we should make sure it is Deploying Continuously. Go
 
 Now save this and queue up a release. In theory everything should go well and your site will be online hosted by Azure. 
 
-### Summary
+## Summary
 
 This is a very simple setup for a blog. Over time things will change and I'll make sure to update this entry with those changes. But starting a blog, the programmer way, can have a lot of tasks to go through. Again, there are many ways to run a blog. I wanted to go a route that was simple, but involved learning new technologies. Hopefully this was easy enough for you to follow and I didn't leave you with too many extra questions.
 
 ---
-### *Quest Rewards*
+## *Quest Rewards*
 - *1000 xp*
 - *Blog Dependency*
 - *Wyam Proficiency*
@@ -254,7 +254,7 @@ This is a very simple setup for a blog. Over time things will change and I'll ma
 
 ---
 
-#### Links
+### Links
 * Scott Hanselman's Wyam Blog Post: http://www.hanselman.com/blog/ExploringWyamANETStaticSiteContentGenerator.aspx
 * Wyam: https://wyam.io/
 * Wyam Releases: https://github.com/Wyamio/Wyam/releases
@@ -263,7 +263,7 @@ This is a very simple setup for a blog. Over time things will change and I'll ma
 * Cake: https://github.com/cake-build/cake
 * Cake Plugin to VSTS: https://marketplace.visualstudio.com/items?itemName=cake-build.cake
 
-#### Wyam Commands:
+### Wyam Commands:
 - Wyam new -r <recipe type>
     - Creates a new Wyam setup folder within the current directory
         - A single folder named 'input'

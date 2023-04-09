@@ -6,16 +6,16 @@ Tags:
 - VSTS
 ---
 
-### Receiving the Quest
+## Receiving the Quest
 *After some time creating a new spell component you realize you want to share it with the magical community. You package it up and share it with everyone over the publicly accessible New Gett enchantment. But then you make a change and realize manually sending into the ether is taking too much time. Mostly from rolling too low on the intelligence check with remembering the steps for sending it. You decide to invest in creating a new enchantment to automagically send a new version of this spell component to the ether once changes have been made.*
 
-### Shameless Plug
+## Shameless Plug
 
 I recently started my first Open Source project - [Command Complete](https://github.com/ProgrammerAl/CommandComplete). It's a .NET Standard library to allow you to add auto-completion to a command string with parameters. It's like auto-complete in PowerShell or other shell tools that add that, but something you can put into your own app. There's built-in support for using this within a console, and you can add some custom bits to use this in something else like a text field in some UI. 
 
 After creating the project I wanted to add some automation to build/test/deploy the library as a NuGet package. I quickly got to a problem where versioning a NuGet package in a Continuous Deployment world is less than ideal.
 
-### How to make a NuGet Package
+## How to make a NuGet Package
 
 We have a plethora of choices when we want to generate a NuGet package from our code. We can:
     - Publish from the command line
@@ -26,7 +26,7 @@ We have a plethora of choices when we want to generate a NuGet package from our 
 
 This isn't the hard part. If you're not very familiar with generating a NuGet package feel free to [search the internet](https://www.bing.com/search?q=how+to+create+a+nuget+package). 
 
-### The problem...from a Continuous Deployment Point of View
+## The problem...from a Continuous Deployment Point of View
 
 Uploading a NuGet package to a feed is easy. You can use the command line, or upload a package directly through the browser. Living in the future has its perks. The problem comes when following normal continuous deployment guides. 
 
@@ -36,7 +36,7 @@ When generating a NuGet package file, the version number gets set. *This is done
 
 After each validation step the goal is to promote the exact same package file artifact to a new place with a version name targeted toward that environment. The bad news is this isn't an option right now. But the good news is Microsoft knows about this scenario and is working toward making this easier, as mentioned in a [blog post](https://blogs.msdn.microsoft.com/devops/2016/05/18/versioning-nuget-packages-cd-2/) 8 months before this one was published.
 
-### The Workaround
+## The Workaround
 
 Since we can't change the version number at deploy time I swallowed some pride and decided to involve a *gasp!* manual process. The image below shows the steps for the VSTS Build Definition. There is no Release Definition because the build will deploy the package. After compiling and running unit tests, the build will:
 - Generate a NuGet package
@@ -65,19 +65,19 @@ Some other build variables are used for versioning that can be set at queue time
 
 As you probably guessed I really don't like the manual step. To me, manual means forgettable. I'll have to remember to set more than one variable at queue time, *and* if I've made any changes since the previous build I'll have to look for the right Git commit number to make sure the right code is compiled and deployed. In the few days since creating this build I've already messed up multiple times. Thankfully none of those mistakes caused any real problems, but it doesn't instill confidence.
 
-### Summary
+## Summary
 
 Since we don't have any tooling at the moment to change a NuGet package version after it has been created, we have to re-compile it to the version number we want. Thankfully automating this is easy, but it came with manual steps. Hopefully tooling gets changed for this sooner than later, but for now it's not horrible (even if I want to say it is).
 
 ---
-### *Quest Rewards*
+## *Quest Rewards*
 - *1000 xp*
 - *NuGet Proficiency*
 - *New OSS Project - Unrelated to this blog post, but it's what the NuGet package is for*
 
 ---
 
-#### Links
+### Links
 * Microsoft blog post on versioning NuGet packages: https://blogs.msdn.microsoft.com/devops/2016/05/03/versioning-nuget-packages-cd-1/
 * Microsoft blog post on not being able to rename a NuGet Version: https://blogs.msdn.microsoft.com/devops/2016/05/18/versioning-nuget-packages-cd-2/
 
