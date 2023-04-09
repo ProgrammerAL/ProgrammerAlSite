@@ -16,8 +16,19 @@
     </div>
 </header>
 *@
+@*<header>
+    <div>
+        <h1>ProgrammerAL</h1>
+        <hr class="small">
+        <h3>AL not A.I.</h3>
+    </div>
+</header>
+*@
+
 @if (Recents != null)
 {
     <RecentBlogPosts Posts="@Recents.RecentBlogPosts" />
 }
+
+<a href="/blog" class="underline text-blue-600 text-center">View all posts</a>
 

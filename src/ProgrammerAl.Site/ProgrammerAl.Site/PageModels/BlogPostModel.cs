@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Components;
+
 using ProgrammerAl.Site.Utilities;
 
 namespace ProgrammerAl.Site.PageModels
@@ -26,6 +28,8 @@ namespace ProgrammerAl.Site.PageModels
             var downloader = new FileDownloader();
             var pathToBlogPost = string.Format(BlogPostRelativeLinkTemplate, PostUrl);
             var response = await downloader.DownloadFileTextFromSiteContentAsync(HttpClient, Config, pathToBlogPost, "text/x-markdown");
+
+            response = "<span blog-post-css-scope>" + response + "</span>";
 
             BlogPostHtml = new MarkupString(response);
 
