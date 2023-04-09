@@ -1,0 +1,23 @@
+﻿@page "/posts"
+@inherits ProgrammerAl.Site.PageModels.BlogModel
+
+@if (BlogPosts != null)
+{
+    var postsByYear = BlogPosts.OrderByDescending(x => x.PostNumber).GroupBy(x => x.PostedDate.Year);
+    foreach (var postByYear in postsByYear)
+    {
+        <div>
+            <h1 class="mt-4 font-semibold">@postByYear.Key</h1>
+            <hr>
+            @foreach (var post in postByYear)
+            {
+                <div class="mt-4">
+                    <a href="/posts/@post.TitleLink">
+                        <h3>@post.Title</h3>
+                    </a>
+                    <p>Posted on @post.PostedDate.ToLongDateString()</p>
+                </div>
+            }
+        </div>
+    }
+}

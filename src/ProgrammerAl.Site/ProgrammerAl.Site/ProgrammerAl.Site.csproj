@@ -8,19 +8,8 @@
         <RootNamespace>ProgrammerAl.Site</RootNamespace>
     </PropertyGroup>
 
-    <!--<ItemGroup>
-        <None Remove="Pages\BlogPost.razor.css" />
-    </ItemGroup>
-
     <ItemGroup>
-        <Content Include="Pages\BlogPost.razor.css">
-            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-        </Content>
-    </ItemGroup>-->
-
-    <ItemGroup>
-        <None Update="Pages/BlogPost.razor.css" CssScope="blog-post-css-scope" />
+        <None Update="Pages\Post.razor.css" CssScope="post-scope" />
     </ItemGroup>
 
     <ItemGroup>
