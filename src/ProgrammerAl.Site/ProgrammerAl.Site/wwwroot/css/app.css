@@ -1,24 +1,4 @@
 ﻿
-.hosted-field {
-    height: 50px;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 12px;
-    display: inline-block;
-    box-shadow: none;
-    font-weight: 600;
-    font-size: 14px;
-    border-radius: 6px;
-    border: 1px solid #dddddd;
-    line-height: 20px;
-    background: #fcfcfc;
-    margin-bottom: 12px;
-    background: linear-gradient(to right, white 50%, #fcfcfc 50%);
-    background-size: 200% 100%;
-    background-position: right bottom;
-    transition: all 300ms ease-in-out;
-}
-
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -47,19 +27,3 @@
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
-
-.animate-bounce-right-to-left {
-    animation: bounce-right-to-left 1s infinite;
-}
-
-@keyframes bounce-right-to-left {
-    0%, 100% {
-        transform: translateX(25%);
-        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-    }
-
-    50% {
-        transform: translateX(0);
-        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    }
-}

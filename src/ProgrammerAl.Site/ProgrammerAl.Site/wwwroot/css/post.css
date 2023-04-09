@@ -16,7 +16,7 @@
 
 .post-content p {
     margin-top: 2em;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin: 0 0 2em 0;
 }
 
@@ -29,6 +29,30 @@
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 800;
 }
+
+    .post-content a {
+        color: #0000EE;
+    }
+
+        .post-content a:hover,
+        .post-content a:focus {
+            color: #337ab7;
+        }
+
+        .post-content a img:hover,
+        .post-content a img:focus {
+            cursor: zoom-in;
+        }
+
+    .post-content blockquote {
+        color: #555555;
+        font-style: italic;
+    }
+
+        .post-content blockquote > p {
+            margin-top: 0;
+        }
+
 /*body {
     font-family: 'Lora', 'Times New Roman', serif;
     font-size: 20px;

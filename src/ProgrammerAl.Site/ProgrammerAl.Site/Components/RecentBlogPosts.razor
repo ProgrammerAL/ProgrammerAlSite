@@ -3,15 +3,15 @@
 @if (Posts != null)
 {
     <div class="flex flex-col gap-8">
-        @foreach (var blogPost in Posts)
+        @foreach (var post in Posts)
         {
-            var paragraphMarkup = new MarkupString(blogPost.FirstParagraph);
+            var paragraphMarkup = new MarkupString(post.FirstParagraph);
 
             <div>
-                <a class="text-xl font-bold" href="/posts/@blogPost.TitleLink">
-                    <h2>@blogPost.Title</h2>
+                <a class="text-xl font-bold" href="/posts/@post.TitleLink">
+                    <h2>@post.Title</h2>
                 </a>
-                <p class="text-sm italic">Posted on @blogPost.PostedDate.ToLongDateString()</p>
+                <p class="text-sm italic">Posted on @post.PostedDate.ToLongDateString()</p>
                 <p class="text-base">@paragraphMarkup</p>
             </div>
         }

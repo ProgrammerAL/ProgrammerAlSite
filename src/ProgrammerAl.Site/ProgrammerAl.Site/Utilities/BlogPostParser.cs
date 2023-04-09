@@ -23,7 +23,7 @@ namespace ProgrammerAl.Site.Utilities
             //  Line 3: Tags:
             //  Line 4-??: - <Tag Name>
             //  Header Ending: --- <Yes, 3 dashes>
-            //  ### <Some header. Usually "### Receiving the Quest">
+            //  ## <Some header. Usually "## Receiving the Quest">
             //  First Paragraph
             //  Rest of it: The blog post
 
@@ -58,7 +58,7 @@ namespace ProgrammerAl.Site.Utilities
 
         private string GrabFirstParagraphOfPost(string post)
         {
-            string headerText = "###";
+            string headerText = "##";
             int headerStartIndex = post.IndexOf(headerText);
             if (headerStartIndex == -1)
             {
