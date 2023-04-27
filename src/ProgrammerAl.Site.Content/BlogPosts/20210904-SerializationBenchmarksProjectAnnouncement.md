@@ -1,4 +1,4 @@
-Title: Introducting: .NET Serialization Benchmarks
+Title: Introducing: .NET Serialization Benchmarks
 Published: 9/4/2021
 Tags: 
 - Performance

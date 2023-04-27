@@ -5,9 +5,15 @@
         @Model.Title
     </h1>
     <p> Posted on: @Model.ReleaseDate.ToLongDateString()</p>
+    @if (Model.Tags.Any())
+    {
+        <p> Tags: @(string.Join(", ", Model.Tags))</p>
+    }
+
 </div>
 
 <div class="post-content">
     @Raw(Model.Post)
 </div>
+
 
