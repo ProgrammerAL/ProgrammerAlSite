@@ -1,19 +1,7 @@
 ﻿using ProgrammerAl.Site.Utilities.Entities;
 
-namespace ProgrammerAl.Site.DynamicContentUpdater
-{
-    partial class Program
-    {
-        public class BlogPostInfo
-        {
-            public BlogPostInfo(string fileNameWithoutExtension, PostEntry entry)
-            {
-                FileNameWithoutExtension = fileNameWithoutExtension;
-                Entry = entry;
-            }
+using System;
 
-            public string FileNameWithoutExtension { get; }
-            public PostEntry Entry { get; }
-        }
-    }
-}
+namespace ProgrammerAl.Site.DynamicContentUpdater;
+
+public record BlogPostInfo(string FileNameWithoutExtension, DateOnly PostDate, PostEntry Entry);

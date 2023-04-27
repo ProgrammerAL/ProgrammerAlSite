@@ -40,7 +40,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             ImmutableList<BlogPostInfo> allPosts = LoadAllBlogPostInfo(contentPath, parser);
 
             ImmutableList<BlogPostInfo> parsedBlogEntries = allPosts
-                .OrderBy(x => x.FileNameWithoutExtension)//All blog posts start with a number. So the higher the number, the newer the post
+                .OrderBy(x => x.PostDate)//All blog posts start with the date they were posted. Order them so the oldest is first
                 .ToImmutableList();
 
             int blogPostNumber = 1;
@@ -125,9 +125,11 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             return blogPostFiles.Select(x =>
                 {
                     string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(x);
+                    var postDateString = fileNameWithoutExtension.Substring(0, 8);
+                    var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
                     string postContent = File.ReadAllText(x);
                     PostEntry blogEntry = parser.ParseFromMarkdown(postContent);
-                    return new BlogPostInfo(fileNameWithoutExtension, blogEntry);
+                    return new BlogPostInfo(fileNameWithoutExtension, postDate, blogEntry);
                 })
                 .ToImmutableList();
         }
