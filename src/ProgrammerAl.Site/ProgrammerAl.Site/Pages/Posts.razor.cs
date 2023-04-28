@@ -29,6 +29,8 @@ public partial class Posts : ComponentBase
     private TagLinks TagLinks { get; set; }
     private ImmutableArray<KeyValuePair<string, bool>> TagSelections { get; set; } = ImmutableArray.Create<KeyValuePair<string, bool>>();
 
+    private bool IsViewingTags { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         var downloader = new FileDownloader();
@@ -45,6 +47,9 @@ public partial class Posts : ComponentBase
         TagLinks = await JsonSerializer.DeserializeAsync<TagLinks>(tagLinksContent);
 
         RefreshTagSelections();
+
+        IsViewingTags = !string.IsNullOrWhiteSpace(QueryStringTagSelections);
+
         StateHasChanged();
 
         await base.OnInitializedAsync();
@@ -93,5 +98,11 @@ public partial class Posts : ComponentBase
             var tagSelectionItems = QueryStringTagSelections?.Split(',', StringSplitOptions.RemoveEmptyEntries);
             TagSelections = TagLinks.Links.OrderBy(x => x.Key).Select(x => new KeyValuePair<string, bool>(x.Key, tagSelectionItems.Any(y => string.Equals(x.Key, y, StringComparison.OrdinalIgnoreCase)))).ToImmutableArray();
         }
+    }
+
+    private void ToggleIsViewingTags()
+    {
+        IsViewingTags = !IsViewingTags;
+        StateHasChanged();
     }
 }
