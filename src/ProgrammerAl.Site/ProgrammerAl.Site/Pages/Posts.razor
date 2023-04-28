@@ -7,15 +7,15 @@
     foreach (var postByYear in postsByYear)
     {
         <div>
-            <h1 class="mt-4 font-semibold">@postByYear.Key</h1>
+            <h1 class="mt-4 font-semibold text-lg">@postByYear.Key</h1>
             <hr>
             @foreach (var post in postByYear)
             {
                 <div class="mt-4">
                     <a href="/posts/@post.TitleLink">
-                        <h3>@post.Title</h3>
+                        <p class="text-lg">@post.Title</p>
                     </a>
-                    <p>Posted on @post.PostedDate.ToLongDateString()</p>
+                    <p class="text-sm">Posted on @post.PostedDate.ToLongDateString()</p>
                 </div>
             }
         </div>
