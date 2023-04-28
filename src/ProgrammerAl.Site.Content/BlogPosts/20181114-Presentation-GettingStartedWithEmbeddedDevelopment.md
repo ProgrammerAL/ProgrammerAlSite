@@ -1,7 +1,7 @@
 Title: Presentation: Getting Started with Embedded Development
 Published: 2018/11/14
 Tags: 
-- Presentation
+- Public Speaking
 - Meetup
 - IoT
 - Embedded

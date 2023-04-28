@@ -1,7 +1,7 @@
 Title: Presentation: Introduction to Pulumi
 Published: 2022/02/10
 Tags: 
-- Presentation
+- Public Speaking
 - Meetup
 - Video Recording
 - Pulumi
