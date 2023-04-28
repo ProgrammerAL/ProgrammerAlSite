@@ -1,5 +1,5 @@
 Title: Presentation: Introduction to OpenTelemetry with .NET
-Published: 03/26/2023
+Published: 2023/03/26
 Tags: 
 - Presentation
 - Conference

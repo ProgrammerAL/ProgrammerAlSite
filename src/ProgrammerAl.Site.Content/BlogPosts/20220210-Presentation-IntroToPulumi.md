@@ -1,5 +1,5 @@
 Title: Presentation: Introduction to Pulumi
-Published: 02/10/2020
+Published: 2022/02/10
 Tags: 
 - Presentation
 - Meetup

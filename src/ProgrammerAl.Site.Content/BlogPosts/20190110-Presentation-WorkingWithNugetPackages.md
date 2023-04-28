@@ -1,5 +1,5 @@
 Title: Presentation: Working with Nuget Packages
-Published: 01/10/2019
+Published: 2019/01/10
 Tags: 
 - Presentation
 - Meetup

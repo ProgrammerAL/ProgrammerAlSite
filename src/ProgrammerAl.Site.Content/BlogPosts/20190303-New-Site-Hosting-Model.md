@@ -1,5 +1,5 @@
 Title: New Site Hosting Model
-Published: 3/3/2019
+Published: 2019/03/03
 Tags: 
 - Blazor
 - Azure

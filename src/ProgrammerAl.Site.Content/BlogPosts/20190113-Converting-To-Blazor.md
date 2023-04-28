@@ -1,5 +1,5 @@
 Title: Converting This Site to Blazor
-Published: 1/13/2019
+Published: 2019/01/13
 Tags: 
 - Blazor
 - Web Development

@@ -1,5 +1,5 @@
 Title: Starting This Blog
-Published: 1/16/2017
+Published: 2017/01/16
 Tags: 
 - Wyam
 - Azure App Service

@@ -1,5 +1,5 @@
 Title: Presentation: .NET of Things
-Published: 03/30/2019
+Published: 2019/03/30
 Tags: 
 - Presentation
 - Conference

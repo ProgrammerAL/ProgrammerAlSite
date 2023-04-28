@@ -1,5 +1,5 @@
 Title: Continuously Deploying a NuGet Package (Through VSTS)
-Published: 1/29/2018
+Published: 2018/01/29
 Tags: 
 - NuGet
 - Continuous Deployment

@@ -1,5 +1,5 @@
 Title: Look for a Different Angle
-Published: 8/7/2017
+Published: 2017/08/07
 Tags: 
 - NuGet
 - C++

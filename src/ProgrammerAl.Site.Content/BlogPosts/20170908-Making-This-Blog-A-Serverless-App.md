@@ -1,5 +1,5 @@
 Title: Making this Blog a Serverless App
-Published: 9/08/2017
+Published: 2017/09/08
 Tags: 
 - Azure Functions
 - Wyam

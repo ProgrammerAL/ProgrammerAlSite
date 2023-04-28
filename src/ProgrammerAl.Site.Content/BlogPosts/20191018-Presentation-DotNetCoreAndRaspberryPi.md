@@ -1,5 +1,5 @@
 Title: Podcast: NET Core and the Raspberry Pi
-Published: 10/18/2019
+Published: 2019/10/18
 Tags: 
 - Presentation
 - Podcast
