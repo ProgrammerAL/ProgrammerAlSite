@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProgrammerAl.Site.Utilities.Entities;
 
-public class TagLinks
+public class RecentData
 {
-    public Dictionary<string, string[]> Links { get; set; }
+    public BlogPostSummary[] RecentBlogPosts { get; set; }
 }

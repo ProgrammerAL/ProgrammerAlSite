@@ -16,7 +16,6 @@ namespace ProgrammerAl.Site
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            _ = builder.Services.AddTransient<HttpClient>(services => new HttpClient());
             _ = builder.Services.AddSingleton<IConfig>(new HardCodedConfig());
 
             _ = builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });

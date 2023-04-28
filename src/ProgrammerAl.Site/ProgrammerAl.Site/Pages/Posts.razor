@@ -1,9 +1,38 @@
 ﻿@page "/posts"
-@inherits ProgrammerAl.Site.PageModels.BlogModel
+@using ProgrammerAl.Site.Components
+@using ProgrammerAl.Site.Utilities.Entities;
+
+@if (TagLinks != null && TagLinks.Links.Any())
+{
+    <p class="text-lg font-semibold">Filter posts by tags:</p>
+    <div class="flex flex-wrap gap-4">
+        @foreach (var tagSelection in TagSelections)
+        {
+            <SelectionTextComponent Text="@tagSelection.Key" IsSelected="@tagSelection.Value" OnSelectionChanged="HandleTagSelectionChangedAsync" />
+        }
+    </div>
+}
 
 @if (BlogPosts != null)
 {
-    var postsByYear = BlogPosts.OrderByDescending(x => x.PostNumber).GroupBy(x => x.PostedDate.Year);
+    IEnumerable<IGrouping<int, BlogPostSummary>> postsByYear;
+    var tagSelections = TagSelections.Where(x => x.Value).Select(x => x.Key).ToList();
+
+    if (tagSelections.Any())
+    {
+        //If any tags are selected, only show posts with those tags
+        var selectedLinks = TagLinks.Links.Where(x => tagSelections.Contains(x.Key, StringComparer.OrdinalIgnoreCase)).SelectMany(x => x.Value).ToList();
+
+        postsByYear = BlogPosts
+        .Where(x => selectedLinks.Any(y => string.Equals(x.TitleLink, y, StringComparison.OrdinalIgnoreCase)))
+        .OrderByDescending(x => x.PostNumber)
+        .GroupBy(x => x.PostedDate.Year);
+    }
+    else
+    {
+        postsByYear = BlogPosts.OrderByDescending(x => x.PostNumber).GroupBy(x => x.PostedDate.Year);
+    }
+
     foreach (var postByYear in postsByYear)
     {
         <div>
@@ -16,6 +45,14 @@
                         <p class="text-lg">@post.Title</p>
                     </a>
                     <p class="text-sm">Posted on @post.PostedDate.ToLongDateString()</p>
+                    @if (post.Tags?.Any() is true)
+                    {
+                        <p class="text-sm">Tags: @(string.Join(", ", post.Tags))</p>
+                    }
+                    else
+                    {
+                        <p class="text-sm">Tags: None</p>
+                    }
                 </div>
             }
         </div>

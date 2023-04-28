@@ -13,9 +13,6 @@ namespace ProgrammerAl.Site.PageModels
     public class IndexModel : ComponentBase
     {
         [Inject]
-        protected HttpClient HttpClient { get; set; }
-
-        [Inject]
         protected IConfig Config { get; set; }
 
         public RecentData Recents { get; set; }
@@ -23,7 +20,7 @@ namespace ProgrammerAl.Site.PageModels
         protected override async Task OnInitializedAsync()
         {
             var downloader = new FileDownloader();
-            var recentDataContent = await downloader.DownloadFileFromSiteContentAsync(HttpClient, Config, "RecentData.json", "*/*");
+            var recentDataContent = await downloader.DownloadFileFromSiteContentAsync(Config, "RecentData.json", "*/*");
             Recents = await JsonSerializer.DeserializeAsync<RecentData>(recentDataContent);
 
             await base.OnInitializedAsync();

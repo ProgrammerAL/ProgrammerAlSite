@@ -1,0 +1,27 @@
+﻿@using ProgrammerAl.Site.Utilities.Entities
+
+<button @onclick="OnButtonClickAsync">
+    <div class="@(IsSelected ? IsSelectedCss : IsNotSelectedCss)">
+        <p>@Text</p>
+    </div>
+</button>
+
+
+@code {
+    private const string IsSelectedCss = "border border-4 border-green-800 rounded-md text-green-800 p-1";
+    private const string IsNotSelectedCss = "border border-2 border-slate-600 rounded-md text-slate-600 p-1";
+
+    [Parameter, EditorRequired]
+    public bool IsSelected { get; set; }
+
+    [Parameter, EditorRequired]
+    public string Text { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnSelectionChanged { get; set; }
+
+    private async Task OnButtonClickAsync()
+    {
+        await OnSelectionChanged.InvokeAsync(Text);
+    }
+}

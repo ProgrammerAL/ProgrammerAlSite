@@ -3,7 +3,7 @@ Published: 2019/01/10
 Tags: 
 - Public Speaking
 - Meetup
-- Nuget
+- NuGet
 - .NET
 ---
 

@@ -53,6 +53,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 FirstParagraph = Markdig.Markdown.ToHtml(x.Entry.FirstParagraph),
                 PostNumber = blogPostNumber++,
                 TitleLink = x.FileNameWithoutExtension,
+                Tags = x.Entry.Tags.ToArray()
             }).ToArray();
 
             BlogPostSummary[] mostRecentBlogPosts = allBlogPostSummaries
@@ -100,7 +101,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         private static TagLinks GenerateTagLinks(ImmutableList<BlogPostInfo> allPosts)
         {
             var tagLinks = new TagLinks();
-            var tagDictionary = new Dictionary<string, List<string>>();
+            var tagDictionary = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
             foreach (var post in allPosts)
             {
                 foreach (var tag in post.Entry.Tags)

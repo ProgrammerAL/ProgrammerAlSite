@@ -13,9 +13,6 @@ namespace ProgrammerAl.Site.PageModels
         private const string BlogPostRelativeLinkTemplate = "BlogPosts/{0}.html";
 
         [Inject]
-        private HttpClient HttpClient { get; set; }
-
-        [Inject]
         private IConfig Config { get; set; }
 
         [Parameter]
@@ -27,7 +24,7 @@ namespace ProgrammerAl.Site.PageModels
         {
             var downloader = new FileDownloader();
             var pathToBlogPost = string.Format(BlogPostRelativeLinkTemplate, PostUrl);
-            var response = await downloader.DownloadFileTextFromSiteContentAsync(HttpClient, Config, pathToBlogPost, "text/x-markdown");
+            var response = await downloader.DownloadFileTextFromSiteContentAsync(Config, pathToBlogPost, "text/x-markdown");
 
             PostHtml = new MarkupString(response);
 
