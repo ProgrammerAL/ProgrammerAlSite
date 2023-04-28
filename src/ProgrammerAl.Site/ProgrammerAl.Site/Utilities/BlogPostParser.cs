@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Text;
 
 namespace ProgrammerAl.Site.Utilities
@@ -19,7 +20,7 @@ namespace ProgrammerAl.Site.Utilities
         {
             //Assumes a specific schema
             //  Line 1: Title: <TITLE HERE>
-            //  Line 2: Published: <MM/DD/YYYY>
+            //  Line 2: Published: <YYYY/MM/DD>
             //  Line 3: Tags:
             //  Line 4-??: - <Tag Name>
             //  Header Ending: --- <Yes, 3 dashes>
@@ -38,7 +39,7 @@ namespace ProgrammerAl.Site.Utilities
             int publishedDateEndIndex = rawEntry.IndexOf('\n', publishedDateStartIndex + 1);
             int publishedDateEndLength = publishedDateEndIndex - publishedDateStartIndex;
             ReadOnlySpan<char> publishedDateLine = rawEntry.AsSpan(publishedDateStartIndex, publishedDateEndLength);
-            DateTime publishedDate = ParseDateTimeFromLine(publishedDateLine);
+            DateOnly publishedDate = ParseDateTimeFromLine(publishedDateLine);
 
             int tagsLineStartIndex = rawEntry.IndexOf('\n', publishedDateEndIndex);
             int endOfTagsLineStartIndex = rawEntry.IndexOf('\n', tagsLineStartIndex);//Do this again because we want to get to the end of the Tags line
@@ -113,10 +114,10 @@ namespace ProgrammerAl.Site.Utilities
             return "Unknown Error";
         }
 
-        private DateTime ParseDateTimeFromLine(ReadOnlySpan<char> textLine)
+        private DateOnly ParseDateTimeFromLine(ReadOnlySpan<char> textLine)
         {
             string dateTimeString = ParseStringValueFromLine(textLine);
-            return DateTime.Parse(dateTimeString);
+            return DateOnly.ParseExact(dateTimeString, format:"yyyy/MM/dd", provider: null);
         }
     }
 }

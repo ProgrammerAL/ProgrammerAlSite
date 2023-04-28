@@ -28,7 +28,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         {
             BlogPostParser parser = new BlogPostParser(_config);
             PostEntry result = parser.ParseFromMarkdown(ValidPost);
-            Assert.Equal(new DateTime(2017, 1, 16, 0, 0, 0), result.ReleaseDate);
+            Assert.Equal(new DateOnly(2017, 1, 16), result.ReleaseDate);
         }
 
         [Fact]
@@ -71,7 +71,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         }
 
         private const string ValidPost = @"Title: Starting This Blog
-Published: 1/16/2017
+Published: 2017/01/16
 Tags: 
 - Wyam
 - Azure App Service

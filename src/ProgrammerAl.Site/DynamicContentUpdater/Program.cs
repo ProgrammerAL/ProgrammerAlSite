@@ -47,7 +47,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             BlogPostSummary[] allBlogPostSummaries = parsedBlogEntries.Select(x => new BlogPostSummary
             {
                 Title = x.Entry.Title,
-                PostedDate = x.Entry.ReleaseDate,
+                PostedDate = x.PostDate,
                 FirstParagraph = Markdig.Markdown.ToHtml(x.Entry.FirstParagraph),
                 PostNumber = blogPostNumber++,
                 TitleLink = x.FileNameWithoutExtension,
