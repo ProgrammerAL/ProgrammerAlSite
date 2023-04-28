@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProgrammerAl.Site.Utilities.Entities
+namespace ProgrammerAl.Site.Utilities.Entities;
+
+public class TagLinks
 {
-    public class RecentData
-    {
-        public BlogPostSummary[] RecentBlogPosts { get; set; }
-    }
+    public Dictionary<string, string[]> Links { get; set; }
 }

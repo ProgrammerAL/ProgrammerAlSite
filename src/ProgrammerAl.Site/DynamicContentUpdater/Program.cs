@@ -10,6 +10,7 @@ using RazorLight;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Text;
+using System.Collections.Generic;
 
 namespace ProgrammerAl.Site.DynamicContentUpdater
 {
@@ -17,6 +18,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
     {
         private const string RecentDataFile = "RecentData.json";
         private const string BlogPostsFile = "BlogPosts.json";
+        private const string TagLinksFile = "TagLinks.json";
         private const int FrontPageBlogsDisplayed = 5;
         private const string SitemapXmlNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
@@ -59,9 +61,11 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                                         .ToArray();
 
             RecentData recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
+            TagLinks tagLinks = GenerateTagLinks(allPosts);
 
             WriteOutFileAsJson(recentData, contentPath, RecentDataFile);
             WriteOutFileAsJson(allBlogPostSummaries, contentPath, BlogPostsFile);
+            WriteOutFileAsJson(tagLinks, contentPath, TagLinksFile);
 
             //Load up the static templating engine
             var fullPathToTemplates = parsedArgs.AppRootPath + "/ProgrammerAl.Site/DynamicContentUpdater/StaticTemplates";
@@ -91,6 +95,26 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             var sitemapFilePath = parsedArgs.AppRootPath + "/ProgrammerAl.Site/ProgrammerAl.Site/wwwroot/sitemap.xml";
             var sitemapText = GenerateSitemapFile("https://www.programmeral.com/", allPosts);
             File.WriteAllText(sitemapFilePath, sitemapText);
+        }
+
+        private static TagLinks GenerateTagLinks(ImmutableList<BlogPostInfo> allPosts)
+        {
+            var tagLinks = new TagLinks();
+            var tagDictionary = new Dictionary<string, List<string>>();
+            foreach (var post in allPosts)
+            {
+                foreach (var tag in post.Entry.Tags)
+                {
+                    if (!tagDictionary.ContainsKey(tag))
+                    {
+                        tagDictionary.Add(tag, new List<string>());
+                    }
+                    tagDictionary[tag].Add(post.FileNameWithoutExtension);
+                }
+            }
+
+            tagLinks.Links = tagDictionary.ToDictionary(x => x.Key, x => x.Value.ToArray());
+            return tagLinks;
         }
 
         private static string GenerateSitemapFile(string siteUrl, ImmutableList<BlogPostInfo> allPosts)
