@@ -3,7 +3,6 @@ Published: 2017/08/07
 Tags: 
 - NuGet
 - C++
-- Big Hero 6
 - Google Protobuf
 ---
 

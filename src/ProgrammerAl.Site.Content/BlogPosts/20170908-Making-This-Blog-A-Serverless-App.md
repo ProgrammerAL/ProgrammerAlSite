@@ -7,8 +7,7 @@ Tags:
 - VSTS
 - Cake
 - NuGet
-- Continuous Integration
-- Continuous Deployment
+- CI/CD
 ---
 
 ## Receiving the Quest
@@ -29,6 +28,9 @@ Tags:
 <div class="alert alert-info">
   <p>Before we start there are some quick definitions at the bottom of the page to some key phrases I'll be using. If you're new to the concept of HTTPS and SSL Certificates, it might be a good idea to skim those first.</p>
 </div>
+
+## Disclaimer
+Update: This site has since been updated and no longer uses Wyam.
 
 ## Changes to the Blog?
 

@@ -6,8 +6,7 @@ Tags:
 - VSTS
 - Cake
 - NuGet
-- Continuous Integration
-- Continuous Deployment
+- CI/CD
 ---
 
 ## Receiving the Quest
@@ -46,6 +45,8 @@ I try to follow a lot of other people on Twitter in the software development fie
 
 But why stop there? Once we have the blog written up, we should use other tools to get it deployed easily. I mean, why do things by hand when we can automate it all? Once the blog is created, we'll use tools to automatically build and release the site.
 
+## Disclaimer
+Update: This site has since been updated and no longer uses Wyam.
 
 ## Wyam
 Getting started with Wyam is easy enough. There are a handful of places to get the bits from, but I chose to use the Windows installer [here](https://github.com/Wyamio/Wyam/releases). Just download the Setup.exe and run it on the machine. Now Wyam is installed and you get a cool command prompt in your start menu.
