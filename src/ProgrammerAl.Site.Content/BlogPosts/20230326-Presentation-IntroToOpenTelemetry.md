@@ -1,7 +1,6 @@
 Title: Presentation: Introduction to OpenTelemetry with .NET
 Published: 2023/03/26
 Tags: 
-- Public Speaking
 - Conference
 - OpenTelemetry
 ---

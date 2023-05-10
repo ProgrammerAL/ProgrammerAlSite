@@ -16,19 +16,19 @@
     </div>
 </header>
 *@
-@*<header>
-    <div>
-        <h1>ProgrammerAL</h1>
-        <hr class="small">
-        <h3>AL not A.I.</h3>
+<header>
+    <div class="text-center m-4">
+        <p>Hi there everyone. I'm AL RODRIGUEZ. A real-life, human, software developer with the right amount of eyes, arms, and everything else.</p>
     </div>
 </header>
-*@
 
 @if (Recents != null)
 {
-    <RecentBlogPosts Posts="@Recents.RecentBlogPosts" />
+    <div>
+        @*<p class="mb-4">Recent Posts:</p>*@
+        <RecentBlogPosts Posts="@Recents.RecentBlogPosts" />
+    </div>
 }
 
-<a href="/posts" class="underline text-blue-600 text-center mt-4">View all posts</a>
+<a href="/posts" class="underline text-blue-600 text-center pt-4">View all posts</a>
 

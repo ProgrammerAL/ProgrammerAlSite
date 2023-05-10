@@ -2,8 +2,8 @@ Title: Look for a Different Angle
 Published: 2017/08/07
 Tags: 
 - NuGet
-- C++
 - Google Protobuf
+- Blog
 ---
 
 ## Receiving the Quest

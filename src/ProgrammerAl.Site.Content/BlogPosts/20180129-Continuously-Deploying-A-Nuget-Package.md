@@ -4,6 +4,7 @@ Tags:
 - NuGet
 - CI/CD
 - VSTS
+- Blog
 ---
 
 ## Receiving the Quest

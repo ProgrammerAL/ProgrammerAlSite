@@ -2,6 +2,7 @@ Title: Removing the www from a URL Controlled by a Third Party
 Published: 2017/11/01
 Tags: 
 - Custom Domain
+- Blog
 ---
 
 ## Receiving the Quest

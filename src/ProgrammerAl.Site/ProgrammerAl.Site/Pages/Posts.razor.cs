@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace ProgrammerAl.Site.Pages;
 
 public partial class Posts : ComponentBase
 {
+    private static readonly string[] PostTypes = new string[] { "Blog", "Meetup", "Conference", "Podcast", "Recording" };
+
     [Inject]
     private IConfig Config { get; set; }
 
@@ -27,6 +30,7 @@ public partial class Posts : ComponentBase
 
     private BlogPostSummary[] BlogPosts { get; set; }
     private TagLinks TagLinks { get; set; }
+    private ImmutableArray<KeyValuePair<string, bool>> TypesTagSelections { get; set; } = ImmutableArray.Create<KeyValuePair<string, bool>>();
     private ImmutableArray<KeyValuePair<string, bool>> TagSelections { get; set; } = ImmutableArray.Create<KeyValuePair<string, bool>>();
 
     private bool IsViewingTags { get; set; }
@@ -89,14 +93,24 @@ public partial class Posts : ComponentBase
 
     private void RefreshTagSelections()
     {
+
         if (string.IsNullOrWhiteSpace(QueryStringTagSelections))
         {
-            TagSelections = TagLinks.Links.OrderBy(x => x.Key).Select(x => new KeyValuePair<string, bool>(x.Key, false)).ToImmutableArray();
+            TypesTagSelections = PostTypes.OrderBy(x => x).Select(x => new KeyValuePair<string, bool>(x, false)).ToImmutableArray();
+            TagSelections = TagLinks.Links
+                .Where(x => PostTypes.All(postType => !string.Equals(x.Key, postType, StringComparison.OrdinalIgnoreCase)))
+                .OrderBy(x => x.Key)
+                .Select(x => new KeyValuePair<string, bool>(x.Key, false)).ToImmutableArray();
         }
         else
         {
             var tagSelectionItems = QueryStringTagSelections?.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            TagSelections = TagLinks.Links.OrderBy(x => x.Key).Select(x => new KeyValuePair<string, bool>(x.Key, tagSelectionItems.Any(y => string.Equals(x.Key, y, StringComparison.OrdinalIgnoreCase)))).ToImmutableArray();
+
+            TypesTagSelections = PostTypes.OrderBy(x => x).Select(x => new KeyValuePair<string, bool>(x, tagSelectionItems.Any(y => string.Equals(x, y, StringComparison.OrdinalIgnoreCase)))).ToImmutableArray();
+            TagSelections = TagLinks.Links
+                                .Where(x => PostTypes.All(postType => !string.Equals(x.Key, postType, StringComparison.OrdinalIgnoreCase)))
+                                .OrderBy(x => x.Key)
+                                .Select(x => new KeyValuePair<string, bool>(x.Key, tagSelectionItems.Any(y => string.Equals(x.Key, y, StringComparison.OrdinalIgnoreCase)))).ToImmutableArray();
         }
     }
 

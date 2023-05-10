@@ -1,9 +1,8 @@
 Title: Presentation: The App Communication Juxtaposition
 Published: 2020/04/14
 Tags:
-- Public Speaking
 - Meetup
-- Video Recording
+- Recording
 - Protobuf
 - MessagePack
 ---

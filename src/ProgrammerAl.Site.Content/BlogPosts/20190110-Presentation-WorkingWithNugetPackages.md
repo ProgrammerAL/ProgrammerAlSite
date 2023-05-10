@@ -1,7 +1,6 @@
 Title: Presentation: Working with Nuget Packages
 Published: 2019/01/10
 Tags: 
-- Public Speaking
 - Meetup
 - NuGet
 - .NET

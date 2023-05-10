@@ -4,6 +4,7 @@ Tags:
 - Blazor
 - Azure
 - Cloudflare
+- Blog
 ---
 
 ## Receiving the Quest

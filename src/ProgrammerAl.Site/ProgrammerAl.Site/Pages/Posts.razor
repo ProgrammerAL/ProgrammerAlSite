@@ -16,11 +16,20 @@
                 <p class="text-lg font-semibold">Filter posts by tags:</p>
             </div>
         </button>
-        <div class="flex flex-wrap gap-4">
-            @foreach (var tagSelection in TagSelections)
-            {
-                <SelectionTextComponent Text="@tagSelection.Key" IsSelected="@tagSelection.Value" OnSelectionChanged="HandleTagSelectionChangedAsync" />
-            }
+        <div class="flex flex-col">
+            <div class="flex flex-wrap gap-4">
+                @foreach (var tagSelection in TypesTagSelections)
+                {
+                    <SelectionTextComponent Text="@tagSelection.Key" IsSelected="@tagSelection.Value" OnSelectionChanged="HandleTagSelectionChangedAsync" />
+                }
+            </div>
+
+            <div class="flex flex-wrap gap-4 mt-4">
+                @foreach (var tagSelection in TagSelections)
+                {
+                    <SelectionTextComponent Text="@tagSelection.Key" IsSelected="@tagSelection.Value" OnSelectionChanged="HandleTagSelectionChangedAsync" />
+                }
+            </div>
         </div>
     }
     else
@@ -49,9 +58,9 @@
         var selectedLinks = TagLinks.Links.Where(x => tagSelections.Contains(x.Key, StringComparer.OrdinalIgnoreCase)).SelectMany(x => x.Value).ToList();
 
         postsByYear = BlogPosts
-        .Where(x => selectedLinks.Any(y => string.Equals(x.TitleLink, y, StringComparison.OrdinalIgnoreCase)))
-        .OrderByDescending(x => x.PostNumber)
-        .GroupBy(x => x.PostedDate.Year);
+                        .Where(x => selectedLinks.Any(y => string.Equals(x.TitleLink, y, StringComparison.OrdinalIgnoreCase)))
+                        .OrderByDescending(x => x.PostNumber)
+                        .GroupBy(x => x.PostedDate.Year);
     }
     else
     {

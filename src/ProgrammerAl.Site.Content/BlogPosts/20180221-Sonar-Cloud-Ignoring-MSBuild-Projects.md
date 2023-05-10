@@ -4,6 +4,7 @@ Tags:
 - SonarQube
 - SonarCloud
 - VSTS
+- Blog
 ---
 
 ## Receiving the Quest

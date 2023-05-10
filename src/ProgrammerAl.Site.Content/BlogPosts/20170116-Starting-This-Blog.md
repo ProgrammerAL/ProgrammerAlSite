@@ -7,6 +7,7 @@ Tags:
 - Cake
 - NuGet
 - CI/CD
+- Blog
 ---
 
 ## Receiving the Quest

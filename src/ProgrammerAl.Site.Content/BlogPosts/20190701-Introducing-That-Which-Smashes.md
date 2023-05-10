@@ -6,6 +6,7 @@ Tags:
 - Azure Queue Storage
 - Pulumi
 - Load Testing
+- Blog
 ---
 
 ## New Project: That Which Smashes

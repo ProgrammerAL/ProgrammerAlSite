@@ -3,6 +3,7 @@ Published: 2019/01/13
 Tags: 
 - Blazor
 - Web Development
+- Blog
 ---
 
 ## Receiving the Quest

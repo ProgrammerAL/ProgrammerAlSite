@@ -1,7 +1,6 @@
 Title: Presentation: .NET of Things
 Published: 2019/03/30
 Tags: 
-- Public Speaking
 - Conference
 - .NET
 - IoT
