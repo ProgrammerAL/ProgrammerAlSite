@@ -45,10 +45,11 @@ This example has 9 fields, including 1 child object.
 
 If we know for a fact that our application will only ever query for the `id`, `FirstName`, and `LastName` fields, we can tell Cosmos DB to only index those. Below is a table comparing costs when uploading this document with all fields indexed vs just 3 fields indexed.
 
-
++------------------+-----------------+---------------+
 | Type             | Execution Time  | Request Units |
-|------------------|-----------------|---------------|
++==================+=================+===============+
 | All Indexed      | 27.946 ms       | 8.57          |
++------------------+-----------------+---------------+
 | 3 Fields Indexed | 19.718 ms       | 6.29          |
 
 
@@ -102,9 +103,11 @@ This example has 27 fields, including 3 child objects, one of which is an array 
 
 If we know for a fact that our application will only ever query for the `id`, `FirstName`, and `LastName` fields (like the above sample), we can tell Cosmos DB to only index those. Below is a table comparing costs when uploading this document with all fields indexed vs just 3 fields indexed.
 
++------------------+-----------------+---------------+
 | Type             | Execution Time  | Request Units |
-|------------------|-----------------|---------------|
++==================+=================+===============+
 | All Indexed      | 21.553 ms       | 15.43         |
++------------------+-----------------+---------------+
 | 3 Fields Indexed | 28.143 ms       | 6.29          |
 
 In this case the difference between Request Units cost is larger than what we saw with the smaller document. 
