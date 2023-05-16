@@ -45,13 +45,30 @@ This example has 9 fields, including 1 child object.
 
 If we know for a fact that our application will only ever query for the `id`, `FirstName`, and `LastName` fields, we can tell Cosmos DB to only index those. Below is a table comparing costs when uploading this document with all fields indexed vs just 3 fields indexed.
 
-+------------------+-----------------+---------------+
-| Type             | Execution Time  | Request Units |
-+==================+=================+===============+
-| All Indexed      | 27.946 ms       | 8.57          |
-+------------------+-----------------+---------------+
-| 3 Fields Indexed | 19.718 ms       | 6.29          |
-
+<table style="border: 1px solid #ddd;">
+    <col style="width:33.33%;border-right: 1px solid #ddd;" />
+    <col style="width:33.33%;border-right: 1px solid #ddd;" />
+    <col style="width:33.33%;" />
+    <thead>
+        <tr style="border-bottom: 1px solid #ddd;">
+            <td>Type</td>
+            <td>Execution Time</td>
+            <td>Request Units</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="border-bottom: 1px solid #ddd;">
+            <td>All Indexed</td>
+            <td>27.946 ms</td>
+            <td>8.57</td>
+        </tr>
+        <tr>
+            <td>3 Fields Indexed</td>
+            <td>19.718 ms</td>
+            <td>6.29</td>
+        </tr>
+    </tbody>
+</table>
 
 You can see that when there are less fields indexed, you are charged less Request Units. Does it really affect your cloud bill? Depends on your scale. But hey, why not optimize for this while you can? It probably won't hurt.
 
@@ -103,14 +120,32 @@ This example has 27 fields, including 3 child objects, one of which is an array 
 
 If we know for a fact that our application will only ever query for the `id`, `FirstName`, and `LastName` fields (like the above sample), we can tell Cosmos DB to only index those. Below is a table comparing costs when uploading this document with all fields indexed vs just 3 fields indexed.
 
-+------------------+-----------------+---------------+
-| Type             | Execution Time  | Request Units |
-+==================+=================+===============+
-| All Indexed      | 21.553 ms       | 15.43         |
-+------------------+-----------------+---------------+
-| 3 Fields Indexed | 28.143 ms       | 6.29          |
+<table style="border: 1px solid #ddd;">
+    <col style="width:33.33%;border-right: 1px solid #ddd;" />
+    <col style="width:33.33%;border-right: 1px solid #ddd;" />
+    <col style="width:33.33%;" />
+    <thead>
+        <tr style="border-bottom: 1px solid #ddd;">
+            <td>Type</td>
+            <td>Execution Time</td>
+            <td>Request Units</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="border-bottom: 1px solid #ddd;">
+            <td>All Indexed</td>
+            <td>21.553 ms</td>
+            <td>15.43</td>
+        </tr>
+        <tr>
+            <td>3 Fields Indexed</td>
+            <td>28.143 ms</td>
+            <td>6.29</td>
+        </tr>
+    </tbody>
+</table>
 
-In this case the difference between Request Units cost is larger than what we saw with the smaller document. 
+In this case the difference between Request Units cost is larger than what we saw with the smaller document. And another thing to note is that the Request Units cost is the same for the small and large documents when only indexing the 3 fields.
 
 The execution time in this example is slightly longer when only indexing 3 fields instead of all of them. I assume the difference is luck of the draw based on load in Azure. There could be more to it, but I haven't done any research.
 
