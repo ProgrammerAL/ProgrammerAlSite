@@ -1,5 +1,5 @@
 Title: Use Pulumi to Specify Cosmos DB Indexes
-Published: 2023/05/15
+Published: 2023/05/16
 Tags: 
 - Blog
 - Cosmos DB
@@ -7,7 +7,6 @@ Tags:
 ---
 
 ## TL;DR
-
 Reducing the indexes Cosmos DB has to generate from your documents can reduce how much you are charged.
 
 ## So Many Indexes

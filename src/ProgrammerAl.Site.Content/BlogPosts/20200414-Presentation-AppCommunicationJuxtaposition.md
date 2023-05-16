@@ -8,7 +8,6 @@ Tags:
 ---
 
 ## The Presentation
-
 This presentation was an overview of different application serialization encodings given to the Orlando .NET User Group named ONETUG. The event details are at the Meetup.com page <a href="https://www.meetup.com/onetug/events/269864249/">here</a>.
 
 This was a virtual presentation and a recording of the talk is on YouTube <a href="https://www.youtube.com/watch?v=GkxzL-X5AtE">here</a>.

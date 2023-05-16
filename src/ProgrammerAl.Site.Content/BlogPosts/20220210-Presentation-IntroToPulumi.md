@@ -8,7 +8,6 @@ Tags:
 ---
 
 ## The Presentation
-
 This presentation was an introduction to Pulumi give to the Orlando .NET User Group named ONETUG. The event details are at the Meetup.com page <a href="https://www.meetup.com/onetug/events/283360077/">here</a>.
 
 This was a virtual presentation and a recording of the talk is on YouTube <a href="https://www.youtube.com/watch?v=ycgcqUBHwzA&t=1s">here</a>.
