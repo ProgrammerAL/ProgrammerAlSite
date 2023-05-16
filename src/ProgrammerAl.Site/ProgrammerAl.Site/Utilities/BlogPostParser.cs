@@ -77,7 +77,7 @@ namespace ProgrammerAl.Site.Utilities
         private string SanitizePost(ReadOnlySpan<char> postSpan)
         {
             StringBuilder builder = new StringBuilder(postSpan.ToString());
-            builder.Replace("__StorageSiteUrl__", _config.SiteContentUrl);
+            _ = builder.Replace("__StorageSiteUrl__", _config.SiteContentUrl);
 
             return builder.ToString();
         }

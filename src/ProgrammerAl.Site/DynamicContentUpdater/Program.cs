@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Text;
 using System.Collections.Generic;
+using Markdig;
 
 namespace ProgrammerAl.Site.DynamicContentUpdater
 {
@@ -45,12 +46,14 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 .OrderBy(x => x.PostDate)//All blog posts start with the date they were posted. Order them so the oldest is first
                 .ToImmutableList();
 
+            var markdownPipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+
             int blogPostNumber = 1;
             BlogPostSummary[] allBlogPostSummaries = parsedBlogEntries.Select(x => new BlogPostSummary
             {
                 Title = x.Entry.Title,
                 PostedDate = x.PostDate,
-                FirstParagraph = Markdig.Markdown.ToHtml(x.Entry.FirstParagraph),
+                FirstParagraph = Markdig.Markdown.ToHtml(x.Entry.FirstParagraph, pipeline: markdownPipeline),
                 PostNumber = blogPostNumber++,
                 TitleLink = x.FileNameWithoutExtension,
                 Tags = x.Entry.Tags.ToArray()
