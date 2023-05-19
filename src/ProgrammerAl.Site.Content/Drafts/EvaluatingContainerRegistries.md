@@ -1,5 +1,5 @@
-Title: Container Registries Comparison
-Published: 2023/05/16
+Title: Research: Evaluating Container Registries for My Project
+Published: 2023/05/21
 Tags: 
 - Blog
 - Docker
@@ -8,7 +8,7 @@ Tags:
 
 ## TL;DR
 
-This post is a feature comparison of different Container Registries. In the end I decided to use ???.
+This post is a feature comparison of Container Registries hosted by different companies. The comparison is specific to the requirements of a project I'm working on. My final decision was to use Azure Container Registry.
 
 ## Docker Registries
 
@@ -25,34 +25,26 @@ The general idea is to:
 
 Here's how that translates to system requirements:
 
-- Programatic Access Tokens
-  - Need to allow the backend service to create short-lived acces tokens on-demand
-- Ample Storage and Egress
-  - Each version of my solution will be approximatly 1 GB of data among the shared images
+- Hosting a Private Registry
+  - Don't want anyone to be able to access the repository
+- Programaticly create Access Tokens
+  - Need to allow the backend service to create short-lived acces tokens on-demand.
+- Ample Storage and Egress (aka download bandwidth)
+  - Each version of my solution will be approximatly 1 GB of data among the shared images.
+    - Note: I'll work to bring the storage use number down later, but I'm okay starting with a high number to know what to optimize for
   - To estimate, I'll assume 20 GB of data for storage and 50 GB of egress for 1 month. This is way more usage than I'll need initially, but I hope to grow to use much more than this.
-- Cheap
+- Cost
   - I'm paying for this with my own money, and am already paying for other Cloud/SaaS services for this project. So the cheaper the better.
+
+With those requirements, I only care about 2 things. The ability to programatically create access tokens to a private registry, and cost.
 
 ### Docker
 
-### Azure Container Registry
+Might as well start this research by looking at what everyone's first thought of Container Registry hosts. Unfortunately I quickly realized this would not work for my own requirements. Access token are created manually through their web portal, and cannot be created programatically. https://docs.docker.com/docker-hub/access-tokens/
 
-The Azure Container Registry seems very fully featured. Since I'm using Azure very heavily for a lot of other stuff in this project, adding another service isn't a bad idea. 
+For my requirements, I would need to get a minimum of the Docker Pro license which is $7 a month. From what I can tell, there is no extra pricing for image storage or download egress. This sounds great in theory, but the license is per-user. So if anyone ever works with me (which I hope to happen someday), the license cost will jump for each person. https://www.docker.com/pricing/
 
-https://learn.microsoft.com/en-us/azure/container-registry/container-registry-skus
-
-The pay-as-you-go pricing is (Days * PricingTier). For my needs, the Basic pricing tier does everything I need. Assuming 20 GB of data for storage and 50 GB of egress for 1 month, the monthly bill would be $5.90*. That sounds incredibly cheap, but the egress pricing is something to keep in mind. With Azure he first 100 GB of egress out is free, and then you pay $0.087 per GB. If we assumed I already use my first 100 GB on something else and this is addative, then the actual monthly bill is $10.25. Still not bad.
-
-Azure Container Registry Pricing: https://azure.microsoft.com/en-us/pricing/details/container-registry/
-Azure Bandwidth Pricing: https://azure.microsoft.com/en-us/pricing/details/bandwidth/
-
-### DigitalOcean
-
-I've had mixed results using DigitalOcean in the past. But they tend to have good pricing for their services and 
-
-With DigitalOcean I would use te Basic 
-
-https://docs.digitalocean.com/products/container-registry/details/pricing/
+This does not meet my requirements, so I won't be able to use it.
 
 ### GitHub Container Registry
 
@@ -67,8 +59,41 @@ Pricing info is at: https://docs.github.com/en/billing/managing-billing-for-gith
 
 When I started this research, I assumed I would use this. I already use the GitHub NuGet registry and this felt like the natual solution for me because I want my GitHub Actions to push the images. 
 
-Unfortunatly you are unable to programatically create a token to access the registry. You must manually create a Personal Access Token with just the right permissions to access the registry, and share that with everything. It looks like it would be possible to do this by creating a GitHub App, but that looked like way more work than I wanted to do. For this reason, I will not be able to use the GitHub Container Registry for this project.
+Unfortunately, like the Docker hosted registry above, you are unable to programatically create a token to access the registry. You must manually create a Personal Access Token with just the right permissions to access the registry, and share that with everything. It looks like it would be possible to do this by creating a GitHub App, but that looked like way more work than I wanted to do. For this reason, I will not be able to use the GitHub Container Registry for this project.
 
-TODO: Maybe the token can be sent from server to device and not stored locally somehow???
+This does not meet my requirements, so I won't be able to use it.
+
+### DigitalOcean
+
+I've had mixed results using DigitalOcean in the past. To be clear, I like DigitalOcean. They make good cloud services at a reasonable price, and I don't think enough people consider this cloud. This IoT project I'm working on uses some DigitalOcean services already. But when I say I've had mixed results in the past, I mean there are times where I want to use a service of theirs but can't because of my own requirements. Usually around cloud automation.
+
+Creating a temporary token is very easy. A straight forward REST API call will generate a token, and you can tell it how long it will live. I like the simplicity. https://docs.digitalocean.com/reference/api/api-reference/#operation/registry_get_dockerCredentials
+
+DigitalOcean has 3 pricing tiers of Container Registry (Started, Basic, and Professional). For my requirements I can use Basic. It has a base price of $5. Going over the 5 GB base storage costs an extra $0.02 per GB. There seems to be no extra cost for bandwidth usage, so that's a plus.
+
+Assuming 20 GB of data for storage for 1 month, the monthly bill would be $5.30*. https://docs.digitalocean.com/products/container-registry/details/pricing/
+
+### Azure Container Registry
+
+The Azure Container Registry seems very fully featured. Since I'm using Azure very heavily for a lot of other stuff in this project, adding another service isn't a bad idea. 
+
+https://learn.microsoft.com/en-us/azure/container-registry/container-registry-skus
+
+The pay-as-you-go pricing is (Days * PricingTier). For my needs, the Basic pricing tier does everything I need. Assuming 20 GB of data for storage and 50 GB of egress for 1 month, the monthly bill would be $5.90*. That sounds incredibly cheap, but the egress pricing is something to keep in mind. With Azure he first 100 GB of egress out is free, and then you pay $0.087 per GB. If we assumed I already use my first 100 GB on something else and this is addative, then the actual monthly bill is $10.25. Still not bad.
+
+Azure Container Registry Pricing: https://azure.microsoft.com/en-us/pricing/details/container-registry/
+Azure Bandwidth Pricing: https://azure.microsoft.com/en-us/pricing/details/bandwidth/
+
+### Amazon Elastic Container Registry
+
+Of all the SaaS providers on this list, I have the least amount of experience with AWS. Which means I'm the most worried about having wrong information for this section. 
+
+With AWS, you are able to create tokens to access the private registry. It appears they have a lifetime of 12 hours and you cannot change that, but I guess it's okay. https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html
+
+Similar to Azure, AWS also uses a pay-as-you-go pricing model. They do not have tiers, so it's just priced on usage. Assuming 20 GB of data for storage and 50 GB of egress for 1 month, the monthly bill would be $6.50. https://aws.amazon.com/ecr/pricing/
+
 
 ## My Choice
+
+I ended up choosing Azure Container Registry. It meets all of my functional requirements, the cost starts low and doesn't grow too badly, and I already have a lot of experience with Azure, so I'll feel at home using it. Remember, I made this decision based on my own requirements which are probably different from yours.
+
