@@ -53,5 +53,7 @@
             margin-top: 0;
         }
 
-
+    .post-content ul {
+        list-style: initial;
+    }
 
