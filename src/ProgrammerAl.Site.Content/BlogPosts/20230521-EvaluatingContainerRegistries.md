@@ -7,7 +7,6 @@ Tags:
 ---
 
 ## TL;DR
-
 This post is a feature comparison of Container Registries hosted by different companies. The comparison is specific to the requirements of a project I'm working on. My final decision was to use the DigitalOcean Container Registry.
 
 ## Docker Registries
