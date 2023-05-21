@@ -17,21 +17,21 @@ Containers (like the Docker ones) are hosted in a registry. There are many diffe
 
 I'm working on a project that will require using an external Container Registry. The application is an IoT device and I want to push a command to the device to have it pull down N number of containers being run with Docker Compose. Here's a quick run down of my features/requirements:
 
-- On build, push N number of images to the private registry. All tagged with the same id number (the build number).
-- On demand using a custom admin portal, send a message to the IoT device to pull the images for the given id number.
+ - On build, push N number of images to the private registry. All tagged with the same id number (the build number).
+ - On demand using a custom admin portal, send a message to the IoT device to pull the images for the given id number.
   - The IoT device will also be given a token to pull down the images from the private registry. This needs to be short-lived because the IoT device is essentially a public device and someone can take it if they really wanted to. So...3 hours is probably good enough for the token lifetime.
 
 Here's how that translates to system requirements:
 
-- Hosting a Private Registry
+ - Hosting a Private Registry
   - Don't want just anyone to access the repository
-- Programaticly create Access Tokens
+ - Programaticly create Access Tokens
   - Need to allow the backend service to create short-lived acces tokens on-demand
-- Ample Storage and Egress (aka download bandwidth)
+ - Ample Storage and Egress (aka download bandwidth)
   - The container images for each version will take approximatly 1 GB of storage among the shared images
-    - Note: I will work to bring the storage number down later, but I'm okay starting with a high number to know what to optimize for
+   - Note: I will work to bring the storage number down later, but I'm okay starting with a high number to know what to optimize for
   - When evaluating the Docker Registries I'll estimate by assuming 20 GB of data storage and 50 GB of egress bandwidth for 1 month. This is way more usage than I'll need initially, but I hope to grow enough to use much more than this
-- Cost
+ - Cost
   - I'm paying for this with my own money, and am already paying for other Cloud/SaaS services for this project. So the cheaper the better
 
 With those requirements, I only care about 2 things. The ability to programatically create access tokens to a private registry, and cost.
