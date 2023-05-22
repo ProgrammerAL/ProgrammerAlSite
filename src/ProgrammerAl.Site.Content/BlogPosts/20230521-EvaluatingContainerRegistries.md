@@ -61,7 +61,7 @@ I've had mixed results using DigitalOcean in the past. To be clear, I like Digit
 
 Creating a temporary token is very easy. A straight forward REST API call will generate a token, and you can tell it how long it will live. I like the simplicity. https://docs.digitalocean.com/reference/api/api-reference/#operation/registry_get_dockerCredentials
 
-DigitalOcean has 3 pricing tiers of Container Registry (Starter, Basic, and Professional). For my requirements I can use Basic. It has a base price of $5. Going over the 5 GB base storage costs an extra $0.02 per GB. There seems to be no extra cost for bandwidth usage, so that's a plus.
+DigitalOcean has 3 pricing tiers of Container Registry (Starter, Basic, and Professional). For my requirements I can use Basic. It has a base price of $5. Going over the 5 GB base storage costs an extra $0.02 per GB. At the time of this writing, there's no extra cost for bandwidth usage, so that's a plus. But DigitalOcean has said they will charge for that in the future, with no details on when or how much. That's a negative.
 
 Assuming 20 GB of data for storage for 1 month, the monthly bill would be $5.30. https://docs.digitalocean.com/products/container-registry/details/pricing/
 
@@ -88,5 +88,5 @@ Similar to Azure, AWS also uses a pay-as-you-go pricing model. They do not have 
 
 ## My Choice
 
-I ended up choosing the DIgitalOcean Registry. It meets all of my functional requirements, the cost is low and there are no extra egress charges for it, so I don't have to worry about using it a lot. Remember, I made this decision based on my own requirements which are probably different from yours.
+I ended up choosing the DIgitalOcean Registry. It meets all of my functional requirements, the cost is low and there are no extra bandwidth egress fees for using it (for now). But I am a little worries about what the egress fees will be once I do start to use it. Though I'm sure it won't be too bad. Remember, I made this decision based on my own requirements which are probably different from yours.
 

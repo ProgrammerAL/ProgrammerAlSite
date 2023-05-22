@@ -50,12 +50,12 @@
 @if (BlogPosts != null)
 {
     IEnumerable<IGrouping<int, BlogPostSummary>> postsByYear;
-    var tagSelections = TagSelections.Where(x => x.Value).Select(x => x.Key).ToList();
+    var selections = TagSelections.Concat(TypesTagSelections).Where(x => x.Value).Select(x => x.Key).ToList();
 
-    if (tagSelections.Any())
+    if (selections.Any())
     {
         //If any tags are selected, only show posts with those tags
-        var selectedLinks = TagLinks.Links.Where(x => tagSelections.Contains(x.Key, StringComparer.OrdinalIgnoreCase)).SelectMany(x => x.Value).ToList();
+        var selectedLinks = TagLinks.Links.Where(x => selections.Contains(x.Key, StringComparer.OrdinalIgnoreCase)).SelectMany(x => x.Value).ToList();
 
         postsByYear = BlogPosts
                         .Where(x => selectedLinks.Any(y => string.Equals(x.TitleLink, y, StringComparison.OrdinalIgnoreCase)))

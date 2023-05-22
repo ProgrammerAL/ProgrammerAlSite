@@ -1,8 +1,7 @@
-Title: Research: Docker vs Podman
+Title: Research: Evaluating Podman
 Published: 2023/05/21
 Tags: 
 - Blog
-- Docker
 - Podman
 - Containers
 ---
