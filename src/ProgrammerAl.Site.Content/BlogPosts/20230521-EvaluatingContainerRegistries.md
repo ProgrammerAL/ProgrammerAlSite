@@ -7,7 +7,7 @@ Tags:
 ---
 
 ## TL;DR
-This post is a feature comparison of Container Registries hosted by different companies. The comparison is specific to the requirements of a project I'm working on. My final decision was to use the DigitalOcean Container Registry.
+This post is a feature comparison of Container Registries hosted by different companies. The comparison is specific to the requirements of a project I'm working on. My final decision was to use the DigitalOcean Container Registry service.
 
 ## Docker Registries
 
@@ -52,7 +52,7 @@ When I started this research, I assumed I would use this. I already use the GitH
 
 Unfortunately, like the Docker hosted registry above, you are unable to programatically create a token to access the registry. You must manually create a Personal Access Token with just the right permissions to access the registry, and share that token with everything that needs access. It looks like it would be possible to do this by creating a GitHub App, but that looked like way more work than I want to do. For this reason, I will not be able to use the GitHub Container Registry for this project.
 
-This does not meet my requirements, so I won't be able to use it.
+I really wanted to use this one, but it doesn't meet my requirements. So I won't be able to use it.
 
 ## DigitalOcean
 
@@ -60,9 +60,9 @@ I've had mixed results using DigitalOcean in the past. To be clear, I like Digit
 
 Creating a temporary token is very easy. A straight forward REST API call will generate a token, and you can tell it how long it will live. I like the simplicity. [https://docs.digitalocean.com/reference/api/api-reference/#operation/registry_get_dockerCredentials](https://docs.digitalocean.com/reference/api/api-reference/#operation/registry_get_dockerCredentials)
 
-DigitalOcean has 3 pricing tiers of Container Registry (Starter, Basic, and Professional). For my requirements I can use Basic. It has a base price of $5. Going over the 5 GB base storage costs an extra $0.02 per GB. At the time of this writing, there's no extra cost for bandwidth usage, so that's a plus. But DigitalOcean has said they will charge for that in the future, with no details on when or how much. That's a negative.
+DigitalOcean has 3 pricing tiers of Container Registry (Starter, Basic, and Professional). At first I thought I could get away with just using the Basic tier, which has a base price of $5. But after reading I found out that has a max of 5 repositories. As a reminder, a repository holds the image. So if I have 3 different images named something like `UsersService`, `BackendHandler`, and `SomethingElse`, then I only get 2 more with no option to pay for more. Currently I have 6 images with more planned for the future. So with DigitalOcean, I will have to use the Professional tier, which has an unlimited number of repositores, with a base cast of $20. Going over the 5 GB base storage costs an extra $0.02 per GB. At the time of this writing, there's no extra cost for bandwidth usage, so that's a plus. But DigitalOcean has said they will charge for that in the future, with no details on when or how much. That's a negative.
 
-Assuming 20 GB of data for storage for 1 month, the monthly bill would be $5.30. [https://docs.digitalocean.com/products/container-registry/details/pricing](https://docs.digitalocean.com/products/container-registry/details/pricing)
+Assuming 20 GB of data for storage for 1 month, the monthly bill would be $20. [https://docs.digitalocean.com/products/container-registry/details/pricing](https://docs.digitalocean.com/products/container-registry/details/pricing)
 
 ## Azure Container Registry
 
@@ -84,5 +84,5 @@ Similar to Azure, AWS also uses a pay-as-you-go pricing model. They do not have 
 
 ## My Choice
 
-I ended up choosing the DIgitalOcean Registry. It meets all of my functional requirements, the cost is low and there are no extra bandwidth egress fees for using it (for now). But I am a little worries about what the egress fees will be once I do start to use it. Though I'm sure it won't be too bad. Remember, I made this decision based on my own requirements which are probably different from yours.
+I ended up choosing the DigitalOcean Registry. It meets all of my functional requirements. I won't be able to use the lowest cost tier, but for my needs I know the price won't grow based on usage like the others probably will. I am a little worried about what the egress fees will be once I do start to use it. Though I'm sure it won't be too bad. Remember, I made this decision based on my own requirements which are probably different from yours.
 
