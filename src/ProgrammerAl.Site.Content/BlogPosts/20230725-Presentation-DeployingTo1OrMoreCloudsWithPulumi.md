@@ -10,3 +10,5 @@ This was an introduction to Pulumi with a focus on deploying to more than 1 clou
 
 If you'd like to see the demo and presentation slides, they are hosted on GitHub at <a href="https://github.com/ProgrammerAl/Presentations-2023/tree/main/2023-07%20THAT%20Conference%20-%20Deploying%20to%201%20or%20More%20Clouds%20with%20Pulumi">here</a>.
 
+The direct view to the slides are at: https://github.com/ProgrammerAl/Presentations-2023/blob/main/2023-07%20THAT%20Conference%20-%20Deploying%20to%201%20or%20More%20Clouds%20with%20Pulumi/presentation.html
+
