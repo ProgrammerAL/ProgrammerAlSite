@@ -2,12 +2,12 @@
 
 @if (Posts != null)
 {
-    <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-4">
         @foreach (var post in Posts)
         {
             var paragraphMarkup = new MarkupString(post.FirstParagraph);
 
-            <div>
+            <div class="border border-2 border-green-800 p-2">
                 <a class="text-xl font-bold" href="/posts/@post.TitleLink">
                     <h2>@post.Title</h2>
                 </a>
