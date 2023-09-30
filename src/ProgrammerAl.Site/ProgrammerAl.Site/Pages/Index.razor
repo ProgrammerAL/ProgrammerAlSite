@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using ProgrammerAl.Site.Components
+@using ProgrammerAl.Site.Components.AnimatedComponents
 @inherits ProgrammerAl.Site.PageModels.IndexModel
 
 <header>
@@ -9,7 +10,13 @@
     </div>
 </header>
 
-@if (Recents != null)
+@if (IsLoadingRecents)
+{
+    <div class="pt-4 text-center">
+        <GreenSpinnerComponent TailwindCssHeightClass="h-24" TailwindCssWidthClass="w-24" />
+    </div>
+}
+else if (Recents != null)
 {
     <div class="pb-4">
         <RecentBlogPosts Posts="@Recents.RecentBlogPosts" />
