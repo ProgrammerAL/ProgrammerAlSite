@@ -1,18 +1,18 @@
 ﻿@model ProgrammerAl.Site.Utilities.Entities.PostEntry
 
-<div class="post-title">
-    <h1>
+<div>
+    <h1 class="text-center text-4xl font-extrabold">
         @Model.Title
     </h1>
-    <p> Posted on: @Model.ReleaseDate.ToLongDateString()</p>
+    <p class="text-center text-sm">Posted on: @Model.ReleaseDate.ToLongDateString()</p>
     @if (Model.Tags.Any())
     {
-        <p> Tags: @(string.Join(", ", Model.Tags))</p>
+        <p class="text-center text-sm">Tags: @(string.Join(", ", Model.Tags))</p>
     }
 
 </div>
 
-<div class="post-content">
+<div class="mt-4">
     @Raw(Model.Post)
 </div>
 
