@@ -7,6 +7,10 @@ Tags:
 
 ---
 
+# Slide Decks and Demo Code
+
+If you'd like to see the demo code, and presentation slides, they are hosted on GitHub <a target="_blank" href="https://github.com/ProgrammerAL/Presentations-2023/tree/main/boston-code-camp-35">here</a>.
+
 # The Presentations
 
 I gave 2 talks at Boston Code Camp 2023 (detailed below). Both on Pulumi, but for different experience levels. The conference page is <a target="_blank" href="https://www.bostoncodecamp.com/CC35/Schedule/SessionGrid">here</a>.
@@ -18,7 +22,3 @@ Pulumi is more than just, "A competitor to Terraform." It's an Infrastructure as
 ## Practical Pulumi
 
 In this session we'll look at patterns that emerge while using Pulumi to manage your cloud infrastructure. This is an intermediate session assuming you know the basics of Pulumi, but haven't used it for a full project yet. We will use C# and Azure in demos, but the concepts work with every programming language and cloud supported by Pulumi.
-
-# Slide Decks and Demo Code
-
-If you'd like to see the demo code, and presentation slides, they are hosted on GitHub <a target="_blank" href="https://github.com/ProgrammerAL/Presentations-2023/tree/main/boston-code-camp-35">here</a>.
