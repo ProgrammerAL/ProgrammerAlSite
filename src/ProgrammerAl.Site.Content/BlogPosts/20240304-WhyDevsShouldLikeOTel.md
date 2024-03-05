@@ -13,6 +13,8 @@ I often see people looking at OpenTelemetry (OTel) and thinking it's not very us
 
 Before we get to the full answer, let's do a quick history review to make sure we're on the same page.
 
+By the way, I will not be recapping what OTel is. If you're unfamiliar with that awesome tool, ask an A.I. chatbot or something. Then double check what it tells you by clicking on at least one of those reference sites, because those things are still way too wrong to trust.
+
 ## Observability
 
 For a long time the only way to observe what an application was doing was to look at log statements. So as developers, that's all we did; we just pushed log messages. Sometimes a, "Starting process ABC" message or simply outputting a stack trace was all we needed. When something went wrong we could trace the flow of the process with those logs.
