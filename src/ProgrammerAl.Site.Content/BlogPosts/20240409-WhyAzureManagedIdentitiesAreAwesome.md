@@ -16,7 +16,7 @@ In this post we'll talk about Azure Managed Identities. A feature that lets appl
 
 Azure Managed Identities are an identity your Azure hosted app can use with RBAC permissions. Create an identity, assign permissions to it, and assign the identity to an application hosted in Azure. Then make a few code changes so your app uses the identity. Now you don't need a connection string to interact with Azure resources like Key Vault, Storage Accounts, etc.
 
-Microsoft has a ton of documentation at: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview
+Microsoft has a ton of documentation at: <a target="_blank" href="https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview">https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview</a>
 
 
 ## What about Service Principals?
@@ -48,7 +48,7 @@ Thankfully that's pretty easy. Below are two C# code samples creating an instanc
 This means when the app runs in Azure, `DefaultAzureCredential` will find the Managed Identity assigned to it. And when the app runs on a developer machine, it will use your developer credentials. Just lie before, your code doesn't change across environments, but now you don't have to have a token stored locally, or shared across the dev team.
 
 ```csharp
-var connectionString = "DefaultEndpointsProtocol=https;AccountName=MYSTORAGEACCOUNT;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;EndpointSuffix=core.windows.net";
+var connectionString = "DefaultEndpointsProtocol=https;AccountName=MYSTORAGEACCOUNT;AccountKey=Eby8vdM02xNOcqFlqUwJPLl...;EndpointSuffix=core.windows.net";
 var container = new BlobServiceClient(connectionString);
 ```
 
@@ -59,4 +59,4 @@ var client = new BlobServiceClient(accountUri, new DefaultAzureCredential());
 
 ## Bonus: What about Azure Managed SQL?
 
-It works there too! But differently. You have to enable a feature on the SQL Server to connect to Entra, and then run some queries to let the database know what database permissions to give to the identity. The concept is the same, but the steps are different. You can read the tutorial with Microsoft's documentation here: https://learn.microsoft.com/en-us/azure/app-service/tutorial-connect-msi-sql-database?tabs=windowsclient%2Cefcore%2Cdotnet
+It works there too! But differently. You have to enable a feature on the SQL Server to connect to Entra, and then run some queries to let the database know what database permissions to give to the identity. The concept is the same, but the steps are different. You can read the tutorial with Microsoft's documentation here: <a target="_blank" href="https://learn.microsoft.com/en-us/azure/app-service/tutorial-connect-msi-sql-database">https://learn.microsoft.com/en-us/azure/app-service/tutorial-connect-msi-sql-database</a>
