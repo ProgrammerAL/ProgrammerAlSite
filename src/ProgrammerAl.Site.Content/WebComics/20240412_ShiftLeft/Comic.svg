@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 670 400">
+    <title>Shift Left</title>
+
+    <style>
+        .section-border { 
+            fill: white;
+            stroke: black;
+            stroke-width: 1;
+        }
+
+        .section-title-border { 
+            stroke: black;
+            stroke-width: 1;
+            fill: white;
+        }
+
+        .section-title-text { 
+            font-family: Georgia;
+            font-size: 14px;
+        }
+
+        .title-text { 
+            font-family: Georgia;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .sub-title-text { 
+            font-family: Georgia;
+            font-size: 10px;
+        }
+
+        .person { 
+            fill: white;
+            stroke: black;
+            stroke-width: 0.5;
+        }
+
+        .hill { 
+            fill: white;
+            stroke: black;
+            stroke-width: 0.8;
+        }
+
+        .boulder { 
+            fill: white;
+            stroke: black;
+            stroke-width: 0.8;
+        }
+
+        .hill { 
+            fill: white;
+            stroke: black;
+            stroke-width: 1.5;
+        }
+
+        .boulder-text { 
+            font-family: Georgia;
+            font-size: 8px;
+        }
+
+    </style>
+
+    <text x="260" y="20" class="title-text">SHIFT LEFT</text>
+    <text x="235" y="30" class="sub-title-text">Doing things earlier in the development cycle</text>
+
+<!-- Panel 1 - Dev -->
+    <rect x="5" y="45" width="150" height="350" class="section-border">
+    </rect>
+
+<!-- Devs title -->
+    <rect x="10" y="60" width="140" height="20" class="section-title-border"></rect> 
+    <text x="57" y="76" class="section-title-text">Devs</text>
+
+<!-- Dev -->
+  <path d="M 35 290 L 55 330 L 53 350 L 55 330 L 70 337" class="person" /><!-- Body -->
+  <path d="M 48 315 L 57 290 L 48 315 L 69 300" class="person" /><!-- Arms -->
+  <circle cx="35" cy="290" r="15" class="person" /><!-- Head -->
+
+  <path d="M 10 380 L 150 280" class="hill" /><!-- Hill -->
+
+  <!-- Boulder -->
+  <circle cx="95" cy="251" r="55" class="boulder" />
+
+  <text x="120" y="225" transform="rotate(50, 120, 225)" text-anchor="start" class="boulder-text">Write Code</text>
+  <text x="60" y="220" transform="rotate(-30, 60, 220)" class="boulder-text">CI/CD</text>
+  <text x="80" y="275" transform="rotate(180, 80, 275)" class="boulder-text">IaC</text>
+ 
+  <text x="100" y="230" transform="rotate(-10, 100, 230)" class="boulder-text">Performance Monitoring</text>
+  <text x="50" y="250" transform="rotate(0)" class="boulder-text">Vulnerability Scanning</text>
+  <text x="50" y="250" transform="rotate(0)" class="boulder-text">Upgrade frameworks</text>
+  <text x="50" y="250" transform="rotate(0)" class="boulder-text">Unit Testing</text>
+  <text x="50" y="250" transform="rotate(0)" class="boulder-text">UI Testing</text>
+  <text x="50" y="250" transform="rotate(0)" class="boulder-text">Integration Testing</text>
+  <text x="50" y="250" transform="rotate(0)" class="boulder-text">Update Tickets</text>
+
+
+<!-- Panel 2 - QA -->
+    <rect x="175" y="45" width="150" height="350" class="section-border">
+    </rect>
+
+<!-- QA title -->
+    <rect x="180" y="60" width="140" height="20" class="section-title-border"></rect> 
+    <text x="240" y="76" class="section-title-text">QA</text>
+
+<!-- Panel 3 - Project Managemnt -->
+    <rect x="345" y="45" width="150" height="350" class="section-border">
+    </rect>
+
+<!-- Project Management title -->
+    <rect x="350" y="60" width="140" height="20" class="section-title-border"></rect> 
+    <text x="355" y="76" class="section-title-text">Project Management</text>
+
+<!-- Panel 4 - Infrastructure -->
+    <rect x="515" y="45" width="150" height="350" class="section-border">
+    </rect>
+<!-- Infrastructure title -->
+    <rect x="520" y="60" width="140" height="20" class="section-title-border"></rect> 
+    <text x="545" y="76" class="section-title-text">Infrastructure</text>
+
+</svg>
