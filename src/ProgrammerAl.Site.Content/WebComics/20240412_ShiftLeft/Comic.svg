@@ -60,10 +60,26 @@
             font-size: 8px;
         }
 
+        .yoyo-line { 
+            stroke: black;
+            stroke-width: 0.4;
+        }
+
+        .yoyo-outer { 
+            fill: white;
+            stroke: black;
+            stroke-width: 1.5;
+        }
+
+        .yoyo-inner { 
+            fill: white;
+            stroke: black;
+            stroke-width: 1.00;
+        }
     </style>
 
     <text x="260" y="20" class="title-text">SHIFT LEFT</text>
-    <text x="235" y="30" class="sub-title-text">Doing things earlier in the development cycle</text>
+    <text x="240" y="30" class="sub-title-text">Do things earlier in the development cycle</text>
 
 <!-- Panel 1 - Dev -->
     <rect x="5" y="45" width="150" height="350" class="section-border">
@@ -83,26 +99,38 @@
   <!-- Boulder -->
   <circle cx="95" cy="251" r="55" class="boulder" />
 
-  <text x="120" y="225" transform="rotate(50, 120, 225)" text-anchor="start" class="boulder-text">Write Code</text>
-  <text x="60" y="220" transform="rotate(-30, 60, 220)" class="boulder-text">CI/CD</text>
+  <text x="120" y="230" transform="rotate(50, 120, 230)" text-anchor="start" class="boulder-text">Write Code</text>
+  <text x="65" y="220" transform="rotate(-30, 65, 220)" class="boulder-text">CI/CD</text>
   <text x="80" y="275" transform="rotate(180, 80, 275)" class="boulder-text">IaC</text>
- 
-  <text x="100" y="230" transform="rotate(-10, 100, 230)" class="boulder-text">Performance Monitoring</text>
-  <text x="50" y="250" transform="rotate(0)" class="boulder-text">Vulnerability Scanning</text>
-  <text x="50" y="250" transform="rotate(0)" class="boulder-text">Upgrade frameworks</text>
-  <text x="50" y="250" transform="rotate(0)" class="boulder-text">Unit Testing</text>
-  <text x="50" y="250" transform="rotate(0)" class="boulder-text">UI Testing</text>
-  <text x="50" y="250" transform="rotate(0)" class="boulder-text">Integration Testing</text>
-  <text x="50" y="250" transform="rotate(0)" class="boulder-text">Update Tickets</text>
+  <text x="42" y="260" transform="rotate(-10, 42, 260)" class="boulder-text">Performance Monitoring</text>
+  <text x="50" y="230" transform="rotate(-5, 50, 230)" class="boulder-text">Vulnerability Scanning</text>
+  <text x="85" y="305" transform="rotate(-35, 85, 305)" class="boulder-text">Upgrade frameworks</text>
+  <text x="65" y="265" transform="rotate(10, 65, 265)" class="boulder-text">Unit Tests</text>
+  <text x="90" y="205" transform="rotate(15, 90, 205)" class="boulder-text">UI Tests</text>
+  <text x="130" y="253" transform="rotate(145, 130, 253)" class="boulder-text">Integration Tests</text>
+  <text x="55" y="245" transform="rotate(-10, 55, 245)" class="boulder-text">Update Tickets</text>
 
 
 <!-- Panel 2 - QA -->
     <rect x="175" y="45" width="150" height="350" class="section-border">
     </rect>
 
+
 <!-- QA title -->
     <rect x="180" y="60" width="140" height="20" class="section-title-border"></rect> 
     <text x="240" y="76" class="section-title-text">QA</text>
+
+<!-- QA -->
+
+  <path d="M 230 260 L 230 300 L 220 310 L 230 300 L 240 310" class="person" /><!-- Body -->
+  <path d="M 230 280 L 220 285 M 230 280 L 245 280" class="person" /><!-- Arms -->
+  <circle cx="235" cy="260" r="15" class="person" /><!-- Head -->
+
+<!-- Yoyo -->
+    <path d="M 244 280 L 244 295" class="yoyo-line" />
+    <!-- <path class="" /> -->
+  <circle cx="244" cy="298" r="5" class="yoyo-outer" />
+  <circle cx="244" cy="298" r="2.75" class="yoyo-inner" />
 
 <!-- Panel 3 - Project Managemnt -->
     <rect x="345" y="45" width="150" height="350" class="section-border">
