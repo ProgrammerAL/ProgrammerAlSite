@@ -135,10 +135,6 @@
 
 <!-- QA Person -->
 
-  <path d="M 230 260 L 230 300 L 220 310 L 230 300 L 240 310" class="person" /><!-- Body -->
-  <path d="M 230 280 L 220 285 M 230 280 L 245 280" class="person" /><!-- Arms -->
-  <circle cx="235" cy="260" r="15" class="person" /><!-- Head -->
-
 <!-- Yoyo -->
     <path d="M 244 280 L 244 295" class="yoyo-line" />
   <circle cx="244" cy="298" r="5" class="yoyo-outer" />
@@ -190,5 +186,17 @@
 
 <!-- Paddle Motion Lines -->
   <path d="M 595 240 L 600 250" class="paddle" />
+
+<g x="100" y="230">
+    <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="15" class="person" />
+    </svg>
+</g>
+
+<!-- <image x="100" y="230" height="100" width="100">
+    <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="15" class="person" />
+    </svg>
+</image> -->
 
 </svg>
