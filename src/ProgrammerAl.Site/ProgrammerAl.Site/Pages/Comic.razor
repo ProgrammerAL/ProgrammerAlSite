@@ -1,0 +1,9 @@
+﻿@page "/comics/{PostUrl}"
+@using System.Text.Encodings.Web;
+
+@inherits ProgrammerAl.Site.PageModels.BlogPostModel
+
+@if (!string.IsNullOrWhiteSpace(PostHtml.Value))
+{
+    @PostHtml
+}

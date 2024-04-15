@@ -35,14 +35,13 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                     return;
                 });
 
-            HardCodedConfig config = new HardCodedConfig();
-            BlogPostParser parser = new BlogPostParser(config);
+            var parser = new BlogPostParser(new HardCodedConfig());
 
             var contentPath = parsedArgs.AppRootPath + "/ProgrammerAl.Site.Content";
 
-            ImmutableList<BlogPostInfo> allPosts = LoadAllBlogPostInfo(contentPath, parser);
+            ImmutableList<PostInfo> allPosts = LoadAllBlogPostInfo(contentPath, parser);
 
-            ImmutableList<BlogPostInfo> parsedBlogEntries = allPosts
+            ImmutableList<PostInfo> parsedBlogEntries = allPosts
                 .OrderBy(x => x.PostDate)//All blog posts start with the date they were posted. Order them so the oldest is first
                 .ToImmutableList();
 
@@ -59,19 +58,9 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 Tags = x.Entry.Tags.ToArray()
             }).ToArray();
 
-            BlogPostSummary[] mostRecentBlogPosts = allBlogPostSummaries
-                                        .OrderByDescending(x => x.PostNumber)
-                                        .Take(FrontPageBlogsDisplayed)
-                                        .ToArray();
+            CreateMetadataJsonFiles(contentPath, allBlogPostSummaries, parsedBlogEntries, allPosts);
 
-            RecentData recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
-            TagLinks tagLinks = GenerateTagLinks(allPosts);
-
-            WriteOutFileAsJson(recentData, contentPath, RecentDataFile);
-            WriteOutFileAsJson(allBlogPostSummaries, contentPath, BlogPostsFile);
-            WriteOutFileAsJson(tagLinks, contentPath, TagLinksFile);
-
-            //Load up the static templating engine
+            //Load the static templating engine
             var fullPathToTemplates = parsedArgs.AppRootPath + "/ProgrammerAl.Site/DynamicContentUpdater/StaticTemplates";
             var engine = new RazorLightEngineBuilder()
               .UseFileSystemProject(fullPathToTemplates)
@@ -85,7 +74,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             }
 
             //Create static html files for each blog post entry
-            foreach (BlogPostInfo blogEntry in parsedBlogEntries)
+            foreach (PostInfo blogEntry in parsedBlogEntries)
             {
                 var htmlContent = Markdig.Markdown.ToHtml(blogEntry.Entry.Post);
                 var blogPostEntryWithHtml = new PostEntry(blogEntry.Entry.Title, blogEntry.Entry.ReleaseDate, blogEntry.Entry.Tags, htmlContent, blogEntry.Entry.FirstParagraph);
@@ -101,7 +90,26 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             File.WriteAllText(sitemapFilePath, sitemapText);
         }
 
-        private static TagLinks GenerateTagLinks(ImmutableList<BlogPostInfo> allPosts)
+        /// <summary>
+        /// Generates the metadata json files that are used by the site to display blog post summaries and tag links
+        /// These are loaded by the site to display the most recent blog posts and the tags that are available
+        /// </summary>
+        private static void CreateMetadataJsonFiles(string contentPath, BlogPostSummary[] allBlogPostSummaries, ImmutableList<PostInfo> parsedBlogEntries, ImmutableList<PostInfo> allPosts)
+        {
+            BlogPostSummary[] mostRecentBlogPosts = allBlogPostSummaries
+                            .OrderByDescending(x => x.PostNumber)
+                            .Take(FrontPageBlogsDisplayed)
+                            .ToArray();
+
+            RecentData recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
+            TagLinks tagLinks = GenerateTagLinks(allPosts);
+
+            WriteOutFileAsJson(recentData, contentPath, RecentDataFile);
+            WriteOutFileAsJson(allBlogPostSummaries, contentPath, BlogPostsFile);
+            WriteOutFileAsJson(tagLinks, contentPath, TagLinksFile);
+        }
+
+        private static TagLinks GenerateTagLinks(ImmutableList<PostInfo> allPosts)
         {
             var tagLinks = new TagLinks();
             var tagDictionary = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
@@ -121,7 +129,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             return tagLinks;
         }
 
-        private static string GenerateSitemapFile(string siteUrl, ImmutableList<BlogPostInfo> allPosts)
+        private static string GenerateSitemapFile(string siteUrl, ImmutableList<PostInfo> allPosts)
         {
             var xmlDoc = new XmlDocument();
             var urlSetElement = xmlDoc.CreateElement("urlset", SitemapXmlNamespace);
@@ -146,7 +154,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + Environment.NewLine + xmlDoc.InnerXml;
         }
 
-        public static ImmutableList<BlogPostInfo> LoadAllBlogPostInfo(string contentPath, BlogPostParser parser)
+        public static ImmutableList<PostInfo> LoadAllBlogPostInfo(string contentPath, BlogPostParser parser)
         {
             string blogPostsFolderPath = contentPath + "/BlogPosts";
             string[] blogPostFolders = Directory.GetDirectories(blogPostsFolderPath, "*.*", SearchOption.TopDirectoryOnly);
@@ -166,7 +174,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
                 string postContent = File.ReadAllText(postFilePath);
                 PostEntry blogEntry = parser.ParseFromMarkdown(postContent);
-                return new BlogPostInfo(postName, postDate, blogEntry);
+                return new PostInfo(postName, postDate, blogEntry);
             })
             .ToImmutableList();
         }
