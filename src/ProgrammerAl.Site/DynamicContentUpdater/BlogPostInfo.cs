@@ -4,4 +4,4 @@ using System;
 
 namespace ProgrammerAl.Site.DynamicContentUpdater;
 
-public record BlogPostInfo(string FileNameWithoutExtension, DateOnly PostDate, PostEntry Entry);
+public record BlogPostInfo(string PostName, DateOnly PostDate, PostEntry Entry);

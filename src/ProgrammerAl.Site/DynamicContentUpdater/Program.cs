@@ -55,7 +55,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 PostedDate = x.PostDate,
                 FirstParagraph = Markdig.Markdown.ToHtml(x.Entry.FirstParagraph, pipeline: markdownPipeline),
                 PostNumber = blogPostNumber++,
-                TitleLink = x.FileNameWithoutExtension,
+                TitleLink = x.PostName,
                 Tags = x.Entry.Tags.ToArray()
             }).ToArray();
 
@@ -92,7 +92,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
                 string staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", blogPostEntryWithHtml);
 
-                string outputFilePath = Path.Combine(outputfolderPath, blogEntry.FileNameWithoutExtension) + ".html";
+                string outputFilePath = Path.Combine(outputfolderPath, blogEntry.PostName) + ".html";
                 File.WriteAllText(outputFilePath, staticHtml);
             }
 
@@ -113,7 +113,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                     {
                         tagDictionary.Add(tag, new List<string>());
                     }
-                    tagDictionary[tag].Add(post.FileNameWithoutExtension);
+                    tagDictionary[tag].Add(post.PostName);
                 }
             }
 
@@ -133,7 +133,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 var urlNode = xmlDoc.CreateElement("url", SitemapXmlNamespace);
 
                 var locationNode = xmlDoc.CreateElement("loc", SitemapXmlNamespace);
-                locationNode.InnerText = siteUrl + "blog/posts/" + post.FileNameWithoutExtension;
+                locationNode.InnerText = siteUrl + "blog/posts/" + post.PostName;
 
                 var lastModifiedNode = xmlDoc.CreateElement("lastmod", SitemapXmlNamespace);
                 lastModifiedNode.InnerText = lastModifiedString;
@@ -149,17 +149,37 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         public static ImmutableList<BlogPostInfo> LoadAllBlogPostInfo(string contentPath, BlogPostParser parser)
         {
             string blogPostsFolderPath = contentPath + "/BlogPosts";
-            string[] blogPostFiles = Directory.GetFiles(blogPostsFolderPath, "*.md", SearchOption.TopDirectoryOnly);
-            return blogPostFiles.Select(x =>
+            string[] blogPostFolders = Directory.GetDirectories(blogPostsFolderPath, "*.*", SearchOption.TopDirectoryOnly);
+
+            return blogPostFolders.Select(x =>
+            {
+                var dirInfo = new DirectoryInfo(x);
+                var postFilePath = $"{x}/post.md";
+                var postName = dirInfo.Name; // Name of post is the name of the folder
+
+                if (!File.Exists(postFilePath))
                 {
-                    string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(x);
-                    var postDateString = fileNameWithoutExtension.Substring(0, 8);
-                    var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
-                    string postContent = File.ReadAllText(x);
-                    PostEntry blogEntry = parser.ParseFromMarkdown(postContent);
-                    return new BlogPostInfo(fileNameWithoutExtension, postDate, blogEntry);
-                })
-                .ToImmutableList();
+                    throw new Exception("$Could not find post file: {postFilePath}");
+                }
+
+                var postDateString = postName.Substring(0, 8);
+                var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
+                string postContent = File.ReadAllText(x);
+                PostEntry blogEntry = parser.ParseFromMarkdown(postContent);
+                return new BlogPostInfo(postName, postDate, blogEntry);
+            })
+    .ToImmutableList();
+
+            //return blogPostFiles.Select(x =>
+            //    {
+            //        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(x);
+            //        var postDateString = fileNameWithoutExtension.Substring(0, 8);
+            //        var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
+            //        string postContent = File.ReadAllText(x);
+            //        PostEntry blogEntry = parser.ParseFromMarkdown(postContent);
+            //        return new BlogPostInfo(fileNameWithoutExtension, postDate, blogEntry);
+            //    })
+            //    .ToImmutableList();
         }
 
         private static void WriteOutFileAsJson<T>(T obj, string contentPath, string fileName)
