@@ -20,8 +20,10 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         private const string RecentDataFile = "RecentData.json";
         private const string BlogPostsFile = "BlogPosts.json";
         private const string TagLinksFile = "TagLinks.json";
+        private const string ComicsFile = "Comics.json";
         private const int FrontPageBlogsDisplayed = 5;
         private const string SitemapXmlNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
+        private const string ComicsTag = "comic";
 
         static async Task Main(string[] args)
         {
@@ -48,7 +50,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             var markdownPipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
 
             int blogPostNumber = 1;
-            BlogPostSummary[] allBlogPostSummaries = parsedPostEntries.Select(x => new BlogPostSummary
+            PostSummary[] allBlogPostSummaries = parsedPostEntries.Select(x => new PostSummary
             {
                 Title = x.Entry.Title,
                 PostedDate = x.PostDate,
@@ -81,7 +83,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
                 string staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", blogPostEntryWithHtml);
 
-                string outputFilePath = Path.Combine(outputfolderPath, blogEntry.PostName) + ".html";
+                string outputFilePath = $"{outputfolderPath}/{blogEntry.PostName}/post.html";
                 File.WriteAllText(outputFilePath, staticHtml);
             }
 
@@ -94,19 +96,32 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         /// Generates the metadata json files that are used by the site to display blog post summaries and tag links
         /// These are loaded by the site to display the most recent blog posts and the tags that are available
         /// </summary>
-        private static void CreateMetadataJsonFiles(string contentPath, BlogPostSummary[] allBlogPostSummaries, ImmutableList<PostInfo> parsedBlogEntries, ImmutableList<PostInfo> allPosts)
+        private static void CreateMetadataJsonFiles(string contentPath, PostSummary[] allBlogPostSummaries, ImmutableList<PostInfo> parsedBlogEntries, ImmutableList<PostInfo> allPosts)
         {
-            BlogPostSummary[] mostRecentBlogPosts = allBlogPostSummaries
+            PostSummary[] mostRecentBlogPosts = allBlogPostSummaries
                             .OrderByDescending(x => x.PostNumber)
                             .Take(FrontPageBlogsDisplayed)
                             .ToArray();
 
-            RecentData recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
-            TagLinks tagLinks = GenerateTagLinks(allPosts);
+            var recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
+            var tagLinks = GenerateTagLinks(allPosts);
+
+            var comicPostSummaries = allBlogPostSummaries
+                .Where(x => x.Tags.Contains(ComicsTag))
+                .Select(x => new ComicPostSummary
+                {
+                    Title = x.Title,
+                    PostedDate = x.PostedDate,
+                    TitleLink = x.TitleLink,
+                    PostNumber = x.PostNumber,
+                    ImageLink = $"{x.TitleLink}/comic.svg"
+                })
+                .ToImmutableArray();
 
             WriteOutFileAsJson(recentData, contentPath, RecentDataFile);
             WriteOutFileAsJson(allBlogPostSummaries, contentPath, BlogPostsFile);
             WriteOutFileAsJson(tagLinks, contentPath, TagLinksFile);
+            WriteOutFileAsJson(comicPostSummaries, contentPath, ComicsFile);
         }
 
         private static TagLinks GenerateTagLinks(ImmutableList<PostInfo> allPosts)
@@ -159,7 +174,9 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             string blogPostsFolderPath = contentPath + "/Posts";
             string[] blogPostFolders = Directory.GetDirectories(blogPostsFolderPath, "*.*", SearchOption.TopDirectoryOnly);
 
-            return blogPostFolders.Select(x =>
+            return blogPostFolders
+                .Where(x => !x.StartsWith("draft__", StringComparison.OrdinalIgnoreCase))
+                .Select(x =>
             {
                 var dirInfo = new DirectoryInfo(x);
                 var postFilePath = $"{x}/post.md";

@@ -49,7 +49,7 @@
 
 @if (BlogPosts != null)
 {
-    IEnumerable<IGrouping<int, BlogPostSummary>> postsByYear;
+    IEnumerable<IGrouping<int, PostSummary>> postsByYear;
     var selections = TagSelections.Concat(TypesTagSelections).Where(x => x.Value).Select(x => x.Key).ToList();
 
     if (selections.Any())

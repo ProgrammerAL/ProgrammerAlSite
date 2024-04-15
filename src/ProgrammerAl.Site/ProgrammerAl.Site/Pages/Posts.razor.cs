@@ -28,7 +28,7 @@ public partial class Posts : ComponentBase
     [Parameter, SupplyParameterFromQuery(Name = "tagSelections")]
     public string QueryStringTagSelections { get; set; }
 
-    private BlogPostSummary[] BlogPosts { get; set; }
+    private PostSummary[] BlogPosts { get; set; }
     private TagLinks TagLinks { get; set; }
     private ImmutableArray<KeyValuePair<string, bool>> TypesTagSelections { get; set; } = ImmutableArray.Create<KeyValuePair<string, bool>>();
     private ImmutableArray<KeyValuePair<string, bool>> TagSelections { get; set; } = ImmutableArray.Create<KeyValuePair<string, bool>>();
@@ -47,7 +47,7 @@ public partial class Posts : ComponentBase
         var recentDataContent = recentDataContentTask.Result;
         var tagLinksContent = tagLinksTask.Result;
 
-        BlogPosts = await JsonSerializer.DeserializeAsync<BlogPostSummary[]>(recentDataContent);
+        BlogPosts = await JsonSerializer.DeserializeAsync<PostSummary[]>(recentDataContent);
         TagLinks = await JsonSerializer.DeserializeAsync<TagLinks>(tagLinksContent);
 
         RefreshTagSelections();

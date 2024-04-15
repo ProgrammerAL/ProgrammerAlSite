@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace ProgrammerAl.Site.Utilities.Entities;
 
-public class BlogPostSummary
+public class PostSummary
 {
     public string Title { get; set; }
     public DateOnly PostedDate { get; set; }
