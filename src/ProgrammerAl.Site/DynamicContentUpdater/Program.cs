@@ -164,22 +164,11 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
                 var postDateString = postName.Substring(0, 8);
                 var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
-                string postContent = File.ReadAllText(x);
+                string postContent = File.ReadAllText(postFilePath);
                 PostEntry blogEntry = parser.ParseFromMarkdown(postContent);
                 return new BlogPostInfo(postName, postDate, blogEntry);
             })
-    .ToImmutableList();
-
-            //return blogPostFiles.Select(x =>
-            //    {
-            //        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(x);
-            //        var postDateString = fileNameWithoutExtension.Substring(0, 8);
-            //        var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
-            //        string postContent = File.ReadAllText(x);
-            //        PostEntry blogEntry = parser.ParseFromMarkdown(postContent);
-            //        return new BlogPostInfo(fileNameWithoutExtension, postDate, blogEntry);
-            //    })
-            //    .ToImmutableList();
+            .ToImmutableList();
         }
 
         private static void WriteOutFileAsJson<T>(T obj, string contentPath, string fileName)
