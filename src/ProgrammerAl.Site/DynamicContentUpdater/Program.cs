@@ -39,16 +39,16 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
             var contentPath = parsedArgs.AppRootPath + "/ProgrammerAl.Site.Content";
 
-            ImmutableList<PostInfo> allPosts = LoadAllBlogPostInfo(contentPath, parser);
+            var allPosts = LoadAllPostInfos(contentPath, parser);
 
-            ImmutableList<PostInfo> parsedBlogEntries = allPosts
+            var parsedPostEntries = allPosts
                 .OrderBy(x => x.PostDate)//All blog posts start with the date they were posted. Order them so the oldest is first
                 .ToImmutableList();
 
             var markdownPipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
 
             int blogPostNumber = 1;
-            BlogPostSummary[] allBlogPostSummaries = parsedBlogEntries.Select(x => new BlogPostSummary
+            BlogPostSummary[] allBlogPostSummaries = parsedPostEntries.Select(x => new BlogPostSummary
             {
                 Title = x.Entry.Title,
                 PostedDate = x.PostDate,
@@ -58,7 +58,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 Tags = x.Entry.Tags.ToArray()
             }).ToArray();
 
-            CreateMetadataJsonFiles(contentPath, allBlogPostSummaries, parsedBlogEntries, allPosts);
+            CreateMetadataJsonFiles(contentPath, allBlogPostSummaries, parsedPostEntries, allPosts);
 
             //Load the static templating engine
             var fullPathToTemplates = parsedArgs.AppRootPath + "/ProgrammerAl.Site/DynamicContentUpdater/StaticTemplates";
@@ -74,7 +74,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             }
 
             //Create static html files for each blog post entry
-            foreach (PostInfo blogEntry in parsedBlogEntries)
+            foreach (PostInfo blogEntry in parsedPostEntries)
             {
                 var htmlContent = Markdig.Markdown.ToHtml(blogEntry.Entry.Post);
                 var blogPostEntryWithHtml = new PostEntry(blogEntry.Entry.Title, blogEntry.Entry.ReleaseDate, blogEntry.Entry.Tags, htmlContent, blogEntry.Entry.FirstParagraph);
@@ -154,9 +154,9 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + Environment.NewLine + xmlDoc.InnerXml;
         }
 
-        public static ImmutableList<PostInfo> LoadAllBlogPostInfo(string contentPath, BlogPostParser parser)
+        public static ImmutableList<PostInfo> LoadAllPostInfos(string contentPath, BlogPostParser parser)
         {
-            string blogPostsFolderPath = contentPath + "/BlogPosts";
+            string blogPostsFolderPath = contentPath + "/Posts";
             string[] blogPostFolders = Directory.GetDirectories(blogPostsFolderPath, "*.*", SearchOption.TopDirectoryOnly);
 
             return blogPostFolders.Select(x =>
