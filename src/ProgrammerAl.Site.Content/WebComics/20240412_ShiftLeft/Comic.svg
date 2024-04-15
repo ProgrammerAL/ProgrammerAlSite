@@ -1,8 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 670 400">
+    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 640 215">
     <title>Shift Left</title>
 
     <style>
+        .signature-text { 
+            font-family: Georgia;
+            font-size: 4px;
+        }
+
         .section-border { 
             fill: white;
             stroke: black;
@@ -88,107 +93,141 @@
             stroke: black;
             stroke-width: 1.1;
         }
+
+        .ball { 
+            fill: white;
+            stroke: black;
+            stroke-width: 0.6;
+        }
+
+        .ball-motion { 
+            stroke: black;
+            stroke-width: 0.3;
+        }
     </style>
 
-    <text x="260" y="20" class="title-text">SHIFT LEFT</text>
-    <text x="240" y="30" class="sub-title-text">Do things earlier in the development cycle</text>
+<text x="603" y="43" class="signature-text">@ProgrammerAL</text>
 
-<!-- Panel 1 - Dev -->
-    <rect x="5" y="45" width="150" height="350" class="section-border">
-    </rect>
+    <g>
+        <svg x="240" y="0">
+            <text x="20" y="20" class="title-text">SHIFT LEFT</text>
+            <text x="0" y="30" class="sub-title-text">Do things earlier in the development cycle</text>
+        </svg>
+    </g>
 
-<!-- Devs title -->
-    <rect x="10" y="60" width="140" height="20" class="section-title-border"></rect> 
-    <text x="57" y="76" class="section-title-text">Devs</text>
+    <!-- Panel 1 - Dev -->
+    <g>
+        <svg x="0" y="40" height="250">
+            <rect x="5" y="5" width="150" height="220" class="section-border">
+            </rect>
 
-<!-- Dev -->
-  <path d="M 35 290 L 55 330 L 53 350 L 55 330 L 70 337" class="person" /><!-- Body -->
-  <path d="M 48 315 L 57 290 L 48 315 L 69 300" class="person" /><!-- Arms -->
-  <circle cx="35" cy="290" r="15" class="person" /><!-- Head -->
+            <!-- Devs title -->
+            <rect x="10" y="20" width="140" height="20" class="section-title-border"></rect> 
+            <text x="57" y="36" class="section-title-text">Devs</text>
 
-  <path d="M 10 380 L 150 280" class="hill" /><!-- Hill -->
+            <!-- Dev -->
+            <path d="M 35 140 L 55 180 L 53 198 L 55 180 L 70 187" class="person" /><!-- Body -->
+            <path d="M 52 175 L 57 150 L 52 175 L 69 160" class="person" /><!-- Arms -->
+            <circle cx="35" cy="150" r="15" class="person" /><!-- Head -->
 
-  <!-- Boulder -->
-  <circle cx="95" cy="251" r="55" class="boulder" />
+            <path d="M 10 224 L 150 140" class="hill" /><!-- Hill -->
 
-  <text x="120" y="230" transform="rotate(50, 120, 230)" text-anchor="start" class="boulder-text">Write Code</text>
-  <text x="65" y="220" transform="rotate(-30, 65, 220)" class="boulder-text">CI/CD</text>
-  <text x="80" y="275" transform="rotate(180, 80, 275)" class="boulder-text">IaC</text>
-  <text x="42" y="260" transform="rotate(-10, 42, 260)" class="boulder-text">Performance Monitoring</text>
-  <text x="50" y="230" transform="rotate(-5, 50, 230)" class="boulder-text">Vulnerability Scanning</text>
-  <text x="85" y="305" transform="rotate(-35, 85, 305)" class="boulder-text">Upgrade frameworks</text>
-  <text x="65" y="265" transform="rotate(10, 65, 265)" class="boulder-text">Unit Tests</text>
-  <text x="90" y="205" transform="rotate(15, 90, 205)" class="boulder-text">UI Tests</text>
-  <text x="130" y="253" transform="rotate(145, 130, 253)" class="boulder-text">Integration Tests</text>
-  <text x="65" y="249" transform="rotate(-15, 65, 249)" class="boulder-text">Update Tickets</text>
-  <text x="50" y="245" transform="rotate(-20, 50, 245)" class="boulder-text">On Call</text>
+            <!-- Boulder -->
+            <circle cx="95" cy="109" r="55" class="boulder" />
 
+            <text x="120" y="90" transform="rotate(50, 120, 90)" text-anchor="start" class="boulder-text">Write Code</text>
+            <text x="65" y="80" transform="rotate(-30, 65, 80)" class="boulder-text">CI/CD</text>
+            <text x="75" y="140" transform="rotate(110, 75, 140)" class="boulder-text">IaC</text>
+            <text x="42" y="120" transform="rotate(-10, 42, 120)" class="boulder-text">Performance Fixes</text>
+            <text x="50" y="90" transform="rotate(-5, 50, 90)" class="boulder-text">Vulnerability Scanning</text>
+            <text x="85" y="165" transform="rotate(-35, 85, 165)" class="boulder-text">Upgrade frameworks</text>
+            <text x="55" y="128" transform="rotate(15, 55, 128)" class="boulder-text">Unit Tests</text>
+            <text x="90" y="65" transform="rotate(15, 90, 65)" class="boulder-text">UI Tests</text>
+            <text x="135" y="113" transform="rotate(145, 135, 113)" class="boulder-text">Integration Tests</text>
+            <text x="65" y="109" transform="rotate(-15, 65, 109)" class="boulder-text">Update Tickets</text>
+            <text x="50" y="105" transform="rotate(-20, 50, 105)" class="boulder-text">On Call</text>
+            <text x="77" y="120" transform="rotate(5, 77, 120)" class="boulder-text">DB Queries</text>
+        </svg>
+    </g>
 
-<!-- Panel 2 - QA -->
-    <rect x="175" y="45" width="150" height="350" class="section-border">
-    </rect>
+    <!-- Panel 2 - QA -->
+    <g>
+        <svg x="160" y="40" height="250">
+            <rect x="5" y="5" width="150" height="220" class="section-border">
+            </rect>
 
+        <!-- QA title -->
+            <rect x="10" y="20" width="140" height="20" class="section-title-border"></rect> 
+            <text x="70" y="36" class="section-title-text">QA</text>
 
-<!-- QA title -->
-    <rect x="180" y="60" width="140" height="20" class="section-title-border"></rect> 
-    <text x="240" y="76" class="section-title-text">QA</text>
+        <!-- QA Person -->
 
-<!-- QA Person -->
+            <path d="M 60 100 L 60 140 L 50 150 L 60 140 L 70 150" class="person" /><!-- Body -->
+            <path d="M 60 120 L 50 125 M 60 120 L 80 120" class="person" /><!-- Arms -->
+            <circle cx="65" cy="100" r="15" class="person" /><!-- Head -->
 
-  <path d="M 230 260 L 230 300 L 220 310 L 230 300 L 240 310" class="person" /><!-- Body -->
-  <path d="M 230 280 L 220 285 M 230 280 L 245 280" class="person" /><!-- Arms -->
-  <circle cx="235" cy="260" r="15" class="person" /><!-- Head -->
+        <!-- Yoyo -->
+            <path d="M 78 120 L 78 135" class="yoyo-line" />
+            <circle cx="78" cy="135" r="5" class="yoyo-outer" />
+            <circle cx="78" cy="135" r="2.75" class="yoyo-inner" />
+        </svg>
+    </g>
 
-<!-- Yoyo -->
-    <path d="M 244 280 L 244 295" class="yoyo-line" />
-  <circle cx="244" cy="298" r="5" class="yoyo-outer" />
-  <circle cx="244" cy="298" r="2.75" class="yoyo-inner" />
+    <!-- Panel 3 - Project Managemnt -->
+    <g>
+        <svg x="320" y="40" height="250">
+            <rect x="5" y="5" width="150" height="220" class="section-border">
+            </rect>
 
-<!-- Panel 3 - Project Managemnt -->
-    <rect x="345" y="45" width="150" height="350" class="section-border">
-    </rect>
+        <!-- Project Management title -->
+            <rect x="10" y="20" width="140" height="20" class="section-title-border"></rect> 
+            <text x="15" y="36" class="section-title-text">Project Management</text>
 
-<!-- Project Management title -->
-    <rect x="350" y="60" width="140" height="20" class="section-title-border"></rect> 
-    <text x="355" y="76" class="section-title-text">Project Management</text>
+        <!-- Project Manager -->
+            <path d="M 60 100 V 140 L 50 160 L 60 140 L 70 160" class="person" /><!-- Body -->
+            <path d="M 50 125 H 80" class="person" /><!-- Arms -->
+            <circle cx="60" cy="100" r="15" class="person" /><!-- Head -->
 
-<!-- Project Manager -->
-  <path d="M 410 270 L 410 310 L 395 320 L 410 310 L 425 320" class="person" /><!-- Body -->
-  <path d="M 400 290 L 430 289" class="person" /><!-- Arms -->
-  <circle cx="410" cy="260" r="15" class="person" /><!-- Head -->
-
-<!-- Project Manager Book -->
-  <path d="M 430 290 L 433 283 L 430 290 L 435 288 L 438 280 L 433 283 L 428 282 L 426 289 L 430 290" class="book" />
-  <!-- Spine -->
-
-<!-- Panel 4 - Infrastructure -->
-    <rect x="515" y="45" width="150" height="350" class="section-border">
-    </rect>
-
-<!-- Infrastructure title -->
-    <rect x="520" y="60" width="140" height="20" class="section-title-border"></rect> 
-    <text x="545" y="76" class="section-title-text">Infrastructure</text>
-
-<!-- Person Left -->
-  <path d="M 540 290 L 540 330 L 530 340 L 540 330 L 550 340" class="person" /> <!-- Body -->
-  <path d="M 530 310 H 560" class="person" /> <!-- Arms -->
-  <circle cx="540" cy="290" r="13" class="person" /><!-- Head -->
-
-<!-- Paddle Left -->
-  <path d="M 560 310 L 565 305" class="paddle" /> <!-- Handle -->
-  <circle cx="566" cy="300" r="5" class="paddle" />
+        <!-- Project Manager Book -->
+            <path d="M 80 125 L 90 123 L 95 110 L 85 115 L 75 110 L 73 120 L 80 125 L 85 115" class="book" /><!-- Spine -->
+        </svg>
+    </g>
 
 
-<!-- Person Right -->
-  <path d="M 620 230 L 620 270 L 610 280 L 620 270 L 630 280" class="person" /> <!-- Body -->
-  <path d="M 600 250 H 630" class="person" /> <!-- Arms -->
-  <circle cx="620" cy="230" r="13" class="person" /><!-- Head -->
+    <!-- Panel 4 - Infrastructure -->
+    <g>
+        <svg x="480" y="40" height="250">
+            <rect x="5" y="5" width="150" height="220" class="section-border">
+            </rect>
 
-<!-- Paddle Right -->
-  <path d="M 595 240 L 600 250" class="paddle" /> <!-- Handle -->
-  <circle cx="595" cy="240" r="5" class="paddle" />
+        <!-- Infrastructure title -->
+            <rect x="10" y="20" width="140" height="20" class="section-title-border"></rect> 
+            <text x="35" y="36" class="section-title-text">Infrastructure</text>
 
-<!-- Paddle Motion Lines -->
-  <path d="M 595 240 L 600 250" class="paddle" />
+        <!-- Person Left -->
+            <path d="M 30 140 L 30 180 L 20 190 L 30 180 L 40 190" class="person" /> <!-- Body -->
+            <path d="M 20 160 H 50" class="person" /> <!-- Arms -->
+            <circle cx="30" cy="140" r="13" class="person" /><!-- Head -->
+
+        <!-- Paddle Left -->
+            <path d="M 48 160 L 53 150" class="paddle" /> <!-- Handle -->
+            <circle cx="53" cy="150" r="5" class="paddle" />
+
+        <!-- Person Right -->
+            <path d="M 110 80 L 110 120 L 100 130 L 110 120 L 120 130" class="person" /> <!-- Body -->
+            <path d="M 90 100 H 120" class="person" /> <!-- Arms -->
+            <circle cx="110" cy="80" r="13" class="person" /><!-- Head -->
+
+        <!-- Paddle Right -->
+            <path d="M 85 90 L 90 100" class="paddle" /> <!-- Handle -->
+            <circle cx="85" cy="90" r="5" class="paddle" />
+
+        <!-- Paddle ball and Lines -->
+            <circle cx="65" cy="125" r="3" class="ball" />
+            <path d="M 62 129 L 60 133" class="ball-motion" />
+            <path d="M 64 129 L 61 135" class="ball-motion" />
+            <path d="M 66 129 L 64 133" class="ball-motion" />
+        </svg>
+    </g>
 
 </svg>
