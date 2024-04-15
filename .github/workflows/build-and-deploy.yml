@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CONFIGURATION: Release
-      DOTNET_VERSION: 7.0.x
+      DOTNET_VERSION: 8.0.x
       SITE_PROJECT_NAME: ProgrammerAl.Site
       SLN_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/ProgrammerAl.Site.sln
       DYNAMIC_CONTENT_UPDATER_PROJECT_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/DynamicContentUpdater/DynamicContentUpdater.csproj
