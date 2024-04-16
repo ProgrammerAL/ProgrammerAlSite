@@ -92,7 +92,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                     var postNumber = i + 1;
 
                     return new PostEntry(
-                        postDirectoryLocalPath: x.PostDirectoryLocalPath
+                        postDirectoryLocalPath: x.PostDirectoryLocalPath,
                         titleHumanReadable: x.ParsedEntry.Title,
                         titleLink: x.PostName,//public url for the post, just the full name of it. ie 20210101-Title
                         releaseDate: x.PostDate,
@@ -100,8 +100,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                         postMarkdown: x.ParsedEntry.Post,
                         postHtml: Markdig.Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline),
                         firstParagraphHtml: Markdig.Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline),
-                        postNumber: postNumber,
-                        comicSvg: x.ComicSvg
+                        postNumber: postNumber
                     );
                 })
                 .ToImmutableArray();

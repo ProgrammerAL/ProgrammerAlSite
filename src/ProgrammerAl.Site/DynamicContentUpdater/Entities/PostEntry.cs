@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Immutable;
+using System.IO;
 
 namespace DynamicContentUpdater.Entities;
 
 public class PostEntry
 {
     public const string ComicsTag = "comic";
+    public const string ComicSvgFileName = "comic.svg";
 
     public PostEntry(
         string postDirectoryLocalPath,
@@ -39,13 +41,13 @@ public class PostEntry
     public string FirstParagraphHtml { get; }
     public int PostNumber { get; }
 
-    public bool HasComic => !string.IsNullOrWhiteSpace(ComicSvg);
+    public bool HasComic => File.Exists($"{PostDirectoryLocalPath}/{ComicSvgFileName}");
 
     public bool TryGetComicLink(out string comicLink)
     {
         if (HasComic)
         {
-            comicLink = $"{TitleLink}/comic.svg";
+            comicLink = $"{TitleLink}/{ComicSvgFileName}";
             return true;
         }
 
