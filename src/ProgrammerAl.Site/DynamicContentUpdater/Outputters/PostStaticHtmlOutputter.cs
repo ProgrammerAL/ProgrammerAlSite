@@ -30,15 +30,7 @@ public class PostStaticHtmlOutputter
         //Create static html files for each blog post entry
         foreach (var post in allPosts)
         {
-            string staticHtml;
-            if (post.TryGetComicLink(out _))
-            {
-                staticHtml = await engine.CompileRenderAsync<PostEntry>("ComicPost.cshtml", post);
-            }
-            else
-            {
-                staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
-            }
+            var staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
 
             string outputFilePath = $"{outputfolderPath}/{post.TitleLink}/post.html";
             File.WriteAllText(outputFilePath, staticHtml);

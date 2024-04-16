@@ -13,11 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="StaticTemplates\ComicPost.cshtml" />
     <None Remove="StaticTemplates\Post.cshtml" />
-    <Content Include="StaticTemplates\ComicPost.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="StaticTemplates\Post.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

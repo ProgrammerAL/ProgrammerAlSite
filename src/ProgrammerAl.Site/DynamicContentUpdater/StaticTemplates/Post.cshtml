@@ -2,7 +2,7 @@
 
 <div class="post-title">
     <h1>
-        @Model.Title
+        @Model.TitleHumanReadable
     </h1>
     <p> Posted on: @Model.ReleaseDate.ToLongDateString()</p>
     @if (Model.Tags.Any())
@@ -12,8 +12,15 @@
 
 </div>
 
+@if (Model.TryGetComicLink(out string comicImageLink))
+{
+    <div class="post-comic-image">
+        <img src="@(comicImageLink)" />
+    </div>
+}
+
 <div class="post-content">
-    @Raw(Model.Post)
+    @Raw(Model.PostHtml)
 </div>
 
 
