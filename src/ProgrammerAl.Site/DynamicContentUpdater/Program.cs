@@ -38,6 +38,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             var allPosts = LoadAllPostsOrderedByDate(contentPath, parser);
 
             new RecentPostsOutputter().Output(contentPath, allPosts);
+            new AllPostSummariesOutputter().Output(contentPath, allPosts);
             new TagLinksOutputter().Output(contentPath, allPosts);
             new SiteMapOutputter().Output(contentPath, sitemapFilePath, allPosts);
             await new PostStaticHtmlOutputter().OutputAsync(contentPath, fullPathToTemplates, allPosts);
