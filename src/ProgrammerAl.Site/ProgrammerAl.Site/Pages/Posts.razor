@@ -47,7 +47,7 @@
     }
 }
 
-@if (BlogPosts != null)
+@if (PostSummaries != null)
 {
     IEnumerable<IGrouping<int, PostSummary>> postsByYear;
     var selections = TagSelections.Concat(TypesTagSelections).Where(x => x.Value).Select(x => x.Key).ToList();
@@ -57,14 +57,14 @@
         //If any tags are selected, only show posts with those tags
         var selectedLinks = TagLinks.Links.Where(x => selections.Contains(x.Key, StringComparer.OrdinalIgnoreCase)).SelectMany(x => x.Value).ToList();
 
-        postsByYear = BlogPosts
+        postsByYear = PostSummaries
                         .Where(x => selectedLinks.Any(y => string.Equals(x.TitleLink, y, StringComparison.OrdinalIgnoreCase)))
                         .OrderByDescending(x => x.PostNumber)
                         .GroupBy(x => x.PostedDate.Year);
     }
     else
     {
-        postsByYear = BlogPosts.OrderByDescending(x => x.PostNumber).GroupBy(x => x.PostedDate.Year);
+        postsByYear = PostSummaries.OrderByDescending(x => x.PostNumber).GroupBy(x => x.PostedDate.Year);
     }
 
     foreach (var postByYear in postsByYear)

@@ -12,6 +12,7 @@ using System.Xml;
 using System.Text;
 using System.Collections.Generic;
 using Markdig;
+using DynamicContentUpdater;
 
 namespace ProgrammerAl.Site.DynamicContentUpdater
 {
@@ -23,7 +24,6 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         private const string ComicsFile = "Comics.json";
         private const int FrontPageBlogsDisplayed = 5;
         private const string SitemapXmlNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
-        private const string ComicsTag = "comic";
 
         static async Task Main(string[] args)
         {
@@ -37,7 +37,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                     return;
                 });
 
-            var parser = new BlogPostParser(new HardCodedConfig());
+            var parser = new PostParser(new HardCodedConfig());
 
             var contentPath = parsedArgs.AppRootPath + "/ProgrammerAl.Site.Content";
 
@@ -50,15 +50,15 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             var markdownPipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
 
             int blogPostNumber = 1;
-            PostSummary[] allBlogPostSummaries = parsedPostEntries.Select(x => new PostSummary
-            {
-                Title = x.Entry.Title,
-                PostedDate = x.PostDate,
-                FirstParagraph = Markdig.Markdown.ToHtml(x.Entry.FirstParagraph, pipeline: markdownPipeline),
-                PostNumber = blogPostNumber++,
-                TitleLink = x.PostName,
-                Tags = x.Entry.Tags.ToArray()
-            }).ToArray();
+            var allBlogPostSummaries = parsedPostEntries.Select(x =>
+            new PostSummary(
+                title: x.Entry.Title,
+                postedDate: x.PostDate,
+                firstParagraph: Markdig.Markdown.ToHtml(x.Entry.FirstParagraph, pipeline: markdownPipeline),
+                postNumber: blogPostNumber++,
+                titleLink: x.PostName,
+                tags: x.Entry.Tags.ToArray()
+            )).ToImmutableArray();
 
             CreateMetadataJsonFiles(contentPath, allBlogPostSummaries, parsedPostEntries, allPosts);
 
@@ -76,14 +76,19 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             }
 
             //Create static html files for each blog post entry
-            foreach (PostInfo blogEntry in parsedPostEntries)
+            foreach (var postInfo in parsedPostEntries)
             {
-                var htmlContent = Markdig.Markdown.ToHtml(blogEntry.Entry.Post);
-                var blogPostEntryWithHtml = new PostEntry(blogEntry.Entry.Title, blogEntry.Entry.ReleaseDate, blogEntry.Entry.Tags, htmlContent, blogEntry.Entry.FirstParagraph);
+                var htmlContent = Markdig.Markdown.ToHtml(postInfo.Entry.Post);
+                var htmlEntry = new PostEntry(
+                    postInfo.Entry.Title,
+                    postInfo.Entry.ReleaseDate,
+                    postInfo.Entry.Tags,
+                    htmlContent,
+                    postInfo.Entry.FirstParagraph);
 
-                string staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", blogPostEntryWithHtml);
+                string staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", htmlEntry);
 
-                string outputFilePath = $"{outputfolderPath}/{blogEntry.PostName}/post.html";
+                string outputFilePath = $"{outputfolderPath}/{postInfo.PostName}/post.html";
                 File.WriteAllText(outputFilePath, staticHtml);
             }
 
@@ -96,7 +101,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
         /// Generates the metadata json files that are used by the site to display blog post summaries and tag links
         /// These are loaded by the site to display the most recent blog posts and the tags that are available
         /// </summary>
-        private static void CreateMetadataJsonFiles(string contentPath, PostSummary[] allBlogPostSummaries, ImmutableList<PostInfo> parsedBlogEntries, ImmutableList<PostInfo> allPosts)
+        private static void CreateMetadataJsonFiles(string contentPath, ImmutableArray<PostSummary> allBlogPostSummaries, ImmutableList<PostInfo> parsedBlogEntries, ImmutableList<PostInfo> allPosts)
         {
             PostSummary[] mostRecentBlogPosts = allBlogPostSummaries
                             .OrderByDescending(x => x.PostNumber)
@@ -107,15 +112,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             var tagLinks = GenerateTagLinks(allPosts);
 
             var comicPostSummaries = allBlogPostSummaries
-                .Where(x => x.Tags.Contains(ComicsTag))
-                .Select(x => new ComicPostSummary
-                {
-                    Title = x.Title,
-                    PostedDate = x.PostedDate,
-                    TitleLink = x.TitleLink,
-                    PostNumber = x.PostNumber,
-                    ImageLink = $"{x.TitleLink}/comic.svg"
-                })
+                .Where(x => x.IsComic())
+                .Select(x => x.ToComicPostSummary())
                 .ToImmutableArray();
 
             WriteOutFileAsJson(recentData, contentPath, RecentDataFile);
@@ -169,7 +167,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + Environment.NewLine + xmlDoc.InnerXml;
         }
 
-        public static ImmutableList<PostInfo> LoadAllPostInfos(string contentPath, BlogPostParser parser)
+        public static ImmutableList<PostInfo> LoadAllPostInfos(string contentPath, PostParser parser)
         {
             string blogPostsFolderPath = contentPath + "/Posts";
             string[] blogPostFolders = Directory.GetDirectories(blogPostsFolderPath, "*.*", SearchOption.TopDirectoryOnly);
@@ -190,8 +188,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 var postDateString = postName.Substring(0, 8);
                 var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
                 string postContent = File.ReadAllText(postFilePath);
-                PostEntry blogEntry = parser.ParseFromMarkdown(postContent);
-                return new PostInfo(postName, postDate, blogEntry);
+                var markdownEntry = parser.ParseFromMarkdown(postContent);
+                return new PostInfo(postName, postDate, markdownEntry);
             })
             .ToImmutableList();
         }

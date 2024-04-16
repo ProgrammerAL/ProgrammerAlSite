@@ -4,16 +4,15 @@ using System.Collections.ObjectModel;
 
 namespace ProgrammerAl.Site.Utilities.Entities;
 
-public class PostEntry
+public class ParsedEntry
 {
-    public PostEntry(string title, DateOnly releaseDate, ReadOnlyCollection<string> tags, string post, string firstParagraph, string comicImageLink)
+    public ParsedEntry(string title, DateOnly releaseDate, ReadOnlyCollection<string> tags, string post, string firstParagraph)
     {
         Title = title;
         ReleaseDate = releaseDate;
         Tags = tags;
         Post = post;
         FirstParagraph = firstParagraph;
-        ComicImageLink = comicImageLink;
     }
 
     public string Title { get; }
@@ -21,5 +20,4 @@ public class PostEntry
     public ReadOnlyCollection<string> Tags { get; }
     public string Post { get; }
     public string FirstParagraph { get; }
-    public string ComicImageLink { get; }
 }

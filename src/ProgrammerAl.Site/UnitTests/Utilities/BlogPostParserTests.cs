@@ -1,4 +1,6 @@
-﻿using NSubstitute;
+﻿using DynamicContentUpdater;
+
+using NSubstitute;
 using ProgrammerAl.Site.Utilities;
 using ProgrammerAl.Site.Utilities.Entities;
 using System;
@@ -18,7 +20,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         [Fact]
         public void WhenParsingValidEntry_AssertTitle()
         {
-            BlogPostParser parser = new BlogPostParser(_config);
+            PostParser parser = new PostParser(_config);
             PostEntry result = parser.ParseFromMarkdown(ValidPost);
             Assert.Equal("Starting This Blog", result.Title);
         }
@@ -26,7 +28,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         [Fact]
         public void WhenParsingValidEntry_AssertPublishedDate()
         {
-            BlogPostParser parser = new BlogPostParser(_config);
+            PostParser parser = new PostParser(_config);
             PostEntry result = parser.ParseFromMarkdown(ValidPost);
             Assert.Equal(new DateOnly(2017, 1, 16), result.ReleaseDate);
         }
@@ -34,7 +36,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         [Fact]
         public void WhenParsingValidEntry_AssertTags()
         {
-            BlogPostParser parser = new BlogPostParser(_config);
+            PostParser parser = new PostParser(_config);
             PostEntry result = parser.ParseFromMarkdown(ValidPost);
             Assert.Equal(7, result.Tags.Count);
             Assert.Contains("Wyam", result.Tags);
@@ -51,7 +53,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         {
             _config.SiteContentUrl.Returns("https://MyLink.com");
 
-            BlogPostParser parser = new BlogPostParser(_config);
+            PostParser parser = new PostParser(_config);
             PostEntry result = parser.ParseFromMarkdown(ValidPost);
             Assert.Equal("### The Post!!!" + Environment.NewLine +
                          "Everything else goes here and should be found" + Environment.NewLine
@@ -65,7 +67,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         {
             _config.SiteContentUrl.Returns("https://MyLink.com");
 
-            BlogPostParser parser = new BlogPostParser(_config);
+            PostParser parser = new PostParser(_config);
             PostEntry result = parser.ParseFromMarkdown(ValidPost);
             Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
         }

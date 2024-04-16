@@ -4,5 +4,4 @@ Tags:
 - comic
 ---
 
-## Secrets are a hassle
-
+## On Shifting

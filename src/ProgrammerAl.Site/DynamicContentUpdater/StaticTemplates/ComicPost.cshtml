@@ -1,0 +1,21 @@
+﻿@model ProgrammerAl.Site.Utilities.Entities.PostEntry
+
+<div class="post-title">
+    <h1>
+        @Model.Title
+    </h1>
+    <p> Posted on: @Model.ReleaseDate.ToLongDateString()</p>
+    @if (Model.Tags.Any())
+    {
+        <p> Tags: @(string.Join(", ", Model.Tags))</p>
+    }
+
+</div>
+
+<div class="post-content">
+    <img src="@(Model.ComicImageLink)" />
+
+    @Raw(Model.Post)
+</div>
+
+
