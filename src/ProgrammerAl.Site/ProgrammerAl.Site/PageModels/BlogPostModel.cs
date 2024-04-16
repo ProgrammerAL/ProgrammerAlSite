@@ -10,7 +10,7 @@ namespace ProgrammerAl.Site.PageModels
 {
     public class BlogPostModel : ComponentBase
     {
-        private const string BlogPostRelativeLinkTemplate = "BlogPosts/{0}/post.html";
+        private const string BlogPostRelativeLinkTemplate = "Posts/{0}/post.html";
 
         [Inject]
         private IConfig Config { get; set; }

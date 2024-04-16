@@ -40,7 +40,7 @@ public class PostEntry
     {
         if (Tags.Contains(ComicsTag))
         {
-            comicLink = $"{TitleHumanReadable}/comic.svg";
+            comicLink = $"{TitleLink}/comic.svg";
             return true;
         }
 
