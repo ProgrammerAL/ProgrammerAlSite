@@ -1,0 +1,27 @@
+﻿@model DynamicContentUpdater.Entities.PostEntry
+
+@if (Model.TryGetComicLink(out string comicImageLink))
+{
+    var srcLink = $"__StorageSiteUrl__Posts/{comicImageLink}";
+    <div class="post-comic-image">
+        <img src="@srcLink" />
+    </div>
+}
+
+<div class="post-title">
+    <h1>
+        @Model.TitleHumanReadable
+    </h1>
+    <p> Posted on: @Model.ReleaseDate.ToLongDateString()</p>
+    @if (Model.Tags.Any())
+    {
+        <p> Tags: @(string.Join(", ", Model.Tags))</p>
+    }
+
+</div>
+
+<div class="post-content">
+    @Raw(Model.PostHtml)
+</div>
+
+
