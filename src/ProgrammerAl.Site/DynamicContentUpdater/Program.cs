@@ -52,7 +52,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             string[] blogPostFolders = Directory.GetDirectories(blogPostsFolderPath, "*.*", SearchOption.TopDirectoryOnly);
 
             return blogPostFolders
-                .Where(x => !x.StartsWith("draft__", StringComparison.OrdinalIgnoreCase))
+                .Where(x => !x.Contains("draft__", StringComparison.OrdinalIgnoreCase))
                 .Select(x =>
             {
                 var dirInfo = new DirectoryInfo(x);
@@ -70,20 +70,13 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
                 string postContent = File.ReadAllText(postFilePath);
                 var parsedEntry = parser.ParseFromMarkdown(postContent);
-                string comicSvg = null;
-
-                if (File.Exists(comicPath))
-                {
-                    comicSvg = File.ReadAllText(comicPath);
-                }
 
                 return new
                 {
                     PostDirectoryLocalPath = postDirectoryLocalPath,
                     PostName = postName,
                     PostDate = postDate,
-                    ParsedEntry = parsedEntry,
-                    ComicSvg = comicSvg
+                    ParsedEntry = parsedEntry
                 };
             })
                 .OrderBy(x => x.PostDate)//All blog posts start with the date they were posted. Order them so the oldest is first
@@ -98,8 +91,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                         releaseDate: x.PostDate,
                         tags: x.ParsedEntry.Tags.ToImmutableArray(),
                         postMarkdown: x.ParsedEntry.Post,
-                        postHtml: Markdig.Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline),
-                        firstParagraphHtml: Markdig.Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline),
+                        postHtml: Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline),
+                        firstParagraphHtml: Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline),
                         postNumber: postNumber
                     );
                 })
