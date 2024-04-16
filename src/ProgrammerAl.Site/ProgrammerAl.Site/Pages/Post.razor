@@ -3,6 +3,10 @@
 
 @inherits ProgrammerAl.Site.PageModels.BlogPostModel
 
+<HeadContent>
+    @* <meta name="og:title" content="ProgrammerAL.com" /> *@
+</HeadContent>
+
 @if (!string.IsNullOrWhiteSpace(PostHtml.Value))
 {
     @PostHtml
