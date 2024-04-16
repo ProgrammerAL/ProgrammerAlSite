@@ -18,6 +18,8 @@ public class RecentPostsOutputter
 
     public void Output(string contentPath, ImmutableArray<PostEntry> allPosts)
     {
+        Console.WriteLine($"Outputting {RecentDataFile}...");
+
         PostSummary[] mostRecentBlogPosts = allPosts
                 .OrderByDescending(x => x.PostNumber)
                 .Take(FrontPageBlogsDisplayed)
@@ -39,5 +41,7 @@ public class RecentPostsOutputter
 
         var recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
         OutputUtils.WriteOutFileAsJson(recentData, contentPath, RecentDataFile);
+
+        Console.WriteLine($"Completed output of {RecentDataFile}");
     }
 }

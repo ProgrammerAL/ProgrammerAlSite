@@ -16,13 +16,15 @@ public class PostStaticHtmlOutputter
 {
     public async ValueTask OutputAsync(string contentPath, string fullPathToTemplates, ImmutableArray<PostEntry> allPosts)
     {
+        await Console.Out.WriteLineAsync("Outputting static html post files...");
+
         //Load the static templating engine
         var engine = new RazorLightEngineBuilder()
           .UseFileSystemProject(fullPathToTemplates)
           .UseMemoryCachingProvider()
           .Build();
 
-        string outputfolderPath = Path.Combine(contentPath, "BlogPosts");
+        string outputfolderPath = Path.Combine(contentPath, "Posts");
         EnsureOutputDirectoryExists(outputfolderPath);
 
         //Create static html files for each blog post entry
@@ -41,6 +43,8 @@ public class PostStaticHtmlOutputter
             string outputFilePath = $"{outputfolderPath}/{post.TitleLink}/post.html";
             File.WriteAllText(outputFilePath, staticHtml);
         }
+
+        Console.WriteLine($"Completed outputting static html files...");
     }
 
     private static void EnsureOutputDirectoryExists(string outputfolderPath)

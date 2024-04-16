@@ -9,10 +9,6 @@ using System.Xml;
 
 using DynamicContentUpdater.Entities;
 
-using Markdig.Parsers;
-
-using ProgrammerAl.Site.Utilities.Entities;
-
 namespace DynamicContentUpdater.Outputters;
 
 public class SiteMapOutputter
@@ -20,10 +16,14 @@ public class SiteMapOutputter
     private const string SiteUrl = "https://www.programmeral.com/";
     private const string SitemapXmlNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
-    public void Output(string contentPath, string outputFilePath, ImmutableArray<PostEntry> allPosts)
+    public void Output(string sitemapFilePath, ImmutableArray<PostEntry> allPosts)
     {
+        Console.WriteLine($"Outputting sitemap file to {sitemapFilePath}");
+
         var sitemapFileText = GenerateSitemapFile(allPosts);
-        File.WriteAllText(outputFilePath, sitemapFileText);
+        File.WriteAllText(sitemapFilePath, sitemapFileText);
+
+        Console.WriteLine($"Completed output of sitemap file to {sitemapFilePath}");
     }
 
     private static string GenerateSitemapFile(ImmutableArray<PostEntry> allPosts)

@@ -17,8 +17,12 @@ public class TagLinksOutputter
 
     public void Output(string contentPath, ImmutableArray<PostEntry> allPosts)
     {
+        Console.WriteLine($"Outputting {TagLinksFile}...");
+
         var tagLinks = GenerateTagLinks(allPosts);
         OutputUtils.WriteOutFileAsJson(tagLinks, contentPath, TagLinksFile);
+
+        Console.WriteLine($"Completed output of {TagLinksFile}");
     }
 
     private TagLinks GenerateTagLinks(ImmutableArray<PostEntry> allPosts)

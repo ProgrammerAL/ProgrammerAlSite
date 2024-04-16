@@ -17,6 +17,8 @@ public class AllPostSummariesOutputter
 
     public void Output(string contentPath, ImmutableArray<PostEntry> allPosts)
     {
+        Console.WriteLine($"Outputting {BlogPostsFile}...");
+
         var allSummaries = allPosts
                 .OrderByDescending(x => x.PostNumber)
                 .Select(x =>
@@ -36,5 +38,7 @@ public class AllPostSummariesOutputter
                 .ToArray();
 
         OutputUtils.WriteOutFileAsJson(allSummaries, contentPath, BlogPostsFile);
+
+        Console.WriteLine($"Completed output of {BlogPostsFile}...");
     }
 }
