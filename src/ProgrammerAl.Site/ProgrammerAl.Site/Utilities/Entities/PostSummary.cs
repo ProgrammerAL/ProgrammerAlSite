@@ -4,15 +4,14 @@ namespace ProgrammerAl.Site.Utilities.Entities;
 
 public class PostSummary
 {
-    public const string ComicsTag = "comic";
-
     public PostSummary(
         string title,
         DateOnly postedDate,
         string titleLink,
         string firstParagraph,
         int postNumber,
-        string[] tags)
+        string[] tags,
+        string comicImageLink)
     {
         Title = title;
         PostedDate = postedDate;
@@ -20,11 +19,7 @@ public class PostSummary
         FirstParagraph = firstParagraph;
         PostNumber = postNumber;
         Tags = tags;
-
-        if (IsComic())
-        {
-            ComicImageLink = $"{TitleLink}/comic.svg";
-        }
+        ComicImageLink = comicImageLink;
     }
 
     public string Title { get; set; }
@@ -34,14 +29,4 @@ public class PostSummary
     public int PostNumber { get; set; }
     public string[] Tags { get; set; }
     public string ComicImageLink { get; set; }
-
-    public bool IsComic()
-        => Tags.Contains(ComicsTag);
-
-    public ComicImageEntry ToComicImageEntry()
-        => new ComicImageEntry
-        {
-            Title = Title,
-            ImageLink = ComicImageLink
-        };
 }

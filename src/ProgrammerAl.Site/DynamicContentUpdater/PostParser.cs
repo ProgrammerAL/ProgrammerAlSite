@@ -1,5 +1,5 @@
-﻿using ProgrammerAl.Site.Utilities;
-using ProgrammerAl.Site.Utilities.Entities;
+﻿using DynamicContentUpdater.Entities;
+using ProgrammerAl.Site.Utilities;
 
 using System;
 using System.Collections.Generic;

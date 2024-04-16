@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace ProgrammerAl.Site.Utilities.Entities;
+namespace DynamicContentUpdater.Entities;
 
 public class ParsedEntry
 {
