@@ -35,14 +35,14 @@ public class PostStaticHtmlOutputter
             string outputFilePath = $"{outputfolderPath}/{post.TitleLink}/post.html";
             File.WriteAllText(outputFilePath, staticHtml);
 
-            //Also copy the comic image file to the output folder
-            if (post.HasComic)
+            //Output all other files too, for example image assets for a blog post
+            //  This includes the comic image if the post has one
+            foreach (var postFile in Directory.EnumerateFiles(post.PostDirectoryLocalPath))
             {
-                var comicOutputFilePath = $"{outputfolderPath}/{post.TitleLink}/comic.svg";
-                File.WriteAllText(comicOutputFilePath, post.ComicSvg);
+                string fileName = Path.GetFileName(postFile);
+                string outputFilePathForFile = $"{outputfolderPath}/{post.TitleLink}/{fileName}";
+                File.Copy(postFile, outputFilePathForFile, overwrite: true);
             }
-
-            //TODO: Output all other files too, for example image assets for a blog post
         }
 
         Console.WriteLine($"Completed outputting static html files...");

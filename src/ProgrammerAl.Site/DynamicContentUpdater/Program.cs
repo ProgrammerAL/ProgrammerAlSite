@@ -65,6 +65,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                     throw new Exception("$Could not find post file: {postFilePath}");
                 }
 
+                var postDirectoryLocalPath = dirInfo.FullName;
                 var postDateString = postName.Substring(0, 8);
                 var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
                 string postContent = File.ReadAllText(postFilePath);
@@ -78,6 +79,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
                 return new
                 {
+                    PostDirectoryLocalPath = postDirectoryLocalPath,
                     PostName = postName,
                     PostDate = postDate,
                     ParsedEntry = parsedEntry,
@@ -90,6 +92,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                     var postNumber = i + 1;
 
                     return new PostEntry(
+                        postDirectoryLocalPath: x.PostDirectoryLocalPath
                         titleHumanReadable: x.ParsedEntry.Title,
                         titleLink: x.PostName,//public url for the post, just the full name of it. ie 20210101-Title
                         releaseDate: x.PostDate,

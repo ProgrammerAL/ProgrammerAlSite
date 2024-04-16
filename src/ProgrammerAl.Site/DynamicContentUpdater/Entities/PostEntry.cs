@@ -8,6 +8,7 @@ public class PostEntry
     public const string ComicsTag = "comic";
 
     public PostEntry(
+        string postDirectoryLocalPath,
         string titleHumanReadable,
         string titleLink,
         DateOnly releaseDate,
@@ -15,9 +16,9 @@ public class PostEntry
         string postMarkdown,
         string postHtml,
         string firstParagraphHtml,
-        int postNumber,
-        string comicSvg)
+        int postNumber)
     {
+        PostDirectoryLocalPath = postDirectoryLocalPath;
         TitleHumanReadable = titleHumanReadable;
         TitleLink = titleLink;
         ReleaseDate = releaseDate;
@@ -26,9 +27,9 @@ public class PostEntry
         PostHtml = postHtml;
         PostNumber = postNumber;
         FirstParagraphHtml = firstParagraphHtml;
-        ComicSvg = comicSvg;
     }
 
+    public string PostDirectoryLocalPath { get; }
     public string TitleHumanReadable { get; }
     public string TitleLink { get; }
     public DateOnly ReleaseDate { get; }
@@ -37,7 +38,6 @@ public class PostEntry
     public string PostHtml { get; }
     public string FirstParagraphHtml { get; }
     public int PostNumber { get; }
-    public string ComicSvg { get; }
 
     public bool HasComic => !string.IsNullOrWhiteSpace(ComicSvg);
 
