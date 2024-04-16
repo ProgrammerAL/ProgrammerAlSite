@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink" 
     role="img"
-    aria-labelledby="titleId descId" 
+    aria-labelledby="titleId descId"
+    overflow="visible"
     viewBox="0 0 640 215">
     <title id="titleId">Shift Left</title>
     <desc id="descId"></desc>

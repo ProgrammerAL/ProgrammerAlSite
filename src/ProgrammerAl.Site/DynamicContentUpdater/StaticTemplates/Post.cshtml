@@ -1,5 +1,13 @@
 ﻿@model DynamicContentUpdater.Entities.PostEntry
 
+@if (Model.TryGetComicLink(out string comicImageLink))
+{
+    var srcLink = $"__StorageSiteUrl__Posts/{comicImageLink}";
+    <div class="post-comic-image">
+        <img src="@srcLink" />
+    </div>
+}
+
 <div class="post-title">
     <h1>
         @Model.TitleHumanReadable
@@ -11,14 +19,6 @@
     }
 
 </div>
-
-@if (Model.TryGetComicLink(out string comicImageLink))
-{
-    var srcLink = $"__StorageSiteUrl__Posts/{comicImageLink}";
-    <div class="post-comic-image">
-        <img src="@srcLink" />
-    </div>
-}
 
 <div class="post-content">
     @Raw(Model.PostHtml)
