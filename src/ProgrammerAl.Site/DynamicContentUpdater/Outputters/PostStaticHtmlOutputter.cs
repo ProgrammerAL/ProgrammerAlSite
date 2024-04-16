@@ -14,7 +14,7 @@ namespace DynamicContentUpdater.Outputters;
 
 public class PostStaticHtmlOutputter
 {
-    public async ValueTask OutputAsync(string contentPath, string fullPathToTemplates, ImmutableArray<PostEntry> allPosts)
+    public async ValueTask OutputAsync(ProgrammerAl.Site.Utilities.IConfig config, string contentPath, string fullPathToTemplates, ImmutableArray<PostEntry> allPosts)
     {
         await Console.Out.WriteLineAsync("Outputting static html post files...");
 
@@ -31,19 +31,10 @@ public class PostStaticHtmlOutputter
         foreach (var post in allPosts)
         {
             var staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
+            staticHtml = staticHtml.Replace("__StorageSiteUrl__", config.SiteContentUrl);
 
             string outputFilePath = $"{outputfolderPath}/{post.TitleLink}/post.html";
             File.WriteAllText(outputFilePath, staticHtml);
-
-            //Not needed. This copies files to their existing location
-            ////Output all other files too, for example image assets for a blog post
-            ////  This includes the comic image if the post has one
-            //foreach (var postFile in Directory.EnumerateFiles(post.PostDirectoryLocalPath))
-            //{
-            //    string fileName = Path.GetFileName(postFile);
-            //    string outputFilePathForFile = $"{outputfolderPath}/{post.TitleLink}/{fileName}";
-            //    File.Copy(postFile, outputFilePathForFile, overwrite: true);
-            //}
         }
 
         Console.WriteLine($"Completed outputting static html files...");

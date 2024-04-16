@@ -14,7 +14,7 @@
 
 @if (Model.TryGetComicLink(out string comicImageLink))
 {
-    var srcLink = $"https://programmeralsitecontent.blob.core.windows.net/sitecontent/Posts/{comicImageLink}";
+    var srcLink = $"__StorageSiteUrl__Posts/{comicImageLink}";
     <div class="post-comic-image">
         <img src="@srcLink" />
     </div>

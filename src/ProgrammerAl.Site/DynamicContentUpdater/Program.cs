@@ -29,7 +29,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                     return;
                 });
 
-            var parser = new PostParser(new HardCodedConfig());
+            var config = new HardCodedConfig();
+            var parser = new PostParser(config);
 
             var contentPath = parsedArgs.AppRootPath + "/ProgrammerAl.Site.Content";
             var sitemapFilePath = parsedArgs.AppRootPath + "/ProgrammerAl.Site/ProgrammerAl.Site/wwwroot/sitemap.xml";
@@ -41,7 +42,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             new AllPostSummariesOutputter().Output(contentPath, allPosts);
             new TagLinksOutputter().Output(contentPath, allPosts);
             new SiteMapOutputter().Output(sitemapFilePath, allPosts);
-            await new PostStaticHtmlOutputter().OutputAsync(contentPath, fullPathToTemplates, allPosts);
+            await new PostStaticHtmlOutputter().OutputAsync(config, contentPath, fullPathToTemplates, allPosts);
         }
 
         public static ImmutableArray<PostEntry> LoadAllPostsOrderedByDate(string contentPath, PostParser parser)
