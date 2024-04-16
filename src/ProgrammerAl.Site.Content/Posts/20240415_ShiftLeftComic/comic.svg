@@ -3,8 +3,6 @@
     role="img"
     aria-labelledby="titleId descId"
     overflow="visible"
-    width="640"
-    height="215"
     viewBox="0 0 640 215">
     <title id="titleId">Shift Left</title>
     <desc id="descId"></desc>
