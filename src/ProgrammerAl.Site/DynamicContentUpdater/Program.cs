@@ -40,7 +40,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             new RecentPostsOutputter().Output(contentPath, allPosts);
             new AllPostSummariesOutputter().Output(contentPath, allPosts);
             new TagLinksOutputter().Output(contentPath, allPosts);
-            new SiteMapOutputter().Output(contentPath, sitemapFilePath, allPosts);
+            new SiteMapOutputter().Output(sitemapFilePath, allPosts);
             await new PostStaticHtmlOutputter().OutputAsync(contentPath, fullPathToTemplates, allPosts);
         }
 
