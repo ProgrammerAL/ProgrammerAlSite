@@ -33,42 +33,14 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
             var contentPath = parsedArgs.AppRootPath + "/ProgrammerAl.Site.Content";
             var sitemapFilePath = parsedArgs.AppRootPath + "/ProgrammerAl.Site/ProgrammerAl.Site/wwwroot/sitemap.xml";
+            var fullPathToTemplates = parsedArgs.AppRootPath + "/ProgrammerAl.Site/DynamicContentUpdater/StaticTemplates";
 
             var allPosts = LoadAllPostsOrderedByDate(contentPath, parser);
 
             new RecentPostsOutputter().Output(contentPath, allPosts);
             new TagLinksOutputter().Output(contentPath, allPosts);
             new SiteMapOutputter().Output(contentPath, sitemapFilePath, allPosts);
-
-            //Load the static templating engine
-            var fullPathToTemplates = parsedArgs.AppRootPath + "/ProgrammerAl.Site/DynamicContentUpdater/StaticTemplates";
-            var engine = new RazorLightEngineBuilder()
-              .UseFileSystemProject(fullPathToTemplates)
-              .UseMemoryCachingProvider()
-              .Build();
-
-            string outputfolderPath = Path.Combine(contentPath, "BlogPosts");
-            if (!Directory.Exists(outputfolderPath))
-            {
-                _ = Directory.CreateDirectory(outputfolderPath);
-            }
-
-            //Create static html files for each blog post entry
-            foreach (var post in allPosts)
-            {
-                string staticHtml;
-                if (post.TryGetComicLink(out _))
-                {
-                    staticHtml = await engine.CompileRenderAsync<PostEntry>("ComicPost.cshtml", post);
-                }
-                else
-                {
-                    staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
-                }
-
-                string outputFilePath = $"{outputfolderPath}/{post.TitleLink}/post.html";
-                File.WriteAllText(outputFilePath, staticHtml);
-            }
+            await new PostStaticHtmlOutputter().OutputAsync(contentPath, fullPathToTemplates, allPosts);
         }
 
         public static ImmutableArray<PostEntry> LoadAllPostsOrderedByDate(string contentPath, PostParser parser)
