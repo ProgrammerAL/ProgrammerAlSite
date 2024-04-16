@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace ProgrammerAl.Site.Utilities.Entities;
+namespace DynamicContentUpdater.Entities;
 
-public class PostEntry
+public class ParsedEntry
 {
-    public PostEntry(string title, DateOnly releaseDate, ReadOnlyCollection<string> tags, string post, string firstParagraph)
+    public ParsedEntry(string title, DateOnly releaseDate, ReadOnlyCollection<string> tags, string post, string firstParagraph)
     {
         Title = title;
         ReleaseDate = releaseDate;

@@ -1,22 +1,24 @@
-﻿using ProgrammerAl.Site.Utilities.Entities;
+﻿using DynamicContentUpdater.Entities;
+using ProgrammerAl.Site.Utilities;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text;
 
-namespace ProgrammerAl.Site.Utilities
+namespace DynamicContentUpdater
 {
-    public class BlogPostParser
+    public class PostParser
     {
         private readonly IConfig _config;
 
-        public BlogPostParser(IConfig config)
+        public PostParser(IConfig config)
         {
             _config = config;
         }
 
-        public PostEntry ParseFromMarkdown(string rawEntry)
+        public ParsedEntry ParseFromMarkdown(string rawEntry)
         {
             //Assumes a specific schema
             //  Line 1: Title: <TITLE HERE>
@@ -54,7 +56,7 @@ namespace ProgrammerAl.Site.Utilities
 
             string firstParagraphOfPost = GrabFirstParagraphOfPost(post);
 
-            return new PostEntry(title, publishedDate, tags, post, firstParagraphOfPost);
+            return new ParsedEntry(title, publishedDate, tags, post, firstParagraphOfPost);
         }
 
         private string GrabFirstParagraphOfPost(string post)
@@ -76,7 +78,7 @@ namespace ProgrammerAl.Site.Utilities
 
         private string SanitizePost(ReadOnlySpan<char> postSpan)
         {
-            StringBuilder builder = new StringBuilder(postSpan.ToString());
+            var builder = new StringBuilder(postSpan.ToString());
             _ = builder.Replace("__StorageSiteUrl__", _config.SiteContentUrl);
 
             return builder.ToString();
@@ -84,7 +86,7 @@ namespace ProgrammerAl.Site.Utilities
 
         private ReadOnlyCollection<string> ParseTagsFromLines(ReadOnlySpan<char> tagLines)
         {
-            List<string> tags = new List<string>();
+            var tags = new List<string>();
             ReadOnlySpan<char> localSpan = tagLines.Slice(0);
 
             int startIndex;
@@ -117,7 +119,7 @@ namespace ProgrammerAl.Site.Utilities
         private DateOnly ParseDateTimeFromLine(ReadOnlySpan<char> textLine)
         {
             string dateTimeString = ParseStringValueFromLine(textLine);
-            return DateOnly.ParseExact(dateTimeString, format:"yyyy/MM/dd", provider: null);
+            return DateOnly.ParseExact(dateTimeString, format: "yyyy/MM/dd", provider: null);
         }
     }
 }
