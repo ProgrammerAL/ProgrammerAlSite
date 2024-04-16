@@ -7,7 +7,7 @@ Tags:
 
 ---
 
-# Why Developers Should Like OpenTelemetry
+## Why Developers Should Like OpenTelemetry
 
 I often see people looking at OpenTelemetry (OTel) and thinking it's not very useful because other tools they use already do the same thing. So why switch? For me, the short answer is because it's a single standard, but more on that below.
 

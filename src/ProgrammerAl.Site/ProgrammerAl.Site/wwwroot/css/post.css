@@ -20,15 +20,33 @@
         margin: 0 0 2em 0;
     }
 
-    .post-content h1,
-    .post-content h2,
-    .post-content h3,
+    .post-content h1 {
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 800;
+        font-size: 1.875em;
+        line-height: 2.25rem;
+    }
+
+    .post-content h2 {
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 600;
+        font-size: 1.4em;
+        line-height: 2rem;
+    }
+
+    .post-content h3 {
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        font-size: 1.25em;
+        line-height: 1.75rem;
+    }
+
     .post-content h4,
     .post-content h5,
     .post-content h6 {
         font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-weight: 800;
-        font-size: 2em;
+        font-size: 1.125em;
+        line-height: 1.75rem;
     }
 
     .post-content a {

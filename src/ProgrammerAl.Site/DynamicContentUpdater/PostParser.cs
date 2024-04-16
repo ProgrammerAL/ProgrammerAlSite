@@ -89,12 +89,6 @@ namespace DynamicContentUpdater
 
             var firstParagraphMarkdown = GrabTextUntilNextEndOfLine(post, startIndex);
 
-            //if (string.IsNullOrWhiteSpace(firstParagraphMarkdown))
-            //{
-            //    int nextStartIndex = post.IndexOf('\n', startIndex) + 1;
-            //    firstParagraphMarkdown = GrabTextUntilNextEndOfLine(post, nextStartIndex);
-            //}
-
             return firstParagraphMarkdown;
         }
 
