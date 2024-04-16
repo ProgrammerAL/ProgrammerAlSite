@@ -57,6 +57,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             {
                 var dirInfo = new DirectoryInfo(x);
                 var postFilePath = $"{x}/post.md";
+                var comicPath = $"{x}/comic.svg";
                 var postName = dirInfo.Name; // Name of post is the name of the folder
 
                 if (!File.Exists(postFilePath))
@@ -68,11 +69,19 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 var postDate = DateOnly.ParseExact(postDateString, "yyyyMMdd");
                 string postContent = File.ReadAllText(postFilePath);
                 var parsedEntry = parser.ParseFromMarkdown(postContent);
+                string comicSvg = null;
+
+                if (File.Exists(comicPath))
+                {
+                    comicSvg = File.ReadAllText(comicPath);
+                }
+
                 return new
                 {
                     PostName = postName,
                     PostDate = postDate,
-                    ParsedEntry = parsedEntry
+                    ParsedEntry = parsedEntry,
+                    ComicSvg = comicSvg
                 };
             })
                 .OrderBy(x => x.PostDate)//All blog posts start with the date they were posted. Order them so the oldest is first
@@ -88,7 +97,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                         postMarkdown: x.ParsedEntry.Post,
                         postHtml: Markdig.Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline),
                         firstParagraphHtml: Markdig.Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline),
-                        postNumber: postNumber
+                        postNumber: postNumber,
+                        comicSvg: x.ComicSvg
                     );
                 })
                 .ToImmutableArray();

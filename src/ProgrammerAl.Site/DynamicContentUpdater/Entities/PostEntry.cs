@@ -15,7 +15,8 @@ public class PostEntry
         string postMarkdown,
         string postHtml,
         string firstParagraphHtml,
-        int postNumber)
+        int postNumber,
+        string comicSvg)
     {
         TitleHumanReadable = titleHumanReadable;
         TitleLink = titleLink;
@@ -25,6 +26,7 @@ public class PostEntry
         PostHtml = postHtml;
         PostNumber = postNumber;
         FirstParagraphHtml = firstParagraphHtml;
+        ComicSvg = comicSvg;
     }
 
     public string TitleHumanReadable { get; }
@@ -35,10 +37,13 @@ public class PostEntry
     public string PostHtml { get; }
     public string FirstParagraphHtml { get; }
     public int PostNumber { get; }
+    public string ComicSvg { get; }
+
+    public bool HasComic => !string.IsNullOrWhiteSpace(ComicSvg);
 
     public bool TryGetComicLink(out string comicLink)
     {
-        if (Tags.Contains(ComicsTag))
+        if (HasComic)
         {
             comicLink = $"{TitleLink}/comic.svg";
             return true;
