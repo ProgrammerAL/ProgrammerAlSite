@@ -73,6 +73,27 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
             Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
         }
 
+        [Fact]
+        public void WhenParsingValidEntryWithSpacingBeforeFirstParagraph_AssertFirstParagraph()
+        {
+            _config.SiteContentUrl.Returns("https://MyLink.com");
+
+            var parser = new PostParser(_config);
+            var result = parser.ParseFromMarkdown(ValidPostWithSpacingInFirstParagraph);
+            Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
+        }
+
+        [Fact]
+        public void WhenParsingValidEntryWithManySpacingsBeforeFirstParagraph_AssertFirstParagraph()
+        {
+            _config.SiteContentUrl.Returns("https://MyLink.com");
+
+            var parser = new PostParser(_config);
+            var result = parser.ParseFromMarkdown(ValidPostWithManySpacingsBeforeFirstParagraph);
+            Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
+        }
+        
+
         private const string ValidPost = @"Title: Starting This Blog
 Published: 2017/01/16
 Tags: 
@@ -85,6 +106,46 @@ Tags:
 - Continuous Deployment
 ---
 ### The Post!!!
+Everything else goes here and should be found
+__StorageSiteUrl__/a/b/c.html
+__StorageSiteUrl__/1/2/3.html
+";
+
+        private const string ValidPostWithSpacingInFirstParagraph = @"Title: Starting This Blog
+Published: 2017/01/16
+Tags: 
+- Wyam
+- Azure App Service
+- VSTS
+- Cake
+- NuGet
+- Continuous Integration
+- Continuous Deployment
+---
+### The Post!!!
+
+Everything else goes here and should be found
+__StorageSiteUrl__/a/b/c.html
+__StorageSiteUrl__/1/2/3.html
+";
+
+        private const string ValidPostWithManySpacingsBeforeFirstParagraph = @"Title: Starting This Blog
+Published: 2017/01/16
+Tags: 
+- Wyam
+- Azure App Service
+- VSTS
+- Cake
+- NuGet
+- Continuous Integration
+- Continuous Deployment
+---
+### The Post!!!
+
+
+
+
+
 Everything else goes here and should be found
 __StorageSiteUrl__/a/b/c.html
 __StorageSiteUrl__/1/2/3.html

@@ -1,4 +1,8 @@
 ﻿using DynamicContentUpdater.Entities;
+
+using Microsoft.Extensions.Primitives;
+
+using ProgrammerAl.Site.Pages;
 using ProgrammerAl.Site.Utilities;
 
 using System;
@@ -62,18 +66,44 @@ namespace DynamicContentUpdater
         private string GrabFirstParagraphOfPost(string post)
         {
             string headerText = "##";
-            int headerStartIndex = post.IndexOf(headerText);
-            if (headerStartIndex == -1)
+            int firstHeaderStartIndex = post.IndexOf(headerText);
+            if (firstHeaderStartIndex == -1)
             {
                 return string.Empty;
             }
 
-            int startIndex = post.IndexOf('\n', headerStartIndex) + 1;
+            //Skip to the end of the header text
+            var endOfHeaderIndex = post.IndexOf('\n', firstHeaderStartIndex);
+            var startIndex = endOfHeaderIndex + 1;
+            //Skip any whitespace characters
+            //  A lot of posts have an empty line after the header, so we want to skip that line
+            while (char.IsWhiteSpace(post[startIndex]) && startIndex < post.Length)
+            {
+                startIndex++;
+            }
+
+            if (startIndex == post.Length)
+            {
+                return string.Empty;
+            }
+
+            var firstParagraphMarkdown = GrabTextUntilNextEndOfLine(post, startIndex);
+
+            //if (string.IsNullOrWhiteSpace(firstParagraphMarkdown))
+            //{
+            //    int nextStartIndex = post.IndexOf('\n', startIndex) + 1;
+            //    firstParagraphMarkdown = GrabTextUntilNextEndOfLine(post, nextStartIndex);
+            //}
+
+            return firstParagraphMarkdown;
+        }
+
+        private string GrabTextUntilNextEndOfLine(string post, int startIndex)
+        {
             int endIndex = post.IndexOf('\n', startIndex);
             int length = endIndex - startIndex;
-            ReadOnlySpan<char> firstParagraphSpan = post.AsSpan(startIndex, length).Trim();
-            var firstParagraphMarkdown = firstParagraphSpan.ToString();
-            return firstParagraphMarkdown;
+            var textSpan = post.AsSpan(startIndex, length).Trim();
+            return textSpan.ToString();
         }
 
         private string SanitizePost(ReadOnlySpan<char> postSpan)
