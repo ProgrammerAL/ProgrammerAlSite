@@ -30,11 +30,6 @@ public class PostStaticHtmlOutputter
         //Create static html files for each blog post entry
         foreach (var post in allPosts)
         {
-            var staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
-
-            string outputFilePath = $"{outputfolderPath}/{post.TitleLink}/post.html";
-            File.WriteAllText(outputFilePath, staticHtml);
-
             //Output all other files too, for example image assets for a blog post
             //  This includes the comic image if the post has one
             foreach (var postFile in Directory.EnumerateFiles(post.PostDirectoryLocalPath))
@@ -43,6 +38,11 @@ public class PostStaticHtmlOutputter
                 string outputFilePathForFile = $"{outputfolderPath}/{post.TitleLink}/{fileName}";
                 File.Copy(postFile, outputFilePathForFile, overwrite: true);
             }
+
+            var staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
+
+            string outputFilePath = $"{outputfolderPath}/{post.TitleLink}/post.html";
+            File.WriteAllText(outputFilePath, staticHtml);
         }
 
         Console.WriteLine($"Completed outputting static html files...");
