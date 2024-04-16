@@ -1,5 +1,5 @@
 Title: Shift Left
-Published: 2024/04/15
+Published: 2024/04/16
 Tags: 
 - comic
 ---
