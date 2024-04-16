@@ -4,6 +4,6 @@ Tags:
 - comic
 ---
 
-## On Shifting
+## On Shifting Left
 
 Quick test

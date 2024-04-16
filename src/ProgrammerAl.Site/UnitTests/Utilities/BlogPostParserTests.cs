@@ -92,6 +92,16 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
             var result = parser.ParseFromMarkdown(ValidPostWithManySpacingsBeforeFirstParagraph);
             Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
         }
+
+        [Fact]
+        public void WhenParsingValidEntryWithShortPost_AssertFirstParagraph()
+        {
+            _config.SiteContentUrl.Returns("https://MyLink.com");
+
+            var parser = new PostParser(_config);
+            var result = parser.ParseFromMarkdown(ValidPostShortPost);
+            Assert.Equal("Quick test", result.FirstParagraph);
+        }
         
 
         private const string ValidPost = @"Title: Starting This Blog
@@ -150,5 +160,23 @@ Everything else goes here and should be found
 __StorageSiteUrl__/a/b/c.html
 __StorageSiteUrl__/1/2/3.html
 ";
+
+        private const string ValidPostShortPost = @"Title: Starting This Blog
+Published: 2017/01/16
+Tags: 
+- Wyam
+- Azure App Service
+- VSTS
+- Cake
+- NuGet
+- Continuous Integration
+- Continuous Deployment
+---
+### The Post!!!
+
+Quick test
+
+";
+
     }
 }

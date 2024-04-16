@@ -95,6 +95,11 @@ namespace DynamicContentUpdater
         private string GrabTextUntilNextEndOfLine(string post, int startIndex)
         {
             int endIndex = post.IndexOf('\n', startIndex);
+            if (endIndex == -1)
+            {
+                endIndex = post.Length;
+            }
+
             int length = endIndex - startIndex;
             var textSpan = post.AsSpan(startIndex, length).Trim();
             return textSpan.ToString();
