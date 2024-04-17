@@ -32,7 +32,7 @@ public class PostDataProvider
         var pathToMetadata = string.Format(PostMetadataRelativeLinkTemplate, postName);
 
         var htmlDownloadTask = _fileDownloader.DownloadFileTextFromSiteContentAsync(pathToPost, "text/x-markdown");
-        var metadataDownloadTask = _fileDownloader.DownloadFileTextFromSiteContentAsync(pathToMetadata, "*.*");
+        var metadataDownloadTask = _fileDownloader.DownloadFileTextFromSiteContentAsync(pathToMetadata, "*/*");
 
         await Task.WhenAll(htmlDownloadTask, metadataDownloadTask);
 
