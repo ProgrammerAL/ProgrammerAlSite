@@ -20,7 +20,7 @@ public partial class Posts : ComponentBase
     private static readonly string[] PostTypes = new string[] { "Blog", "Meetup", "Conference", "Podcast", "Recording" };
 
     [Inject]
-    private IConfig Config { get; set; }
+    private FileDownloader FileDownloader { get; set; }
 
     [Inject]
     private NavigationManager NavManager { get; set; }
@@ -37,10 +37,8 @@ public partial class Posts : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        var downloader = new FileDownloader();
-
-        var recentDataContentTask = downloader.DownloadFileFromSiteContentAsync(Config, PostSummary.AllPostSummariesFile, "*/*");
-        var tagLinksTask = downloader.DownloadFileFromSiteContentAsync(Config, TagLinks.TagLinksFile, "*/*");
+        var recentDataContentTask = FileDownloader.DownloadFileFromSiteContentAsync(PostSummary.AllPostSummariesFile, "*/*");
+        var tagLinksTask = FileDownloader.DownloadFileFromSiteContentAsync(TagLinks.TagLinksFile, "*/*");
 
         _ = await Task.WhenAll(recentDataContentTask, tagLinksTask);
 

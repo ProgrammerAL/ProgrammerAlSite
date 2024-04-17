@@ -33,7 +33,7 @@ public class PostStaticHtmlOutputter
             var staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
             staticHtml = staticHtml.Replace("__StorageSiteUrl__", config.SiteContentUrl);
 
-            string outputFilePath = $"{postsFolderPath}/{post.TitleLink}/{PostEntry.HtmlFileName}}";
+            string outputFilePath = $"{postsFolderPath}/{post.TitleLink}/{PostEntry.HtmlFileName}";
             File.WriteAllText(outputFilePath, staticHtml);
         }
 

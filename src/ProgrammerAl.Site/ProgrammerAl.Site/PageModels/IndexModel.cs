@@ -15,7 +15,7 @@ namespace ProgrammerAl.Site.PageModels
     public class IndexModel : ComponentBase
     {
         [Inject]
-        protected IConfig Config { get; set; }
+        protected FileDownloader FileDownloader { get; set; }
 
         public RecentData Recents { get; set; }
 
@@ -26,8 +26,7 @@ namespace ProgrammerAl.Site.PageModels
             IsLoadingRecents = true;
             StateHasChanged();
 
-            var downloader = new FileDownloader();
-            var recentDataContent = await downloader.DownloadFileFromSiteContentAsync(Config, PostSummary.RecentSummariesFile, "*/*");
+            var recentDataContent = await FileDownloader.DownloadFileFromSiteContentAsync(PostSummary.RecentSummariesFile, "*/*");
             Recents = await JsonSerializer.DeserializeAsync<RecentData>(recentDataContent);
 
             IsLoadingRecents = false;
