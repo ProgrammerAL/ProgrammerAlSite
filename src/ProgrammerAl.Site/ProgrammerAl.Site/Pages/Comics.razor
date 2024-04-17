@@ -2,8 +2,37 @@
 @using System.Text.Encodings.Web;
 
 
-@* @if (!string.IsNullOrWhiteSpace(PostHtml.Value))
+@if (CurrentPostSummary is object)
 {
-    @PostHtml
+    <div class="flex flex-col">
+
+        <div class="post-comic-image">
+            <img src="@($"{Config.SiteContentUrl}Posts/{CurrentPostSummary.ComicImageLink}")" />
+        </div>
+
+        <div class="w-4/5 md:w-1/3 place-self-center
+                    flex flex-row justify-center gap-4 m-4">
+            @if (PreviousPostSummary is object)
+            {
+                <button @onclick="OnPreviousSummarySelected"
+                        class="
+                                w-full
+                                p-4
+                                border border-4 border-green-800 rounded">
+                    <p class="text-sm mg:text-lg lg:text-2xl">@($"< Previous")</p>
+                </button>
+            }
+
+            @if (NextPostSummary is object)
+            {
+                <button @onclick="OnNextSummarySelected"
+                        class="
+                                w-full
+                                p-4
+                                border border-4 border-green-800 rounded">
+                    <p class="text-sm mg:text-lg lg:text-2xl">@($"Next >")</p>
+                </button>
+            }
+        </div>
+    </div>
 }
- *@

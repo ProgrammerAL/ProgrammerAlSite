@@ -13,6 +13,10 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.4" PrivateAssets="all" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\css\custom-modules\" />
+    </ItemGroup>
+
     <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='DEBUG'">
         <Exec Command="npm run build-dev --prefix $(ProjectDir)/../CustomNpmModules/tailwind" />
     </Target>

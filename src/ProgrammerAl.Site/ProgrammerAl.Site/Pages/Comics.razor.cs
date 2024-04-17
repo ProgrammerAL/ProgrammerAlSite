@@ -7,6 +7,8 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Components;
 
 using ProgrammerAl.Site.DataProviders;
+using ProgrammerAl.Site.Utilities;
+using ProgrammerAl.Site.Utilities.Entities;
 
 namespace ProgrammerAl.Site.Pages;
 
@@ -18,9 +20,68 @@ public partial class Comics : ComponentBase
     [Inject]
     private NavigationManager NavManager { get; set; }
 
+    [Inject]
+    private IConfig Config { get; set; }
+
+    [Parameter]
+    public string PostUrl { get; set; }
+
+    private PostSummary CurrentPostSummary { get; set; }
+    private PostSummary NextPostSummary { get; set; }
+    private PostSummary PreviousPostSummary { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
+        var postSummaries = await PostSummariesProvider.GetPostSummariesAsync();
+
+        var orderedComicSummaries = postSummaries
+                                    .Where(x => !string.IsNullOrWhiteSpace(x.ComicImageLink))
+                                    .OrderByDescending(p => p.PostNumber)
+                                    .ToImmutableArray();
+
+        if (string.Equals("latest", PostUrl, StringComparison.OrdinalIgnoreCase))
+        {
+            CurrentPostSummary = orderedComicSummaries.FirstOrDefault();
+            NextPostSummary = orderedComicSummaries.Skip(1).FirstOrDefault();
+        }
+        else
+        {
+            CurrentPostSummary = postSummaries.FirstOrDefault(p => p.TitleLink == PostUrl);
+            if (CurrentPostSummary is object)
+            {
+                var postIndex = orderedComicSummaries.IndexOf(CurrentPostSummary);
+                if (postIndex < orderedComicSummaries.Length - 1)
+                {
+                    NextPostSummary = orderedComicSummaries.Skip(postIndex).FirstOrDefault();
+                }
+
+                if (postIndex > 0)
+                {
+                    PreviousPostSummary = orderedComicSummaries[postIndex - 1];
+                }
+            }
+        }
+
+        if (CurrentPostSummary is null)
+        {
+            NavigateToComic("latest");
+        }
 
         await base.OnInitializedAsync();
+    }
+
+    private void OnPreviousSummarySelected(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
+    {
+        NavigateToComic(PreviousPostSummary.TitleLink);
+    }
+
+    private void OnNextSummarySelected(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
+    {
+        NavigateToComic(NextPostSummary.TitleLink);
+    }
+
+    private void NavigateToComic(string comicLink)
+    {
+        NavManager.NavigateTo($"/comics/{comicLink}");
     }
 }
