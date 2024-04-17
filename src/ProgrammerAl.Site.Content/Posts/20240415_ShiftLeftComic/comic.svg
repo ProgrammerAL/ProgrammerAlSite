@@ -3,9 +3,9 @@
     role="img"
     aria-labelledby="titleId descId"
     overflow="visible"
-    viewBox="0 0 640 215">
+    viewBox="0 0 640 315">
     <title id="titleId">Shift Left</title>
-    <desc id="descId"></desc>
+    <desc id="descId">A 4 panel comic. The first is label Devs and shows a person pushing a boulder up a hill. The boulder has words inside like Unit Tests, CS/CD, DB Queries, etc. The second panel is labeled QA and shows a person playing with a yo-yo. The third panel is labeled Project Management and shows a person reading a book. The 4th panel is labeled Infrastructure and shows 2 people playing ping pong.</desc>
 
     <style>
         .signature-text { 
