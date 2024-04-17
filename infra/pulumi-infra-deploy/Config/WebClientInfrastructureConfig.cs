@@ -6,14 +6,35 @@ namespace ProgrammerAl.Site.IaC.Config;
 
 public record WebClientInfrastructureConfig(
     string RootDomain,
-    string Subdomain,
+    string? Subdomain,
     string CloudflareZoneId)
 {
 
-    public string DomainEndpoint = $"{Subdomain}.{RootDomain}";
-    public string HttpsDomainEndpoint = $"https://{Subdomain}.{RootDomain}";
-    public string ResourceName => "web-client";
-    public string StorageAccountName => "webclient";
+    public string DomainEndpoint
+    {
+        get
+        {
+            if (string.IsNullOrWhiteSpace(Subdomain))
+            {
+                return RootDomain;
+            }
+
+            return $"{Subdomain}.{RootDomain}";
+        }
+    }
+
+    public string HttpsDomainEndpoint
+    {
+        get
+        {
+            if (string.IsNullOrWhiteSpace(Subdomain))
+            {
+                return $"https://{RootDomain}";
+            }
+
+            return $"https://{Subdomain}.{RootDomain}";
+        }
+    }
 }
 
 public class WebClientInfrastructureConfigDto : ConfigDtoBase<WebClientInfrastructureConfig>
@@ -25,7 +46,6 @@ public class WebClientInfrastructureConfigDto : ConfigDtoBase<WebClientInfrastru
     public override WebClientInfrastructureConfig GenerateValidConfigObject()
     {
         if (!string.IsNullOrWhiteSpace(RootDomain)
-            && !string.IsNullOrWhiteSpace(Subdomain)
             && !string.IsNullOrWhiteSpace(CloudflareZoneId)
             )
         {

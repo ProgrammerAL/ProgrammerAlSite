@@ -35,7 +35,7 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
     private CloudflarePagesApp UploadWebClientFiles(
         Cloudflare.Provider provider)
     {
-        var projectName = GlobalConfig.WebClientInfraConfig.Subdomain;
+        var projectName = $"programmeral-site-{GlobalConfig.WebClientInfraConfig.Subdomain ?? "prod"}";
         var pagesApp = new Cloudflare.PagesProject(projectName, new Cloudflare.PagesProjectArgs
         {
             Name = projectName,
@@ -126,8 +126,7 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
         var jsonObject = new JsonObject
         {
             ["ServiceName"] = "website",
-            ["Version"] = GlobalConfig.ServiceConfig.ServiceVersion,
-            ["Environment"] = GlobalConfig.ServiceConfig.Environment
+            ["Version"] = GlobalConfig.ServiceConfig.ServiceVersion
         };
 
         appSettingsJson["WebClientConfig"] = jsonObject;

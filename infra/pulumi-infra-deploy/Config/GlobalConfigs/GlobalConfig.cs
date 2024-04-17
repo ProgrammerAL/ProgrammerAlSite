@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProgrammerAl.Site.IaC.Config.GlobalConfigs;
 
-public record ServiceConfig(string Environment, string ServiceVersion);
+public record ServiceConfig(string ServiceVersion);
 
 public record GlobalConfig(
     ServiceConfig ServiceConfig,
@@ -25,7 +25,6 @@ public record GlobalConfig(
         string secretsKeyVaultUrl = config.Require("secrets-key-vault-url");
         var keyVaultSecrets = await LoadKeyVaultSecretsAsync(secretsKeyVaultUrl);
 
-        string environment = config.Require("environment");
         string serviceVersion = config.Require("service-version");
 
         var cloudflareConfig = new CloudflareConfigDto
@@ -36,7 +35,7 @@ public record GlobalConfig(
         .GenerateValidConfigObject();
 
         return new GlobalConfig(
-            ServiceConfig: new ServiceConfig(environment, serviceVersion),
+            ServiceConfig: new ServiceConfig(serviceVersion),
             DeploymentPackagesConfig: new DeploymentPackagesConfig(),
             WebClientInfraConfig: config.RequireObject<WebClientInfrastructureConfigDto>("web-client-infra").GenerateValidConfigObject(),
             CloudflareConfig: cloudflareConfig,
