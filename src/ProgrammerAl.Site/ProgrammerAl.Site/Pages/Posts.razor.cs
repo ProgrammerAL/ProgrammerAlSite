@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Net.Http;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Components;
 
+using ProgrammerAl.Site.DataProviders;
 using ProgrammerAl.Site.Utilities;
 using ProgrammerAl.Site.Utilities.Entities;
 
@@ -20,7 +18,10 @@ public partial class Posts : ComponentBase
     private static readonly string[] PostTypes = new string[] { "Blog", "Meetup", "Conference", "Podcast", "Recording" };
 
     [Inject]
-    private FileDownloader FileDownloader { get; set; }
+    private PostSummariesProvider PostSummariesProvider { get; set; }
+
+    [Inject]
+    private TagLinksDataProvider TagLinksDataProvider { get; set; }
 
     [Inject]
     private NavigationManager NavManager { get; set; }
@@ -28,25 +29,22 @@ public partial class Posts : ComponentBase
     [Parameter, SupplyParameterFromQuery(Name = "tagSelections")]
     public string QueryStringTagSelections { get; set; }
 
-    private PostSummary[] PostSummaries { get; set; }
+    private ImmutableArray<PostSummary> PostSummaries { get; set; }
     private TagLinks TagLinks { get; set; }
-    private ImmutableArray<KeyValuePair<string, bool>> TypesTagSelections { get; set; } = ImmutableArray.Create<KeyValuePair<string, bool>>();
-    private ImmutableArray<KeyValuePair<string, bool>> TagSelections { get; set; } = ImmutableArray.Create<KeyValuePair<string, bool>>();
+    private ImmutableArray<KeyValuePair<string, bool>> TypesTagSelections { get; set; } = [];
+    private ImmutableArray<KeyValuePair<string, bool>> TagSelections { get; set; } = [];
 
     private bool IsViewingTags { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        var recentDataContentTask = FileDownloader.DownloadFileFromSiteContentAsync(PostSummary.AllPostSummariesFile, "*/*");
-        var tagLinksTask = FileDownloader.DownloadFileFromSiteContentAsync(TagLinks.TagLinksFile, "*/*");
+        var postSummariesTask = PostSummariesProvider.GetPostSummariesAsync();
+        var tagLinksTask = TagLinksDataProvider.GetTagLinksAsync();
 
-        _ = await Task.WhenAll(recentDataContentTask, tagLinksTask);
+        await Task.WhenAll(postSummariesTask, tagLinksTask);
 
-        var recentDataContent = recentDataContentTask.Result;
-        var tagLinksContent = tagLinksTask.Result;
-
-        PostSummaries = await JsonSerializer.DeserializeAsync<PostSummary[]>(recentDataContent);
-        TagLinks = await JsonSerializer.DeserializeAsync<TagLinks>(tagLinksContent);
+        PostSummaries = postSummariesTask.Result;
+        TagLinks = tagLinksTask.Result;
 
         RefreshTagSelections();
 

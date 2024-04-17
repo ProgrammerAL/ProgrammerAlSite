@@ -20,7 +20,9 @@ namespace ProgrammerAl.Site
             _ = builder.Services.AddSingleton<IConfig>(new HardCodedConfig());
             _ = builder.Services.AddSingleton<FileDownloader>();
             _ = builder.Services.AddSingleton<PostDataProvider>();
-
+            _ = builder.Services.AddSingleton<PostSummariesProvider>();
+            _ = builder.Services.AddSingleton<TagLinksDataProvider>();
+            
             _ = builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             await builder.Build().RunAsync();
