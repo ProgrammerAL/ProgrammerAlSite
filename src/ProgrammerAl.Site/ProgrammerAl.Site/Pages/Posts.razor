@@ -76,7 +76,7 @@
             {
                 <div class="mt-4">
                     <a href="/posts/@post.TitleLink">
-                        <p class="text-lg">@post.Title</p>
+                        <p class="text-lg">@post.TitleHumanReadable</p>
                     </a>
                     <p class="text-sm">Posted on @post.PostedDate.ToLongDateString()</p>
                     @if (post.Tags?.Any() is true)

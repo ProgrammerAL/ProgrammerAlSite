@@ -8,26 +8,26 @@ public class PostSummary
     public const string AllPostSummariesFile = "AllPostSummaries.json";
 
     public PostSummary(
-        string title,
-        DateOnly postedDate,
+        string titleHumanReadable,
         string titleLink,
+        DateOnly postedDate,
         string firstParagraph,
         int postNumber,
         string[] tags,
         string comicImageLink)
     {
-        Title = title;
-        PostedDate = postedDate;
+        TitleHumanReadable = titleHumanReadable;
         TitleLink = titleLink;
+        PostedDate = postedDate;
         FirstParagraph = firstParagraph;
         PostNumber = postNumber;
         Tags = tags;
         ComicImageLink = comicImageLink;
     }
 
-    public string Title { get; set; }
-    public DateOnly PostedDate { get; set; }
+    public string TitleHumanReadable { get; set; }
     public string TitleLink { get; set; }
+    public DateOnly PostedDate { get; set; }
     public string FirstParagraph { get; set; }
     public int PostNumber { get; set; }
     public string[] Tags { get; set; }

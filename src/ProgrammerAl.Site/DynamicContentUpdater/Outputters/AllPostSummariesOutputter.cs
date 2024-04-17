@@ -23,9 +23,9 @@ public class AllPostSummariesOutputter
                     string comicImageLink = null;
 
                     return new PostSummary(
-                        title: x.TitleHumanReadable,
-                        postedDate: x.ReleaseDate,
+                        titleHumanReadable: x.TitleHumanReadable,
                         titleLink: x.TitleLink,
+                        postedDate: x.ReleaseDate,
                         firstParagraph: x.FirstParagraphHtml,
                         postNumber: x.PostNumber,
                         tags: x.Tags.ToArray(),

@@ -1,16 +1,28 @@
 ﻿@page "/comics/{PostUrl}"
 @using System.Text.Encodings.Web;
 
-
 @if (CurrentPostSummary is object)
 {
+    <HeadContent>
+        <meta name="og:type" content="article" />
+
+        <meta name="og:title" content="@(CurrentPostSummary.TitleLink)" />
+        <meta name="twitter:title" content="@(CurrentPostSummary.TitleLink)" />
+        <meta property="og:url" content="@($"https://ProgrammerAL.com/comics/{PostUrl}")" />
+        <meta property="twitter:url" content="@($"https://ProgrammerAL.com/comics/{PostUrl}")" />
+
+        <meta property="og:image" content="@(CurrentPostSummary.ComicImageLink)" />
+        <meta property="twitter:image" content="@(CurrentPostSummary.ComicImageLink)" />
+        <meta name="twitter:card" content="summary_large_image">
+    </HeadContent>
+
     <div class="flex flex-col">
 
         <div class="post-comic-image">
             <img src="@($"{Config.SiteContentUrl}Posts/{CurrentPostSummary.ComicImageLink}")" />
         </div>
 
-        <div class="w-4/5 md:w-1/3 place-self-center
+        <div class="w-full md:w-4/5 place-self-center
                     flex flex-row justify-center gap-4 m-4">
             @if (PreviousPostSummary is object)
             {
@@ -19,9 +31,25 @@
                                 w-full
                                 p-4
                                 border border-4 border-green-800 rounded">
-                    <p class="text-sm mg:text-lg lg:text-2xl">@($"< Previous")</p>
+                    <p class="text-sm md:text-lg lg:text-2xl">@($"< Previous")</p>
                 </button>
             }
+
+            <button @onclick="OnComicPostSelected"
+                    class="
+                            w-full
+                            p-4
+                            border border-4 border-green-800 rounded">
+                <p class="text-sm md:text-lg lg:text-2xl">Read Comic Blog Post</p>
+            </button>
+
+            <button @onclick="OnComicsListSelected"
+                    class="
+                            w-full
+                            p-4
+                            border border-4 border-green-800 rounded">
+                <p class="text-sm md:text-lg lg:text-2xl">@($"All Comics List")</p>
+            </button>
 
             @if (NextPostSummary is object)
             {
@@ -30,9 +58,10 @@
                                 w-full
                                 p-4
                                 border border-4 border-green-800 rounded">
-                    <p class="text-sm mg:text-lg lg:text-2xl">@($"Next >")</p>
+                    <p class="text-sm md:text-lg lg:text-2xl">@($"Next >")</p>
                 </button>
             }
         </div>
+
     </div>
 }

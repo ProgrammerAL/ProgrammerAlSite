@@ -67,6 +67,9 @@ public partial class Comics : ComponentBase
             NavigateToComic("latest");
         }
 
+        NextPostSummary = CurrentPostSummary;
+        PreviousPostSummary = CurrentPostSummary;
+
         await base.OnInitializedAsync();
     }
 
@@ -83,5 +86,15 @@ public partial class Comics : ComponentBase
     private void NavigateToComic(string comicLink)
     {
         NavManager.NavigateTo($"/comics/{comicLink}");
+    }
+
+    private void OnComicsListSelected(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
+    {
+        NavManager.NavigateTo($"/comics-list");
+    }
+
+    private void OnComicPostSelected(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
+    {
+        NavManager.NavigateTo($"/posts/{CurrentPostSummary.TitleLink}");
     }
 }
