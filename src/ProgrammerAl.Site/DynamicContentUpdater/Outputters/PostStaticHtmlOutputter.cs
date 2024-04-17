@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DynamicContentUpdater.Entities;
+using ProgrammerAl.Site.PostDataEntities;
 
 using RazorLight;
 
@@ -33,7 +33,7 @@ public class PostStaticHtmlOutputter
             var staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
             staticHtml = staticHtml.Replace("__StorageSiteUrl__", config.SiteContentUrl);
 
-            string outputFilePath = $"{postsFolderPath}/{post.TitleLink}/post.html";
+            string outputFilePath = $"{postsFolderPath}/{post.TitleLink}/{PostEntry.HtmlFileName}}";
             File.WriteAllText(outputFilePath, staticHtml);
         }
 

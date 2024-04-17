@@ -2,12 +2,13 @@
 using System.Collections.Immutable;
 using System.IO;
 
-namespace DynamicContentUpdater.Entities;
+namespace ProgrammerAl.Site.PostDataEntities;
 
 public class PostEntry
 {
     public const string ComicsTag = "comic";
     public const string ComicSvgFileName = "comic.svg";
+    public const string HtmlFileName = "post.html";
 
     public PostEntry(
         string postDirectoryLocalPath,

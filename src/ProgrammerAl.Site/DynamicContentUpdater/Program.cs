@@ -8,8 +8,8 @@ using RazorLight;
 using System.Threading.Tasks;
 using Markdig;
 using DynamicContentUpdater;
-using DynamicContentUpdater.Entities;
 using DynamicContentUpdater.Outputters;
+using ProgrammerAl.Site.PostDataEntities;
 
 namespace ProgrammerAl.Site.DynamicContentUpdater
 {

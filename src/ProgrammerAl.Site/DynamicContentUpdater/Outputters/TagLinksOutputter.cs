@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DynamicContentUpdater.Entities;
-
+using ProgrammerAl.Site.PostDataEntities;
 using ProgrammerAl.Site.Utilities.Entities;
 
 namespace DynamicContentUpdater.Outputters;

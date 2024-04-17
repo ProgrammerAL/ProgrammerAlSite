@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using ProgrammerAl.Site.Utilities;
+using ProgrammerAl.Site.DataProviders;
 
 namespace ProgrammerAl.Site
 {
@@ -17,6 +18,8 @@ namespace ProgrammerAl.Site
             builder.RootComponents.Add<App>("app");
 
             _ = builder.Services.AddSingleton<IConfig>(new HardCodedConfig());
+            _ = builder.Services.AddSingleton<FileDownloader>();
+            _ = builder.Services.AddSingleton<PostDataProvider>();
 
             _ = builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
