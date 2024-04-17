@@ -1,16 +1,13 @@
 config:
-  public-facing-apps:secrets-key-vault-url: https://dev-public-configs-kv.vault.azure.net
-  public-facing-apps:cloudflare-account-id: 43384b2dacb3c8d5a846f9eb53ef3aef
-  public-facing-apps:admin-web-client-domains-config:
+  programmeral-site:secrets-key-vault-url: https://dev-public-configs-kv.vault.azure.net
+  programmeral-site:cloudflare-account-id: 43384b2dacb3c8d5a846f9eb53ef3aef
+  programmeral-site:admin-web-client-domains-config:
     CloudflareZoneId: bd0333ee073e02c92ad4a63bf2477476
-    ExtraRedirectUris:
-    - https://localhost:7224/authentication/login-callback
-    LoginRedirectPath: authentication/login-callback
     RootDomain: PurpleSpikeArcadeInternal.com
     Subdomain: dev-public-admin-client
-  public-facing-apps:service-version: local
-  public-facing-apps:root-run-path: local
-  public-facing-apps:web-client-infra:
+  programmeral-site:service-version: local
+  programmeral-site:root-run-path: local
+  programmeral-site:web-client-infra:
     RootDomain: PurpleSpikeArcadeInternal.com
     Subdomain: dev-public-web-client
     CloudflareZoneId: bd0333ee073e02c92ad4a63bf2477476
