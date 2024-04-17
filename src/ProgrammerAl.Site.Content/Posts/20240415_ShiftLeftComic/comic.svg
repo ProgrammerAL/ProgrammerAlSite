@@ -111,12 +111,12 @@
         }
     </style>
 
-<text x="603" y="43" class="signature-text">@ProgrammerAL</text>
+    <text x="603" y="43" class="signature-text">@ProgrammerAL</text>
 
     <g>
         <svg x="240" y="0">
             <text x="20" y="20" class="title-text">SHIFT LEFT</text>
-            <text x="0" y="30" class="sub-title-text">Do things earlier in the development cycle</text>
+            <text x="0" y="30" class="sub-title-text">Doing things earlier in the development cycle</text>
         </svg>
     </g>
 
