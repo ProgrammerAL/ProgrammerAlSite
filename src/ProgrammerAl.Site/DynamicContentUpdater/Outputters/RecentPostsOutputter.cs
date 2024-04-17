@@ -13,12 +13,11 @@ namespace DynamicContentUpdater.Outputters;
 
 public class RecentPostsOutputter
 {
-    private const string RecentDataFile = "RecentData.json";
     private const int FrontPageBlogsDisplayed = 5;
 
     public void Output(string contentPath, ImmutableArray<PostEntry> allPosts)
     {
-        Console.WriteLine($"Outputting {RecentDataFile}...");
+        Console.WriteLine($"Outputting {PostSummary.RecentSummariesFile}...");
 
         PostSummary[] mostRecentBlogPosts = allPosts
                 .OrderByDescending(x => x.PostNumber)
@@ -40,8 +39,8 @@ public class RecentPostsOutputter
                 .ToArray();
 
         var recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
-        OutputUtils.WriteOutFileAsJson(recentData, contentPath, RecentDataFile);
+        OutputUtils.WriteOutFileAsJson(recentData, contentPath, PostSummary.RecentSummariesFile);
 
-        Console.WriteLine($"Completed output of {RecentDataFile}");
+        Console.WriteLine($"Completed output of {PostSummary.RecentSummariesFile}");
     }
 }

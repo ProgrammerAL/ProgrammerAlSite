@@ -4,6 +4,9 @@ namespace ProgrammerAl.Site.Utilities.Entities;
 
 public class PostSummary
 {
+    public const string RecentSummariesFile = "RecentSummaries.json";
+    public const string AllPostSummariesFile = "AllPostSummaries.json";
+
     public PostSummary(
         string title,
         DateOnly postedDate,

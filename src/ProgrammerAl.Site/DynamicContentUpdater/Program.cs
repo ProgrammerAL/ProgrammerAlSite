@@ -43,6 +43,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             new TagLinksOutputter().Output(contentPath, allPosts);
             new SiteMapOutputter().Output(sitemapFilePath, allPosts);
             await new PostStaticHtmlOutputter().OutputAsync(config, contentPath, fullPathToTemplates, allPosts);
+            new PostMetadataOutputter().Output(contentPath, allPosts);
         }
 
         public static ImmutableArray<PostEntry> LoadAllPostsOrderedByDate(string contentPath, PostParser parser)

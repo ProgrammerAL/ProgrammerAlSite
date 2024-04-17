@@ -24,8 +24,8 @@ public class PostStaticHtmlOutputter
           .UseMemoryCachingProvider()
           .Build();
 
-        string outputfolderPath = Path.Combine(contentPath, "Posts");
-        EnsureOutputDirectoryExists(outputfolderPath);
+        string postsFolderPath = $"{contentPath}/Posts";
+        EnsureOutputDirectoryExists(postsFolderPath);
 
         //Create static html files for each blog post entry
         foreach (var post in allPosts)
@@ -33,11 +33,11 @@ public class PostStaticHtmlOutputter
             var staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
             staticHtml = staticHtml.Replace("__StorageSiteUrl__", config.SiteContentUrl);
 
-            string outputFilePath = $"{outputfolderPath}/{post.TitleLink}/post.html";
+            string outputFilePath = $"{postsFolderPath}/{post.TitleLink}/post.html";
             File.WriteAllText(outputFilePath, staticHtml);
         }
 
-        Console.WriteLine($"Completed outputting static html files...");
+        await Console.Out.WriteLineAsync($"Completed outputting static html files...");
     }
 
     private static void EnsureOutputDirectoryExists(string outputfolderPath)

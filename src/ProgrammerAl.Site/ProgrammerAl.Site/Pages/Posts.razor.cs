@@ -39,8 +39,8 @@ public partial class Posts : ComponentBase
     {
         var downloader = new FileDownloader();
 
-        var recentDataContentTask = downloader.DownloadFileFromSiteContentAsync(Config, "BlogPosts.json", "*/*");
-        var tagLinksTask = downloader.DownloadFileFromSiteContentAsync(Config, "TagLinks.json", "*/*");
+        var recentDataContentTask = downloader.DownloadFileFromSiteContentAsync(Config, PostSummary.AllPostSummariesFile, "*/*");
+        var tagLinksTask = downloader.DownloadFileFromSiteContentAsync(Config, TagLinks.TagLinksFile, "*/*");
 
         _ = await Task.WhenAll(recentDataContentTask, tagLinksTask);
 

@@ -13,11 +13,9 @@ namespace DynamicContentUpdater.Outputters;
 
 public class AllPostSummariesOutputter
 {
-    private const string BlogPostsFile = "BlogPosts.json";
-
     public void Output(string contentPath, ImmutableArray<PostEntry> allPosts)
     {
-        Console.WriteLine($"Outputting {BlogPostsFile}...");
+        Console.WriteLine($"Outputting {PostSummary.AllPostSummariesFile}...");
 
         var allSummaries = allPosts
                 .OrderByDescending(x => x.PostNumber)
@@ -37,8 +35,8 @@ public class AllPostSummariesOutputter
                 })
                 .ToArray();
 
-        OutputUtils.WriteOutFileAsJson(allSummaries, contentPath, BlogPostsFile);
+        OutputUtils.WriteOutFileAsJson(allSummaries, contentPath, PostSummary.AllPostSummariesFile);
 
-        Console.WriteLine($"Completed output of {BlogPostsFile}...");
+        Console.WriteLine($"Completed output of {PostSummary.AllPostSummariesFile}...");
     }
 }

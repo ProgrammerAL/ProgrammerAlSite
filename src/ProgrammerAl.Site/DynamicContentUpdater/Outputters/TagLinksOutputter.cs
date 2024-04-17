@@ -13,16 +13,14 @@ namespace DynamicContentUpdater.Outputters;
 
 public class TagLinksOutputter
 {
-    private const string TagLinksFile = "TagLinks.json";
-
     public void Output(string contentPath, ImmutableArray<PostEntry> allPosts)
     {
-        Console.WriteLine($"Outputting {TagLinksFile}...");
+        Console.WriteLine($"Outputting {TagLinks.TagLinksFile}...");
 
         var tagLinks = GenerateTagLinks(allPosts);
-        OutputUtils.WriteOutFileAsJson(tagLinks, contentPath, TagLinksFile);
+        OutputUtils.WriteOutFileAsJson(tagLinks, contentPath, TagLinks.TagLinksFile);
 
-        Console.WriteLine($"Completed output of {TagLinksFile}");
+        Console.WriteLine($"Completed output of {TagLinks.TagLinksFile}");
     }
 
     private TagLinks GenerateTagLinks(ImmutableArray<PostEntry> allPosts)

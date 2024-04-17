@@ -27,7 +27,7 @@ namespace ProgrammerAl.Site.PageModels
             StateHasChanged();
 
             var downloader = new FileDownloader();
-            var recentDataContent = await downloader.DownloadFileFromSiteContentAsync(Config, "RecentData.json", "*/*");
+            var recentDataContent = await downloader.DownloadFileFromSiteContentAsync(Config, PostSummary.RecentSummariesFile, "*/*");
             Recents = await JsonSerializer.DeserializeAsync<RecentData>(recentDataContent);
 
             IsLoadingRecents = false;
