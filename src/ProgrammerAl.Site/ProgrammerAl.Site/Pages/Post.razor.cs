@@ -12,19 +12,25 @@ namespace ProgrammerAl.Site.Pages;
 public partial class Post : ComponentBase
 {
     [Inject, NotNull]
-    private PostDataProvider PostDataProvider { get; set; }
+    private PostDataProvider? PostDataProvider { get; set; }
 
     [Parameter]
-    public string PostUrl { get; set; }
+    public string? PostUrl { get; set; }
 
     private MarkupString PostHtml { get; set; }
-    private PostData PostData { get; set; }
+    private PostData? PostData { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        var post = await PostDataProvider.GetPostAsync(PostUrl);
+        if (!string.IsNullOrWhiteSpace(PostUrl))
+        {
+            var post = await PostDataProvider.GetPostAsync(PostUrl);
 
-        PostHtml = new MarkupString(post.PostHtml);
+            if (post is object)
+            {
+                PostHtml = new MarkupString(post.PostHtml);
+            }
+        }
 
         await base.OnInitializedAsync();
     }

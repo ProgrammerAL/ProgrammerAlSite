@@ -44,7 +44,7 @@ public class PostEntry
 
     public bool HasComic => File.Exists($"{PostDirectoryLocalPath}/{ComicSvgFileName}");
 
-    public bool TryGetComicLink(out string comicLink)
+    public bool TryGetComicLink(out string? comicLink)
     {
         if (HasComic)
         {

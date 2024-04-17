@@ -14,10 +14,10 @@ namespace ProgrammerAl.Site.PageModels
 {
     public class IndexModel : ComponentBase
     {
-        [Inject]
-        protected FileDownloader FileDownloader { get; set; }
+        [Inject, NotNull]
+        protected FileDownloader? FileDownloader { get; set; }
 
-        public RecentData Recents { get; set; }
+        public RecentData? Recents { get; set; }
 
         public bool IsLoadingRecents { get; set; }
 

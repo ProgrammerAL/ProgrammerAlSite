@@ -2,7 +2,7 @@
 @using ProgrammerAl.Site.Components
 @using ProgrammerAl.Site.Utilities.Entities;
 
-@if (TagLinks != null && TagLinks.Links.Any())
+@if (TagLinks is object && TagLinks.Links?.Any() is true)
 {
     @if (IsViewingTags)
     {
@@ -52,7 +52,7 @@
     IEnumerable<IGrouping<int, PostSummary>> postsByYear;
     var selections = TagSelections.Concat(TypesTagSelections).Where(x => x.Value).Select(x => x.Key).ToList();
 
-    if (selections.Any())
+    if (selections.Any() && TagLinks?.Links is object)
     {
         //If any tags are selected, only show posts with those tags
         var selectedLinks = TagLinks.Links.Where(x => selections.Contains(x.Key, StringComparer.OrdinalIgnoreCase)).SelectMany(x => x.Value).ToList();

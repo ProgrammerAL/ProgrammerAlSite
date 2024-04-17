@@ -8,6 +8,6 @@ namespace ProgrammerAl.Site.Utilities.Entities;
 public class TagLinks
 {
     public const string TagLinksFile = "TagLinks.json";
-    public Dictionary<string, string[]> Links { get; set; }
+    public Dictionary<string, string[]>? Links { get; set; }
 }
 

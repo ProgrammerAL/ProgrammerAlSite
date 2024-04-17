@@ -6,6 +6,7 @@ using System.Net.Http;
 
 using Microsoft.AspNetCore.Components;
 
+using ProgrammerAl.Site.Config;
 using ProgrammerAl.Site.DataProviders;
 using ProgrammerAl.Site.Utilities;
 using ProgrammerAl.Site.Utilities.Entities;
@@ -14,14 +15,14 @@ namespace ProgrammerAl.Site.Pages;
 
 public partial class ComicsList : ComponentBase
 {
-    [Inject]
-    private PostSummariesProvider PostSummariesProvider { get; set; }
+    [Inject, NotNull]
+    private PostSummariesProvider? PostSummariesProvider { get; set; }
 
-    [Inject]
-    private NavigationManager NavManager { get; set; }
+    [Inject, NotNull]
+    private NavigationManager? NavManager { get; set; }
 
-    [Inject]
-    private IConfig Config { get; set; }
+    [Inject, NotNull]
+    private ApiConfig? ApiConfig { get; set; }
 
     private ImmutableArray<PostSummary> ComicSummaries { get; set; } = ImmutableArray<PostSummary>.Empty;
 

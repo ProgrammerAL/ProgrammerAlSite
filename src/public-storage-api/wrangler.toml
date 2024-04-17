@@ -1,0 +1,16 @@
+name = "website-storage-api"
+main = "src/worker.ts"
+compatibility_date = "2023-08-01"
+
+# Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
+# Note: Use secrets to store sensitive data.
+# Docs: https://developers.cloudflare.com/workers/platform/environment-variables
+[vars]
+ADMIN_TOKEN = "abc123"
+
+# Bind an R2 Bucket. Use R2 to store arbitrarily large blobs of data, such as files.
+# Docs: https://developers.cloudflare.com/r2/api/workers/workers-api-usage/
+[[r2_buckets]]
+binding = "STORAGE_BUCKET"
+bucket_name = "storage-bucket"
+preview_bucket_name = "storage-bucket"

@@ -14,8 +14,8 @@
     [Parameter, EditorRequired]
     public bool IsSelected { get; set; }
 
-    [Parameter, EditorRequired]
-    public string Text { get; set; }
+    [Parameter, EditorRequired, NotNull]
+    public string? Text { get; set; }
 
     [Parameter]
     public EventCallback<string> OnSelectionChanged { get; set; }

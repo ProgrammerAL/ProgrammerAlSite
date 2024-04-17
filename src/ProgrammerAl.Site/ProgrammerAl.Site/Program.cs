@@ -7,25 +7,34 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using ProgrammerAl.Site.Utilities;
 using ProgrammerAl.Site.DataProviders;
+using Microsoft.Extensions.Configuration;
+using ProgrammerAl.Site;
+using Microsoft.AspNetCore.Components.Web;
+using ProgrammerAl.Site.Config;
 
-namespace ProgrammerAl.Site
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
+
+ConfigureConfig<ApiConfig>(builder);
+
+builder.Services.AddSingleton<FileDownloader>();
+builder.Services.AddSingleton<PostDataProvider>();
+builder.Services.AddSingleton<PostSummariesProvider>();
+builder.Services.AddSingleton<TagLinksDataProvider>();
+
+builder.Services.AddSingleton<ISiteLogger, SiteLogger>();
+
+
+builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+await builder.Build().RunAsync();
+
+static T ConfigureConfig<T>(WebAssemblyHostBuilder builder)
+    where T : class, new()
 {
-    public class Program
-    {
-        public static async Task Main(string[] args)
-        {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("app");
-
-            _ = builder.Services.AddSingleton<IConfig>(new HardCodedConfig());
-            _ = builder.Services.AddSingleton<FileDownloader>();
-            _ = builder.Services.AddSingleton<PostDataProvider>();
-            _ = builder.Services.AddSingleton<PostSummariesProvider>();
-            _ = builder.Services.AddSingleton<TagLinksDataProvider>();
-            
-            _ = builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-            await builder.Build().RunAsync();
-        }
-    }
+    var config = new T();
+    builder.Configuration.Bind(typeof(T).Name, config);
+    _ = builder.Services.AddSingleton(config);
+    return config;
 }
