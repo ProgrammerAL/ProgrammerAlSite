@@ -13,7 +13,7 @@ namespace DynamicContentUpdater.Outputters;
 
 public class SiteMapOutputter
 {
-    private const string SiteUrl = "https://www.programmeral.com/";
+    private const string SiteUrl = "https://www.programmeral.com";
     private const string SitemapXmlNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
     public void Output(string sitemapFilePath, ImmutableArray<PostEntry> allPosts)
