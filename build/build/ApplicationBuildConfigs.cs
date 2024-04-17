@@ -12,10 +12,10 @@ public record CloudflareWorkersPaths(
     ImmutableArray<CloudflareWorkersPaths.WorkerPaths> Workers,
     string OutputZipFilePath)
 {
-    public static CloudflareWorkersPaths LoadFromContext(ICakeContext context, string srcDirectory)
+    public static CloudflareWorkersPaths LoadFromContext(ICakeContext context, string srcDirectory, string buildArtifactsPath)
     {
         var cloudflareWorkersPath = srcDirectory + $"/AncillaryApi";
-        var outputZipFilePath = srcDirectory + "/cloudflare-output/cloudflare-workers.zip";
+        var outputZipFilePath = buildArtifactsPath + "/cloudflare-workers.zip";
 
         var workers = new List<WorkerPaths>();
         var workerNames = new[] { "public-storage-api" };
@@ -51,7 +51,7 @@ public record WebsitePaths(
     string CoverletOutDir,
     string CustomJsModulesDir)
 {
-    public static WebsitePaths LoadFromContext(ICakeContext context, string buildConfiguration, string srcDirectory)
+    public static WebsitePaths LoadFromContext(ICakeContext context, string buildConfiguration, string srcDirectory, string buildArtifactsPath)
     {
         var projectName = "ProgrammerAl.Site";
         srcDirectory += $"/{projectName}";
@@ -59,7 +59,7 @@ public record WebsitePaths(
         var functionProjectDir = srcDirectory + $"/{projectName}";
         var functionCsprojFile = functionProjectDir + $"/{projectName}.csproj";
         var outDir = functionProjectDir + $"/bin/{buildConfiguration}/cake-build-output";
-        var zipOutDir = functionProjectDir + $"/bin/{buildConfiguration}/cake-publish-output";
+        var zipOutDir = buildArtifactsPath;
         var zipOutFilePath = zipOutDir + $"/{projectName}.zip";
         var unitTestDirectory = srcDirectory + $"/UnitTests";
         var unitTestProj = unitTestDirectory + $"/UnitTests.csproj";

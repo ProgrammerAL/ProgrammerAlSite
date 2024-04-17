@@ -34,7 +34,7 @@ public class BuildContext : FrostingContext
     public string Target { get; }
     public string BuildConfiguration { get; }
     public string SrcDirectoryPath { get; }
-    public string NugetFilePath { get; }
+    public string BuildArtifactsPath { get; }
     public CloudflareWorkersPaths CloudflareWorkersPaths { get; }
     public WebsitePaths WebClientPaths { get; }
 
@@ -43,11 +43,11 @@ public class BuildContext : FrostingContext
     {
         Target = context.Argument("target", "Default");
         BuildConfiguration = context.Argument<string>("configuration");
-        SrcDirectoryPath = context.Argument("srcDirectoryPath", $"../../src");
-        NugetFilePath = context.Argument("nugetConfigFilePath", $"../../src/nuget.config");
+        SrcDirectoryPath = context.Argument<string>("srcDirectoryPath");
+        BuildArtifactsPath = context.Argument<string>("BuildArtifactsPath");
 
-        CloudflareWorkersPaths = CloudflareWorkersPaths.LoadFromContext(context, SrcDirectoryPath);
-        WebClientPaths = WebsitePaths.LoadFromContext(context, BuildConfiguration, SrcDirectoryPath);
+        CloudflareWorkersPaths = CloudflareWorkersPaths.LoadFromContext(context, SrcDirectoryPath, BuildArtifactsPath);
+        WebClientPaths = WebsitePaths.LoadFromContext(context, BuildConfiguration, SrcDirectoryPath, BuildArtifactsPath);
     }
 }
 
@@ -101,10 +101,7 @@ public sealed class BuildTask : FrostingTask<BuildContext>
 
     private void BuildDotnetApp(BuildContext context, string pathToSln)
     {
-        context.DotNetRestore(pathToSln, new DotNetRestoreSettings
-        {
-            ConfigFile = context.NugetFilePath
-        });
+        context.DotNetRestore(pathToSln);
 
         context.DotNetBuild(pathToSln, new DotNetBuildSettings
         {
