@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ProgrammerAl.Site.DynamicContentUpdater;
 using ProgrammerAl.Site.PostDataEntities;
 
 using RazorLight;
@@ -14,7 +15,7 @@ namespace DynamicContentUpdater.Outputters;
 
 public class PostStaticMetaTagFilesOutputter
 {
-    public async ValueTask OutputAsync(ProgrammerAl.Site.Utilities.IConfig config, string contentPath, string fullPathToTemplates, ImmutableArray<PostEntry> allPosts)
+    public async ValueTask OutputAsync(RuntimeConfig runtimeConfig, string contentPath, string fullPathToTemplates, ImmutableArray<PostEntry> allPosts)
     {
         Console.WriteLine($"Outputting meta tag html files...");
 
@@ -32,7 +33,7 @@ public class PostStaticMetaTagFilesOutputter
         foreach (var post in allPosts)
         {
             var staticHtml = await engine.CompileRenderAsync<PostEntry>("MetaTags.cshtml", post);
-            staticHtml = staticHtml.Replace("__StorageSiteUrl__", config.SiteContentUrl);
+            staticHtml = staticHtml.Replace("__StorageSiteUrl__", runtimeConfig.StorageUrl);
 
             string outputFilePath = $"{postsFolderPath}/{post.TitleLink}/{PostEntry.HtmlFileName}";
             File.WriteAllText(outputFilePath, staticHtml);

@@ -15,26 +15,23 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 {
     partial class Program
     {
-        private const string ComicsFile = "Comics.json";
-
         static async Task Main(string[] args)
         {
-            Options parsedArgs = null;
+            RuntimeConfig runtimeConfig = null;
 
-            _ = Parser.Default.ParseArguments<Options>(args)
-                .WithParsed(opts => parsedArgs = opts)
+            _ = Parser.Default.ParseArguments<RuntimeConfig>(args)
+                .WithParsed(opts => runtimeConfig = opts)
                 .WithNotParsed((errs) =>
                 {
                     Console.WriteLine(errs);
                     return;
                 });
 
-            var config = new HardCodedConfig();
-            var parser = new PostParser(config);
+            var parser = new PostParser(runtimeConfig);
 
-            var contentPath = parsedArgs.AppRootPath + "/ProgrammerAl.Site.Content";
-            var sitemapFilePath = parsedArgs.AppRootPath + "/ProgrammerAl.Site/ProgrammerAl.Site/wwwroot/sitemap.xml";
-            var fullPathToTemplates = parsedArgs.AppRootPath + "/ProgrammerAl.Site/DynamicContentUpdater/StaticTemplates";
+            var contentPath = runtimeConfig.AppRootPath + "/ProgrammerAl.Site.Content";
+            var sitemapFilePath = runtimeConfig.AppRootPath + "/ProgrammerAl.Site/ProgrammerAl.Site/wwwroot/sitemap.xml";
+            var fullPathToTemplates = runtimeConfig.AppRootPath + "/ProgrammerAl.Site/DynamicContentUpdater/StaticTemplates";
 
             var allPosts = LoadAllPostsOrderedByDate(contentPath, parser);
 
@@ -44,8 +41,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             new SiteMapOutputter().Output(sitemapFilePath, allPosts);
             new PostMetadataOutputter().Output(contentPath, allPosts);
 
-            await new PostStaticHtmlOutputter().OutputAsync(config, contentPath, fullPathToTemplates, allPosts);
-            await new PostStaticMetaTagFilesOutputter().OutputAsync(config, contentPath, fullPathToTemplates, allPosts);
+            await new PostStaticHtmlOutputter().OutputAsync(runtimeConfig, contentPath, fullPathToTemplates, allPosts);
+            await new PostStaticMetaTagFilesOutputter().OutputAsync(runtimeConfig, contentPath, fullPathToTemplates, allPosts);
         }
 
         public static ImmutableArray<PostEntry> LoadAllPostsOrderedByDate(string contentPath, PostParser parser)
