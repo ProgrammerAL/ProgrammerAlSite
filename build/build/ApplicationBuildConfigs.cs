@@ -14,11 +14,11 @@ public record CloudflareWorkersPaths(
 {
     public static CloudflareWorkersPaths LoadFromContext(ICakeContext context, string srcDirectory, string buildArtifactsPath)
     {
-        var cloudflareWorkersPath = srcDirectory + $"/AncillaryApi";
+        var cloudflareWorkersPath = srcDirectory;
         var outputZipFilePath = buildArtifactsPath + "/cloudflare-workers.zip";
 
         var workers = new List<WorkerPaths>();
-        var workerNames = new[] { "public-storage-api" };
+        var workerNames = new[] { "public-storage-api", "route-filter-worker" };
 
         foreach (var workerName in workerNames)
         {

@@ -1,10 +1,10 @@
 ﻿using Pulumi;
 
-using static ProgrammerAl.Site.IaC.StackBuilders.AncillaryApis.StorageApi.StorageApiInfrastructure;
+using static ProgrammerAl.Site.IaC.StackBuilders.StorageApi.StorageApiInfrastructure;
 
 using Cloudflare = Pulumi.Cloudflare;
 
-namespace ProgrammerAl.Site.IaC.StackBuilders.AncillaryApis.StorageApi;
+namespace ProgrammerAl.Site.IaC.StackBuilders.StorageApi;
 
 public record StorageApiInfrastructure(
     StorageInfrastructure StorageInfra,

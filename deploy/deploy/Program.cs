@@ -119,7 +119,7 @@ public sealed class PulumiDeployTask : AsyncFrostingTask<BuildContext>
 {
     public override async Task RunAsync(BuildContext context)
     {
-        var fullStackName = $"Purple-Spike/{context.PulumiStackName}";
+        var fullStackName = $"ProgrammerAL/{context.PulumiStackName}";
 
         context.Log.Information($"Loading stack {fullStackName} from path '{context.PulumiPath}'");
 

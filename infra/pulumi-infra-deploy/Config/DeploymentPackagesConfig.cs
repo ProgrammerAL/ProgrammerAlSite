@@ -11,9 +11,9 @@ public record DeploymentPackagesConfig()
 {
     public string RootDir => "../../release_artifacts";
     public string UnzippedArtifactsDir => "../../unzipped_artifacts";
-    public string PublicWebClientZipPath => $"{RootDir}/public-web-client.zip";
 
     public string WebsitePath => $"{UnzippedArtifactsDir}/website";
     public string StorageApiWorkerFilePath => $"{UnzippedArtifactsDir}/cloudflare-workers/public-storage-api.js";
+    public string RouteFilterWorkerFilePath => $"{UnzippedArtifactsDir}/cloudflare-workers/route-filter-worker.js";
 }
 

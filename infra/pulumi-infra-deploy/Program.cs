@@ -7,7 +7,8 @@ using System.Linq;
 using System.Collections.Generic;
 using ProgrammerAl.Site.IaC.StackBuilders.Website;
 using ProgrammerAl.Site.IaC.Config.GlobalConfigs;
-using ProgrammerAl.Site.IaC.StackBuilders.AncillaryApis.StorageApi;
+using ProgrammerAl.Site.IaC.StackBuilders.StorageApi;
+using ProgrammerAl.Site.IaC.StackBuilders.RouteFilterWorker;
 
 return await Pulumi.Deployment.RunAsync(async () =>
 {
@@ -19,6 +20,9 @@ return await Pulumi.Deployment.RunAsync(async () =>
 
     var websiteBuilder = new WebsiteStackBuilder(globalConfig, storageApiInfra);
     var websiteInfra = websiteBuilder.GenerateResources();
+
+    var routeFilterWorkerBuilder = new RouteFilterStackBuilder(globalConfig, storageApiInfra);
+    var routeFilterWorkerInfra = routeFilterWorkerBuilder.GenerateResources();
 
     return GenerateOutputs(websiteInfra, storageApiInfra, globalConfig);
 });

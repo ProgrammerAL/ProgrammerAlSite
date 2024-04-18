@@ -17,7 +17,8 @@ public record GlobalConfig(
     DeploymentPackagesConfig DeploymentPackagesConfig,
     WebClientInfrastructureConfig WebClientInfraConfig,
     CloudflareConfig CloudflareConfig,
-    StorageApiConfig StorageApiConfig
+    StorageApiConfig StorageApiConfig,
+    RouteFilterWorkerConfig RouteFilterWorkerConfig
 )
 {
     public static async Task<GlobalConfig> LoadAsync(Pulumi.Config config)
@@ -39,7 +40,8 @@ public record GlobalConfig(
             DeploymentPackagesConfig: new DeploymentPackagesConfig(),
             WebClientInfraConfig: config.RequireObject<WebClientInfrastructureConfigDto>("web-client-infra").GenerateValidConfigObject(),
             CloudflareConfig: cloudflareConfig,
-            StorageApiConfig: config.RequireObject<StorageApiConfigDto>("storage-api-config").GenerateValidConfigObject()
+            StorageApiConfig: config.RequireObject<StorageApiConfigDto>("storage-api-config").GenerateValidConfigObject(),
+            RouteFilterWorkerConfig: config.RequireObject<RouteFilterWorkerConfigDto>("route-filter-worker-config").GenerateValidConfigObject()
         );
     }
 

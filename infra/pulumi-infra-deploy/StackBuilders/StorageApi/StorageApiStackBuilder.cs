@@ -3,11 +3,11 @@ using Pulumi;
 using Pulumi.Cloudflare;
 using Cloudflare = Pulumi.Cloudflare;
 
-using static ProgrammerAl.Site.IaC.StackBuilders.AncillaryApis.StorageApi.StorageApiInfrastructure;
+using static ProgrammerAl.Site.IaC.StackBuilders.StorageApi.StorageApiInfrastructure;
 using ProgrammerAl.Site.IaC.Utilities;
 using ProgrammerAl.Site.IaC.Config.GlobalConfigs;
 
-namespace ProgrammerAl.Site.IaC.StackBuilders.AncillaryApis.StorageApi;
+namespace ProgrammerAl.Site.IaC.StackBuilders.StorageApi;
 
 public record StorageApiStackBuilder(
     GlobalConfig GlobalConfig)

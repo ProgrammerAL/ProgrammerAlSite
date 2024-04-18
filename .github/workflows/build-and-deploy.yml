@@ -31,6 +31,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.arm_subscription_id }}
       DYNAMIC_CONTENT_UPDATER_OUTPUT_PATH: ${{ github.workspace }}/static_content_output
       STORAGE_URL: https://content.programmeral.com
+      PULUMI_STACK_NAME: prod
 
     steps:
       - uses: actions/checkout@v2
@@ -57,7 +58,7 @@ jobs:
       - name: Dotnet Restore - Deploy Project
         run: dotnet restore ${{ env.PULUMI_PROJECT_FILE_PATH }}
       - name: Cake Frosting - Deploy
-        run: dotnet run --project ${{ github.workspace }}/deploy/deploy/Deploy.csproj -- --configuration=${{ env.CONFIGURATION }} --PulumiStackName=${{ inputs.pulumi_stack_name }} --ReleaseVersion=${{ inputs.release_tag_id }} --WorkspacePath=${{ github.workspace }}
+        run: dotnet run --project ${{ github.workspace }}/deploy/deploy/Deploy.csproj -- --configuration=${{ env.CONFIGURATION }} --PulumiStackName=${{ env.PULUMI_STACK_NAME }} --ReleaseVersion=${{ inputs.release_tag_id }} --WorkspacePath=${{ github.workspace }}
 
       # - name: Deploy Static Site
       #   uses: Azure/static-web-apps-deploy@v1
