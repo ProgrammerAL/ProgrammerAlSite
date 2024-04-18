@@ -38,7 +38,7 @@ public class SiteMapOutputter
             var urlNode = xmlDoc.CreateElement("url", SitemapXmlNamespace);
 
             var locationNode = xmlDoc.CreateElement("loc", SitemapXmlNamespace);
-            locationNode.InnerText = $"{SiteUrl}/blog/posts/{post.TitleLink}";
+            locationNode.InnerText = $"{SiteUrl}/posts/{post.TitleLink}";
 
             var lastModifiedNode = xmlDoc.CreateElement("lastmod", SitemapXmlNamespace);
             lastModifiedNode.InnerText = lastModifiedString;
