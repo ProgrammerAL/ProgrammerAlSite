@@ -29,6 +29,8 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.arm_client_secret }}
       ARM_TENANT_ID: ${{ secrets.arm_tenant_id }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.arm_subscription_id }}
+      DYNAMIC_CONTENT_UPDATER_OUTPUT_PATH: ${{ github.workspace }}/static_content_output
+      STORAGE_URL: https://content.programmeral.com
 
     steps:
       - uses: actions/checkout@v2
@@ -45,12 +47,13 @@ jobs:
       - name: Install Pulumi
         uses: pulumi/setup-pulumi@v2
 
+        # Run the dynamic content creator first because some stuff it outputs goes to the blazor site
+      - name: Run Dynamic Content Creator
+        run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ env.SRC_DIRECTORY_PATH}}" --OutputDirectory "${{ env.DYNAMIC_CONTENT_UPDATER_OUTPUT_PATH }}" --StorageUrl "${{ env.STORAGE_URL }}"
+
       - name: Cake Frosting Build
         run: dotnet run --project build/build/Build.csproj -- --configuration=${{ env.CONFIGURATION }} --srcDirectoryPath=${{ env.SRC_DIRECTORY_PATH }} --BuildArtifactsPath=${{ env.BUILD_ARTIFACTS_PATH }}
-  
 
-      - name: Run Dynamic Content Creator
-        run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ env.SRC_DIRECTORY_PATH}}"
       - name: Dotnet Restore - Deploy Project
         run: dotnet restore ${{ env.PULUMI_PROJECT_FILE_PATH }}
       - name: Cake Frosting - Deploy
