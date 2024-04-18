@@ -9,6 +9,7 @@ public class PostEntry
     public const string ComicsTag = "comic";
     public const string ComicSvgFileName = "comic.svg";
     public const string HtmlFileName = "post.html";
+    public const string MetaTagsFileName = "metatags.html";
 
     public PostEntry(
         string postDirectoryLocalPath,

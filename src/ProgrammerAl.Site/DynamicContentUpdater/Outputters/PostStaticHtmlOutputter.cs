@@ -15,18 +15,15 @@ namespace DynamicContentUpdater.Outputters;
 
 public class PostStaticHtmlOutputter
 {
-    public async ValueTask OutputAsync(RuntimeConfig runtimeConfig, string contentPath, string fullPathToTemplates, ImmutableArray<PostEntry> allPosts)
+    public async ValueTask OutputAsync(RuntimeConfig runtimeConfig, string pathToTemplatesDir, ImmutableArray<PostEntry> allPosts)
     {
         await Console.Out.WriteLineAsync("Outputting static html post files...");
 
         //Load the static templating engine
         var engine = new RazorLightEngineBuilder()
-          .UseFileSystemProject(fullPathToTemplates)
+          .UseFileSystemProject(pathToTemplatesDir)
           .UseMemoryCachingProvider()
           .Build();
-
-        string postsFolderPath = $"{contentPath}/Posts";
-        EnsureOutputDirectoryExists(postsFolderPath);
 
         //Create static html files for each blog post entry
         foreach (var post in allPosts)
@@ -34,18 +31,10 @@ public class PostStaticHtmlOutputter
             var staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
             staticHtml = staticHtml.Replace("__StorageSiteUrl__", runtimeConfig.StorageUrl);
 
-            string outputFilePath = $"{postsFolderPath}/{post.TitleLink}/{PostEntry.HtmlFileName}";
+            string outputFilePath = $"{runtimeConfig.OutputDirectory}/Posts/{post.TitleLink}/{PostEntry.HtmlFileName}";
             File.WriteAllText(outputFilePath, staticHtml);
         }
 
         await Console.Out.WriteLineAsync($"Completed outputting static html files...");
-    }
-
-    private static void EnsureOutputDirectoryExists(string outputfolderPath)
-    {
-        if (!Directory.Exists(outputfolderPath))
-        {
-            _ = Directory.CreateDirectory(outputfolderPath);
-        }
     }
 }

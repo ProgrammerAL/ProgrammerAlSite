@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ProgrammerAl.Site.DynamicContentUpdater;
 using ProgrammerAl.Site.PostDataEntities;
 using ProgrammerAl.Site.Utilities.Entities;
 
@@ -13,12 +14,9 @@ namespace DynamicContentUpdater.Outputters;
 
 public class PostMetadataOutputter
 {
-    public void Output(string contentPath, ImmutableArray<PostEntry> allPosts)
+    public void Output(RuntimeConfig runtimeConfig, ImmutableArray<PostEntry> allPosts)
     {
         Console.WriteLine("Outputting post metadata files...");
-
-        string postsFolderPath = $"{contentPath}/Posts";
-        EnsureOutputDirectoryExists(postsFolderPath);
 
         //Create static html files for each blog post entry
         foreach (var post in allPosts)
@@ -28,19 +26,10 @@ public class PostMetadataOutputter
                 title: post.TitleHumanReadable,
                 comicImageLink: comicLink);
 
-            var postDir = $"{postsFolderPath}/{post.TitleLink}";
-
-            OutputUtils.WriteOutFileAsJson(metadata, postDir, PostMetadata.FileName);
+            var outputDir = $"{runtimeConfig.OutputDirectory}/Posts/{post.TitleLink}";
+            OutputUtils.WriteOutFileAsJson(metadata, outputDir, PostMetadata.FileName);
         }
 
         Console.WriteLine($"Completed outputting post metadata files...");
-    }
-
-    private static void EnsureOutputDirectoryExists(string outputfolderPath)
-    {
-        if (!Directory.Exists(outputfolderPath))
-        {
-            _ = Directory.CreateDirectory(outputfolderPath);
-        }
     }
 }

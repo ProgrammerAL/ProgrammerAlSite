@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ProgrammerAl.Site.DynamicContentUpdater;
 using ProgrammerAl.Site.PostDataEntities;
 using ProgrammerAl.Site.Utilities.Entities;
 
@@ -12,12 +13,12 @@ namespace DynamicContentUpdater.Outputters;
 
 public class TagLinksOutputter
 {
-    public void Output(string contentPath, ImmutableArray<PostEntry> allPosts)
+    public void Output(RuntimeConfig runtimeConfig, ImmutableArray<PostEntry> allPosts)
     {
         Console.WriteLine($"Outputting {TagLinks.TagLinksFile}...");
 
         var tagLinks = GenerateTagLinks(allPosts);
-        OutputUtils.WriteOutFileAsJson(tagLinks, contentPath, TagLinks.TagLinksFile);
+        OutputUtils.WriteOutFileAsJson(tagLinks, runtimeConfig.OutputDirectory, TagLinks.TagLinksFile);
 
         Console.WriteLine($"Completed output of {TagLinks.TagLinksFile}");
     }

@@ -31,18 +31,19 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
             var contentPath = runtimeConfig.AppRootPath + "/ProgrammerAl.Site.Content";
             var sitemapFilePath = runtimeConfig.AppRootPath + "/ProgrammerAl.Site/ProgrammerAl.Site/wwwroot/sitemap.xml";
-            var fullPathToTemplates = runtimeConfig.AppRootPath + "/ProgrammerAl.Site/DynamicContentUpdater/StaticTemplates";
+            var pathToTemplatesDir = runtimeConfig.AppRootPath + "/ProgrammerAl.Site/DynamicContentUpdater/StaticTemplates";
 
             var allPosts = LoadAllPostsOrderedByDate(contentPath, parser);
 
-            new RecentPostsOutputter().Output(contentPath, allPosts);
-            new AllPostSummariesOutputter().Output(contentPath, allPosts);
-            new TagLinksOutputter().Output(contentPath, allPosts);
             new SiteMapOutputter().Output(sitemapFilePath, allPosts);
-            new PostMetadataOutputter().Output(contentPath, allPosts);
 
-            await new PostStaticHtmlOutputter().OutputAsync(runtimeConfig, contentPath, fullPathToTemplates, allPosts);
-            await new PostStaticMetaTagFilesOutputter().OutputAsync(runtimeConfig, contentPath, fullPathToTemplates, allPosts);
+            new RecentPostsOutputter().Output(runtimeConfig, allPosts);
+            new AllPostSummariesOutputter().Output(runtimeConfig, allPosts);
+            new TagLinksOutputter().Output(runtimeConfig, allPosts);
+            new PostMetadataOutputter().Output(runtimeConfig, allPosts);
+
+            await new PostStaticHtmlOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, allPosts);
+            await new PostStaticMetaTagFilesOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, allPosts);
         }
 
         public static ImmutableArray<PostEntry> LoadAllPostsOrderedByDate(string contentPath, PostParser parser)

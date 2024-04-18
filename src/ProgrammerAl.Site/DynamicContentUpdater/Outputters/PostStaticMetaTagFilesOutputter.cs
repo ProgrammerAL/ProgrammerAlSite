@@ -15,18 +15,15 @@ namespace DynamicContentUpdater.Outputters;
 
 public class PostStaticMetaTagFilesOutputter
 {
-    public async ValueTask OutputAsync(RuntimeConfig runtimeConfig, string contentPath, string fullPathToTemplates, ImmutableArray<PostEntry> allPosts)
+    public async ValueTask OutputAsync(RuntimeConfig runtimeConfig, string pathToTemplatesDir, ImmutableArray<PostEntry> allPosts)
     {
         Console.WriteLine($"Outputting meta tag html files...");
 
         //Load the static templating engine
         var engine = new RazorLightEngineBuilder()
-          .UseFileSystemProject(fullPathToTemplates)
+          .UseFileSystemProject(pathToTemplatesDir)
           .UseMemoryCachingProvider()
           .Build();
-
-        string postsFolderPath = $"{contentPath}/Posts";
-        EnsureOutputDirectoryExists(postsFolderPath);
 
         //TODO: This only outputs for posts
         //      Need to do the same for Comic pages too
@@ -35,18 +32,10 @@ public class PostStaticMetaTagFilesOutputter
             var staticHtml = await engine.CompileRenderAsync<PostEntry>("MetaTags.cshtml", post);
             staticHtml = staticHtml.Replace("__StorageSiteUrl__", runtimeConfig.StorageUrl);
 
-            string outputFilePath = $"{postsFolderPath}/{post.TitleLink}/{PostEntry.HtmlFileName}";
+            string outputFilePath = $"{runtimeConfig.OutputDirectory}/Posts/{post.TitleLink}/{PostEntry.MetaTagsFileName}";
             File.WriteAllText(outputFilePath, staticHtml);
         }
 
         Console.WriteLine($"Completed output of meta tag html files");
-    }
-
-    private static void EnsureOutputDirectoryExists(string outputfolderPath)
-    {
-        if (!Directory.Exists(outputfolderPath))
-        {
-            _ = Directory.CreateDirectory(outputfolderPath);
-        }
     }
 }
