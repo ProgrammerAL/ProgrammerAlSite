@@ -49,7 +49,7 @@ jobs:
 
         # Run the dynamic content creator first because some stuff it outputs goes to the blazor site
       - name: Run Dynamic Content Creator
-        run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ env.SRC_DIRECTORY_PATH}}" --OutputDirectory "${{ env.DYNAMIC_CONTENT_UPDATER_OUTPUT_PATH }}" --StorageUrl "${{ env.STORAGE_URL }}"
+        run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --verbosity normal -- --AppRootPath "${{ env.SRC_DIRECTORY_PATH}}" --OutputDirectory "${{ env.DYNAMIC_CONTENT_UPDATER_OUTPUT_PATH }}" --StorageUrl "${{ env.STORAGE_URL }}"
 
       - name: Cake - Build
         run: dotnet run --project build/build/Build.csproj -- --configuration=${{ env.CONFIGURATION }} --srcDirectoryPath=${{ env.SRC_DIRECTORY_PATH }} --BuildArtifactsPath=${{ env.BUILD_ARTIFACTS_PATH }}
