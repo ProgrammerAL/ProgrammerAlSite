@@ -35,7 +35,7 @@ static Dictionary<string, object?> GenerateOutputs(
     return new Dictionary<string, object?>
     {
         { "StorageApiHttpsEndpoint", storageApiInfra.Domain.HttpsEndpoint },
-        { "StorageApiAdminAuthToken", storageApiInfra.ApiInfra.AdminAuthToken },
+        { "StorageApiAdminAuthToken", Output.CreateSecret(storageApiInfra.ApiInfra.AdminAuthToken.Result) },
 
         { "WebsiteDomainEndpoint", websiteInfra.FullDomainEndpoint },
 

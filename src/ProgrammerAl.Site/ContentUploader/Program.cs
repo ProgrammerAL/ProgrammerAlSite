@@ -36,6 +36,7 @@ namespace ProgrammerAl.Site.ContentUploader
             var stackArgs = new LocalProgramArgs(runtimeConfig.PulumiStackName, runtimeConfig.PulumiStackPath);
             var stack = await LocalWorkspace.SelectStackAsync(stackArgs);
             var outputs = await stack.GetOutputsAsync();
+
             var storageApiEndpointOutput = outputs["StorageApiHttpsEndpoint"];
             var storageApiAdminAuthTokenOutput = outputs["StorageApiAdminAuthToken"];
 
@@ -43,7 +44,7 @@ namespace ProgrammerAl.Site.ContentUploader
             await Console.Out.WriteLineAsync($"Pushing files to: {storageApiEndpoint}");
 
             var adminToken = storageApiAdminAuthTokenOutput.Value.ToString();
-            await Console.Out.WriteLineAsync($"Pushing files using admin token: {adminToken}");
+            //await Console.Out.WriteLineAsync($"Pushing files using admin token: {adminToken}");
 
             var client = new HttpClient();
             client.BaseAddress = new Uri(storageApiEndpoint);
