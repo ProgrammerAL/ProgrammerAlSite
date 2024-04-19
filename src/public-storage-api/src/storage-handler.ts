@@ -6,13 +6,28 @@ function determineFilePath(requestPath: string): string {
 	return requestPath.substring(STORAGE_PATH_START.length).toLowerCase();
 }
 
-interface completeBody {
-	parts: R2UploadedPart[];
-}
+function determineContenTypeFromFileName(path: string): string {
+	const extension = path
+		.substring(path.lastIndexOf(".") || path.length)
+		?.toLowerCase();
 
-interface CopyObjectRequestBodyObject {
-	fromPath: string;
-	toPath: string;
+	if (!extension) {
+		return '*';
+	}
+	if (extension == 'svg') {
+		return 'image/svg+xml'
+	}
+	if (extension == 'json') {
+		return 'application/json'
+	}
+	if (extension == 'png') {
+		return 'image/png'
+	}
+	if (extension == 'jpg' || extension == 'jpeg') {
+		return 'image/jpeg'
+	}
+
+	return '*';
 }
 
 export default {
@@ -33,6 +48,7 @@ export default {
 		const headers = new Headers();
 		storageObject.writeHttpMetadata(headers);
 		headers.set('etag', storageObject.httpEtag);
+		headers.set('Content-Type', determineContenTypeFromFileName(filePath));
 
 		return new Response(storageObject.body, {
 			headers,
