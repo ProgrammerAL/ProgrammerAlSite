@@ -6,12 +6,19 @@ namespace ProgrammerAl.Site.Utilities;
 
 public class FileDownloader
 {
+    private readonly ISiteLogger _logger;
+    public FileDownloader(ISiteLogger logger)
+    {
+        _logger = logger;
+    }
+
     public async Task<string> DownloadFileTextFromSiteContentAsync(string url, string responseAcceptType)
     {
         url = SanitizeUrl(url);
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Accept", responseAcceptType);
 
+        _logger.Log($"Downloading file text from: {url}");
         return await httpClient.GetStringAsync(url);
     }
 
@@ -21,6 +28,7 @@ public class FileDownloader
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Accept", responseAcceptType);
 
+        _logger.Log($"Downloading stream from: {url}");
         return await httpClient.GetStreamAsync(url);
     }
 
