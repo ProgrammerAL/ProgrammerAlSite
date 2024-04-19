@@ -42,9 +42,12 @@ namespace ProgrammerAl.Site.ContentUploader
             var storageApiEndpoint = storageApiEndpointOutput.Value.ToString();
             await Console.Out.WriteLineAsync($"Pushing files to: {storageApiEndpoint}");
 
+            var adminToken = storageApiAdminAuthTokenOutput.Value.ToString();
+            await Console.Out.WriteLineAsync($"Pushing files using admin token: {adminToken}");
+
             var client = new HttpClient();
             client.BaseAddress = new Uri(storageApiEndpoint);
-            client.DefaultRequestHeaders.Add("x-admin-token", storageApiAdminAuthTokenOutput.Value.ToString());
+            client.DefaultRequestHeaders.Add("x-admin-token", adminToken);
 
             //Length of the initial directory, plus 1 for the slash
             var startIndex = runtimeConfig.ContentDirectory.Length + 1;
@@ -54,6 +57,7 @@ namespace ProgrammerAl.Site.ContentUploader
             {
                 var storagePath = filePath
                                     .Replace('\\', '/')
+                                    .Replace("//", "/")
                                     .Substring(startIndex);
                 var pushPath = $"/storage/{storagePath}?action=store-object";
 

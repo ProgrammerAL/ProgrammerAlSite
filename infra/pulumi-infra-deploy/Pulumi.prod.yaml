@@ -8,10 +8,10 @@ config:
     CloudflareZoneId: cb6b4ef0a57ef72147e4c9bf3c16b532
   programmeral-site:storage-api-config:
     ApiDomain: ProgrammerAL.com
-    ServiceName: programmeral-storage-api
+    ServiceName: programmeral-site-storage-api
     CloudflareZoneId: cb6b4ef0a57ef72147e4c9bf3c16b532
   programmeral-site:route-filter-worker-config:
     RoutePattern: programmeral.com/*
-    ServiceName: programmeral-route-filter-worker
+    ServiceName: programmeral-site-route-filter-worker
     CloudflareZoneId: cb6b4ef0a57ef72147e4c9bf3c16b532
   pulumi:template: azure-csharp
