@@ -17,6 +17,9 @@ public static class OutputUtils
 
         string objJson = JsonConvert.SerializeObject(obj);
         string outputFilePath = Path.Combine(outputDirectoryPath, fileName);
+
+        Console.WriteLine($"Writing to file: {outputFilePath}");
+
         File.WriteAllText(outputFilePath, objJson);
     }
 

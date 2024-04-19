@@ -33,6 +33,7 @@ public class PostStaticMetaTagFilesOutputter
             staticHtml = staticHtml.Replace("__StorageSiteUrl__", runtimeConfig.StorageUrl);
 
             string outputFilePath = $"{runtimeConfig.OutputDirectory}/Posts/{post.TitleLink}/{PostEntry.MetaTagsFileName}";
+            Console.WriteLine($"Writing to file: {outputFilePath}");
             File.WriteAllText(outputFilePath, staticHtml);
         }
 
