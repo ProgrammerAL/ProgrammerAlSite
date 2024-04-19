@@ -2,7 +2,7 @@
 
 @if (Model.TryGetComicLink(out string comicImageLink))
 {
-    var srcLink = $"__StorageSiteUrl__Posts/{comicImageLink}";
+    var srcLink = $"__StorageSiteUrl__/storage/Posts/{comicImageLink}";
     <div class="post-comic-image">
         <img src="@srcLink" />
     </div>

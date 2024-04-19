@@ -15,16 +15,16 @@
 
     <meta name="og:title" content="@(Model.TitleHumanReadable)" />
     <meta name="twitter:title" content="@(Model.TitleHumanReadable)" />
-    <meta property="og:url" content="@($"https://ProgrammerAL.com/posts/{Model.TitleLink}")" />
-    <meta property="twitter:url" content="@($"https://ProgrammerAL.com/posts/{Model.TitleLink}")" />
+    <meta property="og:url" content="@($"__StorageSiteUrl__/storage/posts/{Model.TitleLink}")" />
+    <meta property="twitter:url" content="@($"__StorageSiteUrl__/storage/posts/{Model.TitleLink}")" />
 
     <meta name="og:site_name" content="ProgrammerAL" />
     <meta name="twitter:site" content="@@ProgrammerAL">
 
     @if (Model.TryGetComicLink(out var comicLink))
     {
-        <meta property="og:image" content="@comicLink" />
-        <meta property="twitter:image" content="@comicLink" />
+        <meta property="og:image" content="@($"__StorageSiteUrl__/storage/posts/{comicLink}")" />
+        <meta property="twitter:image" content="@($"__StorageSiteUrl__/storage/posts/{comicLink}")" />
         <meta name="twitter:card" content="summary_large_image">
     }
 </head>

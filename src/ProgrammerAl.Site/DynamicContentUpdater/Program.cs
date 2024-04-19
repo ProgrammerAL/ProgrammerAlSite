@@ -8,6 +8,7 @@ using Markdig;
 using DynamicContentUpdater;
 using DynamicContentUpdater.Outputters;
 using ProgrammerAl.Site.PostDataEntities;
+using System.Diagnostics;
 
 namespace ProgrammerAl.Site.DynamicContentUpdater
 {
@@ -40,6 +41,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             new TagLinksOutputter().Output(runtimeConfig, allPosts);
             new PostMetadataOutputter().Output(runtimeConfig, allPosts);
 
+            new AllContentOutputter().Output(runtimeConfig, contentPath);
             await new PostStaticHtmlOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, allPosts);
             await new PostStaticMetaTagFilesOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, allPosts);
         }
