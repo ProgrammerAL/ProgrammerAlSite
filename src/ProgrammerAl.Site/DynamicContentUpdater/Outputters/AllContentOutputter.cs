@@ -23,7 +23,7 @@ public class AllContentOutputter
         foreach (var file in Directory.GetFiles(contentPath, "*.*", SearchOption.AllDirectories))
         {
             var filePathWithoutContentPath = file.Substring(contentPath.Length);
-            var destinationFile = $"{runtimeConfig.OutputDirectory}/{filePathWithoutContentPath}/{Path.GetFileName(file)}";
+            var destinationFile = $"{runtimeConfig.OutputDirectory}/{filePathWithoutContentPath}";
 
             var destinationDir = new FileInfo(destinationFile).DirectoryName;
             if (!Directory.Exists(destinationDir))
