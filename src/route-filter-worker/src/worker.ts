@@ -104,15 +104,20 @@ async function handleRequest(request: Request, env: Env): Promise<Response> {
 	// 	.substring(pathName.lastIndexOf(".") || pathName.length)
 	// 	?.toLowerCase();
 
+	console.log(`Received request from url '${request.url}' with pathname '${pathName}'`);
+
 	//TODO: Once metatags are made for comics pages, include /Comics/
 	// Non robot user agent
 	// Ignore extensions
-	if (pathName.includes('/posts/')
+	if (request.method.toLowerCase() == "get"
+		&& pathName.includes('/posts/')
 		&& BOT_AGENTS.some((bot) => userAgent.includes(bot))) {
 
 		//example: 		https://programmeral.com/posts/20240409-WhyAzureManagedIdentitiesNoMoreSecrets
 		//Redirects to: https://storage.programmeral.com/posts/20240409-WhyAzureManagedIdentitiesNoMoreSecrets/metatags.html
 		const newUrl = `${env.STORAGE_API_ENDPOINT}/${url.pathname}/metatags.html`;
+
+		console.log(`Redirecting request from '${request.url}' to '${newUrl}'`);
 
 		return fetch(new Request(newUrl, {
 			headers: request.headers,
