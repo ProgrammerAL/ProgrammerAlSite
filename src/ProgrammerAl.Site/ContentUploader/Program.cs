@@ -51,7 +51,7 @@ namespace ProgrammerAl.Site.ContentUploader
             client.DefaultRequestHeaders.Add("x-admin-token", adminToken);
 
             //Length of the initial directory, plus 1 for the slash
-            var startIndex = runtimeConfig.ContentDirectory.Length + 1;
+            var startIndex = runtimeConfig.ContentDirectory.Length;
 
             var contentFiles = Directory.GetFiles(runtimeConfig.ContentDirectory, "*.*", SearchOption.AllDirectories);
             foreach (var filePath in contentFiles)
