@@ -32,7 +32,6 @@ public class BuildContext : FrostingContext
     public string WorkspacePath { get; }
     public string PulumiPath { get; }
     public string PulumiStackName { get; }
-    public string ReleaseVersion { get; }
     public string UnzippedArtifactsDir { get; }
     public string ReleaseArtifactsDownloadDir { get; }
 
@@ -45,7 +44,6 @@ public class BuildContext : FrostingContext
         ReleaseArtifactsDownloadDir = WorkspacePath + "/release_artifacts";
 
         PulumiStackName = LoadParameter(context, nameof(PulumiStackName));
-        ReleaseVersion = LoadParameter(context, nameof(ReleaseVersion));
     }
 
     private string LoadParameter(ICakeContext context, string parameterName)
@@ -85,7 +83,6 @@ public sealed class UpdatePulumiConfigTask : FrostingTask<BuildContext>
         var configFilePath = $"{context.PulumiPath}/Pulumi.{context.PulumiStackName}.yaml";
         var configFileText = File.ReadAllText(configFilePath);
 
-        configFileText = UpdateConfigValue("programmeral-site:service-version: ", context.ReleaseVersion, configFileText);
         configFileText = UpdateConfigValue("programmeral-site:root-run-path: ", context.WorkspacePath, configFileText);
 
         File.WriteAllText(configFilePath, configFileText);

@@ -15,7 +15,6 @@ using System.Linq;
 using ProgrammerAl.Site.IaC.StackBuilders.Website;
 using ProgrammerAl.Site.IaC.Utilities;
 using ProgrammerAl.Site.IaC.Config.GlobalConfigs;
-using ProgrammerAl.Site.IaC.StackBuilders.RouteFilterApi;
 using ProgrammerAl.Site.IaC.StackBuilders.StorageApi;
 
 public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
@@ -107,7 +106,6 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
 
                 JsonNode appSettingsJson = JsonNode.Parse("{}")!;
 
-                AddWebClientConfigValues(appSettingsJson);
                 AddApiConfigValues(appSettingsJson, storageApiHttpsEndpoint);
 
                 var contents = StringContentUtilities.GenerateCompressedStringContent(appSettingsJson);
@@ -120,17 +118,6 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
 
                 return webClientDirPath;
             });
-    }
-
-    private void AddWebClientConfigValues(JsonNode appSettingsJson)
-    {
-        var jsonObject = new JsonObject
-        {
-            ["ServiceName"] = "website",
-            ["Version"] = GlobalConfig.ServiceConfig.ServiceVersion
-        };
-
-        appSettingsJson["WebClientConfig"] = jsonObject;
     }
 
     private void AddApiConfigValues(JsonNode appSettingsJson, string httpsStorageApiEndpoint)

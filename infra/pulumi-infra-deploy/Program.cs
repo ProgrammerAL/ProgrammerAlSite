@@ -39,7 +39,6 @@ static Dictionary<string, object?> GenerateOutputs(
 
         { "WebsiteDomainEndpoint", websiteInfra.FullDomainEndpoint },
 
-        { "ServiceVersion", Output.Create(globalConfig.ServiceConfig.ServiceVersion) },
         { "Readme", Output.Create(System.IO.File.ReadAllText("./Pulumi.README.md")) },
     };
 }

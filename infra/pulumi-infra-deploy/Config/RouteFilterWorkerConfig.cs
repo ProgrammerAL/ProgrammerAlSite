@@ -28,7 +28,7 @@ public class RouteFilterWorkerConfigDto : ConfigDtoBase<RouteFilterWorkerConfig>
             return new RouteFilterWorkerConfig(
                 CloudflareZoneId: CloudflareZoneId,
                 ServiceName: ServiceName,
-                ApiDomain: RoutePattern);
+                RoutePattern: RoutePattern);
         }
 
         throw new Exception($"{GetType().Name} has invalid config");
