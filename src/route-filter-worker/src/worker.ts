@@ -115,9 +115,9 @@ async function handleRequest(request: Request, env: Env): Promise<Response> {
 		&& (pathName.startsWith('/posts/') || pathName.startsWith(comicsSubPath))
 		&& BOT_AGENTS.some((bot) => userAgent.startsWith(bot))) {
 
-		let lookupPathName = pathName;
+		let lookupPathName = pathName.substring(1);//Skip the initial slash
 		if (pathName.startsWith(comicsSubPath)) {
-			lookupPathName = `/posts/${pathName.substring(comicsSubPath.length)}`;
+			lookupPathName = `posts/${pathName.substring(comicsSubPath.length)}`;
 		}
 
 		//example: 		https://programmeral.com/posts/20240409-WhyAzureManagedIdentitiesNoMoreSecrets
