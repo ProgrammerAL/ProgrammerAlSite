@@ -133,7 +133,13 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
 
     private DomainsInfrastructure GenerateDomainEntries(CloudflarePagesApp webClientInfra, Cloudflare.Provider provider)
     {
-        var pagesDomainEndpoint = $"{GlobalConfig.WebClientInfraConfig.Subdomain}.{GlobalConfig.WebClientInfraConfig.RootDomain}".ToLower();
+        string pagesDomainEndpoint = GlobalConfig.WebClientInfraConfig.RootDomain;
+        if (!string.IsNullOrWhiteSpace(GlobalConfig.WebClientInfraConfig.Subdomain))
+        {
+            pagesDomainEndpoint = $"{GlobalConfig.WebClientInfraConfig.Subdomain}.{pagesDomainEndpoint}";
+        }
+
+        pagesDomainEndpoint = pagesDomainEndpoint.ToLower();
 
         var pagesDomain = new Cloudflare.PagesDomain("public-web-app-pages-domain", new()
         {
