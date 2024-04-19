@@ -34,6 +34,9 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
             var allPosts = LoadAllPostsOrderedByDate(contentPath, parser);
 
+            //Make sure this one is first so we don't double-copy files
+            new AllContentOutputter().Output(runtimeConfig, contentPath);
+
             new SiteMapOutputter().Output(sitemapFilePath, allPosts);
 
             new RecentPostsOutputter().Output(runtimeConfig, allPosts);
@@ -41,7 +44,6 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             new TagLinksOutputter().Output(runtimeConfig, allPosts);
             new PostMetadataOutputter().Output(runtimeConfig, allPosts);
 
-            new AllContentOutputter().Output(runtimeConfig, contentPath);
             await new PostStaticHtmlOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, allPosts);
             await new PostStaticMetaTagFilesOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, allPosts);
         }
