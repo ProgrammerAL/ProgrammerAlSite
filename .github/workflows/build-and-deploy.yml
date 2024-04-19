@@ -24,6 +24,7 @@ jobs:
       DYNAMIC_CONTENT_UPDATER_OUTPUT_PATH: ${{ github.workspace }}/static_content_output
       STORAGE_URL: https://content.programmeral.com
       PULUMI_STACK_NAME: prod
+      PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
