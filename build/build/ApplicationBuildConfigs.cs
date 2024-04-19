@@ -60,7 +60,7 @@ public record WebsitePaths(
         var functionCsprojFile = functionProjectDir + $"/{projectName}.csproj";
         var outDir = functionProjectDir + $"/bin/{buildConfiguration}/cake-build-output";
         var zipOutDir = buildArtifactsPath;
-        var zipOutFilePath = zipOutDir + $"/ProgrammerAlSite.zip";
+        var zipOutFilePath = zipOutDir + $"/programmer-al-site.zip";
         var unitTestDirectory = srcDirectory + $"/UnitTests";
         var unitTestProj = unitTestDirectory + $"/UnitTests.csproj";
         var coverletOutDir = unitTestDirectory + $"/coverlet-coverage-results/";

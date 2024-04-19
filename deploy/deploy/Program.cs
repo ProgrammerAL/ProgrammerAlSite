@@ -60,7 +60,7 @@ public sealed class UnzipAssetsTask : FrostingTask<BuildContext>
         _ = Directory.CreateDirectory(context.UnzippedArtifactsDir);
 
         ExtractArchive("cloudflare-workers", context);
-        ExtractArchive("ProgrammerAlSite", context);
+        ExtractArchive("programmer-al-site", context);
     }
 
     private void ExtractArchive(string zipName, BuildContext context)
