@@ -6,8 +6,7 @@
     {
         <div class="border border-2 border-green-800 p-2">
             <a class="text-xl font-bold" href="/comics/@post.TitleLink">
-                TODO: Fix config links
-                @* <img src="@($"{Config.SiteContentUrl}Posts/{post.ComicImageLink}")" /> *@
+                <img src="@($"{ApiConfig.StorageApiBaseEndpoint}/storage/Posts/{post.ComicImageLink}")" />
             </a>
         </div>
     }
