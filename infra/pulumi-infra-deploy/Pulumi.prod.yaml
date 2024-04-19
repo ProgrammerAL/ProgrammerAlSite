@@ -1,5 +1,5 @@
 config:
-  programmeral-site:unzipped-artifacts-dir: D:\GitHub\ProgrammerAL\ProgrammerAlSite\unzipped-artifacts
+  programmeral-site:unzipped-artifacts-dir: local
   programmeral-site:secrets-key-vault-url: https://al-site-deploy-secrets.vault.azure.net/
   programmeral-site:cloudflare-account-id: 25a96b543306c9c9b27e5e04ff7b00b6
   programmeral-site:root-run-path: local
