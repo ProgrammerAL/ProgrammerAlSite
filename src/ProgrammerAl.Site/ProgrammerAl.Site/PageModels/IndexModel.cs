@@ -30,7 +30,7 @@ namespace ProgrammerAl.Site.PageModels
             IsLoadingRecents = true;
             StateHasChanged();
 
-            var url = $"{ApiConfig.StorageApiBaseEndpoint}/{PostSummary.RecentSummariesFile}";
+            var url = $"{ApiConfig.StorageApiBaseEndpoint}/storage/{PostSummary.RecentSummariesFile}";
             var recentDataContent = await FileDownloader.DownloadFileFromSiteContentAsync(url, "*/*");
             Recents = await JsonSerializer.DeserializeAsync<RecentData>(recentDataContent);
 

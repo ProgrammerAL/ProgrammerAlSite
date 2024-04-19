@@ -33,8 +33,8 @@ public class PostDataProvider
             return existingValue;
         }
 
-        var pathToPost = $"{_apiConfig.StorageApiBaseEndpoint}/{string.Format(PostRelativeLinkTemplate, postName)}";
-        var pathToMetadata = $"{_apiConfig.StorageApiBaseEndpoint}/{string.Format(PostMetadataRelativeLinkTemplate, postName)}";
+        var pathToPost = $"{_apiConfig.StorageApiBaseEndpoint}/storage/{string.Format(PostRelativeLinkTemplate, postName)}";
+        var pathToMetadata = $"{_apiConfig.StorageApiBaseEndpoint}/storage/{string.Format(PostMetadataRelativeLinkTemplate, postName)}";
 
         var htmlDownloadTask = _fileDownloader.DownloadFileTextFromSiteContentAsync(pathToPost, "text/x-markdown");
         var metadataDownloadTask = _fileDownloader.DownloadFileTextFromSiteContentAsync(pathToMetadata, "*/*");
