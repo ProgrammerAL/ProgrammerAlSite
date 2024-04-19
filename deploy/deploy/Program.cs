@@ -68,6 +68,8 @@ public sealed class UnzipAssetsTask : FrostingTask<BuildContext>
         var zipFilePath = $"{context.BuildArtifactsPath}/{zipName}.zip";
         var outputPath = $"{context.UnzippedArtifactsDir}/{zipName}";
 
+        context.Log.Information($"Extracting zip '{zipFilePath}' to '{outputPath}'");
+
         using var fileStream = File.OpenRead(zipFilePath);
         using var archive = new ZipArchive(fileStream);
         archive.ExtractToDirectory(outputPath);
