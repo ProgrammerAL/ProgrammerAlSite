@@ -28,7 +28,7 @@ public class PostSummariesProvider
             return _summaries;
         }
 
-        var url = $"{_apiConfig.StorageApiBaseEndpoint}/{PostSummary.AllPostSummariesFile}".Replace("//", "/");
+        var url = $"{_apiConfig.StorageApiBaseEndpoint}/{PostSummary.AllPostSummariesFile}";
         var recentDataContent = await _fileDownloader.DownloadFileFromSiteContentAsync(url, "*/*");
         _summaries = await JsonSerializer.DeserializeAsync<ImmutableArray<PostSummary>>(recentDataContent);
 

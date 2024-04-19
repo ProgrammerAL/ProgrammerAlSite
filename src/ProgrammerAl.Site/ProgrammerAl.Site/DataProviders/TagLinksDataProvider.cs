@@ -28,7 +28,7 @@ public class TagLinksDataProvider
             return _tagLinks;
         }
 
-        var url = $"{_apiConfig.StorageApiBaseEndpoint}/{TagLinks.TagLinksFile}".Replace("//", "/");
+        var url = $"{_apiConfig.StorageApiBaseEndpoint}/{TagLinks.TagLinksFile}";
         var tagLinksContent = await _fileDownloader.DownloadFileFromSiteContentAsync(url, "*/*");
         _tagLinks = await JsonSerializer.DeserializeAsync<TagLinks>(tagLinksContent);
 

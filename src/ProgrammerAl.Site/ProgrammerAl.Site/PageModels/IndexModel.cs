@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
+using ProgrammerAl.Site.Config;
 using ProgrammerAl.Site.Utilities;
 using ProgrammerAl.Site.Utilities.Entities;
 
@@ -15,7 +16,10 @@ namespace ProgrammerAl.Site.PageModels
     public class IndexModel : ComponentBase
     {
         [Inject, NotNull]
-        protected FileDownloader? FileDownloader { get; set; }
+        private ApiConfig? ApiConfig { get; set; }
+
+        [Inject, NotNull]
+        private FileDownloader? FileDownloader { get; set; }
 
         public RecentData? Recents { get; set; }
 
@@ -26,7 +30,8 @@ namespace ProgrammerAl.Site.PageModels
             IsLoadingRecents = true;
             StateHasChanged();
 
-            var recentDataContent = await FileDownloader.DownloadFileFromSiteContentAsync(PostSummary.RecentSummariesFile, "*/*");
+            var url = $"{ApiConfig.StorageApiBaseEndpoint}/{PostSummary.RecentSummariesFile}";
+            var recentDataContent = await FileDownloader.DownloadFileFromSiteContentAsync(url, "*/*");
             Recents = await JsonSerializer.DeserializeAsync<RecentData>(recentDataContent);
 
             IsLoadingRecents = false;
