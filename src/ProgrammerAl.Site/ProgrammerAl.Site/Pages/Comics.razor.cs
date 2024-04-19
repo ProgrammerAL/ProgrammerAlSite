@@ -67,9 +67,6 @@ public partial class Comics : ComponentBase
             NavigateToComic("latest");
         }
 
-        NextPostSummary = CurrentPostSummary;
-        PreviousPostSummary = CurrentPostSummary;
-
         await base.OnInitializedAsync();
     }
 
