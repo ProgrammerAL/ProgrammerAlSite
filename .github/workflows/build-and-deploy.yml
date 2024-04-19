@@ -3,16 +3,6 @@ name: Build and Deploy
 on:
   push:
     branches: [main]
-  workflow_call:
-    secrets:
-      arm_client_id:
-        required: true
-      arm_client_secret:
-        required: true
-      arm_tenant_id:
-        required: true
-      arm_subscription_id:
-        required: true
 
 jobs:
   build-and-publish:
@@ -25,11 +15,7 @@ jobs:
       BUILD_ARTIFACTS_PATH: ${{ github.workspace }}/build_artifacts
       DYNAMIC_CONTENT_UPDATER_PROJECT_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/DynamicContentUpdater/DynamicContentUpdater.csproj
       PULUMI_PROJECT_DIRECTORY: ${{ github.workspace }}/infra/pulumi-infra-deploy
-      PULUMI_PROJECT_FILE_PATH: ${{ env.PULUMI_PROJECT_DIRECTORY }}/pulumi-infra-deploy.csproj
-      ARM_CLIENT_ID: ${{ secrets.arm_client_id }}
-      ARM_CLIENT_SECRET: ${{ secrets.arm_client_secret }}
-      ARM_TENANT_ID: ${{ secrets.arm_tenant_id }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.arm_subscription_id }}
+      PULUMI_PROJECT_FILE_PATH: ${{ github.workspace }}/infra/pulumi-infra-deploy/pulumi-infra-deploy.csproj
       DYNAMIC_CONTENT_UPDATER_OUTPUT_PATH: ${{ github.workspace }}/static_content_output
       STORAGE_URL: https://content.programmeral.com
       PULUMI_STACK_NAME: prod
