@@ -65,6 +65,6 @@ jobs:
         run: dotnet run --project ${{ github.workspace }}/deploy/deploy/Deploy.csproj -- --configuration=${{ env.CONFIGURATION }} --PulumiStackName=${{ env.PULUMI_STACK_NAME }} --WorkspacePath=${{ github.workspace }} --BuildArtifactsPath=${{ env.BUILD_ARTIFACTS_PATH }}
 
       - name: Run - Content Uploader to push content to storage api
-        run: dotnet run --project ${{ github.workspace }}/src/ProgrammerAl.Site/ContentUploader/ContentUploader.csproj -- --configuration=${{ env.CONFIGURATION }} --PulumiStackName=${{ env.PULUMI_STACK_NAME }} --PulumiStackPath=${{ env.PULUMI_PROJECT_DIRECTORY }} --ContentDirectory= "${{ env.SRC_DIRECTORY_PATH}}/ProgrammerAl.Site.Content"
+        run: dotnet run --project ${{ github.workspace }}/src/ProgrammerAl.Site/ContentUploader/ContentUploader.csproj -- --configuration=${{ env.CONFIGURATION }} --PulumiStackName=${{ env.PULUMI_STACK_NAME }} --PulumiStackPath=${{ env.PULUMI_PROJECT_DIRECTORY }} --ContentDirectory="${{ env.SRC_DIRECTORY_PATH}}/ProgrammerAl.Site.Content"
 
 
