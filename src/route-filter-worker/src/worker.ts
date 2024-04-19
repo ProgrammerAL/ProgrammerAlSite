@@ -110,7 +110,7 @@ async function handleRequest(request: Request, env: Env): Promise<Response> {
 	// Non robot user agent
 	// Ignore extensions
 	if (request.method.toLowerCase() == "get"
-		&& pathName.startsWith('/posts/')
+		&& (pathName.startsWith('/posts/') || pathName.startsWith('/comics/'))
 		&& BOT_AGENTS.some((bot) => userAgent == bot)) {
 
 		//example: 		https://programmeral.com/posts/20240409-WhyAzureManagedIdentitiesNoMoreSecrets
