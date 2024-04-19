@@ -83,6 +83,7 @@ public sealed class UpdatePulumiConfigTask : FrostingTask<BuildContext>
         var configFilePath = $"{context.PulumiPath}/Pulumi.{context.PulumiStackName}.yaml";
         var configFileText = File.ReadAllText(configFilePath);
 
+        configFileText = UpdateConfigValue("programmeral-site:unzipped-artifacts-dir: ", context.UnzippedArtifactsDir, configFileText);
         configFileText = UpdateConfigValue("programmeral-site:root-run-path: ", context.WorkspacePath, configFileText);
 
         File.WriteAllText(configFilePath, configFileText);

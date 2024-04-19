@@ -23,6 +23,8 @@ public record GlobalConfig(
         string secretsKeyVaultUrl = config.Require("secrets-key-vault-url");
         var keyVaultSecrets = await LoadKeyVaultSecretsAsync(secretsKeyVaultUrl);
 
+        string unzippedArtifactsDir = config.Require("unzipped-artifacts-dir");
+
         var cloudflareConfig = new CloudflareConfigDto
         {
             ApiToken = keyVaultSecrets.CloudflareProviderToken,
@@ -31,7 +33,7 @@ public record GlobalConfig(
         .GenerateValidConfigObject();
 
         return new GlobalConfig(
-            DeploymentPackagesConfig: new DeploymentPackagesConfig(),
+            DeploymentPackagesConfig: new DeploymentPackagesConfig(unzippedArtifactsDir),
             WebClientInfraConfig: config.RequireObject<WebClientInfrastructureConfigDto>("web-client-infra").GenerateValidConfigObject(),
             CloudflareConfig: cloudflareConfig,
             StorageApiConfig: config.RequireObject<StorageApiConfigDto>("storage-api-config").GenerateValidConfigObject(),

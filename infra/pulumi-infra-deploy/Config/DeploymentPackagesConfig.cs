@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace ProgrammerAl.Site.IaC.Config;
 
-public record DeploymentPackagesConfig()
+public record DeploymentPackagesConfig(string UnzippedArtifactsDir)
 {
-    public string UnzippedArtifactsDir => "../../unzipped_artifacts";
-
     public string WebsitePath => $"{UnzippedArtifactsDir}/website";
     public string StorageApiWorkerFilePath => $"{UnzippedArtifactsDir}/cloudflare-workers/public-storage-api.js";
     public string RouteFilterWorkerFilePath => $"{UnzippedArtifactsDir}/cloudflare-workers/route-filter-worker.js";
