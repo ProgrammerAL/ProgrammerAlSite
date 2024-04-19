@@ -13,18 +13,18 @@
 
     <meta name="og:type" content="article" />
 
-    <meta name="og:title" content="@(PostData.Metadata.Title)" />
-    <meta name="twitter:title" content="@(PostData.Metadata.Title)" />
-    <meta property="og:url" content="@($"https://ProgrammerAL.com/posts/{PostUrl}")" />
-    <meta property="twitter:url" content="@($"https://ProgrammerAL.com/posts/{PostUrl}")" />
+    <meta name="og:title" content="@(Model.TitleHumanReadable)" />
+    <meta name="twitter:title" content="@(Model.TitleHumanReadable)" />
+    <meta property="og:url" content="@($"https://ProgrammerAL.com/posts/{Model.TitleLink}")" />
+    <meta property="twitter:url" content="@($"https://ProgrammerAL.com/posts/{Model.TitleLink}")" />
 
     <meta name="og:site_name" content="ProgrammerAL" />
-    <meta name="twitter:site" content="@ProgrammerAL">
+    <meta name="twitter:site" content="@@ProgrammerAL">
 
-    @if (!string.IsNullOrWhiteSpace(PostData.Metadata.ComicImageLink))
+    @if (Model.TryGetComicLink(out var comicLink))
     {
-        <meta property="og:image" content="@(PostData.Metadata.ComicImageLink)" />
-        <meta property="twitter:image" content="@(PostData.Metadata.ComicImageLink)" />
+        <meta property="og:image" content="@comicLink" />
+        <meta property="twitter:image" content="@comicLink" />
         <meta name="twitter:card" content="summary_large_image">
     }
 </head>
