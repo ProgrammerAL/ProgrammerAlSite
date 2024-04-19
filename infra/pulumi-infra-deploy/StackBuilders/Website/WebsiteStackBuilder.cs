@@ -112,10 +112,6 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
 
                 var webClientDirPath = GlobalConfig.DeploymentPackagesConfig.WebsitePath + "/wwwroot";
 
-                ////Temp Logging
-                //Pulumi.Log.Info($"Directory Exists '{GlobalConfig.DeploymentPackagesConfig.WebsitePath}': {Directory.Exists(GlobalConfig.DeploymentPackagesConfig.WebsitePath)}");
-                //Pulumi.Log.Info($"Directory Exists '{webClientDirPath}': {Directory.Exists(webClientDirPath)}");
-
                 File.WriteAllText($"{webClientDirPath}/appsettings.json", contents.Content);
                 File.WriteAllBytes($"{webClientDirPath}/appsettings.json.br", contents.BrotliContent);
                 File.WriteAllBytes($"{webClientDirPath}/appsettings.json.gz", contents.GZipContent);
