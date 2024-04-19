@@ -15,14 +15,6 @@ interface CopyObjectRequestBodyObject {
 	toPath: string;
 }
 
-function isCreateCopyObjectRequestBodyValid(requestBody?: CopyObjectRequestBodyObject): boolean {
-	return requestBody != null
-		&& requestBody.fromPath != null
-		&& requestBody.fromPath !== ''
-		&& requestBody.toPath != null
-		&& requestBody.toPath !== '';
-}
-
 export default {
 	isValidStorageFilePath(requestPath: string) {
 		//Valid if the path to the file starts with /storage/ and also if there is more text after that value

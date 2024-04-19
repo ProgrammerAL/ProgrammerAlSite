@@ -14,7 +14,6 @@ public class FileDownloader
 
     public async Task<string> DownloadFileTextFromSiteContentAsync(string url, string responseAcceptType)
     {
-        url = SanitizeUrl(url);
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Accept", responseAcceptType);
 
@@ -24,13 +23,10 @@ public class FileDownloader
 
     public async Task<Stream> DownloadFileFromSiteContentAsync(string url, string responseAcceptType)
     {
-        url = SanitizeUrl(url);
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Accept", responseAcceptType);
 
         _logger.Log($"Downloading stream from: {url}");
         return await httpClient.GetStreamAsync(url);
     }
-
-    private string SanitizeUrl(string url) => url.Replace("//", "/");
 }
