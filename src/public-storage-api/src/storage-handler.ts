@@ -14,16 +14,16 @@ function determineContenTypeFromFileName(path: string): string {
 	if (!extension) {
 		return '*';
 	}
-	if (extension == 'svg') {
+	if (extension == '.svg') {
 		return 'image/svg+xml'
 	}
-	if (extension == 'json') {
+	if (extension == '.json') {
 		return 'application/json'
 	}
-	if (extension == 'png') {
+	if (extension == '.png') {
 		return 'image/png'
 	}
-	if (extension == 'jpg' || extension == 'jpeg') {
+	if (extension == '.jpg' || extension == '.jpeg') {
 		return 'image/jpeg'
 	}
 
