@@ -33,15 +33,15 @@ public class BuildContext : FrostingContext
     public string PulumiPath { get; }
     public string PulumiStackName { get; }
     public string UnzippedArtifactsDir { get; }
-    public string ReleaseArtifactsDownloadDir { get; }
+    public string BuildArtifactsPath { get; }
 
     public BuildContext(ICakeContext context)
         : base(context)
     {
         WorkspacePath = LoadParameter(context, nameof(WorkspacePath));
+        BuildArtifactsPath = LoadParameter(context, nameof(BuildArtifactsPath));
         PulumiPath = WorkspacePath + "/infra/pulumi-infra-deploy";
         UnzippedArtifactsDir = WorkspacePath + "/unzipped_artifacts";
-        ReleaseArtifactsDownloadDir = WorkspacePath + "/release_artifacts";
 
         PulumiStackName = LoadParameter(context, nameof(PulumiStackName));
     }
@@ -65,7 +65,7 @@ public sealed class UnzipAssetsTask : FrostingTask<BuildContext>
 
     private void ExtractArchive(string zipName, BuildContext context)
     {
-        var zipFilePath = $"{context.ReleaseArtifactsDownloadDir}/{zipName}.zip";
+        var zipFilePath = $"{context.BuildArtifactsPath}/{zipName}.zip";
         var outputPath = $"{context.UnzippedArtifactsDir}/{zipName}";
 
         using var fileStream = File.OpenRead(zipFilePath);

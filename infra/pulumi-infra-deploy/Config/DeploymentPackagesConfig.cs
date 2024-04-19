@@ -9,7 +9,6 @@ namespace ProgrammerAl.Site.IaC.Config;
 
 public record DeploymentPackagesConfig()
 {
-    public string RootDir => "../../release_artifacts";
     public string UnzippedArtifactsDir => "../../unzipped_artifacts";
 
     public string WebsitePath => $"{UnzippedArtifactsDir}/website";
