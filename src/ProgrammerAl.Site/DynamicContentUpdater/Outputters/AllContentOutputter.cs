@@ -22,9 +22,10 @@ public class AllContentOutputter
 
         foreach (var file in Directory.GetFiles(contentPath, "*.*", SearchOption.AllDirectories))
         {
-            var destinationFile = $"{runtimeConfig.OutputDirectory}/{Path.GetFileName(file)}";
+            var filePathWithoutContentPath = file.Substring(contentPath.Length);
+            var destinationFile = $"{runtimeConfig.OutputDirectory}/{filePathWithoutContentPath}/{Path.GetFileName(file)}";
 
-            var destinationDir = new FileInfo(destinationFile).Directory.FullName;
+            var destinationDir = new FileInfo(destinationFile).DirectoryName;
             if (!Directory.Exists(destinationDir))
             {
                 Console.WriteLine($"\tCreating directory '{destinationDir}'");
