@@ -7,5 +7,5 @@ namespace ProgrammerAl.Site.Utilities.Entities;
 
 public class RecentData
 {
-    public PostSummary[] RecentBlogPosts { get; set; }
+    public PostSummary[]? RecentBlogPosts { get; set; }
 }

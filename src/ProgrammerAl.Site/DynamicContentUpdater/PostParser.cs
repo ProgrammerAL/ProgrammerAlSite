@@ -1,25 +1,21 @@
 ﻿using DynamicContentUpdater.Entities;
 
-using Microsoft.Extensions.Primitives;
-
-using ProgrammerAl.Site.Pages;
-using ProgrammerAl.Site.Utilities;
+using ProgrammerAl.Site.DynamicContentUpdater;
 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Text;
 
 namespace DynamicContentUpdater
 {
     public class PostParser
     {
-        private readonly IConfig _config;
+        private readonly RuntimeConfig _runtimeConfig;
 
-        public PostParser(IConfig config)
+        public PostParser(RuntimeConfig runtimeConfig)
         {
-            _config = config;
+            _runtimeConfig = runtimeConfig;
         }
 
         public ParsedEntry ParseFromMarkdown(string rawEntry)
@@ -108,7 +104,7 @@ namespace DynamicContentUpdater
         private string SanitizePost(ReadOnlySpan<char> postSpan)
         {
             var builder = new StringBuilder(postSpan.ToString());
-            _ = builder.Replace("__StorageSiteUrl__", _config.SiteContentUrl);
+            _ = builder.Replace("__StorageSiteUrl__", _runtimeConfig.StorageUrl);
 
             return builder.ToString();
         }

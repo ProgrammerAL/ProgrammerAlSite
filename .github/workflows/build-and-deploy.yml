@@ -3,6 +3,16 @@ name: Build and Deploy
 on:
   push:
     branches: [main]
+  workflow_call:
+    secrets:
+      arm_client_id:
+        required: true
+      arm_client_secret:
+        required: true
+      arm_tenant_id:
+        required: true
+      arm_subscription_id:
+        required: true
 
 jobs:
   build-and-publish:
@@ -11,11 +21,18 @@ jobs:
       CONFIGURATION: Release
       DOTNET_VERSION: 8.0.x
       SITE_PROJECT_NAME: ProgrammerAl.Site
-      SLN_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/ProgrammerAl.Site.sln
+      SRC_DIRECTORY_PATH: ${{ github.workspace }}/src/
+      BUILD_ARTIFACTS_PATH: ${{ github.workspace }}/build_artifacts
       DYNAMIC_CONTENT_UPDATER_PROJECT_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/DynamicContentUpdater/DynamicContentUpdater.csproj
-      SITE_PROJECT_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/ProgrammerAl.Site/ProgrammerAl.Site.csproj
-      SITE_PUBLISH_OUTPUT_PATH: ${{ github.workspace }}/outputs/ProgrammerAl.Site
-      TAILWIND_MODULE_DIRECTORY: ${{ github.workspace }}/src/ProgrammerAl.Site/CustomNpmModules/tailwind
+      PULUMI_PROJECT_DIRECTORY: ${{ github.workspace }}/infra/pulumi-infra-deploy
+      PULUMI_PROJECT_FILE_PATH: ${{ env.PULUMI_PROJECT_DIRECTORY }}/pulumi-infra-deploy.csproj
+      ARM_CLIENT_ID: ${{ secrets.arm_client_id }}
+      ARM_CLIENT_SECRET: ${{ secrets.arm_client_secret }}
+      ARM_TENANT_ID: ${{ secrets.arm_tenant_id }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.arm_subscription_id }}
+      DYNAMIC_CONTENT_UPDATER_OUTPUT_PATH: ${{ github.workspace }}/static_content_output
+      STORAGE_URL: https://content.programmeral.com
+      PULUMI_STACK_NAME: prod
 
     steps:
       - uses: actions/checkout@v2
@@ -27,34 +44,29 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.3.0
-      - name: .NET Restore
-        run: dotnet restore ${{ env.SLN_PATH }}
-      - name: .NET Test
-        run: dotnet test ${{ env.SLN_PATH }} --no-restore --verbosity normal
+      - name: Install Cloudflare Wrangler
+        run: npm install --location=global wrangler
+      - name: Install Pulumi
+        uses: pulumi/setup-pulumi@v2
+      - name: Log in to Azure CLI so the Pulumi run can get Key Vault Secrets
+        uses: azure/login@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS_GITHUB_ACTIONS_PROGRAMMERAL_SITE }}'
+      - name: Dotnet Restore - Pulumi Project
+        run: dotnet restore ${{ env.PULUMI_PROJECT_FILE_PATH }}
+
+
+        # Run the dynamic content creator first because some stuff it outputs goes to the blazor site
       - name: Run Dynamic Content Creator
-        run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ github.workspace }}/src"
-      - name: Npm Build Tailwind
-        run: npm run publish
-        working-directory: ${{ env.TAILWIND_MODULE_DIRECTORY }}
-      - name: .NET Build Static Site with WASM Runtime
-        run: dotnet build ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --no-restore --self-contained --runtime blazor-wasm
-      - name: .NET Publish
-        run: dotnet publish ${{ env.SITE_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output ${{ env.SITE_PUBLISH_OUTPUT_PATH }}
-      - name: Deploy Static Site
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-          action: 'upload'
-          app_location: ${{ env.SITE_PUBLISH_OUTPUT_PATH }}/wwwroot
-          output_location: ''          
-          skip_app_build: true
-          skip_api_build: true
-      - name: Push Content Files
-        uses: bacongobbler/azure-blob-storage-upload@main
-        with:
-          source_dir: '${{ github.workspace }}/src/ProgrammerAl.Site.Content'
-          container_name: 'sitecontent'
-          connection_string: ${{ secrets.PublicBlobStorageConnectionString }}
-          sync: 'true'  
+        run: dotnet run --project ${{ env.DYNAMIC_CONTENT_UPDATER_PROJECT_PATH }} --no-restore --verbosity normal -- --AppRootPath "${{ env.SRC_DIRECTORY_PATH}}" --OutputDirectory "${{ env.DYNAMIC_CONTENT_UPDATER_OUTPUT_PATH }}" --StorageUrl "${{ env.STORAGE_URL }}"
+
+      - name: Cake - Build
+        run: dotnet run --project build/build/Build.csproj -- --configuration=${{ env.CONFIGURATION }} --srcDirectoryPath=${{ env.SRC_DIRECTORY_PATH }} --BuildArtifactsPath=${{ env.BUILD_ARTIFACTS_PATH }}
+
+      - name: Cake - Deploy
+        run: dotnet run --project ${{ github.workspace }}/deploy/deploy/Deploy.csproj -- --configuration=${{ env.CONFIGURATION }} --PulumiStackName=${{ env.PULUMI_STACK_NAME }} --ReleaseVersion=${{ inputs.release_tag_id }} --WorkspacePath=${{ github.workspace }}
+
+      - name: Run - Content Uploader to push content to storage api
+        run: dotnet run --project ${{ github.workspace }}/src/ProgrammerAl.Site/ContentUploader/ContentUploader.csproj -- --configuration=${{ env.CONFIGURATION }} --PulumiStackName=${{ env.PULUMI_STACK_NAME }} --PulumiStackPath=${{ env.PULUMI_PROJECT_DIRECTORY }} --ContentDirectory= "${{ env.SRC_DIRECTORY_PATH}}/ProgrammerAl.Site.Content"
 
 

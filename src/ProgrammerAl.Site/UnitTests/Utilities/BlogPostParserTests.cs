@@ -1,7 +1,6 @@
 ﻿using DynamicContentUpdater;
-using NSubstitute;
 
-using ProgrammerAl.Site.Utilities;
+using ProgrammerAl.Site.DynamicContentUpdater;
 
 using System;
 
@@ -11,17 +10,20 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
 {
     public class BlogPostParserTests
     {
-        private readonly IConfig _config;
+        private readonly RuntimeConfig _runtimeConfig;
 
         public BlogPostParserTests()
         {
-            _config = Substitute.For<IConfig>();
+            _runtimeConfig = new RuntimeConfig
+            {
+                StorageUrl = "https://MyLink.com"
+            };
         }
 
         [Fact]
         public void WhenParsingValidEntry_AssertTitle()
         {
-            var parser = new PostParser(_config);
+            var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPost);
             Assert.Equal("Starting This Blog", result.Title);
         }
@@ -29,7 +31,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         [Fact]
         public void WhenParsingValidEntry_AssertPublishedDate()
         {
-            var parser = new PostParser(_config);
+            var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPost);
             Assert.Equal(new DateOnly(2017, 1, 16), result.ReleaseDate);
         }
@@ -37,7 +39,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         [Fact]
         public void WhenParsingValidEntry_AssertTags()
         {
-            var parser = new PostParser(_config);
+            var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPost);
             Assert.Equal(7, result.Tags.Count);
             Assert.Contains("Wyam", result.Tags);
@@ -52,9 +54,8 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         [Fact]
         public void WhenParsingValidEntry_AssertContent()
         {
-            _config.SiteContentUrl.Returns("https://MyLink.com");
 
-            var parser = new PostParser(_config);
+            var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPost);
             Assert.Equal("### The Post!!!" + Environment.NewLine +
                          "Everything else goes here and should be found" + Environment.NewLine
@@ -66,9 +67,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         [Fact]
         public void WhenParsingValidEntry_AssertFirstParagraph()
         {
-            _config.SiteContentUrl.Returns("https://MyLink.com");
-
-            var parser = new PostParser(_config);
+            var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPost);
             Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
         }
@@ -76,9 +75,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         [Fact]
         public void WhenParsingValidEntryWithSpacingBeforeFirstParagraph_AssertFirstParagraph()
         {
-            _config.SiteContentUrl.Returns("https://MyLink.com");
-
-            var parser = new PostParser(_config);
+            var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPostWithSpacingInFirstParagraph);
             Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
         }
@@ -86,9 +83,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         [Fact]
         public void WhenParsingValidEntryWithManySpacingsBeforeFirstParagraph_AssertFirstParagraph()
         {
-            _config.SiteContentUrl.Returns("https://MyLink.com");
-
-            var parser = new PostParser(_config);
+            var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPostWithManySpacingsBeforeFirstParagraph);
             Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
         }
@@ -96,9 +91,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         [Fact]
         public void WhenParsingValidEntryWithShortPost_AssertFirstParagraph()
         {
-            _config.SiteContentUrl.Returns("https://MyLink.com");
-
-            var parser = new PostParser(_config);
+            var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPostShortPost);
             Assert.Equal("Quick test", result.FirstParagraph);
         }

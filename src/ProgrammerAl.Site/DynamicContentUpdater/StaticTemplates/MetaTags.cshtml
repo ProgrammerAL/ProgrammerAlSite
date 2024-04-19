@@ -1,0 +1,35 @@
+﻿@model ProgrammerAl.Site.PostDataEntities.PostEntry
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="description" content="The personal site for Al Rodriguez, AKA ProgrammerAL. This site has blog posts, personal links like GitHub and Twitter, and other items of the like." />
+    <meta name="author" content="Al Rodriguez aka ProgrammerAL" />
+    <meta name="keywords" content="Blog, Azure, .NET, Programming, Software Development, C#" />
+    <meta name="google-site-verification" content="yiV1UDeEs1YKSvwq2GPgO6bEAEnPh8sX8JjqIennzuw" />
+
+    <meta name="og:type" content="article" />
+
+    <meta name="og:title" content="@(PostData.Metadata.Title)" />
+    <meta name="twitter:title" content="@(PostData.Metadata.Title)" />
+    <meta property="og:url" content="@($"https://ProgrammerAL.com/posts/{PostUrl}")" />
+    <meta property="twitter:url" content="@($"https://ProgrammerAL.com/posts/{PostUrl}")" />
+
+    <meta name="og:site_name" content="ProgrammerAL" />
+    <meta name="twitter:site" content="@ProgrammerAL">
+
+    @if (!string.IsNullOrWhiteSpace(PostData.Metadata.ComicImageLink))
+    {
+        <meta property="og:image" content="@(PostData.Metadata.ComicImageLink)" />
+        <meta property="twitter:image" content="@(PostData.Metadata.ComicImageLink)" />
+        <meta name="twitter:card" content="summary_large_image">
+    }
+</head>
+
+<body>
+</body>
+
+</html>

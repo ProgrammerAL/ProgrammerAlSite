@@ -1,0 +1,17 @@
+config:
+  programmeral-site:secrets-key-vault-url: https://al-site-deploy-secrets.vault.azure.net/
+  programmeral-site:cloudflare-account-id: 25a96b543306c9c9b27e5e04ff7b00b6
+  programmeral-site:service-version: local
+  programmeral-site:root-run-path: local
+  programmeral-site:web-client-infra:
+    RootDomain: ProgrammerAL.com
+    CloudflareZoneId: bd0333ee073e02c92ad4a63bf2477476
+  programmeral-site:storage-api-config:
+    ApiDomain: ProgrammerAL.com
+    ServiceName: programmeral-storage-api
+    CloudflareZoneId: bd0333ee073e02c92ad4a63bf2477476
+  programmeral-site:route-filter-worker-config:
+    RoutePattern: programmeral.com/*
+    ServiceName: programmeral-route-filter-worker
+    CloudflareZoneId: bd0333ee073e02c92ad4a63bf2477476
+  pulumi:template: azure-csharp

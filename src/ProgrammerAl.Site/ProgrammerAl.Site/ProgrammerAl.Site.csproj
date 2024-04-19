@@ -4,6 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <WarningsAsErrors />
+        <Nullable>enable</Nullable>
         <AssemblyName>ProgrammerAl.Site</AssemblyName>
         <RootNamespace>ProgrammerAl.Site</RootNamespace>
     </PropertyGroup>

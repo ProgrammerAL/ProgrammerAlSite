@@ -1,21 +1,24 @@
 ﻿@page "/posts/{PostUrl}"
 @using System.Text.Encodings.Web;
 
-<HeadContent>
-    <meta name="og:type" content="article" />
+@if (PostData is object)
+{
+    <HeadContent>
+        <meta name="og:type" content="article" />
 
-    <meta name="og:title" content="@(PostData.Metadata.Title)" />
-    <meta name="twitter:title" content="@(PostData.Metadata.Title)" />
-    <meta property="og:url" content="@($"https://ProgrammerAL.com/posts/{PostUrl}")" />
-    <meta property="twitter:url" content="@($"https://ProgrammerAL.com/posts/{PostUrl}")" />
+        <meta name="og:title" content="@(PostData.Metadata.Title)" />
+        <meta name="twitter:title" content="@(PostData.Metadata.Title)" />
+        <meta property="og:url" content="@($"https://ProgrammerAL.com/posts/{PostUrl}")" />
+        <meta property="twitter:url" content="@($"https://ProgrammerAL.com/posts/{PostUrl}")" />
 
-    @if (!string.IsNullOrWhiteSpace(PostData.Metadata.ComicImageLink))
-    {
-        <meta property="og:image" content="@(PostData.Metadata.ComicImageLink)" />
-        <meta property="twitter:image" content="@(PostData.Metadata.ComicImageLink)" />
-        <meta name="twitter:card" content="summary_large_image">
-    }
-</HeadContent>
+        @if (!string.IsNullOrWhiteSpace(PostData.Metadata.ComicImageLink))
+        {
+            <meta property="og:image" content="@(PostData.Metadata.ComicImageLink)" />
+            <meta property="twitter:image" content="@(PostData.Metadata.ComicImageLink)" />
+            <meta name="twitter:card" content="summary_large_image">
+        }
+    </HeadContent>
+}
 
 @if (!string.IsNullOrWhiteSpace(PostHtml.Value))
 {

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ProgrammerAl.Site.DynamicContentUpdater": {
+      "commandName": "Project",
+      "commandLineArgs": "--AppRootPath \"C:/GitHub/ProgrammerAl/ProgrammerAlSite/src/"
+    }
+  }
+}

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ProgrammerAl.Site.DynamicContentUpdater;
 using ProgrammerAl.Site.PostDataEntities;
 using ProgrammerAl.Site.Utilities.Entities;
 
@@ -14,7 +15,7 @@ public class RecentPostsOutputter
 {
     private const int FrontPageBlogsDisplayed = 5;
 
-    public void Output(string contentPath, ImmutableArray<PostEntry> allPosts)
+    public void Output(RuntimeConfig runtimeConfig, ImmutableArray<PostEntry> allPosts)
     {
         Console.WriteLine($"Outputting {PostSummary.RecentSummariesFile}...");
 
@@ -38,7 +39,7 @@ public class RecentPostsOutputter
                 .ToArray();
 
         var recentData = new RecentData { RecentBlogPosts = mostRecentBlogPosts };
-        OutputUtils.WriteOutFileAsJson(recentData, contentPath, PostSummary.RecentSummariesFile);
+        OutputUtils.WriteOutFileAsJson(recentData, runtimeConfig.OutputDirectory, PostSummary.RecentSummariesFile);
 
         Console.WriteLine($"Completed output of {PostSummary.RecentSummariesFile}");
     }

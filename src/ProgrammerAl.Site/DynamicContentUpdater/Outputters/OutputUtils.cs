@@ -11,10 +11,20 @@ namespace DynamicContentUpdater.Outputters;
 
 public static class OutputUtils
 {
-    public static void WriteOutFileAsJson<T>(T obj, string contentPath, string fileName)
+    public static void WriteOutFileAsJson<T>(T obj, string outputDirectoryPath, string fileName)
     {
+        EnsureOutputDirectoryExists(outputDirectoryPath);
+
         string objJson = JsonConvert.SerializeObject(obj);
-        string outputFilePath = Path.Combine(contentPath, fileName);
+        string outputFilePath = Path.Combine(outputDirectoryPath, fileName);
         File.WriteAllText(outputFilePath, objJson);
+    }
+
+    private static void EnsureOutputDirectoryExists(string outputfolderPath)
+    {
+        if (!Directory.Exists(outputfolderPath))
+        {
+            _ = Directory.CreateDirectory(outputfolderPath);
+        }
     }
 }

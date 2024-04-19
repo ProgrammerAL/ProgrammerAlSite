@@ -6,29 +6,29 @@ using System.Net.Http;
 
 using Microsoft.AspNetCore.Components;
 
+using ProgrammerAl.Site.Config;
 using ProgrammerAl.Site.DataProviders;
-using ProgrammerAl.Site.Utilities;
 using ProgrammerAl.Site.Utilities.Entities;
 
 namespace ProgrammerAl.Site.Pages;
 
 public partial class Comics : ComponentBase
 {
-    [Inject]
-    private PostSummariesProvider PostSummariesProvider { get; set; }
+    [Inject, NotNull]
+    private PostSummariesProvider? PostSummariesProvider { get; set; }
 
-    [Inject]
-    private NavigationManager NavManager { get; set; }
+    [Inject, NotNull]
+    private NavigationManager? NavManager { get; set; }
 
-    [Inject]
-    private IConfig Config { get; set; }
+    [Inject, NotNull]
+    private ApiConfig? ApiConfig { get; set; }
 
     [Parameter]
-    public string PostUrl { get; set; }
+    public string? PostUrl { get; set; }
 
-    private PostSummary CurrentPostSummary { get; set; }
-    private PostSummary NextPostSummary { get; set; }
-    private PostSummary PreviousPostSummary { get; set; }
+    private PostSummary? CurrentPostSummary { get; set; }
+    private PostSummary? NextPostSummary { get; set; }
+    private PostSummary? PreviousPostSummary { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -75,12 +75,18 @@ public partial class Comics : ComponentBase
 
     private void OnPreviousSummarySelected(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
     {
-        NavigateToComic(PreviousPostSummary.TitleLink);
+        if (PreviousPostSummary is object)
+        {
+            NavigateToComic(PreviousPostSummary.TitleLink);
+        }
     }
 
     private void OnNextSummarySelected(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
     {
-        NavigateToComic(NextPostSummary.TitleLink);
+        if (NextPostSummary is object)
+        {
+            NavigateToComic(NextPostSummary.TitleLink);
+        }
     }
 
     private void NavigateToComic(string comicLink)
@@ -95,6 +101,9 @@ public partial class Comics : ComponentBase
 
     private void OnComicPostSelected(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
     {
-        NavManager.NavigateTo($"/posts/{CurrentPostSummary.TitleLink}");
+        if (CurrentPostSummary is object)
+        {
+            NavManager.NavigateTo($"/posts/{CurrentPostSummary.TitleLink}");
+        }
     }
 }
