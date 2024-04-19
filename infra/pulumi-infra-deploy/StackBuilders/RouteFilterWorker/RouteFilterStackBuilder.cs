@@ -50,6 +50,10 @@ public record RouteFilterStackBuilder(
             ZoneId = GlobalConfig.RouteFilterWorkerConfig.CloudflareZoneId,
             ScriptName = apiScript.Name,
             Pattern = GlobalConfig.RouteFilterWorkerConfig.RoutePattern,
+
+        }, new CustomResourceOptions
+        {
+            Provider = provider
         });
 
         return new WorkerInfrastructure(apiScript, workerRoute);
