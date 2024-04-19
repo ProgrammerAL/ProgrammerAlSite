@@ -34,7 +34,6 @@ const BOT_AGENTS = [
 	"xing-contenttabreceiver",
 	"chrome-lighthouse",
 	"telegrambot",
-	"integration-test", // Integration testing
 	"google-inspectiontool"
 ];
 
@@ -114,7 +113,7 @@ async function handleRequest(request: Request, env: Env): Promise<Response> {
 	// Ignore extensions
 	if (request.method.toLowerCase() == "get"
 		&& (pathName.startsWith('/posts/') || pathName.startsWith(comicsSubPath))
-		&& BOT_AGENTS.some((bot) => userAgent == bot)) {
+		&& BOT_AGENTS.some((bot) => userAgent.startsWith(bot))) {
 
 		let lookupPathName = pathName;
 		if (pathName.startsWith(comicsSubPath)) {
