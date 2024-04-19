@@ -4,13 +4,13 @@ config:
   programmeral-site:root-run-path: local
   programmeral-site:web-client-infra:
     RootDomain: ProgrammerAL.com
-    CloudflareZoneId: bd0333ee073e02c92ad4a63bf2477476
+    CloudflareZoneId: cb6b4ef0a57ef72147e4c9bf3c16b532
   programmeral-site:storage-api-config:
     ApiDomain: ProgrammerAL.com
     ServiceName: programmeral-storage-api
-    CloudflareZoneId: bd0333ee073e02c92ad4a63bf2477476
+    CloudflareZoneId: cb6b4ef0a57ef72147e4c9bf3c16b532
   programmeral-site:route-filter-worker-config:
     RoutePattern: programmeral.com/*
     ServiceName: programmeral-route-filter-worker
-    CloudflareZoneId: bd0333ee073e02c92ad4a63bf2477476
+    CloudflareZoneId: cb6b4ef0a57ef72147e4c9bf3c16b532
   pulumi:template: azure-csharp
