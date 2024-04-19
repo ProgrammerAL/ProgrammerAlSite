@@ -24,7 +24,8 @@ jobs:
       SRC_DIRECTORY_PATH: ${{ github.workspace }}/src/
       BUILD_ARTIFACTS_PATH: ${{ github.workspace }}/build_artifacts
       DYNAMIC_CONTENT_UPDATER_PROJECT_PATH: ${{ github.workspace }}/src/ProgrammerAl.Site/DynamicContentUpdater/DynamicContentUpdater.csproj
-      PULUMI_PROJECT_FILE_PATH: ${{ github.workspace }}/infra/pulumi-infra-deploy/pulumi-infra-deploy.csproj
+      PULUMI_PROJECT_DIRECTORY: ${{ github.workspace }}/infra/pulumi-infra-deploy
+      PULUMI_PROJECT_FILE_PATH: ${{ env.PULUMI_PROJECT_DIRECTORY }}/pulumi-infra-deploy.csproj
       ARM_CLIENT_ID: ${{ secrets.arm_client_id }}
       ARM_CLIENT_SECRET: ${{ secrets.arm_client_secret }}
       ARM_TENANT_ID: ${{ secrets.arm_tenant_id }}
@@ -47,6 +48,9 @@ jobs:
         run: npm install --location=global wrangler
       - name: Install Pulumi
         uses: pulumi/setup-pulumi@v2
+      - name: Dotnet Restore - Pulumi Project
+        run: dotnet restore ${{ env.PULUMI_PROJECT_FILE_PATH }}
+
 
         # Run the dynamic content creator first because some stuff it outputs goes to the blazor site
       - name: Run Dynamic Content Creator
@@ -55,10 +59,11 @@ jobs:
       - name: Cake Frosting Build
         run: dotnet run --project build/build/Build.csproj -- --configuration=${{ env.CONFIGURATION }} --srcDirectoryPath=${{ env.SRC_DIRECTORY_PATH }} --BuildArtifactsPath=${{ env.BUILD_ARTIFACTS_PATH }}
 
-      - name: Dotnet Restore - Deploy Project
-        run: dotnet restore ${{ env.PULUMI_PROJECT_FILE_PATH }}
       - name: Cake Frosting - Deploy
         run: dotnet run --project ${{ github.workspace }}/deploy/deploy/Deploy.csproj -- --configuration=${{ env.CONFIGURATION }} --PulumiStackName=${{ env.PULUMI_STACK_NAME }} --ReleaseVersion=${{ inputs.release_tag_id }} --WorkspacePath=${{ github.workspace }}
+
+      - name: Push Content to Storage Api
+        run: dotnet run --project ${{ github.workspace }}/src/ProgrammerAl.Site/ContentUploader/ContentUploader.csproj -- --configuration=${{ env.CONFIGURATION }} --PulumiStackName=${{ env.PULUMI_STACK_NAME }} --PulumiStackPath=${{ env.PULUMI_PROJECT_DIRECTORY }} --ContentDirectory= "${{ env.SRC_DIRECTORY_PATH}}/ProgrammerAl.Site.Content"
 
       # - name: Deploy Static Site
       #   uses: Azure/static-web-apps-deploy@v1
