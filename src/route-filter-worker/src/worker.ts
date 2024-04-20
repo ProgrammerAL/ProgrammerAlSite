@@ -134,7 +134,7 @@ async function handleRequest(request: Request, env: Env): Promise<Response> {
 				redirect: "manual",
 			}));
 
-			const responseText = response.text();
+			const responseText = await response.text();
 			console.log(`Redirecting text was: '${responseText}'`);
 
 			return response;
