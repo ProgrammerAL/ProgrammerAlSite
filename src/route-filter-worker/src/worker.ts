@@ -140,7 +140,5 @@ async function handleRequest(request: Request, env: Env): Promise<Response> {
 		}
 	}
 
-	console.log(`Debug: Returning original value for path '${request.url}'. User-Agent is ${userAgent}`);
-
 	return fetch(request);
 }
