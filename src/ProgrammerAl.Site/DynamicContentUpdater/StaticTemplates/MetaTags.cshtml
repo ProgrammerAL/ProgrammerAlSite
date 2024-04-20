@@ -14,22 +14,17 @@
     <meta property="og:site_name" content="ProgrammerAL.com">
     <meta property="og:title" content="@(Model.TitleHumanReadable)">
     <meta property="og:url" content="@($"https://ProgrammerAL.com/posts/{Model.TitleLink}")">
+    <meta property="og:publish_date" content="@(Model.ReleaseDate.ToString("yyyy-MM-dd"))">
+    <meta property="og:type" content="article">
 
     @if (Model.TryGetComicLink(out var comicLink))
     {
         <meta property="og:image" content="@($"__StorageSiteUrl__/storage/posts/{comicLink}")">
-        @* <meta name="twitter:image" content="@($"__StorageSiteUrl__/storage/posts/{comicLink}")"> *@
     }
-    <meta name="twitter:card" content="summary_large_image">
 
-    @*     <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@@ProgrammerAL">
     <meta name="twitter:creator" content="@@ProgrammerAL">
-    *@
-    @* <meta name="twitter:title" content="@(Model.TitleHumanReadable)"> *@
-    @* <meta property="twitter:url" content="@($"__StorageSiteUrl__/storage/posts/{Model.TitleLink}")"> *@
-    @*     <meta name="twitter:description" content="The personal site for Al Rodriguez, AKA ProgrammerAL. This site has blog posts, personal links like GitHub and Twitter, and other items of the like.">
-    *@
 </head>
 
 <body>
