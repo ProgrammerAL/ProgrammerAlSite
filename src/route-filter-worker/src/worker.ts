@@ -37,6 +37,11 @@ const BOT_AGENTS = [
 	"google-inspectiontool"
 ];
 
+const REDIRECTABLE_SUB_PATHS = [
+	"/posts/",
+	"/comics/",
+];
+
 // These are the extensions that the worker will skip prerendering
 // even if any other conditions pass.
 // const IGNORE_EXTENSIONS = [
@@ -103,37 +108,36 @@ async function handleRequest(request: Request, env: Env): Promise<Response> {
 	// 	.substring(pathName.lastIndexOf(".") || pathName.length)
 	// 	?.toLowerCase();
 
-	// console.log(`Received request from url '${request.url}' with pathname '${pathName}'`);
+	console.log(`Received request from url '${request.url}' with pathname '${pathName}' and user agent '${userAgent}'`);
 
 
-	const comicsSubPath = '/comics/';
-
-	//TODO: Once metatags are made for comics pages, include /Comics/
 	// Non robot user agent
-	// Ignore extensions
+	// TODO: Ignore extensions
 	if (request.method.toLowerCase() == "get"
-		&& (pathName.startsWith('/posts/') || pathName.startsWith(comicsSubPath))
 		&& BOT_AGENTS.some((bot) => userAgent.includes(bot))) {
 
-		let lookupPathName = pathName.substring(1);//Skip the initial slash
-		if (pathName.startsWith(comicsSubPath)) {
-			lookupPathName = `posts/${pathName.substring(comicsSubPath.length)}`;
+		var selectedSubPath = REDIRECTABLE_SUB_PATHS.find(x => pathName.startsWith(x));
+		if (selectedSubPath) {
+
+			//Skip the initial lookup path so we can replace it with 'posts'
+			let lookupPathName = pathName.substring(selectedSubPath.length);
+
+			//example: 		 https://programmeral.com/posts/20240409-WhyAzureManagedIdentitiesNoMoreSecrets
+			//other example: https://programmeral.com/comics/20240409-WhyAzureManagedIdentitiesNoMoreSecrets
+			//Redirects to:  https://storage.programmeral.com/storage/posts/20240409-WhyAzureManagedIdentitiesNoMoreSecrets/metatags.html
+			const newUrl = `${env.STORAGE_API_ENDPOINT}/storage/posts/${lookupPathName}/metatags.html`;
+
+			console.log(`Redirecting request from '${request.url}' to '${newUrl}' because it has User-Agent ${userAgent}`);
+
+			return fetch(new Request(newUrl, {
+				headers: request.headers,
+				redirect: "manual",
+			}));
+			// return fetch(new Request(newUrl, {
+			// 	method: "GET",
+			// 	headers: request.headers
+			// }));
 		}
-
-		//example: 		https://programmeral.com/posts/20240409-WhyAzureManagedIdentitiesNoMoreSecrets
-		//Redirects to: https://storage.programmeral.com/posts/20240409-WhyAzureManagedIdentitiesNoMoreSecrets/metatags.html
-		const newUrl = `${env.STORAGE_API_ENDPOINT}/storage/${lookupPathName}/metatags.html`;
-
-		console.log(`Redirecting request from '${request.url}' to '${newUrl}' because it has User-Agent ${userAgent}`);
-
-		// return fetch(new Request(newUrl, {
-		// 	headers: request.headers,
-		// 	redirect: "manual",
-		// }));
-		return fetch(new Request(newUrl, {
-			method: "GET",
-			headers: request.headers
-		}));
 	}
 
 	console.log(`Debug: Returning original value for path '${request.url}'. User-Agent is ${userAgent}`);

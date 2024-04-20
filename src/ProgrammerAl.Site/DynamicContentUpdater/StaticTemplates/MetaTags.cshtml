@@ -1,7 +1,7 @@
 ﻿@model ProgrammerAl.Site.PostDataEntities.PostEntry
 
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" prefix="og: http://ogp.me/ns#">
 
 <head>
     <meta charset="utf-8" />
@@ -12,28 +12,28 @@
     <meta name="keywords" content="Blog, Azure, .NET, Programming, Software Development, C#" />
     <meta name="google-site-verification" content="yiV1UDeEs1YKSvwq2GPgO6bEAEnPh8sX8JjqIennzuw" />
 
-    <meta name="og:type" content="article" />
+    <meta property="og:type" content="article" />
 
-    <meta name="og:title" content="@(Model.TitleHumanReadable)" />
-    <meta name="twitter:title" content="@(Model.TitleHumanReadable)" />
+    <meta property="og:title" content="@(Model.TitleHumanReadable)" />
     <meta property="og:url" content="@($"__StorageSiteUrl__/storage/posts/{Model.TitleLink}")" />
-    <meta property="twitter:url" content="@($"__StorageSiteUrl__/storage/posts/{Model.TitleLink}")" />
+    <meta property="og:site_name" content="ProgrammerAL.com" />
 
-    <meta name="og:site_name" content="ProgrammerAL.com" />
+    @* <meta name="twitter:title" content="@(Model.TitleHumanReadable)" /> *@
+    @* <meta property="twitter:url" content="@($"__StorageSiteUrl__/storage/posts/{Model.TitleLink}")" /> *@
+
     <meta name="twitter:site" content="@@ProgrammerAL">
-
     <meta name="twitter:creator" content="@@ProgrammerAL">
     <meta name="twitter:card" content="summary_large_image">
 
     @if (Model.TryGetComicLink(out var comicLink))
     {
         <meta property="og:image" content="@($"__StorageSiteUrl__/storage/posts/{comicLink}")" />
-        <meta property="twitter:image" content="@($"__StorageSiteUrl__/storage/posts/{comicLink}")" />
+        @* <meta name="twitter:image" content="@($"__StorageSiteUrl__/storage/posts/{comicLink}")" /> *@
     }
 </head>
 
 <body>
-    <p>This is the static meta tags page for: @($"__StorageSiteUrl__/storage/posts/{Model.TitleLink}")</p>
+    <p>This is the static meta tags page for: @($"https://ProgrammerAL.com/posts/{Model.TitleLink}")</p>
 </body>
 
 </html>
