@@ -129,15 +129,11 @@ async function handleRequest(request: Request, env: Env): Promise<Response> {
 
 			console.log(`Redirecting request from '${request.url}' to '${newUrl}' because it has User-Agent ${userAgent}`);
 
-			const response = await fetch(new Request(newUrl, {
+			return fetch(new Request(newUrl, {
 				headers: request.headers,
 				redirect: "manual",
 			}));
 
-			const responseText = await response.text();
-			console.log(`Redirecting text was: '${responseText}'`);
-
-			return response;
 			// return fetch(new Request(newUrl, {
 			// 	method: "GET",
 			// 	headers: request.headers
