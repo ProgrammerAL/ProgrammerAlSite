@@ -113,7 +113,7 @@ async function handleRequest(request: Request, env: Env): Promise<Response> {
 	// Ignore extensions
 	if (request.method.toLowerCase() == "get"
 		&& (pathName.startsWith('/posts/') || pathName.startsWith(comicsSubPath))
-		&& BOT_AGENTS.some((bot) => userAgent.startsWith(bot))) {
+		&& BOT_AGENTS.some((bot) => userAgent.includes(bot))) {
 
 		let lookupPathName = pathName.substring(1);//Skip the initial slash
 		if (pathName.startsWith(comicsSubPath)) {
@@ -131,6 +131,7 @@ async function handleRequest(request: Request, env: Env): Promise<Response> {
 		// 	redirect: "manual",
 		// }));
 		return fetch(new Request(newUrl, {
+			method: "GET",
 			headers: request.headers
 		}));
 	}
