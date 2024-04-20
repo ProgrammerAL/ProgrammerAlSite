@@ -12,7 +12,10 @@ function determineContenTypeFromFileName(path: string): string {
 		?.toLowerCase();
 
 	if (!extension) {
-		return '*';
+		return '';
+	}
+	if(extension == '.html') {
+		return 'text/html';
 	}
 	if (extension == '.svg') {
 		return 'image/svg+xml'
@@ -26,8 +29,14 @@ function determineContenTypeFromFileName(path: string): string {
 	if (extension == '.jpg' || extension == '.jpeg') {
 		return 'image/jpeg'
 	}
+	if(extension == '.gif') {
+		return 'image/gif';
+	}
+	if(extension == '.js') {
+		return 'text/json';
+	}
 
-	return '*';
+	return '';
 }
 
 export default {
@@ -48,7 +57,11 @@ export default {
 		const headers = new Headers();
 		storageObject.writeHttpMetadata(headers);
 		headers.set('etag', storageObject.httpEtag);
-		headers.set('Content-Type', determineContenTypeFromFileName(filePath));
+
+		var contentType = determineContenTypeFromFileName(filePath);
+		if(contentType){
+			headers.set('Content-Type', contentType);
+		}
 
 		return new Response(storageObject.body, {
 			headers,
