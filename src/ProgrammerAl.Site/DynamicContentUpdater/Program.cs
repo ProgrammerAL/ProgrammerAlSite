@@ -36,7 +36,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
 
             //Make sure this one is first so we don't double-copy files
             new AllContentOutputter().Output(runtimeConfig, contentPath);
-
+            new SvgToPngOutputter().Output(runtimeConfig, contentPath);
+            
             new SiteMapOutputter().Output(sitemapFilePath, allPosts);
 
             new RecentPostsOutputter().Output(runtimeConfig, allPosts);

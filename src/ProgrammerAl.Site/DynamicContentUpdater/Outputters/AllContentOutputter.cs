@@ -6,11 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Razor.Language;
-
 using ProgrammerAl.Site.DynamicContentUpdater;
-using ProgrammerAl.Site.PostDataEntities;
-using ProgrammerAl.Site.Utilities.Entities;
 
 namespace DynamicContentUpdater.Outputters;
 

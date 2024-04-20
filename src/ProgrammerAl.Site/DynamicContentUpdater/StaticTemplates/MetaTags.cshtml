@@ -17,7 +17,7 @@
     <meta property="og:publish_date" content="@(Model.ReleaseDate.ToString("yyyy-MM-dd"))">
     <meta property="og:type" content="article">
 
-    @if (Model.TryGetComicLink(out var comicLink))
+    @if (Model.TryGetPngComicLink(out var comicLink))
     {
         <meta property="og:image" content="@($"__StorageSiteUrl__/storage/posts/{comicLink}")">
     }

@@ -33,7 +33,7 @@ public class RecentPostsOutputter
                         firstParagraph: x.FirstParagraphHtml,
                         postNumber: x.PostNumber,
                         tags: x.Tags.ToArray(),
-                        comicImageLink: x.TryGetComicLink(out comicImageLink) ? comicImageLink : null
+                        comicImageLink: x.TryGetComicSvgLink(out comicImageLink) ? comicImageLink : null
                     );
                 })
                 .ToArray();

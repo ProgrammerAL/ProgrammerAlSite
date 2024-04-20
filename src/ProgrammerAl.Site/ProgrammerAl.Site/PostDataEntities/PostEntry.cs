@@ -8,6 +8,7 @@ public class PostEntry
 {
     public const string ComicsTag = "comic";
     public const string ComicSvgFileName = "comic.svg";
+    public const string ComicPngFileName = "comic.png";
     public const string HtmlFileName = "post.html";
     public const string MetaTagsFileName = "metatags.html";
 
@@ -45,11 +46,23 @@ public class PostEntry
 
     public bool HasComic => File.Exists($"{PostDirectoryLocalPath}/{ComicSvgFileName}");
 
-    public bool TryGetComicLink(out string? comicLink)
+    public bool TryGetComicSvgLink(out string? comicLink)
     {
         if (HasComic)
         {
             comicLink = $"{TitleLink}/{ComicSvgFileName}";
+            return true;
+        }
+
+        comicLink = null;
+        return false;
+    }
+
+    public bool TryGetPngComicLink(out string? comicLink)
+    {
+        if (HasComic)
+        {
+            comicLink = $"{TitleLink}/{ComicPngFileName}";
             return true;
         }
 

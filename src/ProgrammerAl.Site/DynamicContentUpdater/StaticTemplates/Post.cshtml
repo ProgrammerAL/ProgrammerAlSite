@@ -1,6 +1,6 @@
 ﻿@model ProgrammerAl.Site.PostDataEntities.PostEntry
 
-@if (Model.TryGetComicLink(out string comicImageLink))
+@if (Model.TryGetComicSvgLink(out string comicImageLink))
 {
     var srcLink = $"__StorageSiteUrl__/storage/Posts/{comicImageLink}";
     <div class="post-comic-image">
