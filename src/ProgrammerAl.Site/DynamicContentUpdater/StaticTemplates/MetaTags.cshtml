@@ -3,7 +3,8 @@
 @{
     string comicSrcLink = null;
 
-    if (Model.TryGetPngComicLink(out var comicLink))
+    // if (Model.TryGetPngComicLink(out var comicLink))
+    if (Model.TryGetSvgComicLink(out var comicLink))
     {
         comicSrcLink = $"__StorageSiteUrl__/storage/Posts/{comicLink}";
     }
