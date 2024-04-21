@@ -1,10 +1,10 @@
-Title: Shift Left
+Title: Know Your MCU
 Published: 2024/04/20
 Tags: 
 - comic
 - humor
 ---
 
-## KNow Your MCU
+## Know Your MCU
 
 This is a draft
