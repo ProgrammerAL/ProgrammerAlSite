@@ -95,7 +95,7 @@ public partial class Posts : ComponentBase
         RefreshTagSelections();
 
         //Navigate back to this page with the new query string. Doesn't do a page refresh, UI update only
-        var uri = $"/{LinkType}?tagSelections={QueryStringTagSelections}";
+        var uri = $"{LinkType}?tagSelections={QueryStringTagSelections}";
 
         NavManager.NavigateTo(uri, forceLoad: false);
 
