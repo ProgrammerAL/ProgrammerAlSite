@@ -38,7 +38,7 @@ public partial class Posts : ComponentBase
 
     private bool IsViewingTags { get; set; }
     private bool IsViewingDrafts => NavManager.Uri.Contains("/drafts", StringComparison.OrdinalIgnoreCase);
-    private string LinkType => IsViewingDrafts ? "/drafts/" : "/posts/";
+    private string LinkType => IsViewingDrafts ? "/drafts" : "/posts";
 
     protected override async Task OnInitializedAsync()
     {
