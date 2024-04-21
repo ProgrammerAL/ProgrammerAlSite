@@ -32,10 +32,26 @@ public class DraftStaticHtmlOutputter
             staticHtml = staticHtml.Replace("__StorageSiteUrl__", runtimeConfig.StorageUrl);
 
             string outputFilePath = $"{runtimeConfig.OutputDirectory}/drafts/{post.TitleLink}/{PostEntry.HtmlFileName}";
+
+            var destinationDir = new FileInfo(outputFilePath).DirectoryName;
+            if (!Directory.Exists(destinationDir))
+            {
+                Console.WriteLine($"\tCreating directory '{destinationDir}'");
+                Directory.CreateDirectory(destinationDir);
+            }
+
             Console.WriteLine($"Writing to file: {outputFilePath}");
             File.WriteAllText(outputFilePath, staticHtml);
         }
 
         await Console.Out.WriteLineAsync($"Completed outputting static html draft files...");
+    }
+
+    private static void EnsureOutputDirectoryExists(string outputfolderPath)
+    {
+        if (!Directory.Exists(outputfolderPath))
+        {
+            _ = Directory.CreateDirectory(outputfolderPath);
+        }
     }
 }

@@ -61,7 +61,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             string[] blogPostFolders = Directory.GetDirectories(blogPostsFolderPath, "*.*", SearchOption.TopDirectoryOnly);
 
             var postsFolderEntries = blogPostFolders
-                .Select(x =>
+            .Select(x =>
             {
                 var dirInfo = new DirectoryInfo(x);
                 var postFilePath = $"{x}/post.md";
