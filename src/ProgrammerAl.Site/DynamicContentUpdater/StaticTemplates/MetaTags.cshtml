@@ -1,7 +1,7 @@
 ﻿@model ProgrammerAl.Site.PostDataEntities.PostEntry
 
 @{
-    string? comicSrcLink = null;
+    string comicSrcLink = null;
 
     if (Model.TryGetPngComicLink(out var comicLink))
     {
