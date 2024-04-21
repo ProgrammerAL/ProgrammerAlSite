@@ -37,7 +37,7 @@ public partial class Posts : ComponentBase
     private ImmutableArray<KeyValuePair<string, bool>> TagSelections { get; set; } = [];
 
     private bool IsViewingTags { get; set; }
-    private bool IsViewingDrafts => NavManager.Uri.Contains("/drafts/", StringComparison.OrdinalIgnoreCase);
+    private bool IsViewingDrafts => NavManager.Uri.Contains("/drafts", StringComparison.OrdinalIgnoreCase);
     private string LinkType => IsViewingDrafts ? "/drafts/" : "/posts/";
 
     protected override async Task OnInitializedAsync()
