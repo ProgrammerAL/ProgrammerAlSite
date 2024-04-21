@@ -49,7 +49,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             await new PostStaticHtmlOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, postEntries.Posts);
             await new PostStaticMetaTagFilesOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, postEntries.Posts);
 
-            new AllDraftSummariesOutputter().Output(runtimeConfig, postEntries.Posts);
+            new AllDraftSummariesOutputter().Output(runtimeConfig, postEntries.Drafts);
             await new DraftStaticHtmlOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, postEntries.Drafts);
         }
 
