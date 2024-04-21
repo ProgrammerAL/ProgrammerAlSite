@@ -46,11 +46,12 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             new TagLinksOutputter().Output(runtimeConfig, postEntries.Posts);
             new PostMetadataOutputter().Output(runtimeConfig, postEntries.Posts);
 
+            //Output the static html files for the posts and drafts
             await new PostStaticHtmlOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, postEntries.Posts);
-            await new PostStaticMetaTagFilesOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, postEntries.Posts);
+            await new PostStaticHtmlOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, postEntries.Drafts);
 
-            new AllDraftSummariesOutputter().Output(runtimeConfig, postEntries.Drafts);
-            await new DraftStaticHtmlOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, postEntries.Drafts);
+            await new PostStaticMetaTagFilesOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, postEntries.Posts);
+            //new AllDraftSummariesOutputter().Output(runtimeConfig, postEntries.Drafts);
         }
 
         public static PostEntries LoadAllPostEntries(string contentPath, PostParser parser)

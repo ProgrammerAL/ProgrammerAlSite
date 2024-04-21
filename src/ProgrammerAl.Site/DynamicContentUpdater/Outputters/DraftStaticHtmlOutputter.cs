@@ -31,7 +31,7 @@ public class DraftStaticHtmlOutputter
             var staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
             staticHtml = staticHtml.Replace("__StorageSiteUrl__", runtimeConfig.StorageUrl);
 
-            string outputFilePath = $"{runtimeConfig.OutputDirectory}/drafts/{post.TitleLink}/{PostEntry.HtmlFileName}";
+            string outputFilePath = $"{runtimeConfig.OutputDirectory}/Posts/{post.TitleLink}/{PostEntry.HtmlFileName}";
 
             var destinationDir = new FileInfo(outputFilePath).DirectoryName;
             if (!Directory.Exists(destinationDir))
