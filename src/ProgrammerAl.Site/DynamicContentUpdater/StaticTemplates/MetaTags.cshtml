@@ -1,5 +1,14 @@
 ﻿@model ProgrammerAl.Site.PostDataEntities.PostEntry
 
+@{
+    string? comicSrcLink = null;
+
+    if (Model.TryGetPngComicLink(out var comicLink))
+    {
+        comicSrcLink = $"__StorageSiteUrl__/storage/Posts/{comicImageLink}";
+    }
+}
+
 <!DOCTYPE html>
 <html lang="en-us">
 
@@ -17,9 +26,9 @@
     <meta property="og:publish_date" content="@(Model.ReleaseDate.ToString("yyyy-MM-dd"))">
     <meta property="og:type" content="article">
 
-    @if (Model.TryGetPngComicLink(out var comicLink))
+    @if (!string.IsNullOrWhiteSpace(comicSrcLink))
     {
-        <meta property="og:image" content="@($"__StorageSiteUrl__/storage/posts/{comicLink}")">
+        <meta property="og:image" content="@comicSrcLink">
     }
 
     <meta name="twitter:card" content="summary_large_image">
@@ -30,9 +39,9 @@
 <body>
     <p>This is the static meta tags page for: @($"https://ProgrammerAL.com/posts/{Model.TitleLink}")</p>
 
-    @if (Model.TryGetPngComicLink(out var comicLink))
+    @if (!string.IsNullOrWhiteSpace(comicSrcLink))
     {
-        <img src="@srcLink" />
+        <img src="@comicSrcLink" />
     }
 </body>
 
