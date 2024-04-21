@@ -6,6 +6,7 @@ public class PostSummary
 {
     public const string RecentSummariesFile = "RecentSummaries.json";
     public const string AllPostSummariesFile = "AllPostSummaries.json";
+    public const string AllDraftSummariesFile = "AllDraftSummaries.json";
 
     public PostSummary(
         string titleHumanReadable,

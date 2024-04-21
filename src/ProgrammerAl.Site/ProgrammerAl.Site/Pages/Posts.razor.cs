@@ -20,6 +20,9 @@ public partial class Posts : ComponentBase
     private PostSummariesProvider? PostSummariesProvider { get; set; }
 
     [Inject, NotNull]
+    private DraftSummariesProvider? DraftSummariesProvider { get; set; }
+
+    [Inject, NotNull]
     private TagLinksDataProvider? TagLinksDataProvider { get; set; }
 
     [Inject, NotNull]
@@ -28,21 +31,33 @@ public partial class Posts : ComponentBase
     [Parameter, SupplyParameterFromQuery(Name = "tagSelections")]
     public string? QueryStringTagSelections { get; set; }
 
-    private ImmutableArray<PostSummary> PostSummaries { get; set; } = ImmutableArray<PostSummary>.Empty;
+    private ImmutableArray<PostSummary> Summaries { get; set; } = ImmutableArray<PostSummary>.Empty;
     private TagLinks? TagLinks { get; set; }
     private ImmutableArray<KeyValuePair<string, bool>> TypesTagSelections { get; set; } = [];
     private ImmutableArray<KeyValuePair<string, bool>> TagSelections { get; set; } = [];
 
     private bool IsViewingTags { get; set; }
+    private bool IsViewingDrafts => NavManager.Uri.Contains("/drafts/", StringComparison.OrdinalIgnoreCase);
+    private string LinkType => IsViewingDrafts ? "/drafts/" : "/posts/";
 
     protected override async Task OnInitializedAsync()
     {
-        var postSummariesTask = PostSummariesProvider.GetPostSummariesAsync();
+        Task<ImmutableArray<PostSummary>> summariesTask;
+
+        if (IsViewingDrafts)
+        {
+            summariesTask = DraftSummariesProvider.GetDraftSummariesAsync();
+        }
+        else
+        {
+            summariesTask = PostSummariesProvider.GetPostSummariesAsync();
+        }
+
         var tagLinksTask = TagLinksDataProvider.GetTagLinksAsync();
 
-        await Task.WhenAll(postSummariesTask, tagLinksTask);
+        await Task.WhenAll(summariesTask, tagLinksTask);
 
-        PostSummaries = postSummariesTask.Result;
+        Summaries = summariesTask.Result;
         TagLinks = tagLinksTask.Result;
 
         RefreshTagSelections();
@@ -80,7 +95,8 @@ public partial class Posts : ComponentBase
         RefreshTagSelections();
 
         //Navigate back to this page with the new query string. Doesn't do a page refresh, UI update only
-        var uri = $"/posts?tagSelections={QueryStringTagSelections}";
+        var uri = $"/{LinkType}?tagSelections={QueryStringTagSelections}";
+
         NavManager.NavigateTo(uri, forceLoad: false);
 
         await InvokeAsync(StateHasChanged);

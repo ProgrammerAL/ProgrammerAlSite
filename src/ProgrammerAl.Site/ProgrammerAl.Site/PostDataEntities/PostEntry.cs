@@ -21,7 +21,8 @@ public class PostEntry
         string postMarkdown,
         string postHtml,
         string firstParagraphHtml,
-        int postNumber)
+        int postNumber,
+        bool isDraft)
     {
         PostDirectoryLocalPath = postDirectoryLocalPath;
         TitleHumanReadable = titleHumanReadable;
@@ -32,6 +33,7 @@ public class PostEntry
         PostHtml = postHtml;
         PostNumber = postNumber;
         FirstParagraphHtml = firstParagraphHtml;
+        IsDraft = isDraft;
     }
 
     public string PostDirectoryLocalPath { get; }
@@ -43,6 +45,7 @@ public class PostEntry
     public string PostHtml { get; }
     public string FirstParagraphHtml { get; }
     public int PostNumber { get; }
+    public bool IsDraft { get; }
 
     public bool HasComic => File.Exists($"{PostDirectoryLocalPath}/{ComicSvgFileName}");
 

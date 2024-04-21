@@ -1,4 +1,5 @@
 ﻿@page "/posts"
+@page "/drafts"
 @using ProgrammerAl.Site.Components
 @using ProgrammerAl.Site.Utilities.Entities;
 
@@ -47,7 +48,7 @@
     }
 }
 
-@if (PostSummaries != null)
+@if (Summaries != null)
 {
     IEnumerable<IGrouping<int, PostSummary>> postsByYear;
     var selections = TagSelections.Concat(TypesTagSelections).Where(x => x.Value).Select(x => x.Key).ToList();
@@ -57,14 +58,14 @@
         //If any tags are selected, only show posts with those tags
         var selectedLinks = TagLinks.Links.Where(x => selections.Contains(x.Key, StringComparer.OrdinalIgnoreCase)).SelectMany(x => x.Value).ToList();
 
-        postsByYear = PostSummaries
+        postsByYear = Summaries
                         .Where(x => selectedLinks.Any(y => string.Equals(x.TitleLink, y, StringComparison.OrdinalIgnoreCase)))
                         .OrderByDescending(x => x.PostNumber)
                         .GroupBy(x => x.PostedDate.Year);
     }
     else
     {
-        postsByYear = PostSummaries.OrderByDescending(x => x.PostNumber).GroupBy(x => x.PostedDate.Year);
+        postsByYear = Summaries.OrderByDescending(x => x.PostNumber).GroupBy(x => x.PostedDate.Year);
     }
 
     foreach (var postByYear in postsByYear)
@@ -74,8 +75,10 @@
             <hr>
             @foreach (var post in postByYear)
             {
+                var postLink = $"/{LinkType}/{post.TitleLink}";
+
                 <div class="mt-4">
-                    <a href="/posts/@post.TitleLink">
+                    <a href="@postLink">
                         <p class="text-lg">@post.TitleHumanReadable</p>
                     </a>
                     <p class="text-sm">Posted on @post.PostedDate.ToLongDateString()</p>

@@ -21,6 +21,7 @@ ConfigureConfig<ApiConfig>(builder);
 builder.Services.AddSingleton<FileDownloader>();
 builder.Services.AddSingleton<PostDataProvider>();
 builder.Services.AddSingleton<PostSummariesProvider>();
+builder.Services.AddSingleton<DraftSummariesProvider>();
 builder.Services.AddSingleton<TagLinksDataProvider>();
 
 builder.Services.AddSingleton<ISiteLogger, SiteLogger>();

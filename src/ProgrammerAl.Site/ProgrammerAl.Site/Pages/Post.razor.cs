@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
 using ProgrammerAl.Site.DataProviders;
-using ProgrammerAl.Site.Utilities;
 
 namespace ProgrammerAl.Site.Pages;
 
