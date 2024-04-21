@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Pulumi.Automation;
+using System.Collections.Generic;
 
 namespace ProgrammerAl.Site.ContentUploader
 {
@@ -54,31 +55,41 @@ namespace ProgrammerAl.Site.ContentUploader
             var startIndex = runtimeConfig.ContentDirectory.Length;
 
             var contentFiles = Directory.GetFiles(runtimeConfig.ContentDirectory, "*.*", SearchOption.AllDirectories);
+            var uploadTasks = new List<Task>(contentFiles.Length);
             foreach (var filePath in contentFiles)
             {
-                var storagePath = filePath
-                                    .Replace('\\', '/')
-                                    .Replace("//", "/")
-                                    .Substring(startIndex);
-                var pushPath = $"/storage/{storagePath}?action=store-object";
+                var uploadTask = UploadFileAsync(filePath, startIndex, client);
+                uploadTasks.Add(uploadTask);
+            }
 
-                await Console.Out.WriteLineAsync($"Processing file {filePath}");
-                await Console.Out.WriteLineAsync($"\tUploading to {pushPath}");
+            await Task.WhenAll(uploadTasks);
+            await Console.Out.WriteLineAsync("Done uploading all files...");
+        }
 
-                var request = new HttpRequestMessage(HttpMethod.Put, pushPath);
-                using var fileStream = File.Open(filePath, FileMode.Open);
-                request.Content = new StreamContent(fileStream);
+        private static async Task UploadFileAsync(string filePath, int rootPathStartIndex, HttpClient httpClient)
+        {
+            var storagePath = filePath
+                    .Replace('\\', '/')
+                    .Replace("//", "/")
+                    .Substring(rootPathStartIndex);
+            var pushPath = $"/storage/{storagePath}?action=store-object";
 
-                var result = await client.SendAsync(request);
-                if (result.IsSuccessStatusCode)
-                {
-                    await Console.Out.WriteLineAsync($"\t\tResult Success");
-                }
-                else
-                {
-                    var resultContent = await result.Content.ReadAsStringAsync();
-                    await Console.Out.WriteLineAsync($"\t\tResult Error {result.StatusCode}. {resultContent}");
-                }
+            Console.WriteLine($"Processing file {filePath}");
+            Console.WriteLine($"\tUploading to {pushPath}");
+
+            var request = new HttpRequestMessage(HttpMethod.Put, pushPath);
+            using var fileStream = File.Open(filePath, FileMode.Open);
+            request.Content = new StreamContent(fileStream);
+
+            var result = await httpClient.SendAsync(request);
+            if (result.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"\t\tResult Success");
+            }
+            else
+            {
+                var resultContent = await result.Content.ReadAsStringAsync();
+                Console.WriteLine($"\t\tResult Error {result.StatusCode}. {resultContent}");
             }
         }
     }
