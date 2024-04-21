@@ -58,7 +58,7 @@ public class PostEntry
         return false;
     }
 
-    public bool TryGetPngComicLink(out string? comicLink)
+    public bool TryGetComicPngLink(out string? comicLink)
     {
         if (HasComic)
         {
