@@ -29,6 +29,11 @@
 
 <body>
     <p>This is the static meta tags page for: @($"https://ProgrammerAL.com/posts/{Model.TitleLink}")</p>
+
+    @if (Model.TryGetPngComicLink(out var comicLink))
+    {
+        <img src="@srcLink" />
+    }
 </body>
 
 </html>
