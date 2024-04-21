@@ -44,7 +44,10 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             new RecentPostsOutputter().Output(runtimeConfig, postEntries.Posts);
             new AllPostSummariesOutputter().Output(runtimeConfig, postEntries.Posts);
             new TagLinksOutputter().Output(runtimeConfig, postEntries.Posts);
+
+            //Output the metadata files for the posts and drafts
             new PostMetadataOutputter().Output(runtimeConfig, postEntries.Posts);
+            new PostMetadataOutputter().Output(runtimeConfig, postEntries.Drafts);
 
             //Output the static html files for the posts and drafts
             await new PostStaticHtmlOutputter().OutputAsync(runtimeConfig, pathToTemplatesDir, postEntries.Posts);
