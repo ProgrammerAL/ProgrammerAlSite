@@ -61,7 +61,6 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
             string[] blogPostFolders = Directory.GetDirectories(blogPostsFolderPath, "*.*", SearchOption.TopDirectoryOnly);
 
             var postsFolderEntries = blogPostFolders
-                .Where(x => !x.Contains("draft__", StringComparison.OrdinalIgnoreCase))
                 .Select(x =>
             {
                 var dirInfo = new DirectoryInfo(x);
