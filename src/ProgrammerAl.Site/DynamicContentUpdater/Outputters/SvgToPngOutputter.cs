@@ -36,7 +36,7 @@ public class SvgToPngOutputter
             var svgText = File.ReadAllText(sourceFilePath);
             var sanitizedSvg = ReplaceSvgVariablesWithDefaultValues(svgText);
 
-            var encodedSvg = Encoding.UTF8.GetBytes(svgText);
+            var encodedSvg = Encoding.UTF8.GetBytes(sanitizedSvg);
             using var memoryStream = new MemoryStream(encodedSvg);
             var svgDocument = SvgDocument.Open<SvgDocument>(memoryStream);
 
