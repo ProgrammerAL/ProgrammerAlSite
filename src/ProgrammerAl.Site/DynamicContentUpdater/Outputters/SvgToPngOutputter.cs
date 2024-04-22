@@ -6,8 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Components.Forms;
-
 using ProgrammerAl.Site.DynamicContentUpdater;
 
 using Svg;
@@ -54,6 +52,8 @@ public class SvgToPngOutputter
             }
 
             bitmap.Save(destinationFile);
+            var outputDebugSvg = destinationFile.Substring(0, destinationFile.Length - 4) + ".debug.svg";//Replace .svg with .png
+            File.WriteAllText(outputDebugSvg, sanitizedSvg);
         }
 
         Console.WriteLine($"Completed outputting post svg files to png files");
