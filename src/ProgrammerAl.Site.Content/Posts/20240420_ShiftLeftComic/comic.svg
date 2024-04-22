@@ -8,108 +8,134 @@
     <desc id="descId">A 4 panel comic. The first is label Devs and shows a person pushing a boulder up a hill. The boulder has words inside like Unit Tests, CS/CD, DB Queries, etc. The second panel is labeled QA and shows a person playing with a yo-yo. The third panel is labeled Project Management and shows a person reading a book. The 4th panel is labeled Infrastructure and shows 2 people playing ping pong.</desc>
 
     <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --line-color: black;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: black;
+                --text-color: white;
+                --line-color: white;
+            }
+        }
+        
+        .background {
+            fill: var(--background-color);
+        }
+
         .signature-text { 
             font-family: Georgia;
             font-size: 4px;
+            fill: var(--text-color);
         }
 
         .section-border { 
-            fill: white;
-            stroke: black;
+            fill: var(--background-color);
+            stroke: var(--line-color);
             stroke-width: 1;
         }
 
         .section-title-border { 
-            stroke: black;
+            stroke: var(--line-color);
             stroke-width: 1;
-            fill: white;
+            fill: var(--background-color);
         }
 
         .section-title-text { 
             font-family: Georgia;
             font-size: 14px;
+            fill: var(--text-color);
         }
 
         .title-text { 
             font-family: Georgia;
             font-size: 24px;
             font-weight: bold;
+            fill: var(--text-color);
         }
 
         .sub-title-text { 
             font-family: Georgia;
             font-size: 10px;
+            fill: var(--text-color);
         }
 
         .person { 
-            fill: white;
-            stroke: black;
+            fill: var(--background-color);
+            stroke: var(--line-color);
             stroke-width: 0.5;
         }
 
         .hill { 
-            fill: white;
-            stroke: black;
+            fill: var(--background-color);
+            stroke: var(--line-color);
             stroke-width: 0.8;
         }
 
         .boulder { 
-            fill: white;
-            stroke: black;
+            fill: var(--background-color);
+            stroke: var(--line-color);
             stroke-width: 0.8;
         }
 
         .hill { 
-            fill: white;
-            stroke: black;
+            fill: var(--background-color);
+            stroke: var(--line-color);
             stroke-width: 1.5;
         }
 
         .boulder-text { 
             font-family: Georgia;
             font-size: 8px;
+            fill: var(--text-color);
         }
 
         .yoyo-line { 
-            stroke: black;
+            stroke: var(--line-color);
             stroke-width: 0.4;
         }
 
         .yoyo-outer { 
-            fill: white;
-            stroke: black;
+            fill: var(--background-color);
+            stroke: var(--line-color);
             stroke-width: 1.5;
         }
 
         .yoyo-inner { 
-            fill: white;
-            stroke: black;
+            fill: var(--background-color);
+            stroke: var(--line-color);
             stroke-width: 1;
         }
 
         .book { 
-            fill: white;
-            stroke: black;
+            fill: var(--background-color);
+            stroke: var(--line-color);
             stroke-width: 0.9;
         }
 
         .paddle { 
-            fill: black;
-            stroke: black;
+            fill: var(--line-color);
+            stroke: var(--line-color);
             stroke-width: 1.1;
         }
 
         .ball { 
-            fill: white;
-            stroke: black;
+            fill: var(--background-color);
+            stroke: var(--line-color);
             stroke-width: 0.6;
         }
 
         .ball-motion { 
-            stroke: black;
+            stroke: var(--line-color);
             stroke-width: 0.3;
         }
     </style>
+
+    <rect x="0" y="0" height="315" width="640" class="background">
+    </rect>
 
     <text x="124" y="43" class="signature-text">@ProgrammerAL</text>
 
