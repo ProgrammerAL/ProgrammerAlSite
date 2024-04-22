@@ -52,8 +52,6 @@ public class SvgToPngOutputter
             }
 
             bitmap.Save(destinationFile);
-            var outputDebugSvg = destinationFile.Substring(0, destinationFile.Length - 4) + ".debug.svg";//Replace .svg with .png
-            File.WriteAllText(outputDebugSvg, sanitizedSvg);
         }
 
         Console.WriteLine($"Completed outputting post svg files to png files");
