@@ -8,44 +8,56 @@
     <desc id="descId"></desc>
 
     <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: black;
+                --text-color: white;
+            }
+        }
+
+        .background {
+            fill: var(--background-color);
+        }
+
         .signature-text { 
             font-family: Verdana;
             font-size: 2px;
-        }
-
-        .section-border { 
-            fill: white;
-            stroke: black;
-            stroke-width: 1;
-        }
-
-        .section-title-border { 
-            stroke: black;
-            stroke-width: 1;
-            fill: white;
+            fill: var(--text-color);
         }
 
         .section-title-text { 
             font-family: Verdana;
             font-size: 10px;
+            fill: var(--text-color);
         }
 
         .title-text { 
             font-family: Verdana;
             font-size: 24px;
             font-weight: bold;
+            fill: var(--text-color);
         }
 
         .center-text { 
             font-family: Verdana;
             font-size: 8px;
+            fill: var(--text-color);
         }
 
         .check-text { 
             font-family: Verdana;
             font-size: 16px;
+            fill: var(--text-color);
         }
     </style>
+
+    <rect x="0" y="0" height="200" width="350" class="background">
+    </rect>
 
     <text x="313" y="31" class="signature-text">@ProgrammerAL</text>
 
@@ -92,4 +104,5 @@
             <text x="30" y="140" class="check-text">✔</text>
         </svg>
     </g>
+
 </svg>
