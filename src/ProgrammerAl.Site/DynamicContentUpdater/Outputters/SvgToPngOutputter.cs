@@ -33,7 +33,12 @@ public class SvgToPngOutputter
                 Directory.CreateDirectory(destinationDir);
             }
 
-            var svgDocument = SvgDocument.Open(sourceFilePath);
+            var svgText = File.ReadAllText(sourceFilePath);
+            var sanitizedSvg = ReplaceSvgVariablesWithDefaultValues(svgText);
+
+            var encodedSvg = Encoding.UTF8.GetBytes(svgText);
+            using var memoryStream = new MemoryStream(encodedSvg);
+            var svgDocument = SvgDocument.Open<SvgDocument>(memoryStream);
 
             if (svgDocument == null)
             {
@@ -52,5 +57,52 @@ public class SvgToPngOutputter
         }
 
         Console.WriteLine($"Completed outputting post svg files to png files");
+    }
+
+    /// <summary>
+    /// Replaces any SVG variables inside the Style element with the default values
+    /// This is because PNG files can't use CSS variables, so we need to force it to use the default values set
+    /// </summary>
+    private string ReplaceSvgVariablesWithDefaultValues(string svgText)
+    {
+        //The :root section of the svg file contains the variables that need to be replaced
+        var rootStyleStartIndex = svgText.IndexOf(":root");
+        var endIndex = svgText.IndexOf("}", rootStyleStartIndex);
+
+        var rootStyle = svgText.Substring(rootStyleStartIndex, endIndex - rootStyleStartIndex + 1);
+
+        var variables = new Dictionary<string, string>();
+
+        //Find all the variables in the :root section
+        var count = 0;
+        var index = 0;
+        while (count < 1_000)//Sanity check to prevent infinite loop
+        {
+            count++;
+            index = rootStyle.IndexOf("--", index);
+            if (index == -1)
+            {
+                break;
+            }
+
+            var endIndexOfVariable = rootStyle.IndexOf(":", index);
+            var variableName = rootStyle.Substring(index, endIndexOfVariable - index).Trim();
+            var variableValueStartIndex = endIndexOfVariable + 2;
+            var variableValueEndIndex = rootStyle.IndexOf("\n", variableValueStartIndex);
+            var variableValue = rootStyle.Substring(variableValueStartIndex, variableValueEndIndex - variableValueStartIndex).Trim();
+
+            variables[variableName] = variableValue;
+            index = variableValueStartIndex;
+        }
+
+        //In the rest of the style, replace the variables with their values
+        foreach (var variable in variables)
+        {
+            var variableKeyText = $"var({variable.Key})";
+            var variableValueText = variable.Value;
+            svgText = svgText.Replace(variableKeyText, variableValueText);
+        }
+
+        return svgText;
     }
 }
