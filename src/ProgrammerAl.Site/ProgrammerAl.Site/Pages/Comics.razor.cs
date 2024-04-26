@@ -30,8 +30,12 @@ public partial class Comics : ComponentBase
     private PostSummary? NextPostSummary { get; set; }
     private PostSummary? PreviousPostSummary { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
+        CurrentPostSummary = null;
+        PreviousPostSummary = null;
+        NextPostSummary = null;
+
         var postSummaries = await PostSummariesProvider.GetPostSummariesAsync();
 
         var orderedComicSummaries = postSummaries
@@ -42,7 +46,7 @@ public partial class Comics : ComponentBase
         if (string.Equals("latest", PostUrl, StringComparison.OrdinalIgnoreCase))
         {
             CurrentPostSummary = orderedComicSummaries.FirstOrDefault();
-            NextPostSummary = orderedComicSummaries.Skip(1).FirstOrDefault();
+            PreviousPostSummary = orderedComicSummaries.Skip(1).FirstOrDefault();
         }
         else
         {
@@ -50,14 +54,20 @@ public partial class Comics : ComponentBase
             if (CurrentPostSummary is object)
             {
                 var postIndex = orderedComicSummaries.IndexOf(CurrentPostSummary);
-                if (postIndex < orderedComicSummaries.Length - 1)
+                var previousPostIndex = postIndex + 1;
+                var nextPostIndex = postIndex - 1;
+
+                //Previous Post, ie next one in the past
+                if (previousPostIndex < orderedComicSummaries.Length)
                 {
-                    NextPostSummary = orderedComicSummaries.Skip(postIndex).FirstOrDefault();
+                    PreviousPostSummary = orderedComicSummaries[previousPostIndex];
                 }
 
-                if (postIndex > 0)
+                //Next Post, ie one less index, ie 1 more recent
+                if (nextPostIndex >= 0
+                    && orderedComicSummaries.Length > 0)
                 {
-                    PreviousPostSummary = orderedComicSummaries[postIndex - 1];
+                    NextPostSummary = orderedComicSummaries[nextPostIndex];
                 }
             }
         }
