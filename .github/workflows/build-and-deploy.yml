@@ -11,7 +11,7 @@ on:
 
 jobs:
   build-and-publish:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       CONFIGURATION: Release
       DOTNET_VERSION: 8.0.x
