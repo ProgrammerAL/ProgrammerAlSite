@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" 
+    role="img"
+    aria-labelledby="titleId descId"
+    overflow="visible"
+    viewBox="0 0 800 600">
+    <title id="titleId">The Backlog</title>
+    <desc id="descId"></desc>
+
+    <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --line-color: black;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: black;
+                --text-color: white;
+            }
+        }
+
+        .background {
+            fill: var(--background-color);
+        }
+
+        .debug-rect {
+            fill: green;
+        }
+
+        .signature-text { 
+            font-family: Verdana;
+            font-size: 5px;
+            fill: var(--text-color);
+        }
+
+        .section-title-text { 
+            font-family: Verdana;
+            font-size: 16px;
+            fill: var(--text-color);
+        }
+
+        .title-text { 
+            font-family: Verdana;
+            font-size: 24px;
+            font-weight: bold;
+            fill: var(--text-color);
+        }
+
+        .section-border { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 1.5;
+        }
+
+        .ticket-border { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 0.7;
+        }
+
+        .ticket-text { 
+            font-family: Verdana;
+            font-size: 8px;
+            fill: var(--text-color);
+        }
+
+        .person { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 0.8;
+        }
+
+        .talking-line { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 0.6;
+        }
+
+        .talking-text { 
+            font-family: Verdana;
+            font-size: 14px;
+            fill: var(--text-color);
+        }
+
+    </style>
+
+    <rect x="0" y="0" width="800" height="600" class="background">
+    </rect>
+
+    <!-- <rect x="0" y="0" width="800" height="600" class="debug-rect">
+    </rect> -->
+
+    <text x="751" y="48" class="signature-text">@ProgrammerAL</text>
+
+    <g>
+        <svg x="0" y="0">
+            <text x="280" y="20" class="title-text">It's on the Backlog</text>
+        </svg>
+    </g>
+
+    <!-- Panel 1 - Conversation -->
+    <g>
+        <svg x="0" y="30" width="600" height="560" >
+
+            <!-- Person 1 -->
+
+            <!-- Body -->
+            <path d="M 90 150 V 250 L 70 280 L 90 250 L 110 280" class="person" />
+            <!-- Arms -->
+            <path d="M 70 210 H 120" class="person" />
+            <!-- Head -->
+            <circle cx="90" cy="150" r="30" class="person" />
+
+            <path d="M 125 160 L 170 130" class="talking-line" />
+            <text x="150" y="125" class="talking-text">What's the status of that item?</text>
+
+
+            <!-- Person 2 -->
+
+            <!-- Body -->
+            <path d="M 250 200 V 300 L 230 330 L 250 300 L 270 330" class="person" />
+            <!-- Arms -->
+            <path d="M 230 260 H 280" class="person" />
+            <!-- Head -->
+            <circle cx="250" cy="200" r="30" class="person" />
+
+            <path d="M 285 210 L 310 190" class="talking-line" />
+            <text x="300" y="180" class="talking-text">It's on the backlog</text>
+
+        </svg>
+    </g>
+
+    <!-- Panel 2 - Backlog -->
+    <g>
+        <svg x="600" y="30"  width="200" height="560">
+            <text x="70" y="15" class="section-title-text">Backlog</text>
+            <rect x="5" y="20" height="539" width="190" class="section-border">
+            </rect>
+
+            <rect x="15" y="30" height="25" width="75" class="ticket-border">
+            </rect>
+            <text x="20" y="45" class="ticket-text">Add email login</text>
+
+            <rect x="100" y="30" height="25" width="85" class="ticket-border">
+            </rect>
+            <text x="105" y="45" class="ticket-text">Add logout button</text>
+
+            <rect x="15" y="60" height="35" width="105" class="ticket-border">
+            </rect>
+            <text x="22" y="75" class="ticket-text">User age deleted after</text>
+            <text x="27" y="85" class="ticket-text">viewing past orders</text>
+
+            <rect x="15" y="100" height="35" width="165" class="ticket-border">
+            </rect>
+            <text x="22" y="115" class="ticket-text">Can't </text>
+            <text x="27" y="125" class="ticket-text"></text>
+
+            <!-- <rect x="70" y="30" height="50" width="50" class="ticket-border">
+            </rect>
+
+            <rect x="130" y="30" height="50" width="50" class="ticket-border">
+            </rect> -->
+
+        </svg>
+    </g>
+
+</svg>
