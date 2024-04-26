@@ -87,3 +87,16 @@ pre code {
     min-width: 100px;
     padding: 1rem;
 }
+
+
+@media (prefers-color-scheme: dark) {
+
+    .post-content a {
+        color: #818CF8;
+    }
+
+        .post-content a:hover,
+        .post-content a:focus {
+            color: #9EA7F8;
+        }
+}
