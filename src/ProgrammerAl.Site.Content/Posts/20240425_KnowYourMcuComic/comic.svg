@@ -98,10 +98,10 @@
             <text x="0" y="10" class="section-title-text">Microcontroller</text>
             <text x="20" y="20" class="section-title-text">Unit</text>
 
-            <text x="20" y="60" class="check-text">✔</text>
-            <text x="20" y="80" class="check-text">✔</text>
-            <text x="20" y="100" class="check-text">✔</text>
-            <text x="20" y="140" class="check-text">✔</text>
+            <text x="10" y="60" class="check-text">✔</text>
+            <text x="10" y="80" class="check-text">✔</text>
+            <text x="10" y="100" class="check-text">✔</text>
+            <text x="10" y="140" class="check-text">✔</text>
         </svg>
     </g>
 
