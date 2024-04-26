@@ -51,7 +51,7 @@
 
         .check-text { 
             font-family: Verdana;
-            font-size: 16px;
+            font-size: 12px;
             fill: var(--text-color);
         }
     </style>
@@ -73,9 +73,9 @@
             <text x="5" y="10" class="section-title-text">Marvel Cinematic</text>
             <text x="22" y="20" class="section-title-text">Universe</text>
 
-            <text x="40" y="40" class="check-text">✔</text>
-            <text x="40" y="60" class="check-text">✔</text>
-            <text x="40" y="120" class="check-text">✔</text>
+            <text x="70" y="40" class="check-text">✔</text>
+            <text x="70" y="60" class="check-text">✔</text>
+            <text x="70" y="120" class="check-text">✔</text>
         </svg>
     </g>
 
@@ -83,7 +83,7 @@
     <g>
         <svg x="100" y="30" height="160" width="150">
 
-            <text x="15" y="40" class="center-text">First MCU result on Google</text>
+            <text x="15" y="40" class="center-text">First result for "MCU" on Google</text>
             <text x="15" y="60" class="center-text">Seemingly everywhere</text>
             <text x="15" y="80" class="center-text">Uses some kind of electricity</text>
             <text x="15" y="100" class="center-text">Works with DC</text>
@@ -96,12 +96,12 @@
     <g>
         <svg x="250" y="30" height="160" width="100">
             <text x="0" y="10" class="section-title-text">Micro Controller</text>
-            <text x="25" y="20" class="section-title-text">Unit</text>
+            <text x="20" y="20" class="section-title-text">Unit</text>
 
-            <text x="30" y="60" class="check-text">✔</text>
-            <text x="30" y="80" class="check-text">✔</text>
-            <text x="30" y="100" class="check-text">✔</text>
-            <text x="30" y="140" class="check-text">✔</text>
+            <text x="20" y="60" class="check-text">✔</text>
+            <text x="20" y="80" class="check-text">✔</text>
+            <text x="20" y="100" class="check-text">✔</text>
+            <text x="20" y="140" class="check-text">✔</text>
         </svg>
     </g>
 
