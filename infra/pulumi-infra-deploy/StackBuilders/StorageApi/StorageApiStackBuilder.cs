@@ -47,6 +47,8 @@ public record StorageApiStackBuilder(
         {
         });
 
+        Pulumi.Log.Info($"Using storage api js file from: {GlobalConfig.DeploymentPackagesConfig.StorageApiWorkerFilePath}");
+
         var name = $"{serviceName}-script";
         var apiScript = new WorkerScript(name, new()
         {
