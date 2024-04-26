@@ -16,7 +16,7 @@
 
     <ItemGroup>
         <PackageReference Include="CommandLineParser" Version="2.9.1" />
-        <PackageReference Include="Pulumi.Automation" Version="3.61.0" />
+        <PackageReference Include="Pulumi.Automation" Version="3.63.1" />
     </ItemGroup>
 
 </Project>
