@@ -41,6 +41,7 @@ public record StorageApiStackBuilder(
 
         return new StorageInfrastructure(bucket);
     }
+
     private ApiInfrastructure CreateApi(StorageInfrastructure storageInfra, string serviceName, Provider provider)
     {
         var adminAuthToken = new Pulumi.Random.RandomUuid($"{serviceName}-admin-auth-token", new Pulumi.Random.RandomUuidArgs

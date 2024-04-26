@@ -41,7 +41,7 @@ public class BuildContext : FrostingContext
         WorkspacePath = LoadParameter(context, nameof(WorkspacePath));
         BuildArtifactsPath = LoadParameter(context, nameof(BuildArtifactsPath));
         PulumiPath = WorkspacePath + "/infra/pulumi-infra-deploy";
-        UnzippedArtifactsDir = WorkspacePath + "/unzipped_artifacts";
+        UnzippedArtifactsDir = (WorkspacePath + "/unzipped_artifacts").Replace("\\", "/");
 
         PulumiStackName = LoadParameter(context, nameof(PulumiStackName));
     }
