@@ -92,10 +92,10 @@
         </svg>
     </g>
 
-    <!-- Panel 3 - Micro Controller Unit -->
+    <!-- Panel 3 - Microcontroller Unit -->
     <g>
         <svg x="250" y="30" height="160" width="100">
-            <text x="0" y="10" class="section-title-text">Micro Controller</text>
+            <text x="0" y="10" class="section-title-text">Microcontroller</text>
             <text x="20" y="20" class="section-title-text">Unit</text>
 
             <text x="20" y="60" class="check-text">✔</text>
