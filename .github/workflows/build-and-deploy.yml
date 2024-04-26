@@ -11,6 +11,7 @@ on:
 
 jobs:
   build-and-publish:
+    # Run on Windows because the Dynamic Content Creator uses a library that converts SVGs to PNGs, and the PNGs look WAY better when this runs on Windows
     runs-on: windows-latest
     env:
       CONFIGURATION: Release
@@ -46,7 +47,6 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS_GITHUB_ACTIONS_PROGRAMMERAL_SITE }}
       - name: Dotnet Restore - Pulumi Project
         run: dotnet restore ${{ env.PULUMI_PROJECT_FILE_PATH }}
-
 
         # Run the dynamic content creator first because some stuff it outputs goes to the blazor site
       - name: Run Dynamic Content Creator
