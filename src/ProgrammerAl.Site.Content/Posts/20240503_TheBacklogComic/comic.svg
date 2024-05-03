@@ -141,45 +141,49 @@
     <g>
         <svg x="450" y="30"  width="350" height="560">
             <text x="120" y="55" class="section-title-text">The Backlog</text>
-            <rect x="5" y="60" height="470" width="340" class="section-border">
+            <rect x="5" y="60" height="498" width="340" class="section-border">
             </rect>
             <!-- +25 y per text -->
             <!-- +15 y +5 x per continuation -->
-            <text x="20" y="85" class="ticket-text">Add email login</text>
+            <text x="20" y="77" class="ticket-text">Add email login</text>
 
-            <text x="20" y="110" class="ticket-text">Add logout button</text>
+            <text x="20" y="102" class="ticket-text">Add logout button</text>
 
-            <text x="20" y="135" class="ticket-text">User age deleted after viewing past orders</text>
+            <text x="20" y="127" class="ticket-text">User age deleted after viewing past orders</text>
 
-            <text x="20" y="160" class="ticket-text">Logs messages have too much cursing</text>
+            <text x="20" y="152" class="ticket-text">Logs messages have too much cursing</text>
 
-            <text x="20" y="185" class="ticket-text">Apostrophe in name throws error on save</text>
+            <text x="20" y="177" class="ticket-text">Migrate to Pulumi</text>
 
-            <text x="20" y="210" class="ticket-text">Save button is 2 shades too blue</text>
+            <text x="20" y="202" class="ticket-text">Save button is 2 shades too blue</text>
 
-            <text x="20" y="235" class="ticket-text">Not enough VR -- CEO Request</text>
+            <text x="20" y="227" class="ticket-text">Not enough VR -- CEO Request</text>
 
-            <text x="20" y="260" class="ticket-text">Too much Bitcoin -- Legal Request</text>
+            <text x="20" y="252" class="ticket-text">Too much Bitcoin -- Legal Request</text>
 
-            <text x="20" y="285" class="ticket-text">Not enough A.I. -- Investor Request</text>
+            <text x="20" y="277" class="ticket-text">Not enough A.I. -- Investor Request</text>
 
-            <text x="20" y="310" class="ticket-text">iPhone app slow when running on Android</text>
+            <text x="20" y="302" class="ticket-text">iPhone app slow when running on Android</text>
 
-            <text x="20" y="335" class="ticket-text">Migrate to Pulumi</text>
+            <text x="20" y="327" class="ticket-text">Apostrophe in name throws error on save</text>
 
-            <text x="20" y="360" class="ticket-text">Remove JQuery</text>
+            <text x="20" y="352" class="ticket-text">Remove JQuery</text>
 
-            <text x="20" y="385" class="ticket-text">Website doesn't load on Smart TV</text>
+            <text x="20" y="377" class="ticket-text">Website doesn't load on Smart TV</text>
 
-            <text x="20" y="410" class="ticket-text">Website loads too fast</text>
+            <text x="20" y="402" class="ticket-text">Website loads too fast</text>
 
-            <text x="20" y="435" class="ticket-text">Add extra dark mode</text>
+            <text x="20" y="427" class="ticket-text">Add extra dark mode</text>
 
-            <text x="20" y="460" class="ticket-text">Cache POST requests</text>
+            <text x="20" y="452" class="ticket-text">Cache POST requests</text>
 
-            <text x="20" y="485" class="ticket-text">Rewrite in Rust</text>
+            <text x="20" y="477" class="ticket-text">Rewrite in Rust</text>
 
-            <text x="20" y="510" class="ticket-text">Verify site accessible on mole people internet</text>
+            <text x="20" y="502" class="ticket-text">Verify site accessible on mole people internet</text>
+
+            <text x="20" y="527" class="ticket-text">Don't allow SQL Injections</text>
+
+            <text x="20" y="552" class="ticket-text">Improve Security</text>
 
         </svg>
     </g>
