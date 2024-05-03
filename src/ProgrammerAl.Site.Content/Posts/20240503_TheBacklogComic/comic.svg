@@ -117,7 +117,7 @@
             <circle cx="50" cy="200" r="30" class="person" />
 
             <path d="M 85 210 L 130 180" class="talking-line" />
-            <text x="80" y="130" class="talking-text">Remember that migration item we</text>
+            <text x="80" y="130" class="talking-text">Remember that item we</text>
             <text x="90" y="150" class="talking-text">talked about a few sprints ago?</text>
             <text x="80" y="170" class="talking-text">What's the status of it?</text>
 
