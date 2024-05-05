@@ -5,6 +5,7 @@ Tags:
 - humor
 ---
 
+Mention this tweet: https://twitter.com/paulyuki99/status/1783695782887170297
 
 ## What is Cold Boot?
 
