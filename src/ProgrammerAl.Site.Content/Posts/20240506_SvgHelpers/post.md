@@ -1,5 +1,5 @@
 Title: New Project: SVGHelpers.com
-Published: 2024/05/05
+Published: 2024/05/06
 Tags: 
 - Blog
 - SVG
@@ -8,7 +8,7 @@ Tags:
 
 ## New Project: SvgHelpers.com
 
-Statistically, you aren't aware I make programming themed [web comics](https://programmeral.com/comics/latest). Generic and stupid jokes, kind of like the Dilbert guy, but I'm way less problematic and don't own a pool shaped like Dilbert's head (look it up (both of them)).
+Statistically, you aren't aware I make programming themed [web comics](https://programmeral.com/comics/latest). Generic and stupid jokes, kind of like the Dilbert guy, but I'm way less problematic and don't own a pool shaped like Dilbert's head (look it up (both of them)). Anyway, I needed some tools to help create those image files, so I created SVG Helpers.
 
 ## What's an SVG?
 
