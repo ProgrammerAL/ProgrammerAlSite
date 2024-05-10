@@ -24,7 +24,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         public void WhenParsingValidEntry_AssertTitle()
         {
             var parser = new PostParser(_runtimeConfig);
-            var result = parser.ParseFromMarkdown(ValidPost);
+            var result = parser.ParseFromMarkdown(ValidPost, "20240501_MyPost");
             Assert.Equal("Starting This Blog", result.Title);
         }
 
@@ -32,7 +32,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         public void WhenParsingValidEntry_AssertPublishedDate()
         {
             var parser = new PostParser(_runtimeConfig);
-            var result = parser.ParseFromMarkdown(ValidPost);
+            var result = parser.ParseFromMarkdown(ValidPost, "20240501_MyPost");
             Assert.Equal(new DateOnly(2017, 1, 16), result.ReleaseDate);
         }
 
@@ -40,7 +40,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         public void WhenParsingValidEntry_AssertTags()
         {
             var parser = new PostParser(_runtimeConfig);
-            var result = parser.ParseFromMarkdown(ValidPost);
+            var result = parser.ParseFromMarkdown(ValidPost, "20240501_MyPost");
             Assert.Equal(7, result.Tags.Count);
             Assert.Contains("Wyam", result.Tags);
             Assert.Contains("Azure App Service", result.Tags);
@@ -56,7 +56,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         {
 
             var parser = new PostParser(_runtimeConfig);
-            var result = parser.ParseFromMarkdown(ValidPost);
+            var result = parser.ParseFromMarkdown(ValidPost, "20240501_MyPost");
             Assert.Equal("### The Post!!!" + Environment.NewLine +
                          "Everything else goes here and should be found" + Environment.NewLine
                          + "https://MyLink.com/a/b/c.html" + Environment.NewLine
@@ -68,7 +68,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         public void WhenParsingValidEntry_AssertFirstParagraph()
         {
             var parser = new PostParser(_runtimeConfig);
-            var result = parser.ParseFromMarkdown(ValidPost);
+            var result = parser.ParseFromMarkdown(ValidPost, "20240501_MyPost");
             Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
         }
 
@@ -76,7 +76,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         public void WhenParsingValidEntryWithSpacingBeforeFirstParagraph_AssertFirstParagraph()
         {
             var parser = new PostParser(_runtimeConfig);
-            var result = parser.ParseFromMarkdown(ValidPostWithSpacingInFirstParagraph);
+            var result = parser.ParseFromMarkdown(ValidPostWithSpacingInFirstParagraph, "20240501_MyPost");
             Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
         }
 
@@ -84,7 +84,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         public void WhenParsingValidEntryWithManySpacingsBeforeFirstParagraph_AssertFirstParagraph()
         {
             var parser = new PostParser(_runtimeConfig);
-            var result = parser.ParseFromMarkdown(ValidPostWithManySpacingsBeforeFirstParagraph);
+            var result = parser.ParseFromMarkdown(ValidPostWithManySpacingsBeforeFirstParagraph, "20240501_MyPost");
             Assert.Equal("Everything else goes here and should be found", result.FirstParagraph);
         }
 
@@ -92,7 +92,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         public void WhenParsingValidEntryWithShortPost_AssertFirstParagraph()
         {
             var parser = new PostParser(_runtimeConfig);
-            var result = parser.ParseFromMarkdown(ValidPostShortPost);
+            var result = parser.ParseFromMarkdown(ValidPostShortPost, "20240501_MyPost");
             Assert.Equal("Quick test", result.FirstParagraph);
         }
         

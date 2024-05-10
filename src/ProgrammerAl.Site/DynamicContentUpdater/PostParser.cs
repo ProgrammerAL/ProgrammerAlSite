@@ -1,6 +1,8 @@
 ﻿using DynamicContentUpdater.Entities;
+using DynamicContentUpdater.Utilities;
 
 using ProgrammerAl.Site.DynamicContentUpdater;
+using ProgrammerAl.Site.Pages;
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,7 @@ namespace DynamicContentUpdater
             _runtimeConfig = runtimeConfig;
         }
 
-        public ParsedEntry ParseFromMarkdown(string rawEntry)
+        public ParsedEntry ParseFromMarkdown(string rawEntry, string postName)
         {
             //Assumes a specific schema
             //  Line 1: Title: <TITLE HERE>
@@ -36,7 +38,6 @@ namespace DynamicContentUpdater
             ReadOnlySpan<char> titleLine = rawEntry.AsSpan(titleStartIndex, titleLineLength);
             string title = ParseStringValueFromLine(titleLine);
 
-
             int publishedDateStartIndex = rawEntry.IndexOf('\n', titleEndIndex);
             int publishedDateEndIndex = rawEntry.IndexOf('\n', publishedDateStartIndex + 1);
             int publishedDateEndLength = publishedDateEndIndex - publishedDateStartIndex;
@@ -52,7 +53,7 @@ namespace DynamicContentUpdater
 
             int headerCloseIndexStart = rawEntry.IndexOf("---") + 3;
             ReadOnlySpan<char> postSpan = rawEntry.AsSpan(headerCloseIndexStart + 1).Trim();
-            string post = SanitizePost(postSpan);
+            string post = SanitizePost(postSpan, postName);
 
             string firstParagraphOfPost = GrabFirstParagraphOfPost(post);
 
@@ -101,12 +102,15 @@ namespace DynamicContentUpdater
             return textSpan.ToString();
         }
 
-        private string SanitizePost(ReadOnlySpan<char> postSpan)
+        private string SanitizePost(ReadOnlySpan<char> postSpan, string postName)
         {
-            var builder = new StringBuilder(postSpan.ToString());
-            _ = builder.Replace("__StorageSiteUrl__", _runtimeConfig.StorageUrl);
+            var postText = postSpan.ToString();
+            postText = HtmlModificationUtility.ReplacePlaceholders(
+                postText,
+                _runtimeConfig,
+                postName);
 
-            return builder.ToString();
+            return postText;
         }
 
         private ReadOnlyCollection<string> ParseTagsFromLines(ReadOnlySpan<char> tagLines)

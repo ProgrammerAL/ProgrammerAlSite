@@ -77,7 +77,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                     throw new Exception("$Could not find post file: {postFilePath}");
                 }
 
-                var isDraft = postName.Contains("draft__", StringComparison.OrdinalIgnoreCase);
+                var isDraft = postName.Contains("draft_", StringComparison.OrdinalIgnoreCase);
 
                 string postDirectoryLocalPath;
                 DateOnly postDate;
@@ -94,7 +94,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 }
 
                 string postContent = File.ReadAllText(postFilePath);
-                var parsedEntry = parser.ParseFromMarkdown(postContent);
+                var parsedEntry = parser.ParseFromMarkdown(postContent, postName);
 
                 return new
                 {

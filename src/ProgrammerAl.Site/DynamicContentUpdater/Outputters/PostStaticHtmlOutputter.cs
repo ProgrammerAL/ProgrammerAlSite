@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DynamicContentUpdater.Utilities;
+
 using ProgrammerAl.Site.DynamicContentUpdater;
 using ProgrammerAl.Site.PostDataEntities;
 
@@ -29,7 +31,7 @@ public class PostStaticHtmlOutputter
         foreach (var post in allPosts)
         {
             var staticHtml = await engine.CompileRenderAsync<PostEntry>("Post.cshtml", post);
-            staticHtml = staticHtml.Replace("__StorageSiteUrl__", runtimeConfig.StorageUrl);
+            staticHtml = HtmlModificationUtility.ReplacePlaceholders(staticHtml, runtimeConfig, post);
 
             string outputFilePath = $"{runtimeConfig.OutputDirectory}/Posts/{post.TitleLink}/{PostEntry.HtmlFileName}";
             Console.WriteLine($"Writing to file: {outputFilePath}");
