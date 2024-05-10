@@ -26,7 +26,7 @@ public static class HtmlModificationUtility
     {
         text = text.Replace("__StorageSiteUrl__", runtimeConfig.StorageUrl);
 
-        var imagePostsUrl = $"{runtimeConfig.StorageUrl}/{postTitleLink}/images";
+        var imagePostsUrl = $"{runtimeConfig.StorageUrl}/storage/posts/{postTitleLink}/images";
         text = text.Replace("__PostImagesUrl__", imagePostsUrl);
 
         return text;
