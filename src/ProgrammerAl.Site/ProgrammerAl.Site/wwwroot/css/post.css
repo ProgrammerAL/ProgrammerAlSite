@@ -25,6 +25,7 @@
         font-weight: 800;
         font-size: 1.875em;
         line-height: 2.25rem;
+        margin: 0 2em 0 0;
     }
 
     .post-content h2 {
@@ -32,6 +33,7 @@
         font-weight: 600;
         font-size: 1.4em;
         line-height: 2rem;
+        margin: 0 2em 0 0;
     }
 
     .post-content h3 {
@@ -39,6 +41,7 @@
         font-weight: 400;
         font-size: 1.25em;
         line-height: 1.75rem;
+        margin: 0 2em 0 0;
     }
 
     .post-content h4,
@@ -77,6 +80,11 @@
         padding: 1rem 1rem 1rem 2rem;
     }
 
+    .post-content table thead tr th {
+        text-align: center;
+        padding: 1rem;
+    }
+
 pre code {
     display: block;
     background: none;
@@ -87,7 +95,6 @@ pre code {
     min-width: 100px;
     padding: 1rem;
 }
-
 
 @media (prefers-color-scheme: dark) {
 
