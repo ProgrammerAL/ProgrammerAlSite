@@ -25,7 +25,7 @@
         font-weight: 800;
         font-size: 1.875em;
         line-height: 2.25rem;
-        margin: 0 2em 0 0;
+        margin: 0 2em 0 1em;
     }
 
     .post-content h2 {
@@ -33,7 +33,7 @@
         font-weight: 600;
         font-size: 1.4em;
         line-height: 2rem;
-        margin: 0 2em 0 0;
+        margin: 0 2em 0 1em;
     }
 
     .post-content h3 {
@@ -41,7 +41,7 @@
         font-weight: 400;
         font-size: 1.25em;
         line-height: 1.75rem;
-        margin: 0 2em 0 0;
+        margin: 0 2em 0 1em;
     }
 
     .post-content h4,
@@ -50,6 +50,7 @@
         font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         font-size: 1.125em;
         line-height: 1.75rem;
+        margin: 0 1em 0 1em;
     }
 
     .post-content a {
