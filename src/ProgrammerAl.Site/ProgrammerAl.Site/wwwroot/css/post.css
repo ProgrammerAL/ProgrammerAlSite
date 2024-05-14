@@ -91,18 +91,6 @@
         border: solid;
     }
 
-    .post-content pre code {
-        display: block;
-        background: none;
-        white-space: pre;
-        -webkit-overflow-scrolling: touch;
-        overflow-x: auto;
-        max-width: 100%;
-        min-width: 100px;
-        padding: 1em;
-        border: solid;
-    }
-
 @media (prefers-color-scheme: dark) {
 
     .post-content a {
