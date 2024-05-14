@@ -17,7 +17,7 @@
     .post-content p {
         margin-top: 2em;
         font-size: 1.25em;
-        margin: 0.2em 0 0.2em 0;
+        margin: 1em 0 1em 0;
     }
 
     .post-content h1 {
@@ -78,12 +78,17 @@
 
     .post-content ul {
         list-style: initial;
-        padding: 0.15em 0 0 1em;
+        padding: 0.15em 0 0 2em;
     }
 
     .post-content table thead tr th {
         text-align: center;
         padding: 0em 1em 0em 1em;
+        border: solid;
+    }
+
+    .post-content table tbody tr td {
+        border: solid;
     }
 
     .post-content pre code {
