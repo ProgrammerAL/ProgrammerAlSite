@@ -91,6 +91,14 @@
         border: solid;
     }
 
+    .post-content p code {
+        background: rgba(0, 0, 0, 0.1);
+        max-width: 100%;
+        font-size: 80%;
+        padding: 0.1em 0.25em;
+    }
+
+
 @media (prefers-color-scheme: dark) {
 
     .post-content a {
