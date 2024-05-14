@@ -1,5 +1,5 @@
-Title: Improving Azure Functions Cold Boot Time
-Published: 2024/05/03
+Title: Improving Azure Functions Cold Boot
+Published: 2024/05/13
 Tags: 
 - blog
 - Azure Functions
