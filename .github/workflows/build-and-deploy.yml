@@ -47,6 +47,8 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS_GITHUB_ACTIONS_PROGRAMMERAL_SITE }}
       - name: Dotnet Restore - Pulumi Project
         run: dotnet restore ${{ env.PULUMI_PROJECT_FILE_PATH }}
+      - name: Install .NET Wasm Tools
+        run: dotnet workload install wasm-tools
 
         # Run the dynamic content creator first because some stuff it outputs goes to the blazor site
       - name: Run Dynamic Content Creator
