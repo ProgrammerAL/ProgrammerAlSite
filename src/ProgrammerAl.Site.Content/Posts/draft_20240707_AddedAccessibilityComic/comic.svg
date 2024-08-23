@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" 
+    role="img"
+    aria-labelledby="titleId descId"
+    overflow="visible"
+    viewBox="0 0 800 600">
+    <title id="titleId">Added Accessibility</title>
+    <desc id="descId"></desc>
+
+    <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --line-color: black;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: black;
+                --text-color: white;
+            }
+        }
+
+        .background {
+            fill: var(--background-color);
+        }
+
+        .debug-rect {
+            fill: green;
+        }
+
+        .signature-text { 
+            font-family: Verdana;
+            font-size: 8px;
+            fill: var(--text-color);
+        }
+
+        .section-title-text { 
+            font-family: Verdana;
+            font-size: 20px;
+            fill: var(--text-color);
+        }
+
+        .title-text { 
+            font-family: Verdana;
+            font-size: 24px;
+            font-weight: bold;
+            fill: var(--text-color);
+        }
+
+        .section-border { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 1.5;
+        }
+
+        .ticket-border { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 0.7;
+        }
+
+        .terminal-text { 
+            font-family: Verdana;
+            font-size: 14px;
+            fill: var(--text-color);
+        }
+
+        .person { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 0.8;
+        }
+
+        .talking-line { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 0.6;
+        }
+
+        .talking-text { 
+            font-family: Verdana;
+            font-size: 18px;
+            fill: var(--text-color);
+        }
+    </style>
+
+    <rect x="0" y="0" width="800" height="600" class="background">
+    </rect>
+
+    <!-- <rect x="0" y="0" width="800" height="600" class="debug-rect">
+    </rect> -->
+
+    <!-- <text x="727" y="87" class="signature-text">@ProgrammerAL</text> -->
+
+    <!-- Panel - Diff View -->
+    <!-- <g>
+        <svg x="0" y="30" width="450" height="560" >
+        </svg>
+    </g> -->
+
+    <!-- Panel 2 - Terminal -->
+    <g>
+        <svg x="5" y="300" width="790" height="290">
+            <rect x="5" y="5" width="780" height="280" class="section-border">
+            </rect>
+            <!-- +25 y per text -->
+            <!-- +15 y +5 x per continuation -->
+            <text x="20" y="77" class="terminal-text">> git commit --message "Added Accessibility"</text>
+            <text x="20" y="102" class="ticket-text">Add logout button</text>
+        </svg>
+    </g>
+
+</svg>
