@@ -54,33 +54,15 @@
             stroke-width: 1.5;
         }
 
-        .ticket-border { 
+        .terminal-border { 
             fill: var(--background-color);
             stroke: var(--line-color);
-            stroke-width: 0.7;
+            stroke-width: 2.0;
         }
 
         .terminal-text { 
             font-family: Verdana;
-            font-size: 14px;
-            fill: var(--text-color);
-        }
-
-        .person { 
-            fill: var(--background-color);
-            stroke: var(--line-color);
-            stroke-width: 0.8;
-        }
-
-        .talking-line { 
-            fill: var(--background-color);
-            stroke: var(--line-color);
-            stroke-width: 0.6;
-        }
-
-        .talking-text { 
-            font-family: Verdana;
-            font-size: 18px;
+            font-size: 30px;
             fill: var(--text-color);
         }
     </style>
@@ -101,13 +83,23 @@
 
     <!-- Panel 2 - Terminal -->
     <g>
-        <svg x="5" y="300" width="790" height="290">
-            <rect x="5" y="5" width="780" height="280" class="section-border">
+        <svg x="5" y="350" width="790" height="250">
+            <rect x="5" y="5" width="780" height="240" class="terminal-border">
             </rect>
             <!-- +25 y per text -->
             <!-- +15 y +5 x per continuation -->
-            <text x="20" y="77" class="terminal-text">> git commit --message "Added Accessibility"</text>
-            <text x="20" y="102" class="ticket-text">Add logout button</text>
+            <text x="10" y="40" class="terminal-text">> git add src/index.html</text>
+            <text x="10" y="80" class="terminal-text">> git commit --message "Added Accessibility"</text>
+
+            <text x="40" y="120" class="terminal-text">[main b6fa7bf] Added Accessibility</text>
+            <text x="40" y="160" class="terminal-text">1 files changed, 1 insertions(+)</text>
+            <text x="40" y="200" class="terminal-text">create mode 100644 src/index.html</text>
+            <text x="10" y="240" class="terminal-text">></text>
+
+            <!-- [main b6fa7bf] some work on a new draft comic
+ 2 files changed, 125 insertions(+)
+ create mode 100644 src/ProgrammerAl.Site.Content/Posts/draft_20240707_AddedAccessibilityComic/comic.svg
+ create mode 100644 src/ProgrammerAl.Site.Content/Posts/draft_20240707_AddedAccessibilityComic/post.md -->
         </svg>
     </g>
 

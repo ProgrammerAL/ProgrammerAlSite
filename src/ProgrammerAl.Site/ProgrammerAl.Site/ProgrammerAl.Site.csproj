@@ -7,6 +7,9 @@
         <Nullable>enable</Nullable>
         <AssemblyName>ProgrammerAl.Site</AssemblyName>
         <RootNamespace>ProgrammerAl.Site</RootNamespace>
+
+        <!--<RunAOTCompilation>true</RunAOTCompilation>
+        <WasmStripILAfterAOT>true</WasmStripILAfterAOT>-->
     </PropertyGroup>
 
     <ItemGroup>

@@ -11,7 +11,6 @@ using ProgrammerAl.Site.PostDataEntities;
 
 namespace ProgrammerAl.Site.DynamicContentUpdater
 {
-
     public record PostEntries(ImmutableArray<PostEntry> Posts, ImmutableArray<PostEntry> Drafts);
     partial class Program
     {
