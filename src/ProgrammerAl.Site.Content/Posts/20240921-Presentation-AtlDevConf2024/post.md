@@ -8,13 +8,13 @@ Tags:
 
 ---
 
-# Setting Up Your C# Pit of Success
+## Setting Up Your C# Pit of Success
 
 This was an overview of different features built into .NET and C# to help us developers write better code.
 
 You can download the slides from GitHub <a target="_blank" href="https://github.com/ProgrammerAL/Presentations-2024/tree/main/atlanta-developers-conference-2024">here</a>.
 
-# Abstract
+## Abstract
 
 Writing code is only 40% of the work. Maintaining high-quality code is maybe another 20%. Reviewing PRs and updating dependencies are just some of the manual processes we have to deal with that regularly take us away from the fun part of development: writing code. But we're developers, and we can automate these processes. Nay, we MUST automate or risk becoming less efficient the longer we work on a codebase. Thankfully, the 20+ year lifespan of C# and .NET means it has some features built-in to help us enforce certain levels of code quality.
 

@@ -9,7 +9,6 @@ Tags:
 
 ---
 
-
 # Slide Decks and Demo Code
 
 If you'd like to see the demo code, and presentation slides, they are hosted on GitHub <a target="_blank" href="https://github.com/ProgrammerAL/Presentations-2024/tree/main/atlanta-cloud-conference-2024">here</a>.
