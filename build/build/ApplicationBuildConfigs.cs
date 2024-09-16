@@ -80,3 +80,42 @@ public record WebsitePaths(
             customJsModulesDir);
     }
 }
+
+public record AzFunctionsPaths(
+    AzureFunctionsProjectPaths FeedbackApiPaths)
+{
+    public static AzFunctionsPaths LoadFromContext(ICakeContext context, string buildConfiguration, string srcDirectory, string buildArtifactsPath)
+    {
+        var feedbackApiPaths = AzureFunctionsProjectPaths.LoadSettings("FeedbackApi", srcDirectory, buildConfiguration, buildArtifactsPath);
+
+        return new AzFunctionsPaths(
+            feedbackApiPaths);
+    }
+};
+
+public record AzureFunctionsProjectPaths(
+    string PathToSln,
+    string ProjectFolder, 
+    string CsprojFile, 
+    string OutDir, 
+    string ZipOutDir, 
+    string ZipOutPath)
+{
+    public static AzureFunctionsProjectPaths LoadSettings(string projectName, string srcDirectory, string buildConfiguration, string buildArtifactsPath)
+    {
+        var projectDir = srcDirectory + $"/{projectName}";
+        var pathToSln = srcDirectory + $"/{projectName}.sln";
+        var csprojFile = projectDir + $"/{projectName}.csproj";
+        var outDir = projectDir + $"/bin/{buildConfiguration}/cake-build-output";
+        var zipOutDir = buildArtifactsPath;
+        var zipOutFilePath = zipOutDir + $"/{projectName}.zip";
+
+        return new AzureFunctionsProjectPaths(
+            pathToSln,
+            projectDir,
+            csprojFile,
+            outDir,
+            zipOutDir,
+            zipOutFilePath);
+    }
+}

@@ -37,6 +37,7 @@ public class BuildContext : FrostingContext
     public string BuildArtifactsPath { get; }
     public CloudflareWorkersPaths CloudflareWorkersPaths { get; }
     public WebsitePaths WebClientPaths { get; }
+    public AzFunctionsPaths AzFunctionsPaths { get; }
 
     public BuildContext(ICakeContext context)
         : base(context)
@@ -48,6 +49,7 @@ public class BuildContext : FrostingContext
 
         CloudflareWorkersPaths = CloudflareWorkersPaths.LoadFromContext(context, SrcDirectoryPath, BuildArtifactsPath);
         WebClientPaths = WebsitePaths.LoadFromContext(context, BuildConfiguration, SrcDirectoryPath, BuildArtifactsPath);
+        AzFunctionsPaths = AzFunctionsPaths.LoadFromContext(context, BuildConfiguration, SrcDirectoryPath);
     }
 }
 
@@ -88,6 +90,7 @@ public sealed class BuildTask : FrostingTask<BuildContext>
         var buildDotnetAppFuncs = new[]
         {
             () => BuildDotnetApp(context, context.WebClientPaths.PathToSln),
+            () => BuildDotnetApp(context, context.AzFunctionsPaths.FeedbackApiPaths.PathToSln),
         };
 
         var buildFuncs = buildDotnetAppFuncs.Concat(buildCustomJsModulesWebAppFuncs).ToArray();
@@ -157,6 +160,7 @@ public sealed class PublishApplicationsTask : FrostingTask<BuildContext>
         var buildFuncs = new List<Action>
         {
             () => PublishWebClient(context),
+            () => PublishAzureFunctionsProject(context, context.AzFunctionsPaths.FeedbackApiPaths),
         };
 
         var cloudflareWorkersBuildFuncs = context.CloudflareWorkersPaths.Workers.Select(worker => new Action(() => PublishCloudflareWorker(context, worker))).ToList();
@@ -205,6 +209,34 @@ public sealed class PublishApplicationsTask : FrostingTask<BuildContext>
         };
 
         NpmRunScriptAliases.NpmRunScript(context, settings);
+    }
+
+    private void PublishAzureFunctionsProject(BuildContext context, AzureFunctionsProjectPaths apiPaths)
+    {
+        var settings = new DotNetPublishSettings()
+        {
+            NoRestore = false,
+            NoBuild = false,
+            Configuration = context.BuildConfiguration,
+            OutputDirectory = apiPaths.OutDir,
+            Runtime = "linux-x64",
+        };
+
+        context.DotNetPublish(apiPaths.CsprojFile, settings);
+
+        //Now that the code is published, create the compressed folder
+        if (!Directory.Exists(apiPaths.ZipOutDir))
+        {
+            _ = Directory.CreateDirectory(apiPaths.ZipOutDir);
+        }
+
+        if (File.Exists(apiPaths.ZipOutPath))
+        {
+            File.Delete(apiPaths.ZipOutPath);
+        }
+
+        ZipFile.CreateFromDirectory(apiPaths.OutDir, apiPaths.ZipOutPath);
+        context.Log.Information($"Output functions zip file to: {apiPaths.ZipOutPath}");
     }
 }
 
