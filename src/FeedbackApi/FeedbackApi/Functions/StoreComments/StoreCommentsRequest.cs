@@ -1,7 +1,7 @@
 
-using ProgrammerAl.Site.FeedbackFunctionsApp.Exceptions;
+using ProgrammerAl.Site.FeedbackApi.Exceptions;
 
-namespace ProgrammerAl.Site.FeedbackFunctionsApp.Functions;
+namespace ProgrammerAl.Site.FeedbackApi.Functions;
 
 public record StoreCommentsRequest(string PostName, string Comments);
 

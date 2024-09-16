@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<RootNamespace>ProgrammerAl.Site.ProgrammerAl.Site.FeedbackFunctionsApp</RootNamespace>
+		<RootNamespace>ProgrammerAl.Site.ProgrammerAl.Site.FeedbackApi</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Azure.Data.Tables" Version="12.9.0" />

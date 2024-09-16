@@ -9,7 +9,7 @@ using Azure.Identity;
 
 using Microsoft.Extensions.Options;
 
-namespace ProgrammerAl.Site.FeedbackFunctionsApp.AzureUtils;
+namespace ProgrammerAl.Site.FeedbackApi.AzureUtils;
 
 public interface IAzureCredentialsManager
 {

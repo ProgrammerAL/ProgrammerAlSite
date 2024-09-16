@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.Options;
 
-namespace ProgrammerAl.Site.FeedbackFunctionsApp;
+namespace ProgrammerAl.Site.FeedbackApi;
 
 public class AzureCredentialsConfig
 {

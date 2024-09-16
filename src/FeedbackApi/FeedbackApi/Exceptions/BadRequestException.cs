@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgrammerAl.Site.FeedbackFunctionsApp.Exceptions;
+namespace ProgrammerAl.Site.FeedbackApi.Exceptions;
 
 public class BadRequestException : HttpRequestException
 {

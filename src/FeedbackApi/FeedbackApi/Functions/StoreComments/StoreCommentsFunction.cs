@@ -3,13 +3,13 @@ using System.Text;
 
 using Azure.Data.Tables;
 
-using ProgrammerAl.Site.FeedbackFunctionsApp.AzureUtils;
+using ProgrammerAl.Site.FeedbackApi.AzureUtils;
 
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Options;
 
-namespace ProgrammerAl.Site.FeedbackFunctionsApp.Functions.StoreComment;
+namespace ProgrammerAl.Site.FeedbackApi.Functions.StoreComment;
 
 public class StoreCommentsFunction
 {

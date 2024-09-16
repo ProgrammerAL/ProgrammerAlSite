@@ -1,6 +1,6 @@
-using ProgrammerAl.Site.FeedbackFunctionsApp;
-using ProgrammerAl.Site.FeedbackFunctionsApp.AzureUtils;
-using ProgrammerAl.Site.FeedbackFunctionsApp.Middleware;
+using ProgrammerAl.Site.FeedbackApi;
+using ProgrammerAl.Site.FeedbackApi.AzureUtils;
+using ProgrammerAl.Site.FeedbackApi.Middleware;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
