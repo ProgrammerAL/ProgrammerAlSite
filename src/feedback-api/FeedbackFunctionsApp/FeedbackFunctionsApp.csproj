@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AzureFunctionsVersion>v4</AzureFunctionsVersion>
+		<OutputType>Exe</OutputType>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<RootNamespace>ProgrammerAl.Site.ProgrammerAl.Site.FeedbackFunctionsApp</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Azure.Data.Tables" Version="12.9.0" />
+		<PackageReference Include="Azure.Identity" Version="1.12.0" />
+		<PackageReference Include="Microsoft.Azure.AppConfiguration.Functions.Worker" Version="7.3.0" />
+		<PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.23.0" />
+		<PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.2.0" />
+		<PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.17.4" />
+		<PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk.Analyzers" Version="1.2.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis" Version="4.11.0" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="host.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="local.settings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+		<EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
+	</PropertyGroup>
+</Project>
