@@ -104,7 +104,7 @@ public record AzureFunctionsProjectPaths(
     public static AzureFunctionsProjectPaths LoadSettings(string projectName, string srcDirectory, string buildConfiguration, string buildArtifactsPath)
     {
         var projectDir = srcDirectory + $"/{projectName}";
-        var pathToSln = srcDirectory + $"/{projectName}.sln";
+        var pathToSln = projectDir + $"/{projectName}.sln";
         var csprojFile = projectDir + $"/{projectName}.csproj";
         var outDir = projectDir + $"/bin/{buildConfiguration}/cake-build-output";
         var zipOutDir = buildArtifactsPath;
