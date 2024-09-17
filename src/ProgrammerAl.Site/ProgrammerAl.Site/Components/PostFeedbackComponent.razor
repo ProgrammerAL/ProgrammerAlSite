@@ -1,7 +1,7 @@
 ﻿@using ProgrammerAl.Site.Components.AnimatedComponents
 <div class="flex flex-col gap-2 border p-4 m-8">
     <p class="font-semibold text-lg">If you have time, please provide anonymous feedback:</p>
-    <textarea @bind=@Comments
+    <textarea @bind-value="@Comments" @bind-value:event="oninput"
               placeholder="Place feedback here..."
               rows="4"
               maxlength="2000"
@@ -17,7 +17,8 @@
         <button @onclick=@PostCommentsAsync
                 class="p-2 w-2/5 place-self-center
                    border border-2 border-green-800 rounded
-                   font-bold text-xl">
+                   font-bold text-xl"
+                disabled=@(string.IsNullOrWhiteSpace(Comments) ? "true" : "false")>
             Submit Feedback
         </button>
     }
