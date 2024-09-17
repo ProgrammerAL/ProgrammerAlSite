@@ -33,4 +33,25 @@ public partial class Post : ComponentBase
 
         await base.OnInitializedAsync();
     }
+
+    private bool ShouldPostRequestFeedback()
+    {
+        if (PostData is null)
+        {
+            return false;
+        }
+
+        var feedbackStartDate = PostData.Metadata.ReleaseDate.AddDays(-1);
+        var feedbackEndDate = PostData.Metadata.ReleaseDate.AddDays(3);
+
+        var todayDate = DateOnly.FromDateTime(DateTime.UtcNow);
+
+        if (todayDate < feedbackStartDate
+            || todayDate > feedbackEndDate)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -16,9 +16,11 @@ using ProgrammerAl.Site.IaC.StackBuilders.Website;
 using ProgrammerAl.Site.IaC.Utilities;
 using ProgrammerAl.Site.IaC.Config.GlobalConfigs;
 using ProgrammerAl.Site.IaC.StackBuilders.StorageApi;
+using ProgrammerAl.Site.IaC.StackBuilders.FeedbackApi;
 
 public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
-    StorageApiInfrastructure StorageApiInfra)
+    StorageApiInfrastructure StorageApiInfra,
+    FeedbackApiInfrastructure FeedbackFunctionsInfra)
 {
     public WebsiteInfrastructure GenerateResources()
     {
@@ -98,15 +100,16 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
     {
         return Output.Tuple(
                 StorageApiInfra.Domain.HttpsEndpoint,
-                Output.Create("")//Just to make it a tuple so we can add things later with less code changes
+                FeedbackFunctionsInfra.FeedbackApiFunctionsInfra.HttpsEndpoint
             )
             .Apply(x =>
             {
                 var storageApiHttpsEndpoint = x.Item1;
+                var feedbackApiHttpsEndpoint = x.Item2;
 
                 JsonNode appSettingsJson = JsonNode.Parse("{}")!;
 
-                AddApiConfigValues(appSettingsJson, storageApiHttpsEndpoint);
+                AddApiConfigValues(appSettingsJson, storageApiHttpsEndpoint, feedbackApiHttpsEndpoint);
 
                 var contents = StringContentUtilities.GenerateCompressedStringContent(appSettingsJson);
 
@@ -120,11 +123,12 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
             });
     }
 
-    private void AddApiConfigValues(JsonNode appSettingsJson, string httpsStorageApiEndpoint)
+    private void AddApiConfigValues(JsonNode appSettingsJson, string httpsStorageApiEndpoint, string feedbackApiHttpsEndpoint)
     {
         var jsonObject = new JsonObject
         {
             ["StorageApiBaseEndpoint"] = $"{httpsStorageApiEndpoint}",
+            ["FeedbackApiBaseEndpoint"] = $"{feedbackApiHttpsEndpoint}",
             ["HttpTimeout"] = "00:10:00"
         };
 

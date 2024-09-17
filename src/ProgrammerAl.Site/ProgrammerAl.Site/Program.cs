@@ -11,12 +11,13 @@ using Microsoft.Extensions.Configuration;
 using ProgrammerAl.Site;
 using Microsoft.AspNetCore.Components.Web;
 using ProgrammerAl.Site.Config;
+using ProgrammerAl.Site.HttpClients.FeedbackApi;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-ConfigureConfig<ApiConfig>(builder);
+var apiConfig = ConfigureConfig<ApiConfig>(builder);
 
 builder.Services.AddSingleton<FileDownloader>();
 builder.Services.AddSingleton<PostDataProvider>();
@@ -26,8 +27,7 @@ builder.Services.AddSingleton<TagLinksDataProvider>();
 
 builder.Services.AddSingleton<ISiteLogger, SiteLogger>();
 
-
-builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+ConfigureHttpClient<IFeedbackApiHttpClient, FeedbackApiHttpClient>(builder, apiConfig.FeedbackApiBaseEndpoint);
 
 await builder.Build().RunAsync();
 
@@ -38,4 +38,27 @@ static T ConfigureConfig<T>(WebAssemblyHostBuilder builder)
     builder.Configuration.Bind(typeof(T).Name, config);
     _ = builder.Services.AddSingleton(config);
     return config;
+}
+
+static void ConfigureHttpClient
+<
+    TClient,
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TImplementation>(
+    WebAssemblyHostBuilder builder,
+    string baseEndpoint)
+    where TClient : class
+    where TImplementation : class, TClient
+{
+    var clientBuilder = builder.Services.AddHttpClient<TClient, TImplementation>((serviceProvider, client) =>
+    {
+        var apiConfig = serviceProvider.GetRequiredService<ApiConfig>();
+
+        if (!baseEndpoint.EndsWith('/'))
+        {
+            baseEndpoint += "/";
+        }
+
+        client.BaseAddress = new Uri(baseEndpoint);
+        client.Timeout = apiConfig.HttpTimeout.Value;
+    });
 }

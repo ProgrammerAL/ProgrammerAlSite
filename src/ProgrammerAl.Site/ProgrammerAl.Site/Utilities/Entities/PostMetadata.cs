@@ -2,18 +2,7 @@
 
 namespace ProgrammerAl.Site.Utilities.Entities;
 
-public class PostMetadata
+public record PostMetadata(string Title, string ComicImageLink, DateOnly ReleaseDate)
 {
     public const string FileName = "metadata.json";
-
-    public PostMetadata(
-        string title,
-        string comicImageLink)
-    {
-        Title = title;
-        ComicImageLink = comicImageLink;
-    }
-
-    public string Title { get; set; }
-    public string ComicImageLink { get; set; }
 }

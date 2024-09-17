@@ -1,6 +1,7 @@
 ﻿@page "/posts/{PostUrl}"
 @page "/drafts/{PostUrl}"
 @using System.Text.Encodings.Web;
+@using ProgrammerAl.Site.Components
 
 @if (PostData is object)
 {
@@ -20,10 +21,15 @@
         }
     </HeadContent>
 }
-
 @if (!string.IsNullOrWhiteSpace(PostHtml.Value))
 {
     @PostHtml
 
+    @if (ShouldPostRequestFeedback())
+    {
+        <PostFeedbackComponent PostName="@PostUrl" />
+    }
+
+    @* Just run this to make all code blocks in the post look nice*@
     <script>hljs.highlightAll();</script>
 }

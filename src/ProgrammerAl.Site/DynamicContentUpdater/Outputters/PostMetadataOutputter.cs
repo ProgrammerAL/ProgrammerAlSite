@@ -23,8 +23,9 @@ public class PostMetadataOutputter
         {
             var comicLink = post.TryGetComicSvgLink(out var outComicLink) ? outComicLink : null;
             var metadata = new PostMetadata(
-                title: post.TitleHumanReadable,
-                comicImageLink: comicLink);
+                 Title: post.TitleHumanReadable,
+                 ComicImageLink: comicLink,
+                 ReleaseDate: post.ReleaseDate);
 
             var outputDir = $"{runtimeConfig.OutputDirectory}/Posts/{post.TitleLink}";
             OutputUtils.WriteOutFileAsJson(metadata, outputDir, PostMetadata.FileName);
