@@ -9,9 +9,11 @@ using ProgrammerAl.Site.IaC.StackBuilders.Website;
 using ProgrammerAl.Site.IaC.Config.GlobalConfigs;
 using ProgrammerAl.Site.IaC.StackBuilders.StorageApi;
 using ProgrammerAl.Site.IaC.StackBuilders.RouteFilterWorker;
+using ProgrammerAl.Site.IaC.Utilities;
 
 return await Pulumi.Deployment.RunAsync(async () =>
 {
+    CredentialsUtilities.SetCredentialEnvironmentVariables();
     var clientConfig = await Pulumi.AzureNative.Authorization.GetClientConfig.InvokeAsync();
 
     var config = new Config();
