@@ -49,7 +49,7 @@ public class BuildContext : FrostingContext
 
         CloudflareWorkersPaths = CloudflareWorkersPaths.LoadFromContext(context, SrcDirectoryPath, BuildArtifactsPath);
         WebClientPaths = WebsitePaths.LoadFromContext(context, BuildConfiguration, SrcDirectoryPath, BuildArtifactsPath);
-        AzFunctionsPaths = AzFunctionsPaths.LoadFromContext(context, BuildConfiguration, SrcDirectoryPath);
+        AzFunctionsPaths = AzFunctionsPaths.LoadFromContext(context, BuildConfiguration, SrcDirectoryPath, BuildArtifactsPath);
     }
 }
 
