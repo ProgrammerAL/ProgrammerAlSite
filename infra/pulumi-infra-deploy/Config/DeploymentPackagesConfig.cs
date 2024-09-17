@@ -12,5 +12,6 @@ public record DeploymentPackagesConfig(string UnzippedArtifactsDir)
     public string WebsitePath => $"{UnzippedArtifactsDir}/programmer-al-site";
     public string StorageApiWorkerFilePath => $"{UnzippedArtifactsDir}/cloudflare-workers/public-storage-api.js";
     public string RouteFilterWorkerFilePath => $"{UnzippedArtifactsDir}/cloudflare-workers/route-filter-worker.js";
+    public string FeedbackApiFunctionsZipFilePath => $"{UnzippedArtifactsDir}/feedback-api/feedback-api.zip";
 }
 

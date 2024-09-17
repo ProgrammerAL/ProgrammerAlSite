@@ -12,6 +12,8 @@ using ProgrammerAl.Site.IaC.StackBuilders.RouteFilterWorker;
 
 return await Pulumi.Deployment.RunAsync(async () =>
 {
+    var clientConfig = await Pulumi.AzureNative.Authorization.GetClientConfig.InvokeAsync();
+
     var config = new Config();
     var globalConfig = await GlobalConfig.LoadAsync(config);
 
@@ -23,6 +25,12 @@ return await Pulumi.Deployment.RunAsync(async () =>
 
     var routeFilterWorkerBuilder = new RouteFilterStackBuilder(globalConfig, storageApiInfra);
     var routeFilterWorkerInfra = routeFilterWorkerBuilder.GenerateResources();
+
+    var azureRgBuilder = new AzureResourceGroupStackBuilder(globalConfig);
+    var azureRgInfra = azureRgBuilder.GenerateResources();
+
+    var feedbackFunctionsBuilder = new FeedbackApiStackBuilder(globalConfig, azureRgInfra, clientConfig);
+    var feedbackFunctionsInfra = feedbackFunctionsBuilder.GenerateResources();
 
     return GenerateOutputs(websiteInfra, storageApiInfra, globalConfig);
 });

@@ -15,7 +15,8 @@ public record GlobalConfig(
     WebClientInfrastructureConfig WebClientInfraConfig,
     CloudflareConfig CloudflareConfig,
     StorageApiConfig StorageApiConfig,
-    RouteFilterWorkerConfig RouteFilterWorkerConfig
+    RouteFilterWorkerConfig RouteFilterWorkerConfig,
+    AzureConfig AzureConfig
 )
 {
     public static async Task<GlobalConfig> LoadAsync(Pulumi.Config config)
@@ -24,6 +25,17 @@ public record GlobalConfig(
         var keyVaultSecrets = await LoadKeyVaultSecretsAsync(secretsKeyVaultUrl);
 
         string unzippedArtifactsDir = config.Require("unzipped-artifacts-dir");
+
+        var azureClientConfig = await Pulumi.AzureNative.Authorization.GetClientConfig.InvokeAsync();
+        string azLocation = config.Require("az-location");
+        string resourceGroupName = config.Require("resource-group-name");
+
+        var azureConfig = new AzureConfigDto
+        {
+            ClientConfig = azureClientConfig,
+            Location = azLocation,
+            ResourceGroupName = resourceGroupName
+        }.GenerateValidConfigObject();
 
         var cloudflareConfig = new CloudflareConfigDto
         {
@@ -37,7 +49,8 @@ public record GlobalConfig(
             WebClientInfraConfig: config.RequireObject<WebClientInfrastructureConfigDto>("web-client-infra").GenerateValidConfigObject(),
             CloudflareConfig: cloudflareConfig,
             StorageApiConfig: config.RequireObject<StorageApiConfigDto>("storage-api-config").GenerateValidConfigObject(),
-            RouteFilterWorkerConfig: config.RequireObject<RouteFilterWorkerConfigDto>("route-filter-worker-config").GenerateValidConfigObject()
+            RouteFilterWorkerConfig: config.RequireObject<RouteFilterWorkerConfigDto>("route-filter-worker-config").GenerateValidConfigObject(),
+            AzureConfig: azureConfig
         );
     }
 

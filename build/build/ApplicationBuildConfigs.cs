@@ -108,7 +108,7 @@ public record AzureFunctionsProjectPaths(
         var csprojFile = projectDir + $"/{projectName}/{projectName}.csproj";
         var outDir = projectDir + $"/bin/{buildConfiguration}/cake-build-output";
         var zipOutDir = buildArtifactsPath;
-        var zipOutFilePath = zipOutDir + $"/{projectName}.zip";
+        var zipOutFilePath = zipOutDir + $"/feedback-api.zip";
 
         return new AzureFunctionsProjectPaths(
             pathToSln,
