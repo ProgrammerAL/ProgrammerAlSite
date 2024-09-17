@@ -61,6 +61,7 @@ public sealed class UnzipAssetsTask : FrostingTask<BuildContext>
 
         ExtractArchive("cloudflare-workers", context);
         ExtractArchive("programmer-al-site", context);
+        CopyArchive("feedback-api", context);
     }
 
     private void ExtractArchive(string zipName, BuildContext context)
@@ -73,6 +74,15 @@ public sealed class UnzipAssetsTask : FrostingTask<BuildContext>
         using var fileStream = File.OpenRead(zipFilePath);
         using var archive = new ZipArchive(fileStream);
         archive.ExtractToDirectory(outputPath);
+    }
+
+    private void CopyArchive(string zipName, BuildContext context)
+    {
+        var zipFilePath = $"{context.BuildArtifactsPath}/{zipName}.zip";
+        var outputPath = $"{context.UnzippedArtifactsDir}/{zipName}.zip";
+
+        context.Log.Information($"Copying zip '{zipFilePath}' to '{outputPath}'");
+        File.Copy(sourceFileName: zipFilePath, destFileName: outputPath);
     }
 }
 
