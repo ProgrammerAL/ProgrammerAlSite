@@ -5,14 +5,12 @@ on:
     branches: [main]
   workflow_dispatch:
   workflow_call:
-    secrets:
-      AZURE_CREDENTIALS_GITHUB_ACTIONS_PROGRAMMERAL_SITE:
-        required: true
 
 jobs:
   build-and-publish:
     # Run on Windows because the Dynamic Content Creator uses a library that converts SVGs to PNGs, and the PNGs look WAY better when this runs on Windows
     runs-on: windows-latest
+    environment: prod
     env:
       CONFIGURATION: Release
       DOTNET_VERSION: 8.0.x
