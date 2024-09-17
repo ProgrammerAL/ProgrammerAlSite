@@ -23,11 +23,12 @@ public partial class Post : ComponentBase
     {
         if (!string.IsNullOrWhiteSpace(PostUrl))
         {
-            var post = await PostDataProvider.GetPostAsync(PostUrl);
+            PostData = await PostDataProvider.GetPostAsync(PostUrl);
 
-            if (post is object)
+            if (PostData is object)
             {
-                PostHtml = new MarkupString(post.PostHtml);
+                PostHtml = new MarkupString(PostData.PostHtml);
+                await InvokeAsync(StateHasChanged);
             }
         }
 
