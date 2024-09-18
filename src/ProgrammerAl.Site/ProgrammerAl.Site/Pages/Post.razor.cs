@@ -42,8 +42,8 @@ public partial class Post : ComponentBase
             return false;
         }
 
-        var feedbackStartDate = PostData.Metadata.ReleaseDate.AddDays(-10);
-        var feedbackEndDate = PostData.Metadata.ReleaseDate.AddDays(4);
+        var feedbackStartDate = PostData.Metadata.ReleaseDate.AddDays(-3);
+        var feedbackEndDate = PostData.Metadata.ReleaseDate.AddDays(7);
 
         var todayDate = DateOnly.FromDateTime(DateTime.UtcNow);
 
