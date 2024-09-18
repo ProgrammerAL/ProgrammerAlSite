@@ -128,7 +128,7 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
         var jsonObject = new JsonObject
         {
             ["StorageApiBaseEndpoint"] = $"{httpsStorageApiEndpoint}",
-            ["FeedbackApiBaseEndpoint"] = $"{feedbackApiHttpsEndpoint}",
+            ["FeedbackApiBaseEndpoint"] = $"{feedbackApiHttpsEndpoint}/api/",
             ["HttpTimeout"] = "00:10:00"
         };
 

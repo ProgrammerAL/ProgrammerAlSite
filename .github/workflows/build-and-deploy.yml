@@ -47,10 +47,6 @@ jobs:
         run: dotnet restore ${{ env.PULUMI_PROJECT_FILE_PATH }}
       - name: Install .NET Wasm Tools
         run: dotnet workload install wasm-tools
-      # - name: Log in to Azure CLI so the Pulumi run custom commands
-      #   uses: azure/login@v1
-      #   with:
-      #     creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
 
         # Run the dynamic content creator first because some stuff it outputs goes to the blazor site
       - name: Run Dynamic Content Creator
