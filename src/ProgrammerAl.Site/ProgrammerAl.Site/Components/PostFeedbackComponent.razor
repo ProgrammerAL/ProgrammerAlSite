@@ -12,27 +12,28 @@
                     dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
                     dark:focus:border-blue-500" />
 
-    <div class="place-self-center">
-        @if (SubmitState == SubmitStateType.NotSubmitted)
-        {
-            <button @onclick=@PostCommentsAsync
-                    class="p-2 w-2/5
-                   border border-2 border-green-800 rounded
-                   font-bold text-xl">
-                Submit Feedback
-            </button>
-        }
-        else if (SubmitState == SubmitStateType.Submitting)
-        {
+    @if (SubmitState == SubmitStateType.NotSubmitted)
+    {
+        <button @onclick=@PostCommentsAsync
+                class="p-2 w-2/5
+                        place-self-center
+                        border border-2 border-green-800 rounded
+                        font-bold text-xl">
+            Submit Feedback
+        </button>
+    }
+    else if (SubmitState == SubmitStateType.Submitting)
+    {
+        <div class="place-self-center">
             <GreenSpinnerComponent TailwindCssHeightClass="h-12" TailwindCssWidthClass="w-12" />
-        }
-        else if (SubmitState == SubmitStateType.SubmitSuccessful)
-        {
-            <p class="font-semibold text-lg">Thank you for your feedback! Buy yourself a sticker from your marketplace of choice!</p>
-        }
-        else if (SubmitState == SubmitStateType.SubmitFailed)
-        {
-            <p class="font-semibold text-lg text-red-800">@ErrorResultMessage</p>
-        }
-    </div>
+        </div>
+    }
+    else if (SubmitState == SubmitStateType.SubmitSuccessful)
+    {
+        <p class="font-semibold text-lg place-self-center">Thank you for your feedback! Buy yourself a sticker from your marketplace of choice!</p>
+    }
+    else if (SubmitState == SubmitStateType.SubmitFailed)
+    {
+        <p class="font-semibold text-lg text-red-800 place-self-center">@ErrorResultMessage</p>
+    }
 </div>
