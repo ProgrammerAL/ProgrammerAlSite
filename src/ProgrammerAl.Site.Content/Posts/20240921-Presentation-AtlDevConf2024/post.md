@@ -6,6 +6,9 @@ Tags:
 - C#
 - .NET
 
+Slides:
+- https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/atlanta-developers-conference-2024/presentation.html
+
 ---
 
 ## Setting Up Your C# Pit of Success
@@ -13,6 +16,9 @@ Tags:
 This was an overview of different features built into .NET and C# to help us developers write better code.
 
 You can download the slides from GitHub <a target="_blank" href="https://github.com/ProgrammerAL/Presentations-2024/tree/main/atlanta-developers-conference-2024">here</a>.
+
+You can also view the slides in your browser by clicking <a target="_blank" href="/posts/20240919-Presentation-20240921-Presentation-AtlDevConf2024/slides/0">here</a>.
+
 
 ## Abstract
 
