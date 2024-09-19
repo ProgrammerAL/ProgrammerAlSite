@@ -6,6 +6,8 @@ using System;
 
 using Xunit;
 
+using static System.Net.WebRequestMethods;
+
 namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
 {
     public class BlogPostParserTests
@@ -41,7 +43,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         {
             var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPost, "20240501_MyPost");
-            Assert.Equal(7, result.Tags.Count);
+            Assert.Equal(7, result.Tags.Length);
             Assert.Contains("Wyam", result.Tags);
             Assert.Contains("Azure App Service", result.Tags);
             Assert.Contains("VSTS", result.Tags);
@@ -50,11 +52,28 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
             Assert.Contains("Continuous Integration", result.Tags);
             Assert.Contains("Continuous Deployment", result.Tags);
         }
-        
+
+        [Fact]
+        public void WhenParsingValidEntry_AssertSlides()
+        {
+            var parser = new PostParser(_runtimeConfig);
+            var result = parser.ParseFromMarkdown(ValidPost, "20240501_MyPost");
+            Assert.Equal(2, result.PresentationSlideUrls.Length);
+            Assert.Contains("https://MyLink.com/a/b/c.html", result.PresentationSlideUrls);
+            Assert.Contains("https://MyLink.com/1/2/3.html", result.PresentationSlideUrls);
+        }
+
+        [Fact]
+        public void WhenParsingValidEntryWithNoSlides_AssertNoSlides()
+        {
+            var parser = new PostParser(_runtimeConfig);
+            var result = parser.ParseFromMarkdown(ValidPostNoSlides, "20240501_MyPost");
+            Assert.Empty(result.PresentationSlideUrls);
+        }
+
         [Fact]
         public void WhenParsingValidEntry_AssertContent()
         {
-
             var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPost, "20240501_MyPost");
             Assert.Equal("### The Post!!!" + Environment.NewLine +
@@ -95,9 +114,29 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
             var result = parser.ParseFromMarkdown(ValidPostShortPost, "20240501_MyPost");
             Assert.Equal("Quick test", result.FirstParagraph);
         }
-        
+
 
         private const string ValidPost = @"Title: Starting This Blog
+Published: 2017/01/16
+Tags: 
+- Wyam
+- Azure App Service
+- VSTS
+- Cake
+- NuGet
+- Continuous Integration
+- Continuous Deployment
+Slides:
+- https://MyLink.com/a/b/c.html
+- https://MyLink.com/1/2/3.html
+---
+### The Post!!!
+Everything else goes here and should be found
+__StorageSiteUrl__/a/b/c.html
+__StorageSiteUrl__/1/2/3.html
+";
+
+        private const string ValidPostNoSlides = @"Title: Starting This Blog
 Published: 2017/01/16
 Tags: 
 - Wyam
@@ -113,7 +152,6 @@ Everything else goes here and should be found
 __StorageSiteUrl__/a/b/c.html
 __StorageSiteUrl__/1/2/3.html
 ";
-
         private const string ValidPostWithSpacingInFirstParagraph = @"Title: Starting This Blog
 Published: 2017/01/16
 Tags: 

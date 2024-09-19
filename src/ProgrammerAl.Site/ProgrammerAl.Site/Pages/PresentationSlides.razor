@@ -1,0 +1,21 @@
+﻿@page "/posts/{PostUrl}/slides/{Index}"
+@page "/drafts/{PostUrl}/slides/{Index}"
+@using System.Text.Encodings.Web;
+@using ProgrammerAl.Site.Components
+
+@if (PostData is object)
+{
+    <HeadContent>
+        <meta name="og:type" content="article" />
+
+        <meta name="og:title" content="@(PostData.Metadata.Title)" />
+        <meta name="twitter:title" content="@(PostData.Metadata.Title)" />
+        <meta property="og:url" content="@($"https://ProgrammerAL.com/posts/{PostUrl}/slides/{Index}")" />
+        <meta property="twitter:url" content="@($"https://ProgrammerAL.com/posts/{PostUrl}/slides/{Index}")" />
+    </HeadContent>
+}
+
+@if (!string.IsNullOrWhiteSpace(SlidesHtml.Value))
+{
+    @SlidesHtml
+}

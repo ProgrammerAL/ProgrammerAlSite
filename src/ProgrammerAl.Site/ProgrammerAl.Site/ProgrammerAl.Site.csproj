@@ -22,6 +22,12 @@
       <Folder Include="wwwroot\css\custom-modules\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="Pages\PresentationSlides.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
+    </ItemGroup>
+
     <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='DEBUG'">
         <Exec Command="npm run build-dev --prefix $(ProjectDir)/../CustomNpmModules/tailwind" />
     </Target>

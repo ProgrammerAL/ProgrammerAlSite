@@ -18,6 +18,7 @@ public class PostEntry
         string titleLink,
         DateOnly releaseDate,
         ImmutableArray<string> tags,
+        ImmutableArray<string> presentationSlidesUrls,
         string postMarkdown,
         string postHtml,
         string firstParagraphHtml,
@@ -29,6 +30,7 @@ public class PostEntry
         TitleLink = titleLink;
         ReleaseDate = releaseDate;
         Tags = tags;
+        PresentationSlidesUrls = presentationSlidesUrls;
         PostMarkdown = postMarkdown;
         PostHtml = postHtml;
         PostNumber = postNumber;
@@ -41,6 +43,7 @@ public class PostEntry
     public string TitleLink { get; }
     public DateOnly ReleaseDate { get; }
     public ImmutableArray<string> Tags { get; }
+    public ImmutableArray<string> PresentationSlidesUrls { get; }
     public string PostMarkdown { get; }
     public string PostHtml { get; }
     public string FirstParagraphHtml { get; }

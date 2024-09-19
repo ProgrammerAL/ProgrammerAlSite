@@ -7,7 +7,9 @@ using ProgrammerAl.Site.Utilities.Entities;
 
 namespace ProgrammerAl.Site.DataProviders;
 
-public record PostData(PostMetadata Metadata, string PostHtml);
+public record PostData(
+    PostMetadata Metadata,
+    string PostHtml);
 public class PostDataProvider
 {
     private const string PostRelativeLinkTemplate = $"Posts/{{0}}/{PostEntry.HtmlFileName}";

@@ -25,7 +25,8 @@ public class PostMetadataOutputter
             var metadata = new PostMetadata(
                  Title: post.TitleHumanReadable,
                  ComicImageLink: comicLink,
-                 ReleaseDate: post.ReleaseDate);
+                 ReleaseDate: post.ReleaseDate,
+                 PresentationSlideUrls: post.PresentationSlidesUrls);
 
             var outputDir = $"{runtimeConfig.OutputDirectory}/Posts/{post.TitleLink}";
             OutputUtils.WriteOutFileAsJson(metadata, outputDir, PostMetadata.FileName);

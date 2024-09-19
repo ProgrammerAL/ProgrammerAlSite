@@ -117,7 +117,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                         titleHumanReadable: x.ParsedEntry.Title,
                         titleLink: x.PostName,//public url for the post, just the full name of it. ie 20210101-Title
                         releaseDate: x.PostDate,
-                        tags: x.ParsedEntry.Tags.ToImmutableArray(),
+                        tags: x.ParsedEntry.Tags,
+                        presentationSlidesUrls: x.ParsedEntry.PresentationSlideUrls,
                         postMarkdown: x.ParsedEntry.Post,
                         postHtml: Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline),
                         firstParagraphHtml: Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline),
@@ -136,7 +137,8 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                         titleHumanReadable: x.ParsedEntry.Title,
                         titleLink: x.PostName,//public url for the post, just the full name of it. ie draft_20210101-Title
                         releaseDate: x.PostDate,
-                        tags: x.ParsedEntry.Tags.ToImmutableArray(),
+                        tags: x.ParsedEntry.Tags,
+                        presentationSlidesUrls: x.ParsedEntry.PresentationSlideUrls,
                         postMarkdown: x.ParsedEntry.Post,
                         postHtml: Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline),
                         firstParagraphHtml: Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline),

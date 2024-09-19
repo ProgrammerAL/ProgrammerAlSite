@@ -6,6 +6,7 @@ using ProgrammerAl.Site.Pages;
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Text;
 
@@ -27,29 +28,38 @@ namespace DynamicContentUpdater
             //  Line 2: Published: <YYYY/MM/DD>
             //  Line 3: Tags:
             //  Line 4-??: - <Tag Name>
+            //  Line ??: PresentationSlides:
+            //  Line ??-??: - <Slide Url>
             //  Header Ending: --- <Yes, 3 dashes>
             //  ## <Some header. Usually "## Receiving the Quest">
             //  First Paragraph
             //  Rest of it: The blog post
 
-            int titleStartIndex = 0;
-            int titleEndIndex = rawEntry.IndexOf('\n');
+            int titleStartIndex = rawEntry.IndexOf("Title:");
+            int titleEndIndex = rawEntry.IndexOf("\n", titleStartIndex);
             int titleLineLength = titleEndIndex - titleStartIndex;
             ReadOnlySpan<char> titleLine = rawEntry.AsSpan(titleStartIndex, titleLineLength);
             string title = ParseStringValueFromLine(titleLine);
 
-            int publishedDateStartIndex = rawEntry.IndexOf('\n', titleEndIndex);
+            int publishedDateStartIndex = rawEntry.IndexOf("Published:");
             int publishedDateEndIndex = rawEntry.IndexOf('\n', publishedDateStartIndex + 1);
             int publishedDateEndLength = publishedDateEndIndex - publishedDateStartIndex;
             ReadOnlySpan<char> publishedDateLine = rawEntry.AsSpan(publishedDateStartIndex, publishedDateEndLength);
             DateOnly publishedDate = ParseDateTimeFromLine(publishedDateLine);
 
-            int tagsLineStartIndex = rawEntry.IndexOf('\n', publishedDateEndIndex);
-            int endOfTagsLineStartIndex = rawEntry.IndexOf('\n', tagsLineStartIndex);//Do this again because we want to get to the end of the Tags line
-            int tagsLineEndIndex = rawEntry.IndexOf("---", endOfTagsLineStartIndex + 3);
-            int tagsLineEndLength = tagsLineEndIndex - tagsLineStartIndex;
-            ReadOnlySpan<char> tagLines = rawEntry.AsSpan(tagsLineStartIndex, tagsLineEndLength);
-            var tags = ParseTagsFromLines(tagLines);
+            int tagsLineStartIndex = rawEntry.IndexOf("Tags:");
+            var tags = ParseListSection(rawEntry, tagsLineStartIndex);
+
+            int slidesLineStartIndex = rawEntry.IndexOf("Slides:");
+            ImmutableArray<string> slideUrls;
+            if (slidesLineStartIndex == -1)
+            {
+                slideUrls = ImmutableArray<string>.Empty;
+            }
+            else
+            {
+                slideUrls = ParseListSection(rawEntry, slidesLineStartIndex);
+            }
 
             int headerCloseIndexStart = rawEntry.IndexOf("---") + 3;
             ReadOnlySpan<char> postSpan = rawEntry.AsSpan(headerCloseIndexStart + 1).Trim();
@@ -57,7 +67,13 @@ namespace DynamicContentUpdater
 
             string firstParagraphOfPost = GrabFirstParagraphOfPost(post);
 
-            return new ParsedEntry(title, publishedDate, tags, post, firstParagraphOfPost);
+            return new ParsedEntry(
+                title,
+                publishedDate,
+                tags,
+                slideUrls,
+                post,
+                firstParagraphOfPost);
         }
 
         private string GrabFirstParagraphOfPost(string post)
@@ -113,24 +129,46 @@ namespace DynamicContentUpdater
             return postText;
         }
 
-        private ReadOnlyCollection<string> ParseTagsFromLines(ReadOnlySpan<char> tagLines)
+        private ImmutableArray<string> ParseListSection(string text, int sectionTitleStartIndex)
         {
-            var tags = new List<string>();
-            ReadOnlySpan<char> localSpan = tagLines.Slice(0);
+            var items = new List<string>();
 
-            int startIndex;
+            var endOfLineIndex = text.IndexOf('\n', sectionTitleStartIndex);
+            var endOfHeaderIndex = text.IndexOf("---");
 
-            while ((startIndex = localSpan.IndexOf('-') + 1) > 0)
+            //int startIndex = endOfLineIndex;
+            var nextItemIndex = text.IndexOf('-', endOfLineIndex);
+            while (nextItemIndex != -1
+                && nextItemIndex < endOfHeaderIndex)
             {
-                localSpan = localSpan.Slice(startIndex);
+                var startIndex = nextItemIndex;
+                if (text[startIndex] != '-')
+                {
+                    break;
+                }
 
-                int endIndex = localSpan.IndexOf('\n');
-                string tag = localSpan.Slice(0, endIndex).Trim().ToString();
-                tags.Add(tag);
-                localSpan = localSpan.Slice(endIndex + 1);
+                startIndex++;//Skip the dash
+                var endIndex = text.IndexOf('\n', startIndex + 1);
+
+                var length = endIndex - startIndex;
+                var line = text.Substring(startIndex, length).Trim();
+
+                items.Add(line);
+
+                nextItemIndex = endIndex + 1;
             }
 
-            return tags.AsReadOnly();
+            //while ((startIndex = localSpan.IndexOf('-') + 1) > 0)
+            //{
+            //    localSpan = localSpan.Slice(startIndex);
+
+            //    int endIndex = localSpan.IndexOf('\n');
+            //    string tag = localSpan.Slice(0, endIndex).Trim().ToString();
+            //    items.Add(tag);
+            //    localSpan = localSpan.Slice(endIndex + 1);
+            //}
+
+            return items.ToImmutableArray();
         }
 
         private string ParseStringValueFromLine(ReadOnlySpan<char> textLine)
