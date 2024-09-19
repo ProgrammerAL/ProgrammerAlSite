@@ -21,23 +21,21 @@ public partial class PresentationSlides : ComponentBase
     public string? PostUrl { get; set; }
 
     [Parameter]
-    public int? Index { get; set; }
+    public int Index { get; set; }
 
     private MarkupString SlidesHtml { get; set; }
     private PostData? PostData { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        if (!string.IsNullOrWhiteSpace(PostUrl))
+        if (!string.IsNullOrWhiteSpace(PostUrl) && Index > -1)
         {
             PostData = await PostDataProvider.GetPostAsync(PostUrl);
 
             if (PostData is object
-                && Index.HasValue
-                    && Index > -1
-                    && Index < PostData.Metadata.PresentationSlideUrls.Length)
+                && Index < PostData.Metadata.PresentationSlideUrls.Length)
             {
-                var slidesUrl = PostData.Metadata.PresentationSlideUrls[Index.Value];
+                var slidesUrl = PostData.Metadata.PresentationSlideUrls[Index];
                 var slidesHtml = await FileDownloader.DownloadFileTextFromSiteContentAsync(slidesUrl, "*/*");
                 if (!string.IsNullOrWhiteSpace(slidesHtml))
                 {
