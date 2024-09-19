@@ -28,19 +28,13 @@ public partial class PresentationSlides : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        //var client = new HttpClient();
-        //var result = await client.GetAsync("https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/devops-days-tampa-bay-2024/presentation.html");
-        //var content = await result.Content.ReadAsStringAsync();
-        //PostHtml = new MarkupString(content);
-        //await InvokeAsync(StateHasChanged);
-
         if (!string.IsNullOrWhiteSpace(PostUrl))
         {
             PostData = await PostDataProvider.GetPostAsync(PostUrl);
 
             if (PostData is object
                 && Index.HasValue
-                    && Index > 0
+                    && Index > -1
                     && Index < PostData.Metadata.PresentationSlideUrls.Length)
             {
                 var slidesUrl = PostData.Metadata.PresentationSlideUrls[Index.Value];
