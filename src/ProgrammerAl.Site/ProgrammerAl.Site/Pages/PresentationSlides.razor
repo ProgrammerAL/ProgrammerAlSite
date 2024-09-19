@@ -2,6 +2,7 @@
 @page "/drafts/{PostUrl}/slides/{Index:int}"
 @using System.Text.Encodings.Web;
 @using ProgrammerAl.Site.Components
+@using ProgrammerAl.Site.Components.AnimatedComponents
 
 @if (PostData is object)
 {
@@ -15,7 +16,13 @@
     </HeadContent>
 }
 
-@if (!string.IsNullOrWhiteSpace(SlidesHtml.Value))
+@if (string.IsNullOrWhiteSpace(SlidesHtml.Value))
+{
+    <div class="place-self-center">
+        <GreenSpinnerComponent TailwindCssHeightClass="h-12" TailwindCssWidthClass="w-12" />
+    </div>
+}
+else
 {
     @SlidesHtml
 }
