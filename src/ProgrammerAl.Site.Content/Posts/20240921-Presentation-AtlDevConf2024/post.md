@@ -1,4 +1,4 @@
-Title: Atlanta Developers' Conference  2024
+Title: Atlanta Developers' Conference 2024
 Published: 2024/09/21
 Tags:
 

@@ -39,13 +39,21 @@ public partial class PresentationSlides : ComponentBase
                 var slidesHtml = await FileDownloader.DownloadFileTextFromSiteContentAsync(slidesUrl, "*/*");
                 if (!string.IsNullOrWhiteSpace(slidesHtml))
                 {
-                    SlidesHtml = new MarkupString(slidesHtml);
+                    var sanitizedSlidesHtml = SanitizeHtml(slidesHtml);
+
+                    SlidesHtml = new MarkupString(sanitizedSlidesHtml);
                     await InvokeAsync(StateHasChanged);
                 }
             }
         }
 
         await base.OnInitializedAsync();
+    }
+
+    private string SanitizeHtml(string slidesHtml)
+    {
+        slidesHtml = slidesHtml.Replace("background-image:url(&quot;", "background-image:url(&quot;");
+        return slidesHtml;
     }
 
     private bool ShouldPostRequestFeedback()
