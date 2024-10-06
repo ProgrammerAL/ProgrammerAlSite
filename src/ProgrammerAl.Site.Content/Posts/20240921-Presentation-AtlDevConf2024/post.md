@@ -7,7 +7,7 @@ Tags:
 - .NET
 
 Slides:
-- https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/atlanta-developers-conference-2024/presentation.html
+- https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/atlanta-developers-conference-2024/presentation.md
 
 ---
 
