@@ -16,7 +16,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
     {
         static async Task Main(string[] args)
         {
-            RuntimeConfig runtimeConfig = null;
+            RuntimeConfig? runtimeConfig = null;
 
             _ = Parser.Default.ParseArguments<RuntimeConfig>(args)
                 .WithParsed(opts => runtimeConfig = opts)
@@ -25,6 +25,12 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                     Console.WriteLine(errs);
                     return;
                 });
+
+            if (runtimeConfig is null)
+            {
+                Console.WriteLine("Can't continue, no runtime config");
+                return;
+            }
 
             var parser = new PostParser(runtimeConfig);
 

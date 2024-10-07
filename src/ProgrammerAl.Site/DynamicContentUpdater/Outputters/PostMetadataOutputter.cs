@@ -21,8 +21,8 @@ public class PostMetadataOutputter
         //Create static html files for each blog post entry
         foreach (var post in allPosts)
         {
-            var comicLink = post.TryGetComicSvgLink(out var outComicLink) ? outComicLink : null;
-            var presentations = post.Presentations.Select(x => new PostMetadata.PresentationData(x.Id, x.SlidesUrl, x.SlideImagesUrl)).ToImmutableArray();
+            _ = post.TryGetComicSvgLink(out var comicLink);
+            var presentations = post.Presentations.Select(x => new PostMetadata.PresentationData(x.Id, x.SlidesUrl, x.SlidesImagesUrl)).ToImmutableArray();
             var metadata = new PostMetadata(
                  Title: post.TitleHumanReadable,
                  ComicImageLink: comicLink,

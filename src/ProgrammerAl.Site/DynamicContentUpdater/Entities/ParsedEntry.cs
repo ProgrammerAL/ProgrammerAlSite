@@ -13,5 +13,5 @@ public record ParsedEntry(
     string Post,
     string FirstParagraph)
 {
-    public record PresentationEntry(int Id, string SlidesUrl, string SlideImagesUrl);
+    public record PresentationEntry(int Id, string SlidesUrl, string? SlideImagesUrl);
 }

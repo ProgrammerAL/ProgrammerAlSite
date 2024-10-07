@@ -16,7 +16,9 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         {
             _runtimeConfig = new RuntimeConfig
             {
-                StorageUrl = "https://MyLink.com"
+                StorageUrl = "https://MyLink.com",
+                AppRootPath = "C:\\MyPath",
+                OutputDirectory = "./"
             };
         }
 

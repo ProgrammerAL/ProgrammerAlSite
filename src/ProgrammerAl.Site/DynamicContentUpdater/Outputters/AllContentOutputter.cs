@@ -21,7 +21,7 @@ public class AllContentOutputter
             var filePathWithoutContentPath = file.Substring(contentPath.Length);
             var destinationFile = $"{runtimeConfig.OutputDirectory}/{filePathWithoutContentPath}";
 
-            var destinationDir = new FileInfo(destinationFile).DirectoryName;
+            var destinationDir = new FileInfo(destinationFile).DirectoryName!;
             if (!Directory.Exists(destinationDir))
             {
                 Console.WriteLine($"\tCreating directory '{destinationDir}'");

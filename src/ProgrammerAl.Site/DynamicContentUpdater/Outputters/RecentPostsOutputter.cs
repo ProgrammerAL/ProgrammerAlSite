@@ -24,16 +24,17 @@ public class RecentPostsOutputter
                 .Take(FrontPageBlogsDisplayed)
                 .Select(x =>
                 {
-                    string comicImageLink = null;
+                    string? comicImageLink = null;
+                    _ = x.TryGetComicSvgLink(out comicImageLink);
 
                     return new PostSummary(
-                        titleHumanReadable: x.TitleHumanReadable,
-                        titleLink: x.TitleLink,
-                        postedDate: x.ReleaseDate,
-                        firstParagraph: x.FirstParagraphHtml,
-                        postNumber: x.PostNumber,
-                        tags: x.Tags.ToArray(),
-                        comicImageLink: x.TryGetComicSvgLink(out comicImageLink) ? comicImageLink : null
+                        TitleHumanReadable: x.TitleHumanReadable,
+                        TitleLink: x.TitleLink,
+                        PostedDate: x.ReleaseDate,
+                        FirstParagraph: x.FirstParagraphHtml,
+                        PostNumber: x.PostNumber,
+                        Tags: x.Tags.ToArray(),
+                        ComicImageLink: comicImageLink
                     );
                 })
                 .ToArray();

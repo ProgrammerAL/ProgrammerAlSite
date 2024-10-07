@@ -27,7 +27,7 @@ public record PostEntry(
 
     public bool HasComic => File.Exists($"{PostDirectoryLocalPath}/{ComicSvgFileName}");
 
-    public bool TryGetComicSvgLink(out string? comicLink)
+    public bool TryGetComicSvgLink([NotNullWhen(true)] out string? comicLink)
     {
         if (HasComic)
         {
@@ -51,5 +51,5 @@ public record PostEntry(
         return false;
     }
 
-    public record PresentationEntry(int Id, string SlidesUrl, string SlideImagesUrl);
+    public record PresentationEntry(int Id, string SlidesUrl, string? SlidesImagesUrl);
 }

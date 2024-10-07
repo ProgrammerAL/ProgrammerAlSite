@@ -24,7 +24,7 @@ public class SvgToPngOutputter
             var destinationFile = $"{runtimeConfig.OutputDirectory}/{filePathWithoutContentPath}";
             destinationFile = destinationFile.Substring(0, destinationFile.Length - 4) + ".png";//Replace .svg with .png
 
-            var destinationDir = new FileInfo(destinationFile).DirectoryName;
+            var destinationDir = new FileInfo(destinationFile).DirectoryName!;
             if (!Directory.Exists(destinationDir))
             {
                 Console.WriteLine($"\tCreating directory '{destinationDir}'");

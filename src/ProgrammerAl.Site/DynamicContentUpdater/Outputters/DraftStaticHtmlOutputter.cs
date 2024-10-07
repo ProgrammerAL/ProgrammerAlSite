@@ -35,7 +35,7 @@ public class DraftStaticHtmlOutputter
 
             string outputFilePath = $"{runtimeConfig.OutputDirectory}/Posts/{post.TitleLink}/{PostEntry.HtmlFileName}";
 
-            var destinationDir = new FileInfo(outputFilePath).DirectoryName;
+            var destinationDir = new FileInfo(outputFilePath).DirectoryName!;
             if (!Directory.Exists(destinationDir))
             {
                 Console.WriteLine($"\tCreating directory '{destinationDir}'");

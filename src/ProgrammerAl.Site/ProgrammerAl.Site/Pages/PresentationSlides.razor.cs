@@ -58,7 +58,11 @@ public partial class PresentationSlides : ComponentBase
 
     private string SanitizeHtml(PostMetadata.PresentationData presentation, string slidesHtml)
     {
-        slidesHtml = slidesHtml.Replace("background-image:url(&quot;", $"background-image:url(&quot;{presentation.SlideImagesUrl}");
+        if (!string.IsNullOrWhiteSpace(presentation.SlidesImagesUrl))
+        {
+            slidesHtml = slidesHtml.Replace("background-image:url(&quot;", $"background-image:url(&quot;{presentation.SlidesImagesUrl}");
+        }
+
         return slidesHtml;
     }
 
