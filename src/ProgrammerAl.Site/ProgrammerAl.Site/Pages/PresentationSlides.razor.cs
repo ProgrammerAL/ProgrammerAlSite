@@ -60,7 +60,7 @@ public partial class PresentationSlides : ComponentBase
     {
         if (!string.IsNullOrWhiteSpace(presentation.SlidesImagesUrl))
         {
-            slidesHtml = slidesHtml.Replace("background-image:url(&quot;", $"background-image:url(&quot;{presentation.SlidesImagesUrl}");
+            slidesHtml = slidesHtml.Replace("background-image:url(&quot;", $"background-image:url(&quot;{presentation.SlidesImagesUrl}/");
         }
 
         return slidesHtml;
