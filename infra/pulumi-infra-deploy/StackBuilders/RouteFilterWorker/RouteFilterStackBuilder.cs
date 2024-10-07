@@ -10,7 +10,7 @@ using ProgrammerAl.Site.IaC.StackBuilders.StorageApi;
 namespace ProgrammerAl.Site.IaC.StackBuilders.RouteFilterWorker;
 
 public record RouteFilterStackBuilder(
-    GlobalConfig GlobalConfig, 
+    GlobalConfig GlobalConfig,
     StorageApiInfrastructure StorageApiInfra)
 {
     public RouteFilterInfrastructure GenerateResources()

@@ -8,14 +8,14 @@
     "publish": "npm install && wrangler deploy --outdir ./dist --dry-run"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230419.0",
-    "itty-router": "^3.0.12",
-    "typescript": "^5.0.4",
-    "wrangler": "^3.0.0"
+    "@cloudflare/workers-types": "^4.20241004.0",
+    "itty-router": "^5.0.18",
+    "typescript": "^5.6.2",
+    "wrangler": "^2.21.1"
   },
   "dependencies": {
     "@cloudflare/workers-honeycomb-logger": "^2.3.3",
-    "@types/uuid": "^9.0.2",
-    "uuid": "^9.0.0"
+    "@types/uuid": "^10.0.0",
+    "uuid": "^10.0.0"
   }
 }

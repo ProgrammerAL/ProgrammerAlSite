@@ -12,6 +12,6 @@
     },
     "author": "Al Rodriguez",
     "devDependencies": {
-        "tailwindcss": "^3.2.4"
+        "tailwindcss": "^3.4.13"
     }
 }

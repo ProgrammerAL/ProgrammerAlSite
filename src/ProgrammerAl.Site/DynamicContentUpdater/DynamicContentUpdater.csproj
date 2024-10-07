@@ -6,7 +6,9 @@
         <Nullable>enable</Nullable>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <WarningsAsErrors />
-        <LangVersion>preview</LangVersion>
+        <LangVersion>latest</LangVersion>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 
         <!--Required for the Razor to html conversion stuff-->
         <PreserveCompilationContext>true</PreserveCompilationContext>

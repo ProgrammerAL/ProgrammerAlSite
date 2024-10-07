@@ -95,10 +95,10 @@ public record AzFunctionsPaths(
 
 public record AzureFunctionsProjectPaths(
     string PathToSln,
-    string ProjectFolder, 
-    string CsprojFile, 
-    string OutDir, 
-    string ZipOutDir, 
+    string ProjectFolder,
+    string CsprojFile,
+    string OutDir,
+    string ZipOutDir,
     string ZipOutPath)
 {
     public static AzureFunctionsProjectPaths LoadSettings(string projectName, string srcDirectory, string buildConfiguration, string buildArtifactsPath)
