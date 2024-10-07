@@ -1,4 +1,4 @@
-Title: Denver Dev Day: May 2024 - IaC for Developers with Pulumi
+Title: "Denver Dev Day: May 2024 - IaC for Developers with Pulumi"
 Published: 2024/05/31
 Tags:
 

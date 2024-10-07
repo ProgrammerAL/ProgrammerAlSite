@@ -1,4 +1,4 @@
-Title: SonarCloud - Getting Started with VSTS and Bonus - Ignoring MSBuild Projects
+Title: "SonarCloud - Getting Started with VSTS and Bonus - Ignoring MSBuild Projects"
 Published: 2018/02/21
 Tags: 
 - SonarQube

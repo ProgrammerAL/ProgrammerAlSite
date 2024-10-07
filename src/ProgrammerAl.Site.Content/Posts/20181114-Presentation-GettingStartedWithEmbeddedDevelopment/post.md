@@ -1,4 +1,4 @@
-Title: Presentation: Getting Started with Embedded Development
+Title: "Presentation: Getting Started with Embedded Development"
 Published: 2018/11/14
 Tags: 
 - Meetup

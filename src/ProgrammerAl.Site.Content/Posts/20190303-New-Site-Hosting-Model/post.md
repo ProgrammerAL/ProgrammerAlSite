@@ -1,4 +1,4 @@
-Title: New Site Hosting Model
+Title: "New Site Hosting Model"
 Published: 2019/03/03
 Tags: 
 - Blazor

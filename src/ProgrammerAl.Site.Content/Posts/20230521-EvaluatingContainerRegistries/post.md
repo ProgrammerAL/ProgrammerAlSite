@@ -1,4 +1,4 @@
-Title: Research: Evaluating Container Registry Services
+Title: "Research: Evaluating Container Registry Services"
 Published: 2023/05/21
 Tags: 
 - Blog

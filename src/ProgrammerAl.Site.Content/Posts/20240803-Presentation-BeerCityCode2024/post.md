@@ -1,4 +1,4 @@
-Title: Beer City Code 2024
+Title: "Beer City Code 2024"
 Published: 2024/08/03
 Tags:
 

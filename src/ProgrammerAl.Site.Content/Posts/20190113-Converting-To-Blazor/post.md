@@ -1,4 +1,4 @@
-Title: Converting This Site to Blazor
+Title: "Converting This Site to Blazor"
 Published: 2019/01/13
 Tags: 
 - Blazor

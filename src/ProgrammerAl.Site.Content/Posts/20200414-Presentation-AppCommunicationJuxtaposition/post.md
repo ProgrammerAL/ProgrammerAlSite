@@ -1,4 +1,4 @@
-Title: Presentation: The App Communication Juxtaposition
+Title: "Presentation: The App Communication Juxtaposition"
 Published: 2020/04/14
 Tags:
 - Meetup

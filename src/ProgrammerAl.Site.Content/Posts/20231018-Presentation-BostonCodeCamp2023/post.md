@@ -1,4 +1,4 @@
-Title: Boston Code Camp 2023: Beginning Pulumi and Practical Pulumi Talks
+Title: "Boston Code Camp 2023: Beginning Pulumi and Practical Pulumi Talks"
 Published: 2023/10/18
 Tags:
 

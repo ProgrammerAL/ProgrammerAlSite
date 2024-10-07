@@ -1,4 +1,4 @@
-Title: New Project: Public Interface Generator
+Title: "New Project: Public Interface Generator"
 Published: 2024/09/30
 Tags: 
 - Blog

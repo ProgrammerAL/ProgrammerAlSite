@@ -1,4 +1,4 @@
-Title: Making this Blog a Serverless App
+Title: "Making this Blog a Serverless App"
 Published: 2017/09/08
 Tags: 
 - Azure Functions

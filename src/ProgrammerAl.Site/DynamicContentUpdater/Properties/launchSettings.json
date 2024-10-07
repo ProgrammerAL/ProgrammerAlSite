@@ -2,7 +2,7 @@
   "profiles": {
     "ProgrammerAl.Site.DynamicContentUpdater": {
       "commandName": "Project",
-      "commandLineArgs": "--AppRootPath \"C:/GitHub/ProgrammerAl/ProgrammerAlSite/src/"
+      "commandLineArgs": "--AppRootPath \"C:/GitHub/ProgrammerAl/ProgrammerAlSite/src/\" --StorageUrl \"https://MyStorageUrl.com\" --OutputDirectory \"c:/temp/my-output\""
     }
   }
 }

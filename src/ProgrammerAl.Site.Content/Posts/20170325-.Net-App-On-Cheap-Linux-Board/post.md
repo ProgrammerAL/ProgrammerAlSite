@@ -1,4 +1,4 @@
-Title: Running a .Net app console app on an 'Embedded' linux board
+Title: "Running a .Net app console app on an 'Embedded' linux board"
 Published: 2017/03/25
 Tags: 
 - .Net MicroFramework

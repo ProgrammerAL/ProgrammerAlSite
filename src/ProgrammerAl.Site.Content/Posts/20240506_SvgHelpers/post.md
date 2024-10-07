@@ -1,4 +1,4 @@
-Title: New Project: SVGHelpers.com
+Title: "New Project: SVGHelpers.com"
 Published: 2024/05/06
 Tags: 
 - Blog

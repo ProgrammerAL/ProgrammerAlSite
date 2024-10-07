@@ -35,29 +35,36 @@ namespace DynamicContentUpdater
             int headerTextLength = rawEntry.IndexOf("---");
             var headerText = rawEntry.Substring(0, headerTextLength);
 
-            var properties = deserializer.Deserialize<PostPropertiesDto>(headerText);
-            AssertProperties(properties);
+            try
+            {
+                var properties = deserializer.Deserialize<PostPropertiesDto>(headerText);
+                AssertProperties(properties);
 
-            var tags = properties!.Tags!.Select(x => x!).ToImmutableArray();
-            var presentations = properties
-                .Presentations
-                ?.Select(x => new ParsedEntry.PresentationEntry(x!.Id!.Value, x.SlidesUrl, x.SlideImagesUrl))
-                .ToImmutableArray()
-                ?? ImmutableArray<ParsedEntry.PresentationEntry>.Empty;
+                var tags = properties!.Tags!.Select(x => x!).ToImmutableArray();
+                var presentations = properties
+                    .Presentations
+                    ?.Select(x => new ParsedEntry.PresentationEntry(x!.Id!.Value, x.SlidesUrl, x.SlideImagesUrl))
+                    .ToImmutableArray()
+                    ?? ImmutableArray<ParsedEntry.PresentationEntry>.Empty;
 
-            var postStartIndex = headerTextLength + 4;
-            ReadOnlySpan<char> postSpan = rawEntry.AsSpan(postStartIndex).Trim();
-            string post = SanitizePost(postSpan, postName);
+                var postStartIndex = headerTextLength + 4;
+                ReadOnlySpan<char> postSpan = rawEntry.AsSpan(postStartIndex).Trim();
+                string post = SanitizePost(postSpan, postName);
 
-            string firstParagraphOfPost = GrabFirstParagraphOfPost(post);
+                string firstParagraphOfPost = GrabFirstParagraphOfPost(post);
 
-            return new ParsedEntry(
-                properties.Title!,
-                properties.Published!.Value,
-                tags,
-                presentations,
-                post,
-                firstParagraphOfPost);
+                return new ParsedEntry(
+                    properties.Title!,
+                    properties.Published!.Value,
+                    tags,
+                    presentations,
+                    post,
+                    firstParagraphOfPost);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void AssertProperties(PostPropertiesDto? properties)

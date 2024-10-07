@@ -1,4 +1,4 @@
-Title: Improving Azure Functions Cold Boot
+Title: "Improving Azure Functions Cold Boot"
 Published: 2024/05/13
 Tags: 
 - blog

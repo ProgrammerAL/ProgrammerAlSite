@@ -1,4 +1,4 @@
-Title: Presentation: Deploying Infrastructure to 1 or More Clouds with Pulumi
+Title: "Presentation: Deploying Infrastructure to 1 or More Clouds with Pulumi"
 Published: 2023/07/25
 Tags: 
 - Conference

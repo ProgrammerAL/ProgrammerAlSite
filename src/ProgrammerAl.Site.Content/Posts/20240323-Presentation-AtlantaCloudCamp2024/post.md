@@ -1,4 +1,4 @@
-Title: Atlanta Cloud Conference 2024: IaC for Developers and Azure Managed Identities
+Title: "Atlanta Cloud Conference 2024: IaC for Developers and Azure Managed Identities"
 Published: 2024/03/23
 Tags:
 

@@ -1,4 +1,4 @@
-Title: Use Pulumi to Specify Cosmos DB Indexes
+Title: "Use Pulumi to Specify Cosmos DB Indexes"
 Published: 2023/05/16
 Tags: 
 - Blog

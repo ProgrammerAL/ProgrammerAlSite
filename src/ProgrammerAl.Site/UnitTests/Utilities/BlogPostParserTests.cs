@@ -119,6 +119,13 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
             Assert.Equal("Quick test", result.FirstParagraph);
         }
 
+        [Fact]
+        public void WhenParseingPostWithColonInTitle_AssertTitle()
+        {
+            var parser = new PostParser(_runtimeConfig);
+            var result = parser.ParseFromMarkdown(ValidPost_ColonInTitle, "20240501_MyPost");
+            Assert.Equal("My Title: Starting This Blog", result.Title);
+        }
 
         private const string ValidPost = @"
 Title: Starting This Blog
@@ -212,6 +219,19 @@ Tags:
 - Cake
 - NuGet
 - Continuous Integration
+- Continuous Deployment
+---
+### The Post!!!
+
+Quick test
+
+";
+
+        private const string ValidPost_ColonInTitle = @"
+Title: ""My Title: Starting This Blog""
+Published: 2017/01/16
+Tags: 
+- Wyam
 - Continuous Deployment
 ---
 ### The Post!!!

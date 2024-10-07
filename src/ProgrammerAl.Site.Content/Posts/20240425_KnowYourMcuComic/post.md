@@ -1,4 +1,4 @@
-Title: Know Your MCU
+Title: "Know Your MCU"
 Published: 2024/04/25
 Tags: 
 - comic

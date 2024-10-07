@@ -1,4 +1,4 @@
-Title: Introducing: That Which Smashes
+Title: "Introducing: That Which Smashes"
 Published: 2019/07/01
 Tags: 
 - Azure

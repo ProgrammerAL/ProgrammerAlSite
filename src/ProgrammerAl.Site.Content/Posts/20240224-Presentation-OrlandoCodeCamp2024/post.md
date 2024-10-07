@@ -1,4 +1,4 @@
-Title: Orlando Code Camp 2024: Beginner's Guide to Pulumi: Infrastructure as Code with Code
+Title: "Orlando Code Camp 2024: Beginner's Guide to Pulumi: Infrastructure as Code with Code"
 Published: 2024/02/24
 Tags:
 
