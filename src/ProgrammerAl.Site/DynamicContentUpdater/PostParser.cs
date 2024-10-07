@@ -1,14 +1,19 @@
-﻿using DynamicContentUpdater.Entities;
+﻿#nullable enable
+using DynamicContentUpdater.Entities;
 using DynamicContentUpdater.Utilities;
 
 using ProgrammerAl.Site.DynamicContentUpdater;
-using ProgrammerAl.Site.Pages;
 
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Text;
+
+using YamlDotNet.Serialization.NamingConventions;
+using YamlDotNet.Serialization;
+using ExCSS;
+using System.Linq;
 
 namespace DynamicContentUpdater
 {
@@ -23,57 +28,94 @@ namespace DynamicContentUpdater
 
         public ParsedEntry ParseFromMarkdown(string rawEntry, string postName)
         {
-            //Assumes a specific schema
-            //  Line 1: Title: <TITLE HERE>
-            //  Line 2: Published: <YYYY/MM/DD>
-            //  Line 3: Tags:
-            //  Line 4-??: - <Tag Name>
-            //  Line ??: PresentationSlides:
-            //  Line ??-??: - <Slide Url>
-            //  Header Ending: --- <Yes, 3 dashes>
-            //  ## <Some header. Usually "## Receiving the Quest">
-            //  First Paragraph
-            //  Rest of it: The blog post
+            var deserializer = new DeserializerBuilder()
+                .WithNamingConvention(PascalCaseNamingConvention.Instance)
+            .Build();
 
-            int titleStartIndex = rawEntry.IndexOf("Title:");
-            int titleEndIndex = rawEntry.IndexOf("\n", titleStartIndex);
-            int titleLineLength = titleEndIndex - titleStartIndex;
-            ReadOnlySpan<char> titleLine = rawEntry.AsSpan(titleStartIndex, titleLineLength);
-            string title = ParseStringValueFromLine(titleLine);
+            int headerEndIndex = rawEntry.IndexOf("---");
+            var headerText = rawEntry.Substring(0, headerEndIndex);
 
-            int publishedDateStartIndex = rawEntry.IndexOf("Published:");
-            int publishedDateEndIndex = rawEntry.IndexOf('\n', publishedDateStartIndex + 1);
-            int publishedDateEndLength = publishedDateEndIndex - publishedDateStartIndex;
-            ReadOnlySpan<char> publishedDateLine = rawEntry.AsSpan(publishedDateStartIndex, publishedDateEndLength);
-            DateOnly publishedDate = ParseDateTimeFromLine(publishedDateLine);
+            var properties = deserializer.Deserialize<PostPropertiesDto>(headerText);
+            AssertProperties(properties);
 
-            int tagsLineStartIndex = rawEntry.IndexOf("Tags:");
-            var tags = ParseListSection(rawEntry, tagsLineStartIndex);
+            var tags = properties!.Tags!.Select(x => x!).ToImmutableArray();
+            var presentations = properties.Presentations!.Select(x => new ParsedEntry.PresentationEntry(x!.Id!.Value, x.SlidesUrl, x.SlideImagesUrl)).ToImmutableArray();
 
-            int slidesLineStartIndex = rawEntry.IndexOf("Slides:");
-            ImmutableArray<string> slideUrls;
-            if (slidesLineStartIndex == -1)
-            {
-                slideUrls = ImmutableArray<string>.Empty;
-            }
-            else
-            {
-                slideUrls = ParseListSection(rawEntry, slidesLineStartIndex);
-            }
-
-            int headerCloseIndexStart = rawEntry.IndexOf("---") + 3;
-            ReadOnlySpan<char> postSpan = rawEntry.AsSpan(headerCloseIndexStart + 1).Trim();
+            var postStartIndex = headerEndIndex + 4;
+            ReadOnlySpan<char> postSpan = rawEntry.AsSpan(postStartIndex).Trim();
             string post = SanitizePost(postSpan, postName);
 
             string firstParagraphOfPost = GrabFirstParagraphOfPost(post);
 
             return new ParsedEntry(
-                title,
-                publishedDate,
+                properties.Title!,
+                properties.Published!.Value,
                 tags,
-                slideUrls,
+                presentations,
                 post,
                 firstParagraphOfPost);
+        }
+
+        private void AssertProperties(PostPropertiesDto? properties)
+        {
+            if (properties is null)
+            {
+                throw new Exception($"Post properties object is null");
+            }
+
+            AssertProperty(properties.Title, nameof(properties.Title));
+            AssertProperty(properties.Published, nameof(properties.Published));
+            AssertProperty(properties.Tags, nameof(properties.Tags));
+
+            //Presentations is optional
+            if (properties.Presentations is object)
+            {
+                foreach (var presentation in properties.Presentations)
+                {
+                    if (presentation is null)
+                    {
+                        throw new Exception($"Post presentation is null");
+                    }
+
+                    AssertProperty(presentation.Id, nameof(presentation.Id));
+                    AssertProperty(presentation.SlidesUrl, nameof(presentation.SlidesUrl));
+                    AssertProperty(presentation.SlideImagesUrl, nameof(presentation.SlideImagesUrl));
+                }
+            }
+        }
+
+        private void AssertProperty(string? value, string name)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new Exception($"Post property is null or empty: {name}");
+            }
+        }
+
+        private void AssertProperty(int? value, string name)
+        {
+            if (!value.HasValue
+                || value.Value == 0)
+            {
+                throw new Exception($"Post property is null or empty: {name}");
+            }
+        }
+
+        private void AssertProperty(DateOnly? value, string name)
+        {
+            if (!value.HasValue)
+            {
+                throw new Exception($"Post property is null or empty: {name}");
+            }
+        }
+
+        private void AssertProperty(string?[]? value, string name)
+        {
+            if (value is null
+                || value.Any(x => string.IsNullOrWhiteSpace(x)))
+            {
+                throw new Exception($"Post array property is null has a null or empty item: {name}");
+            }
         }
 
         private string GrabFirstParagraphOfPost(string post)
@@ -128,65 +170,20 @@ namespace DynamicContentUpdater
 
             return postText;
         }
+    }
 
-        private ImmutableArray<string> ParseListSection(string text, int sectionTitleStartIndex)
+    public class PostPropertiesDto
+    {
+        public string? Title { get; set; }
+        public DateOnly? Published { get; set; }
+        public string?[]? Tags { get; set; }
+        public PresentationDto?[]? Presentations { get; set; }
+
+        public class PresentationDto
         {
-            var items = new List<string>();
-
-            var endOfLineIndex = text.IndexOf('\n', sectionTitleStartIndex);
-            var endOfHeaderIndex = text.IndexOf("---");
-
-            //int startIndex = endOfLineIndex;
-            var nextItemIndex = text.IndexOf('-', endOfLineIndex);
-            while (nextItemIndex != -1
-                && nextItemIndex < endOfHeaderIndex)
-            {
-                var startIndex = nextItemIndex;
-                if (text[startIndex] != '-')
-                {
-                    break;
-                }
-
-                startIndex++;//Skip the dash
-                var endIndex = text.IndexOf('\n', startIndex + 1);
-
-                var length = endIndex - startIndex;
-                var line = text.Substring(startIndex, length).Trim();
-
-                items.Add(line);
-
-                nextItemIndex = endIndex + 1;
-            }
-
-            //while ((startIndex = localSpan.IndexOf('-') + 1) > 0)
-            //{
-            //    localSpan = localSpan.Slice(startIndex);
-
-            //    int endIndex = localSpan.IndexOf('\n');
-            //    string tag = localSpan.Slice(0, endIndex).Trim().ToString();
-            //    items.Add(tag);
-            //    localSpan = localSpan.Slice(endIndex + 1);
-            //}
-
-            return items.ToImmutableArray();
-        }
-
-        private string ParseStringValueFromLine(ReadOnlySpan<char> textLine)
-        {
-            int separatorIndex = textLine.IndexOf(':');
-            if (separatorIndex > -1)
-            {
-                separatorIndex++;//index is first character after the colon
-                return textLine.Slice(separatorIndex).Trim().ToString();
-            }
-
-            return "Unknown Error";
-        }
-
-        private DateOnly ParseDateTimeFromLine(ReadOnlySpan<char> textLine)
-        {
-            string dateTimeString = ParseStringValueFromLine(textLine);
-            return DateOnly.ParseExact(dateTimeString, format: "yyyy/MM/dd", provider: null);
+            public int? Id { get; set; }
+            public string? SlidesUrl { get; set; }
+            public string? SlideImagesUrl { get; set; }
         }
     }
 }

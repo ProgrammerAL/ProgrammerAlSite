@@ -6,8 +6,6 @@ using System;
 
 using Xunit;
 
-using static System.Net.WebRequestMethods;
-
 namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
 {
     public class BlogPostParserTests
@@ -58,9 +56,15 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         {
             var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPost, "20240501_MyPost");
-            Assert.Equal(2, result.PresentationSlideUrls.Length);
-            Assert.Contains("https://MyLink.com/a/b/c.html", result.PresentationSlideUrls);
-            Assert.Contains("https://MyLink.com/1/2/3.html", result.PresentationSlideUrls);
+            Assert.Equal(2, result.Presentations.Length);
+
+            Assert.Equal(1, result.Presentations[0].Id);
+            Assert.Equal("https://MyLink.com/a/b/c.html", result.Presentations[0].SlidesUrl);
+            Assert.Equal("https://MyLink.com/a/b/images", result.Presentations[0].SlideImagesUrl);
+
+            Assert.Equal(2, result.Presentations[1].Id);
+            Assert.Equal("https://MyLink.com/1/2/3.html", result.Presentations[1].SlidesUrl);
+            Assert.Equal("https://MyLink.com/1/2/images", result.Presentations[1].SlideImagesUrl);
         }
 
         [Fact]
@@ -68,7 +72,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         {
             var parser = new PostParser(_runtimeConfig);
             var result = parser.ParseFromMarkdown(ValidPostNoSlides, "20240501_MyPost");
-            Assert.Empty(result.PresentationSlideUrls);
+            Assert.Empty(result.Presentations);
         }
 
         [Fact]
@@ -116,9 +120,11 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
         }
 
 
-        private const string ValidPost = @"Title: Starting This Blog
+        private const string ValidPost = @"
+Title: Starting This Blog
 Published: 2017/01/16
 Tags: 
+
 - Wyam
 - Azure App Service
 - VSTS
@@ -126,9 +132,14 @@ Tags:
 - NuGet
 - Continuous Integration
 - Continuous Deployment
-Slides:
-- https://MyLink.com/a/b/c.html
-- https://MyLink.com/1/2/3.html
+
+Presentations:
+- Id: 1
+  SlidesUrl: https://MyLink.com/a/b/c.html
+  SlideImagesUrl: https://MyLink.com/a/b/images
+- Id: 2
+  SlidesUrl: https://MyLink.com/1/2/3.html
+  SlideImagesUrl: https://MyLink.com/1/2/images
 ---
 ### The Post!!!
 Everything else goes here and should be found

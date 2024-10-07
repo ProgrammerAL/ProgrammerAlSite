@@ -2,53 +2,28 @@
 using System.Collections.Immutable;
 using System.IO;
 
+using static ProgrammerAl.Site.PostDataEntities.PostEntry;
+
 namespace ProgrammerAl.Site.PostDataEntities;
 
-public class PostEntry
+public record PostEntry(
+        string PostDirectoryLocalPath,
+        string TitleHumanReadable,
+        string TitleLink,
+        DateOnly ReleaseDate,
+        ImmutableArray<string> Tags,
+        ImmutableArray<PresentationEntry> Presentations,
+        string PostMarkdown,
+        string PostHtml,
+        string FirstParagraphHtml,
+        int PostNumber,
+        bool IsDraft)
 {
     public const string ComicsTag = "comic";
     public const string ComicSvgFileName = "comic.svg";
     public const string ComicPngFileName = "comic.png";
     public const string HtmlFileName = "post.html";
     public const string MetaTagsFileName = "metatags.html";
-
-    public PostEntry(
-        string postDirectoryLocalPath,
-        string titleHumanReadable,
-        string titleLink,
-        DateOnly releaseDate,
-        ImmutableArray<string> tags,
-        ImmutableArray<string> presentationSlidesUrls,
-        string postMarkdown,
-        string postHtml,
-        string firstParagraphHtml,
-        int postNumber,
-        bool isDraft)
-    {
-        PostDirectoryLocalPath = postDirectoryLocalPath;
-        TitleHumanReadable = titleHumanReadable;
-        TitleLink = titleLink;
-        ReleaseDate = releaseDate;
-        Tags = tags;
-        PresentationSlidesUrls = presentationSlidesUrls;
-        PostMarkdown = postMarkdown;
-        PostHtml = postHtml;
-        PostNumber = postNumber;
-        FirstParagraphHtml = firstParagraphHtml;
-        IsDraft = isDraft;
-    }
-
-    public string PostDirectoryLocalPath { get; }
-    public string TitleHumanReadable { get; }
-    public string TitleLink { get; }
-    public DateOnly ReleaseDate { get; }
-    public ImmutableArray<string> Tags { get; }
-    public ImmutableArray<string> PresentationSlidesUrls { get; }
-    public string PostMarkdown { get; }
-    public string PostHtml { get; }
-    public string FirstParagraphHtml { get; }
-    public int PostNumber { get; }
-    public bool IsDraft { get; }
 
     public bool HasComic => File.Exists($"{PostDirectoryLocalPath}/{ComicSvgFileName}");
 
@@ -75,4 +50,6 @@ public class PostEntry
         comicLink = null;
         return false;
     }
+
+    public record PresentationEntry(int Id, string SlidesUrl, string SlideImagesUrl);
 }

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Collections.ObjectModel;
+
+using static DynamicContentUpdater.Entities.ParsedEntry;
 
 namespace DynamicContentUpdater.Entities;
 
@@ -9,6 +9,9 @@ public record ParsedEntry(
     string Title,
     DateOnly ReleaseDate,
     ImmutableArray<string> Tags,
-    ImmutableArray<string> PresentationSlideUrls,
+    ImmutableArray<PresentationEntry> Presentations,
     string Post,
-    string FirstParagraph);
+    string FirstParagraph)
+{
+    public record PresentationEntry(int Id, string SlidesUrl, string SlideImagesUrl);
+}

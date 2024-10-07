@@ -112,18 +112,22 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 {
                     var postNumber = i + 1;
 
+                    var presentations = x.ParsedEntry.Presentations.Select(p => new PostEntry.PresentationEntry(p.Id, p.SlidesUrl, p.SlideImagesUrl)).ToImmutableArray();
+                    var postHtml = Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline);
+                    var firstParagraphHtml = Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline);
+
                     return new PostEntry(
-                        postDirectoryLocalPath: x.PostDirectoryLocalPath,
-                        titleHumanReadable: x.ParsedEntry.Title,
-                        titleLink: x.PostName,//public url for the post, just the full name of it. ie 20210101-Title
-                        releaseDate: x.PostDate,
-                        tags: x.ParsedEntry.Tags,
-                        presentationSlidesUrls: x.ParsedEntry.PresentationSlideUrls,
-                        postMarkdown: x.ParsedEntry.Post,
-                        postHtml: Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline),
-                        firstParagraphHtml: Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline),
-                        postNumber: postNumber,
-                        isDraft: false
+                        PostDirectoryLocalPath: x.PostDirectoryLocalPath,
+                        TitleHumanReadable: x.ParsedEntry.Title,
+                        TitleLink: x.PostName,//public url for the post, just the full name of it. ie draft_20210101-Title
+                        ReleaseDate: x.PostDate,
+                        Tags: x.ParsedEntry.Tags,
+                        Presentations: presentations,
+                        PostMarkdown: x.ParsedEntry.Post,
+                        PostHtml: postHtml,
+                        FirstParagraphHtml: firstParagraphHtml,
+                        PostNumber: postNumber,
+                        IsDraft: false
                     );
                 })
                 .ToImmutableArray();
@@ -132,18 +136,21 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 .Where(x => x.IsDraft)
                 .Select((x, i) =>
                 {
+                    var presentations = x.ParsedEntry.Presentations.Select(p => new PostEntry.PresentationEntry(p.Id, p.SlidesUrl, p.SlideImagesUrl)).ToImmutableArray();
+                    var postHtml = Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline);
+                    var firstParagraphHtml = Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline);
                     return new PostEntry(
-                        postDirectoryLocalPath: x.PostDirectoryLocalPath,
-                        titleHumanReadable: x.ParsedEntry.Title,
-                        titleLink: x.PostName,//public url for the post, just the full name of it. ie draft_20210101-Title
-                        releaseDate: x.PostDate,
-                        tags: x.ParsedEntry.Tags,
-                        presentationSlidesUrls: x.ParsedEntry.PresentationSlideUrls,
-                        postMarkdown: x.ParsedEntry.Post,
-                        postHtml: Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline),
-                        firstParagraphHtml: Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline),
-                        postNumber: -1,
-                        isDraft: true
+                        PostDirectoryLocalPath: x.PostDirectoryLocalPath,
+                        TitleHumanReadable: x.ParsedEntry.Title,
+                        TitleLink: x.PostName,//public url for the post, just the full name of it. ie draft_20210101-Title
+                        ReleaseDate: x.PostDate,
+                        Tags: x.ParsedEntry.Tags,
+                        Presentations: presentations,
+                        PostMarkdown: x.ParsedEntry.Post,
+                        PostHtml: postHtml,
+                        FirstParagraphHtml: firstParagraphHtml,
+                        PostNumber: -1,
+                        IsDraft: true
                     );
                 })
                 .ToImmutableArray();

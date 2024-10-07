@@ -22,11 +22,12 @@ public class PostMetadataOutputter
         foreach (var post in allPosts)
         {
             var comicLink = post.TryGetComicSvgLink(out var outComicLink) ? outComicLink : null;
+            var presentations = post.Presentations.Select(x => new PostMetadata.PresentationData(x.Id, x.SlidesUrl, x.SlideImagesUrl)).ToImmutableArray();
             var metadata = new PostMetadata(
                  Title: post.TitleHumanReadable,
                  ComicImageLink: comicLink,
                  ReleaseDate: post.ReleaseDate,
-                 PresentationSlideUrls: post.PresentationSlidesUrls);
+                 Presentations: presentations);
 
             var outputDir = $"{runtimeConfig.OutputDirectory}/Posts/{post.TitleLink}";
             OutputUtils.WriteOutFileAsJson(metadata, outputDir, PostMetadata.FileName);

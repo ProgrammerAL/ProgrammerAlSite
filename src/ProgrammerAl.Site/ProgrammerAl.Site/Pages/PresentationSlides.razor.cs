@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components;
 
 using ProgrammerAl.Site.DataProviders;
 using ProgrammerAl.Site.Utilities;
+using ProgrammerAl.Site.Utilities.Entities;
 
 namespace ProgrammerAl.Site.Pages;
 
@@ -21,38 +22,43 @@ public partial class PresentationSlides : ComponentBase
     public string? PostUrl { get; set; }
 
     [Parameter]
-    public int Index { get; set; }
+    public int Id { get; set; }
 
     private MarkupString SlidesHtml { get; set; }
     private PostData? PostData { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        if (!string.IsNullOrWhiteSpace(PostUrl) && Index > -1)
+        if (string.IsNullOrWhiteSpace(PostUrl) || Id <= 0)
         {
-            PostData = await PostDataProvider.GetPostAsync(PostUrl);
-
-            if (PostData is object
-                && Index < PostData.Metadata.PresentationSlideUrls.Length)
-            {
-                var slidesUrl = PostData.Metadata.PresentationSlideUrls[Index];
-                var slidesHtml = await FileDownloader.DownloadFileTextFromSiteContentAsync(slidesUrl, "*/*");
-                if (!string.IsNullOrWhiteSpace(slidesHtml))
-                {
-                    var sanitizedSlidesHtml = SanitizeHtml(slidesHtml);
-
-                    SlidesHtml = new MarkupString(sanitizedSlidesHtml);
-                    await InvokeAsync(StateHasChanged);
-                }
-            }
+            return;
         }
+
+        PostData = await PostDataProvider.GetPostAsync(PostUrl);
+
+        var presentation = PostData?.Metadata.Presentations.FirstOrDefault(x => x.Id == Id);
+        if (presentation is null)
+        {
+            return;
+        }
+
+        var slidesHtml = await FileDownloader.DownloadFileTextFromSiteContentAsync(presentation.SlidesUrl, "*/*");
+        if (string.IsNullOrWhiteSpace(slidesHtml))
+        {
+            return;
+        }
+
+        var sanitizedSlidesHtml = SanitizeHtml(presentation, slidesHtml);
+
+        SlidesHtml = new MarkupString(sanitizedSlidesHtml);
+        await InvokeAsync(StateHasChanged);
 
         await base.OnInitializedAsync();
     }
 
-    private string SanitizeHtml(string slidesHtml)
+    private string SanitizeHtml(PostMetadata.PresentationData presentation, string slidesHtml)
     {
-        slidesHtml = slidesHtml.Replace("background-image:url(&quot;", "background-image:url(&quot;");
+        slidesHtml = slidesHtml.Replace("background-image:url(&quot;", $"background-image:url(&quot;{presentation.SlideImagesUrl}");
         return slidesHtml;
     }
 
