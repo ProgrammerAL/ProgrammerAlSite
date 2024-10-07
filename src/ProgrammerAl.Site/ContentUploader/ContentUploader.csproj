@@ -6,12 +6,11 @@
         <PreserveCompilationContext>true</PreserveCompilationContext>
         <AssemblyName>ProgrammerAl.Site.ContentUploader</AssemblyName>
         <RootNamespace>ProgrammerAl.Site.ContentUploader</RootNamespace>
-    </PropertyGroup>
-
-    <PropertyGroup>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <WarningsAsErrors />
-        <LangVersion>preview</LangVersion>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
