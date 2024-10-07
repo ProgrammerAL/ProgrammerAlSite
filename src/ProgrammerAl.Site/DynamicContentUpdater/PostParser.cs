@@ -32,16 +32,20 @@ namespace DynamicContentUpdater
                 .WithNamingConvention(PascalCaseNamingConvention.Instance)
             .Build();
 
-            int headerEndIndex = rawEntry.IndexOf("---");
-            var headerText = rawEntry.Substring(0, headerEndIndex);
+            int headerTextLength = rawEntry.IndexOf("---");
+            var headerText = rawEntry.Substring(0, headerTextLength);
 
             var properties = deserializer.Deserialize<PostPropertiesDto>(headerText);
             AssertProperties(properties);
 
             var tags = properties!.Tags!.Select(x => x!).ToImmutableArray();
-            var presentations = properties.Presentations!.Select(x => new ParsedEntry.PresentationEntry(x!.Id!.Value, x.SlidesUrl, x.SlideImagesUrl)).ToImmutableArray();
+            var presentations = properties
+                .Presentations
+                ?.Select(x => new ParsedEntry.PresentationEntry(x!.Id!.Value, x.SlidesUrl, x.SlideImagesUrl))
+                .ToImmutableArray()
+                ?? ImmutableArray<ParsedEntry.PresentationEntry>.Empty;
 
-            var postStartIndex = headerEndIndex + 4;
+            var postStartIndex = headerTextLength + 4;
             ReadOnlySpan<char> postSpan = rawEntry.AsSpan(postStartIndex).Trim();
             string post = SanitizePost(postSpan, postName);
 
