@@ -145,10 +145,10 @@ Tags:
 Presentations:
 - Id: 1
   SlidesUrl: https://MyLink.com/a/b/c.html
-  SlideImagesUrl: https://MyLink.com/a/b/images
+  SlidesImagesUrl: https://MyLink.com/a/b/images
 - Id: 2
   SlidesUrl: https://MyLink.com/1/2/3.html
-  SlideImagesUrl: https://MyLink.com/1/2/images
+  SlidesImagesUrl: https://MyLink.com/1/2/images
 ---
 ### The Post!!!
 Everything else goes here and should be found
