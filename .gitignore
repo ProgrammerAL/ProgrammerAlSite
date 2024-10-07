@@ -268,3 +268,5 @@ __pycache__/
 **/ProgrammerAl.Site/wwwroot/sitemap.xml
 
 **/ProgrammerAl.Site/wwwroot/css/custom-modules/*.css
+
+**/src/**/dist
