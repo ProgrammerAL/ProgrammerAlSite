@@ -18,4 +18,9 @@
         <PackageReference Include="Pulumi.Automation" Version="3.67.1" />
     </ItemGroup>
 
+    <PropertyGroup>
+        <NuGetAudit>true</NuGetAudit>
+        <NuGetAuditMode>all</NuGetAuditMode>
+        <NuGetAuditLevel>low</NuGetAuditLevel>
+    </PropertyGroup>
 </Project>

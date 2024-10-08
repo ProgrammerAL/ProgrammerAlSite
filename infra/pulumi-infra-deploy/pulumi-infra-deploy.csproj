@@ -21,4 +21,9 @@
 		<PackageReference Include="Pulumi.Random" Version="4.16.6" />
 	</ItemGroup>
 
+	<PropertyGroup>
+		<NuGetAudit>true</NuGetAudit>
+		<NuGetAuditMode>all</NuGetAuditMode>
+		<NuGetAuditLevel>low</NuGetAuditLevel>
+	</PropertyGroup>
 </Project>

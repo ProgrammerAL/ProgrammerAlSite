@@ -38,4 +38,9 @@
         <ProjectReference Include="..\ProgrammerAl.Site\ProgrammerAl.Site.csproj" />
     </ItemGroup>
 
+    <PropertyGroup>
+        <NuGetAudit>true</NuGetAudit>
+        <NuGetAuditMode>all</NuGetAuditMode>
+        <NuGetAuditLevel>low</NuGetAuditLevel>
+    </PropertyGroup>
 </Project>

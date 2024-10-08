@@ -14,4 +14,10 @@
 		<PackageReference Include="Cake.GitHub" Version="1.0.0" />
 		<PackageReference Include="Cake.Npm" Version="4.0.0" />
 	</ItemGroup>
+
+	<PropertyGroup>
+		<NuGetAudit>true</NuGetAudit>
+		<NuGetAuditMode>all</NuGetAuditMode>
+		<NuGetAuditLevel>low</NuGetAuditLevel>
+	</PropertyGroup>
 </Project>
