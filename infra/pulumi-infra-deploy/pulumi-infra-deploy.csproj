@@ -14,7 +14,7 @@
 	<ItemGroup>
 		<PackageReference Include="Azure.Identity" Version="1.12.1" />
 		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.6.0" />
-		<PackageReference Include="Pulumi.AzureNative" Version="2.64.3" />
+		<PackageReference Include="Pulumi.AzureNative" Version="2.65.0" />
 		<PackageReference Include="Pulumi.AzureAD" Version="5.53.5" />
 		<PackageReference Include="Pulumi.Cloudflare" Version="5.40.0" />
 		<PackageReference Include="Pulumi.Command" Version="1.0.1" />
