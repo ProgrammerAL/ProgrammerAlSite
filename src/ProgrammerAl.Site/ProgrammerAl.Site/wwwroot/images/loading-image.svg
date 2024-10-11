@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" 
+    role="img"
+    aria-labelledby="titleId descId"
+    overflow="visible"
+    viewBox="0 0 350 200">
+    <title id="titleId">ProgrammerAL.com Loading...</title>
+    <desc id="descId"></desc>
+
+    <style>
+        :root {
+            --background-color: blue;
+            --border-color: black;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: darkblue;
+                --border-color: white;
+            }
+        }
+
+        .background {
+            fill: var(--background-color);
+            stroke: var(--border-color);
+            stroke-width: 2;
+        }
+
+        .sun {
+            fill: #f4d03f;
+        }
+
+        .ground {
+            fill: #0A6114;
+        }
+        
+        .steg-body {
+            fill: #0F921F;
+            stroke: black;
+            stroke-width: 1;
+        }
+
+        .steg-spike {
+            fill: #ACCAAF;
+            stroke: black;
+            stroke-width: 1;
+        }
+    </style>
+
+    <rect x="0" y="0" height="200" width="350" class="background">
+    </rect>
+
+    <!-- Sun-->
+    <circle cx="30" cy="30" r="20" class="sun"/>
+
+    <!-- Ground -->
+    <rect x="1" y="175" height="25" width="348" class="ground" />
+
+    <!-- Stegasaurus -->
+    <!-- Tail -->
+     <path d="
+        M 50 150
+        L 100 140
+        V 160
+        Z" 
+      class="steg-body" />
+
+    <!-- Tail Spikes -->
+     <path d="
+        M 54 149
+        L 53 140
+        L 59 148
+
+        M 63 147
+        L 67 130
+        L 72 145
+
+        M 58 152
+        L 61 160
+        L 65 153
+
+        M 67 153
+        L 71 165
+        L 76 155
+        " 
+      class="steg-spike" />
+
+<!-- Body Spikes -->
+<!-- Q d1x,d1y d2x,d2y: d1 is the point of the top of the curve, d2 is the final point-->
+     <path d="
+        M 110 130
+        Q 110 90 130 117
+        " 
+      class="steg-spike" />
+     <path d="
+        M 137 120
+        Q 153 80 170 110
+        " 
+      class="steg-spike" />
+     <path d="
+        M 125 120
+        Q 130 95 145 112
+        " 
+      class="steg-spike" />
+     <path d="
+        M 200 120
+        Q 210 90 220 130
+        " 
+      class="steg-spike" />
+     <path d="
+        M 165 120
+        Q 190 80 205 120
+        " 
+      class="steg-spike" />
+     <path d="
+        M 205 120
+        Q 245 90 240 150
+        " 
+      class="steg-spike" />
+
+    <!-- Body -->
+    <path d="
+        M 100 140
+        Q 150 80 250 140
+        V 160
+        H 100
+        Z
+        "
+        class="steg-body" />
+
+
+</svg>
