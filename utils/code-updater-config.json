@@ -6,5 +6,10 @@
   "DotNetLangVersion": "latest",
   "EnableNetAnalyzers": true,
   "EnforceCodeStyleInBuild": true,
-  "RunDotnetFormat": true
+  "RunDotnetFormat": true,
+  "NugetAudit": {
+    "NuGetAudit": true,
+    "AuditMode": "all",
+    "AuditLevel": "low"
+  }
 }

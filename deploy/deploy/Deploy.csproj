@@ -20,4 +20,4 @@
 		<NuGetAuditMode>all</NuGetAuditMode>
 		<NuGetAuditLevel>low</NuGetAuditLevel>
 	</PropertyGroup>
-</Project>
+<PropertyGroup /></Project>
