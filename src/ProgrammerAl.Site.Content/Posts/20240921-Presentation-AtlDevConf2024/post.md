@@ -17,10 +17,10 @@ Presentations:
 
 This was an overview of different features built into .NET and C# to help us developers write better code.
 
-You can download the slides from GitHub <a target="_blank" href="https://github.com/ProgrammerAL/Presentations-2024/tree/main/atlanta-developers-conference-2024">here</a>.
-
-You can also view the slides in your browser by clicking <a href="/posts/20240921-Presentation-AtlDevConf2024/slides/1">here</a>.
-
+<div class="post-multiple-links-div">
+  <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2024/tree/main/atlanta-developers-conference-2024">View Session Content on GitHub</a>
+  <a class="post-view-session-content-link" href="/posts/20240921-Presentation-AtlDevConf2024/slides/1">View Slides in Browser</a>
+</div>
 
 ## Abstract
 

@@ -98,9 +98,31 @@
         padding: 0.1em 0.25em;
     }
 
+.post-multiple-links-div {
+    display: flex;
+    margin: 1rem; /* 16px */
+    gap: 1rem; /* 16px */
+}
+
+.post-session-content-link {
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(22 101 52);
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+    font-weight: 600;
+}
+
+.post-view-session-content-link {
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(22 101 52);
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+    font-weight: 600;
+}
 
 @media (prefers-color-scheme: dark) {
-
     .post-content a {
         color: #818CF8;
     }
