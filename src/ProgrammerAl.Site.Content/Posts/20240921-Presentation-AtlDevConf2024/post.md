@@ -24,7 +24,7 @@ I performed one session titled, "Setting Up Your C# Pit of Success" which is an 
   <a class="post-view-session-content-link" href="/posts/20240921-Presentation-AtlDevConf2024/slides/1">View Slides in Browser</a>
 </div>
 
-## Abstract for Setting Up Your C# Pit of Success
+## Session Abstract
 
 Writing code is only 40% of the work. Maintaining high-quality code is maybe another 20%. Reviewing PRs and updating dependencies are just some of the manual processes we have to deal with that regularly take us away from the fun part of development: writing code. But we're developers, and we can automate these processes. Nay, we MUST automate or risk becoming less efficient the longer we work on a codebase. Thankfully, the 20+ year lifespan of C# and .NET means it has some features built-in to help us enforce certain levels of code quality.
 
