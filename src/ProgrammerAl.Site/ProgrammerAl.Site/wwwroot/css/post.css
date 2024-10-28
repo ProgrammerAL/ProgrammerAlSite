@@ -106,20 +106,22 @@
 
 .post-session-content-link {
     border: solid;
-    border-width: 2px;
+    border-width: 4px;
     border-color: rgb(22 101 52);
     font-size: 1.25rem; /* 20px */
     line-height: 1.75rem; /* 28px */
     font-weight: 600;
+    padding: 4px;
 }
 
 .post-view-session-content-link {
     border: solid;
-    border-width: 2px;
+    border-width: 4px;
     border-color: rgb(22 101 52);
     font-size: 1.25rem; /* 20px */
     line-height: 1.75rem; /* 28px */
     font-weight: 600;
+    padding: 4px;
 }
 
 @media (prefers-color-scheme: dark) {
