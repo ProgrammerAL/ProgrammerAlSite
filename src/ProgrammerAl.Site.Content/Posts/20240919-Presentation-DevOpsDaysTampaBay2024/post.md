@@ -8,6 +8,7 @@ Tags:
 Presentations:
 - Id: 1
   SlidesUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/devops-days-tampa-bay-2024/presentation.html
+  SlidesImagesUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/refs/heads/main/devops-days-tampa-bay-2024
 
 
 ---
