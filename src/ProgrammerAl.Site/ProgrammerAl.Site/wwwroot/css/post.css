@@ -111,7 +111,7 @@
     font-size: 1.25rem; /* 20px */
     line-height: 1.75rem; /* 28px */
     font-weight: 600;
-    padding: 4px;
+    padding: 8px;
 }
 
 .post-view-session-content-link {
@@ -121,7 +121,7 @@
     font-size: 1.25rem; /* 20px */
     line-height: 1.75rem; /* 28px */
     font-weight: 600;
-    padding: 4px;
+    padding: 8px;
 }
 
 @media (prefers-color-scheme: dark) {
