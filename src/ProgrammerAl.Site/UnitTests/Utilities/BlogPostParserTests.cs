@@ -61,12 +61,10 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
             Assert.Equal(2, result.Presentations.Length);
 
             Assert.Equal(1, result.Presentations[0].Id);
-            Assert.Equal("https://MyLink.com/a/b/c.html", result.Presentations[0].SlidesUrl);
-            Assert.Equal("https://MyLink.com/a/b/images", result.Presentations[0].SlideImagesUrl);
+            Assert.Equal("https://MyLink.com/a/b/c.html", result.Presentations[0].SlidesRootUrl);
 
             Assert.Equal(2, result.Presentations[1].Id);
-            Assert.Equal("https://MyLink.com/1/2/3.html", result.Presentations[1].SlidesUrl);
-            Assert.Equal("https://MyLink.com/1/2/images", result.Presentations[1].SlideImagesUrl);
+            Assert.Equal("https://MyLink.com/1/2", result.Presentations[1].SlidesRootUrl);
         }
 
         [Fact]
@@ -144,11 +142,9 @@ Tags:
 
 Presentations:
 - Id: 1
-  SlidesUrl: https://MyLink.com/a/b/c.html
-  SlidesImagesUrl: https://MyLink.com/a/b/images
+  SlidesRootUrl: https://MyLink.com/a/b
 - Id: 2
-  SlidesUrl: https://MyLink.com/1/2/3.html
-  SlidesImagesUrl: https://MyLink.com/1/2/images
+  SlidesRootUrl: https://MyLink.com/1/2
 ---
 ### The Post!!!
 Everything else goes here and should be found

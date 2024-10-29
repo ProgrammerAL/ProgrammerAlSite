@@ -12,5 +12,8 @@ public record PostMetadata(
 {
     public const string FileName = "metadata.json";
 
-    public record PresentationData(int Id, string SlidesUrl, string? SlidesImagesUrl);
+    public record PresentationData(int Id, string SlidesRootUrl)
+    {
+        public string SlidesUrl => $"{SlidesRootUrl}/presentation.html";
+    }
 }

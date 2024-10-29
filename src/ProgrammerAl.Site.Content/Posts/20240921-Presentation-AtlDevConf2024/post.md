@@ -8,8 +8,7 @@ Tags:
 
 Presentations:
 - Id: 1
-  SlidesUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/atlanta-developers-conference-2024/presentation.html
-  SlidesImagesUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/refs/heads/main/atlanta-developers-conference-2024
+  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/atlanta-developers-conference-2024
 
 ---
 

@@ -9,11 +9,9 @@ Tags:
 
 Presentations:
 - Id: 1
-  SlidesUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/beer-city-code/open-telemetry/presentation.html
-  SlidesImagesUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/refs/heads/main/beer-city-code/open-telemetry
+  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/beer-city-code/open-telemetry
 - Id: 2
-  SlidesUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/beer-city-code/managed-identities/presentation.html
-  SlidesImagesUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/refs/heads/main/beer-city-code/managed-identities
+  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/beer-city-code/managed-identities
 
 ---
 

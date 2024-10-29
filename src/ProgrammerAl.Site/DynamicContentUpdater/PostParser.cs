@@ -43,7 +43,7 @@ namespace DynamicContentUpdater
                 var tags = properties!.Tags!.Select(x => x!).ToImmutableArray();
                 var presentations = properties
                     .Presentations
-                    ?.Select(x => new ParsedEntry.PresentationEntry(x!.Id!.Value, x.SlidesUrl!, x.SlidesImagesUrl))
+                    ?.Select(x => new ParsedEntry.PresentationEntry(x!.Id!.Value, x.SlidesRootUrl!))
                     .ToImmutableArray()
                     ?? ImmutableArray<ParsedEntry.PresentationEntry>.Empty;
 
@@ -89,7 +89,7 @@ namespace DynamicContentUpdater
                     }
 
                     AssertProperty(presentation.Id, nameof(presentation.Id));
-                    AssertProperty(presentation.SlidesUrl, nameof(presentation.SlidesUrl));
+                    AssertProperty(presentation.SlidesRootUrl, nameof(presentation.SlidesRootUrl));
                 }
             }
         }
@@ -192,8 +192,7 @@ namespace DynamicContentUpdater
         public class PresentationDto
         {
             public int? Id { get; set; }
-            public string? SlidesUrl { get; set; }
-            public string? SlidesImagesUrl { get; set; }
+            public string? SlidesRootUrl { get; set; }
         }
     }
 }

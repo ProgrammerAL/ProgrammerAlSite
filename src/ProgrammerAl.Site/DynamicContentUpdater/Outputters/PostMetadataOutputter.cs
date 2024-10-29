@@ -22,7 +22,7 @@ public class PostMetadataOutputter
         foreach (var post in allPosts)
         {
             _ = post.TryGetComicSvgLink(out var comicLink);
-            var presentations = post.Presentations.Select(x => new PostMetadata.PresentationData(x.Id, x.SlidesUrl, x.SlidesImagesUrl)).ToImmutableArray();
+            var presentations = post.Presentations.Select(x => new PostMetadata.PresentationData(x.Id, x.SlidesRootUrl)).ToImmutableArray();
             var metadata = new PostMetadata(
                  Title: post.TitleHumanReadable,
                  ComicImageLink: comicLink,

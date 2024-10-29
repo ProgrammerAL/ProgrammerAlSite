@@ -118,7 +118,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 {
                     var postNumber = i + 1;
 
-                    var presentations = x.ParsedEntry.Presentations.Select(p => new PostEntry.PresentationEntry(p.Id, p.SlidesUrl, p.SlideImagesUrl)).ToImmutableArray();
+                    var presentations = x.ParsedEntry.Presentations.Select(p => new PostEntry.PresentationEntry(p.Id, p.SlidesRootUrl)).ToImmutableArray();
                     var postHtml = Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline);
                     var firstParagraphHtml = Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline);
 
@@ -142,7 +142,7 @@ namespace ProgrammerAl.Site.DynamicContentUpdater
                 .Where(x => x.IsDraft)
                 .Select((x, i) =>
                 {
-                    var presentations = x.ParsedEntry.Presentations.Select(p => new PostEntry.PresentationEntry(p.Id, p.SlidesUrl, p.SlideImagesUrl)).ToImmutableArray();
+                    var presentations = x.ParsedEntry.Presentations.Select(p => new PostEntry.PresentationEntry(p.Id, p.SlidesRootUrl)).ToImmutableArray();
                     var postHtml = Markdown.ToHtml(x.ParsedEntry.Post, pipeline: markdownPipeline);
                     var firstParagraphHtml = Markdown.ToHtml(x.ParsedEntry.FirstParagraph, pipeline: markdownPipeline);
                     return new PostEntry(

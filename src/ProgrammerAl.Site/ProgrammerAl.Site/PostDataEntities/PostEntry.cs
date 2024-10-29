@@ -51,5 +51,5 @@ public record PostEntry(
         return false;
     }
 
-    public record PresentationEntry(int Id, string SlidesUrl, string? SlidesImagesUrl);
+    public record PresentationEntry(int Id, string SlidesRootUrl);
 }
