@@ -5,11 +5,27 @@ Tags:
 - Conference
 - Pulumi
 
+Presentations:
+- Id: 1
+  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2024/main/orlando-code-camp
+
 ---
 
-## The Presentation
+## Orlando Code Camp 2024
 
-This was an introduction to Infrastructure as Code session with an emphasis on Pulumi. This was given at the 2024 Orlando Code Camp community driven conference. The conference page is <a target="_blank" href="https://orlandocodecamp.com/schedule/">here</a>.
+Orlando Code Camp 2024 was hosted on February 24th, 2024. https://orlandocodecamp.com/
 
-If you'd like to see the demo code, and presentation slides, they are hosted on GitHub at <a target="_blank" href="https://github.com/ProgrammerAL/Presentations-2024/tree/main/orlando-code-camp">here</a>.
+I performed a session titled, "Beginner's Guide to Pulumi: Infrastructure as Code with Code".
+
+
+<div class="post-multiple-links-div">
+  <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2024/tree/main/orlando-code-camp">View Session Content on GitHub</a>
+  <a class="post-view-session-content-link" href="/posts/20240224-Presentation-OrlandoCodeCamp2024/slides/1">View Slides in Browser</a>
+</div>
+
+## Beginner's Guide to Pulumi: Infrastructure as Code with Code
+
+__Session Abstract__:
+Pulumi is more than just, "A competitor to Terraform." It's an Infrastructure as Code tool for managing cloud infrastructure through general purpose coding languages like C#, JavaScript/TypeScript, Go, and others. In this introductory session we'll review the basic features of Pulumi and review some code demos that show how easy it is to get started creating new cloud infrastructure. By then end of the session, we'll have enough of an understanding to get started using Pulumi to manage cloud infrastructure for any new projects.
+
 
