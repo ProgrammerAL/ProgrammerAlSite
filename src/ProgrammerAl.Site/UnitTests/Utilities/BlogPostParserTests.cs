@@ -61,7 +61,7 @@ namespace UnitTests.ProgrammerAl.DeveloperSideQuests.Utilities
             Assert.Equal(2, result.Presentations.Length);
 
             Assert.Equal(1, result.Presentations[0].Id);
-            Assert.Equal("https://MyLink.com/a/b/c.html", result.Presentations[0].SlidesRootUrl);
+            Assert.Equal("https://MyLink.com/a/b", result.Presentations[0].SlidesRootUrl);
 
             Assert.Equal(2, result.Presentations[1].Id);
             Assert.Equal("https://MyLink.com/1/2", result.Presentations[1].SlidesRootUrl);
