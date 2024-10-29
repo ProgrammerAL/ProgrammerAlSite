@@ -53,6 +53,9 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
             AccountId = GlobalConfig.CloudflareConfig.AccountId,
             ZoneTag = GlobalConfig.WebClientInfraConfig.CloudflareZoneId,
             AutoInstall = true,
+        }, new CustomResourceOptions
+        {
+            Provider = provider
         });
 
         //Hack: We do it to guarantee the appsettings files are generated before the command runs to upload all files to Cloudflare
