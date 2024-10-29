@@ -48,6 +48,13 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
             Provider = provider
         });
 
+        var siteAnalytics = new Cloudflare.WebAnalyticsSite("site-analytics", new()
+        {
+            AccountId = GlobalConfig.CloudflareConfig.AccountId,
+            ZoneTag = GlobalConfig.WebClientInfraConfig.CloudflareZoneId,
+            AutoInstall = true,
+        });
+
         //Hack: We do it to guarantee the appsettings files are generated before the command runs to upload all files to Cloudflare
         //      Before this, the files were being generated after the `wrangler pages deploy` command ran
         var webClientDirPathOutput = PrepareAppFilesForUpload();
