@@ -28,6 +28,9 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Update="Pages\Tools.razor">
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        </Content>
         <Content Update="Pages\PresentationSlides.razor">
             <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         </Content>
