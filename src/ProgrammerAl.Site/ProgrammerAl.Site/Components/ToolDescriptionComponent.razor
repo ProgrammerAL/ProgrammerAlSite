@@ -1,0 +1,29 @@
+﻿@using ProgrammerAl.Site.Utilities.Entities
+
+<div class="flex flex-col gap-2">
+    <div class="
+            text-2xl font-bold
+            hover:text-green-800 active:text-green-600 focus:text-green-900
+            underline">
+        <a href="@Link">@LinkText</a>
+    </div>
+
+    <p class="mx-4 text-lg">
+        @Description View more information here:
+        <a class="underline hover:font-semibold
+            text-blue-700 hover:text-blue-800"
+           href="@Link">link</a>
+    </p>
+</div>
+
+
+@code {
+    [Parameter, EditorRequired]
+    public required string Link { get; set; }
+
+    [Parameter, EditorRequired]
+    public required string LinkText { get; set; }
+
+    [Parameter, EditorRequired]
+    public required string Description { get; set; }
+}
