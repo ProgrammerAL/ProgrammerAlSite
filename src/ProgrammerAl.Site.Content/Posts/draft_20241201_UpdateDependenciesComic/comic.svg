@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" 
+    role="img"
+    aria-labelledby="titleId descId"
+    overflow="visible"
+    viewBox="0 0 800 600">
+    <title id="titleId">Updating Dependencies</title>
+    <desc id="descId"></desc>
+
+    <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --line-color: black;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: black;
+                --text-color: white;
+                --line-color: white;
+            }
+        }
+
+        .background {
+            fill: var(--background-color);
+        }
+
+        .debug-rect {
+            fill: green;
+        }
+
+        .signature-text { 
+            font-family: Verdana;
+            font-size: 8px;
+            fill: var(--text-color);
+        }
+
+        .section-title-text { 
+            font-family: Verdana;
+            font-size: 20px;
+            fill: var(--text-color);
+        }
+
+        .title-text { 
+            font-family: Verdana;
+            font-size: 24px;
+            font-weight: bold;
+            fill: var(--text-color);
+        }
+
+        .section-border { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 1.5;
+        }
+
+        .confirmation-button-border { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 2.0;
+        }
+
+        .display-text { 
+            font-family: Verdana;
+            font-size: 30px;
+            fill: var(--text-color);
+        }
+
+        .confirmation-text { 
+            font-family: Verdana;
+            font-size: 40px;
+            fill: var(--text-color);
+        }
+
+        .person { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 3;
+        }
+
+        .talking-line { 
+            fill: var(--background-color);
+            stroke: var(--line-color);
+            stroke-width: 0.6;
+        }
+
+        .talking-text { 
+            font-family: Verdana;
+            font-size: 18px;
+            fill: var(--text-color);
+        }
+
+    </style>
+
+    <rect x="0" y="0" width="800" height="600" class="background">
+    </rect>
+
+    <!-- <rect x="0" y="0" width="800" height="600" class="debug-rect">
+    </rect> -->
+
+    <g>
+        <svg x="0" y="0">
+            <text x="250" y="25" class="title-text">Updating Dependencies</text>
+        </svg>
+    </g>
+
+    <!-- Panel - Update Prompt -->
+    <g>
+        <svg x="0" y="30" width="400" height="560" >
+            <rect x="5" y="5" width="390" height="240" class="section-border">
+            </rect>
+            <text x="60" y="60" class="display-text">Update from 6.11</text>
+            <text x="130" y="95" class="display-text">to 14.2?</text>
+
+            <rect x="40" y="120" width="140" height="50" class="confirmation-button-border">
+            </rect>
+
+            <rect x="220" y="120" width="140" height="50" class="confirmation-button-border">
+            </rect>
+            
+            <text x="80" y="160" class="confirmation-text">No</text>
+            <text x="250" y="160" class="confirmation-text">Yes</text>
+        </svg>
+    </g>
+
+    <!-- Panel 2 - Person Response -->
+    <g>
+        <svg x="400" y="30" width="400" height="250">
+            <rect x="5" y="5" width="390" height="240" class="section-border">
+            </rect>
+
+            <!-- Head -->
+            <circle cx="80" cy="170" r="70" class="person" />
+
+            <!-- Eye -->
+            <circle cx="130" cy="150" r="1" class="person" />
+
+            <!-- Mouth -->
+            <line x1="100" y1="200" x2="142" y2="200" class="person" />
+
+            <path d="M 150 190 L 200 80" class="talking-line" />
+            <text x="200" y="60" class="talking-text">Hmmmm....</text>
+            <text x="200" y="80" class="talking-text">That's a big update.</text>
+
+            <path d="M 150 190 L 195 160" class="talking-line" />
+            <text x="200" y="150" class="talking-text">Better wait until</text>
+            <text x="200" y="170" class="talking-text">we have time</text>
+            <text x="210" y="190" class="talking-text">to test.</text>
+
+            <text x="200" y="210" class="talking-text">Like Q2, 2056.</text>
+
+        </svg>
+    </g>
+
+    <text x="726" y="32" class="signature-text">@ProgrammerAL</text>
+
+</svg>
