@@ -3,7 +3,7 @@
     role="img"
     aria-labelledby="titleId descId"
     overflow="visible"
-    viewBox="0 0 800 600">
+    viewBox="0 0 800 300">
     <title id="titleId">Updating Dependencies</title>
     <desc id="descId"></desc>
 
@@ -93,10 +93,10 @@
 
     </style>
 
-    <rect x="0" y="0" width="800" height="600" class="background">
+    <rect x="0" y="0" width="800" height="300" class="background">
     </rect>
 
-    <!-- <rect x="0" y="0" width="800" height="600" class="debug-rect">
+    <!-- <rect x="0" y="0" width="800" height="300" class="debug-rect">
     </rect> -->
 
     <g>
