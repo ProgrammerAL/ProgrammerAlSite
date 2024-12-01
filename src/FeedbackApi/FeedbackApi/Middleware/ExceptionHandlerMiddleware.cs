@@ -19,7 +19,8 @@ public class ExceptionHandlerMiddleware : IFunctionsWorkerMiddleware
         {
             var req = await context.GetHttpRequestDataAsync();
             var response = req!.CreateResponse();
-            await response.WriteAsJsonAsync(ex.ToString(), HttpStatusCode.InternalServerError);
+            await response.WriteAsJsonAsync(ex.ToString());
+            response.StatusCode = HttpStatusCode.InternalServerError;
 
             SetHttpResponseData(context, response);
         }

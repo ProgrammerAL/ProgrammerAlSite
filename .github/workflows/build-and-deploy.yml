@@ -13,7 +13,7 @@ jobs:
     environment: prod
     env:
       CONFIGURATION: Release
-      DOTNET_VERSION: 8.0.x
+      DOTNET_VERSION: 9.x.x
       SITE_PROJECT_NAME: ProgrammerAl.Site
       SRC_DIRECTORY_PATH: ${{ github.workspace }}/src/
       BUILD_ARTIFACTS_PATH: ${{ github.workspace }}/build_artifacts
