@@ -1,7 +1,7 @@
 ﻿@model ProgrammerAl.Site.PostDataEntities.PostEntry
 
 @{
-    string comicSrcLink = null;
+    string comicSrcLink = "";
 
     //Note: External sites don't like SVG so much, so we have to use the PNG version
     if (Model.TryGetComicPngLink(out var comicLink))
@@ -18,7 +18,7 @@
 <head>
     <title>@(Model.TitleHumanReadable)</title>
     <meta charset="utf-8">
-    <meta name="description" content="The personal site for AL Rodriguez, AKA ProgrammerAL. This site has blog posts, personal links like GitHub and Twitter, and other items of the like.">
+    <meta name="description" content="The personal site for AL Rodriguez, AKA ProgrammerAL. This site has blog posts, personal links like GitHub and Bluesky, and other items of the like.">
     <meta name="author" content="AL Rodriguez aka ProgrammerAL">
     <meta name="keywords" content="Blog, @tags">
     <meta name="google-site-verification" content="yiV1UDeEs1YKSvwq2GPgO6bEAEnPh8sX8JjqIennzuw">
