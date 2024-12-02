@@ -19,8 +19,11 @@ public partial class Post : ComponentBase
     private MarkupString PostHtml { get; set; }
     private PostData? PostData { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
+        PostData = null;
+        PostHtml = new MarkupString(string.Empty);
+
         if (!string.IsNullOrWhiteSpace(PostUrl))
         {
             PostData = await PostDataProvider.GetPostAsync(PostUrl);
@@ -28,11 +31,12 @@ public partial class Post : ComponentBase
             if (PostData is object)
             {
                 PostHtml = new MarkupString(PostData.PostHtml);
-                await InvokeAsync(StateHasChanged);
             }
         }
 
-        await base.OnInitializedAsync();
+        await InvokeAsync(StateHasChanged);
+
+        await base.OnParametersSetAsync();
     }
 
     private bool ShouldPostRequestFeedback()
