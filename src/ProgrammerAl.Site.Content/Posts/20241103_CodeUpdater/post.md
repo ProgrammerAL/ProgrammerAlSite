@@ -1,7 +1,6 @@
 Title: "New Project: Code Updater"
 Published: 2024/11/03
 Tags: 
-- Blog
 - Project
 - C#
 ---
