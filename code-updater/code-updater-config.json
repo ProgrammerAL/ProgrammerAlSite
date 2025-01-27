@@ -7,7 +7,7 @@
   },
   "loggingOptions": {
     "logLevel": "Verbose",
-    "outputFile": "./code-updater-output.txt"
+    "outputFile": "./code-updater-output.log"
   },
   "cSharpOptions": {
     "csProjVersioningOptions": {
