@@ -1,5 +1,5 @@
 Title: ConFoo 2025
-Published: 2025/26/02d
+Published: 2025/02/26
 Tags:
 
 - Conference
