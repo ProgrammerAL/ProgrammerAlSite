@@ -26,7 +26,7 @@ I performed two sessions, "Azure IaC for Developers with C# and Pulumi" and "Int
 
 <div class="post-multiple-links-div">
   <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2025/tree/main/confoo-2025/azure-iac">View Session Content on GitHub</a>
-  <a class="post-view-session-content-link" href="/posts/20252602_ConFoo2025/slides/1">View Slides in Browser</a>
+  <a class="post-view-session-content-link" href="/posts/20250226_ConFoo2025/slides/1">View Slides in Browser</a>
 </div>
 
 __Session Abstract__: 
@@ -36,7 +36,7 @@ As developers we know what our application needs from the cloud, so we should be
 
 <div class="post-multiple-links-div">
   <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2025/tree/main/confoo-2025/open-telemetry">View Session Content on GitHub</a>
-  <a class="post-view-session-content-link" href="/posts/20252602_ConFoo2025/slides/2">View Slides in Browser</a>
+  <a class="post-view-session-content-link" href="/posts/20250226_ConFoo2025/slides/2">View Slides in Browser</a>
 </div>
 
 __Session Abstract__: 
