@@ -15,7 +15,7 @@ Presentations:
 
 ---
 
-## ConFoo 2024
+## ConFoo 2025
 
 ConFoo 2025 is a software conference held in Montreal Canada February 26-28, 2025. https://confoo.ca/en/2025/schedule
 
