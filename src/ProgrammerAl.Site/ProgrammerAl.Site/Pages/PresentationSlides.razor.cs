@@ -61,29 +61,9 @@ public partial class PresentationSlides : ComponentBase
         if (!string.IsNullOrWhiteSpace(presentation.SlidesRootUrl))
         {
             slidesHtml = slidesHtml.Replace("background-image:url(&quot;", $"background-image:url(&quot;{presentation.SlidesRootUrl}/");
+            slidesHtml = slidesHtml.Replace("<img src=\"presentation-images/", $"<img src=\"{presentation.SlidesRootUrl}/presentation-images/");
         }
 
         return slidesHtml;
-    }
-
-    private bool ShouldPostRequestFeedback()
-    {
-        if (PostData is null)
-        {
-            return false;
-        }
-
-        var feedbackStartDate = PostData.Metadata.ReleaseDate.AddDays(-3);
-        var feedbackEndDate = PostData.Metadata.ReleaseDate.AddDays(7);
-
-        var todayDate = DateOnly.FromDateTime(DateTime.UtcNow);
-
-        if (todayDate < feedbackStartDate
-            || todayDate > feedbackEndDate)
-        {
-            return false;
-        }
-
-        return true;
     }
 }
