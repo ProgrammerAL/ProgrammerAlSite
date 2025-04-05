@@ -14,8 +14,7 @@ Presentations:
 
 ## Orlando Code Camp 2025
 
-Orlando Code Camp 2025 is a yearly Code Camp style conference in Orlando. The 2025 conference was held on April 5th. https://confoo.ca/en/2025/schedule
-
+Orlando Code Camp 2025 is a yearly Code Camp style conference in Orlando. The 2025 conference was held on April 5th. [The Schedule is Here](https://sessionize.com/api/v2/ofd7i82z/view/GridSmart?under=True)
 
 ## Setting Up Your C# Pit of Success
 
