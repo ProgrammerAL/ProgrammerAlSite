@@ -12,9 +12,9 @@ Presentations:
 
 ---
 
-## Atlanta CLoud Conference 2025
+## Atlanta Cloud Conference 2025
 
-Atlanta Cloud Conference 2025 is a yearly Code Camp style conference in Orlando. The 2025 conference was held on April 5th. [The Schedule is Here](https://sessionize.com/api/v2/0gqooth4/view/GridSmart?under=True)
+Atlanta Cloud Conference 2025 is a yearly community conference focusing on cloud topics, hosted in Atlanta. The 2025 conference was held on April 26th. [The full schedule is Here](https://sessionize.com/api/v2/0gqooth4/view/GridSmart?under=True)
 
 ## The State of Serverless: Azure 2025 Edition
 
@@ -27,5 +27,3 @@ __Session Abstract__:
 Serverless used to be all the rage, then the term became overloaded and it seems like we all stopped talking about it. But the technology is still alive and kicking. And like all technology, it has its own set of tradeoffs.
 
 In this talk we'll define what "Serverless" is, and discuss the different ways we write serverless code from a traditional model. We'll also review the different services Azure has available for hosting hosting our applications.
-
-
