@@ -108,7 +108,7 @@
 
     </style>
 
-    <rect x="0" y="0" width="600" height="300" class="background">
+    <rect x="0" y="0" width="800" height="300" class="background">
     </rect>
 
     <!-- <rect x="0" y="0" width="800" height="300" class="debug-rect">
