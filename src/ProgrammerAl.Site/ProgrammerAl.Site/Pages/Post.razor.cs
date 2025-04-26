@@ -41,7 +41,8 @@ public partial class Post : ComponentBase
 
     private bool ShouldPostRequestFeedback()
     {
-        if (PostData is null)
+        if (PostData is null
+            || PostData.Metadata.ReleaseDate == DateOnly.MinValue)//Drafts
         {
             return false;
         }
