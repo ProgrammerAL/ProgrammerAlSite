@@ -210,10 +210,10 @@
             </text>
 
             <text x="180" y="90" class="talking-text-1">
-                No! Bad Request!
+                Bad Request!
              </text>
 
-            <text x="160" y="105" class="talking-text-2">
+            <text x="160" y="108" class="talking-text-2">
                 Come back with a JWT!
              </text>
         </svg>
