@@ -13,7 +13,7 @@ Presentations:
 
 ## StirTrek Conference 2025
 
-StirTrek is a yearly, one-day software conference for developers, hosted in Columbus Ohio. The 2025 conference was held on May 2nd. https://stirtrek.com/
+StirTrek is a yearly, one-day software conference for developers, hosted in Columbus Ohio. The 2025 conference was held on May 2nd. https://stirtrek.com/ with the full schedule at https://stir-trek-2025.sessionize.com/
 
 ## Session: Intro to OpenTelemetry for Developers
 
