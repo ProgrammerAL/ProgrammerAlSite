@@ -14,7 +14,7 @@ namespace ProgrammerAl.Site.Pages;
 
 public partial class Posts : ComponentBase
 {
-    private static readonly string[] PostTypes = new string[] { "Blog", "Meetup", "Conference", "Podcast", "Recording" };
+    private static readonly string[] PostTypes = new string[] { "Blog", "Meetup", "Conference", "Podcast", "Video" };
 
     [Inject, NotNull]
     private PostSummariesProvider? PostSummariesProvider { get; set; }

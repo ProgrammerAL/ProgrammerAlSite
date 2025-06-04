@@ -2,7 +2,6 @@ Title: "Podcast: NET Core and the Raspberry Pi"
 Published: 2019/10/18
 Tags: 
 - Podcast
-- Recording
 - .NET
 - IoT
 - Raspberry Pi

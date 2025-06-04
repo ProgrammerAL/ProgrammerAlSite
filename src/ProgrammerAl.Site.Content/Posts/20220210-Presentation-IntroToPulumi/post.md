@@ -2,7 +2,7 @@ Title: "Presentation: Introduction to Pulumi"
 Published: 2022/02/10
 Tags: 
 - Meetup
-- Recording
+- Video
 - Pulumi
 - IaC
 ---
