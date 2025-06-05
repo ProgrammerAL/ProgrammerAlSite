@@ -38,7 +38,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.3.0
+          node-version: 20.0.0
       - name: Install Cloudflare Wrangler
         run: npm install --location=global wrangler
       - name: Install Pulumi
