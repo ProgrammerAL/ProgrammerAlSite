@@ -51,28 +51,28 @@ public record StorageApiStackBuilder(
         Pulumi.Log.Info($"Using storage api js file from: {GlobalConfig.DeploymentPackagesConfig.StorageApiWorkerFilePath}");
 
         var name = $"{serviceName}-script";
-        var apiScript = new WorkerScript(name, new()
+        var apiScript = new WorkersScript(name, new()
         {
             AccountId = GlobalConfig.CloudflareConfig.AccountId,
-            Name = GlobalConfig.StorageApiConfig.ServiceName,
+            ScriptName = GlobalConfig.StorageApiConfig.ServiceName,
             Content = File.ReadAllText(GlobalConfig.DeploymentPackagesConfig.StorageApiWorkerFilePath),
-            Module = true,
-            R2BucketBindings = new[]
+            MainModule = name,
+            Bindings = new[]
             {
-                new Cloudflare.Inputs.WorkerScriptR2BucketBindingArgs
+                new Cloudflare.Inputs.WorkersScriptBindingArgs
                 {
                     Name = "STORAGE_BUCKET",
                     BucketName = storageInfra.Bucket.Name,
+                    Type = "r2_bucket"
                 },
-            },
-            SecretTextBindings = new[]
-            {
-                new Cloudflare.Inputs.WorkerScriptSecretTextBindingArgs
+                new Cloudflare.Inputs.WorkersScriptBindingArgs
                 {
                     Name = "ADMIN_TOKEN",
                     Text = adminAuthToken.Result,
+                    Type = "secret_text",
                 },
-            },
+            }
+
         }, new CustomResourceOptions
         {
             Provider = provider
@@ -85,12 +85,13 @@ public record StorageApiStackBuilder(
     {
         var domainEndpoint = $"{GlobalConfig.StorageApiConfig.ServiceName}.{GlobalConfig.StorageApiConfig.ApiDomain}".ToLower();
 
-        var workerDomain = new WorkerDomain($"{serviceName}-worker-domain", new()
+        var workerDomain = new WorkersCustomDomain($"{serviceName}-worker-domain", new()
         {
             AccountId = GlobalConfig.CloudflareConfig.AccountId,
             ZoneId = GlobalConfig.StorageApiConfig.CloudflareZoneId,
-            Service = apiInfra.Script.Name,
-            Hostname = domainEndpoint
+            Service = apiInfra.Script.ScriptName,
+            Hostname = domainEndpoint,
+            Environment = "production"//We don't use cloudflare's environments, so just put "production" here because something is required
         }, new CustomResourceOptions
         {
             Provider = provider

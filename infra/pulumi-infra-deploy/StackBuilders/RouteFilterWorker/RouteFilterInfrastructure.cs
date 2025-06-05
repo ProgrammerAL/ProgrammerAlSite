@@ -11,5 +11,5 @@ public record RouteFilterInfrastructure(
 {
 
     public record WorkerInfrastructure(
-        Cloudflare.WorkerScript Script, Cloudflare.WorkerRoute workerRoute);
+        Cloudflare.WorkersScript Script, Cloudflare.WorkersRoute workerRoute);
 }

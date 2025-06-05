@@ -6,6 +6,7 @@ using static ProgrammerAl.Site.IaC.StackBuilders.RouteFilterWorker.RouteFilterIn
 using ProgrammerAl.Site.IaC.Utilities;
 using ProgrammerAl.Site.IaC.Config.GlobalConfigs;
 using ProgrammerAl.Site.IaC.StackBuilders.StorageApi;
+using Pulumi.Cloudflare.Inputs;
 
 namespace ProgrammerAl.Site.IaC.StackBuilders.RouteFilterWorker;
 
@@ -26,18 +27,19 @@ public record RouteFilterStackBuilder(
     private WorkerInfrastructure CreateWorker(string serviceName, Provider provider)
     {
         var name = $"{serviceName}-script";
-        var apiScript = new WorkerScript(name, new()
+        var apiScript = new WorkersScript(name, new()
         {
             AccountId = GlobalConfig.CloudflareConfig.AccountId,
-            Name = GlobalConfig.RouteFilterWorkerConfig.ServiceName,
+            ScriptName = GlobalConfig.RouteFilterWorkerConfig.ServiceName,
             Content = File.ReadAllText(GlobalConfig.DeploymentPackagesConfig.RouteFilterWorkerFilePath),
-            Module = true,
-            PlainTextBindings = new[]
+            MainModule = name,
+            Bindings = new[] 
             {
-                new Pulumi.Cloudflare.Inputs.WorkerScriptPlainTextBindingArgs
+                new WorkersScriptBindingArgs
                 {
                     Name = "STORAGE_API_ENDPOINT",
                     Text = StorageApiInfra.Domain.HttpsEndpoint,
+                    Type = "plain_text",
                 },
             }
         }, new CustomResourceOptions
@@ -45,10 +47,10 @@ public record RouteFilterStackBuilder(
             Provider = provider
         });
 
-        var workerRoute = new WorkerRoute($"{serviceName}-route", new WorkerRouteArgs
+        var workerRoute = new WorkersRoute($"{serviceName}-route", new WorkersRouteArgs
         {
             ZoneId = GlobalConfig.RouteFilterWorkerConfig.CloudflareZoneId,
-            ScriptName = apiScript.Name,
+            Script = apiScript.ScriptName,
             Pattern = GlobalConfig.RouteFilterWorkerConfig.RoutePattern,
 
         }, new CustomResourceOptions
