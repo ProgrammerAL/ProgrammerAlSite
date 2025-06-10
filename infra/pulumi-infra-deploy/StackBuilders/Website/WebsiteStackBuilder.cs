@@ -148,20 +148,19 @@ public record WebsiteStackBuilder(GlobalConfig GlobalConfig,
         var pagesDomain = new Cloudflare.PagesDomain("public-web-app-pages-domain", new()
         {
             AccountId = GlobalConfig.CloudflareConfig.AccountId,
-            Domain = pagesDomainEndpoint,
+            Name = pagesDomainEndpoint,
             ProjectName = webClientInfra.PagesProject.Name,
         }, new CustomResourceOptions
         {
             Provider = provider
         });
 
-        var record = new Cloudflare.Record("website-cname", new Cloudflare.RecordArgs
+        var record = new Cloudflare.DnsRecord("website-cname", new Cloudflare.DnsRecordArgs
         {
             Name = pagesDomainEndpoint,
-            Value = webClientInfra.PagesProject.Subdomain,
+            Content = webClientInfra.PagesProject.Subdomain,
             ZoneId = GlobalConfig.WebClientInfraConfig.CloudflareZoneId,
             Proxied = true,
-            AllowOverwrite = true,
             Type = "CNAME",
             Ttl = 1,//Has to be set to 1 because this is proxied
         }, new CustomResourceOptions

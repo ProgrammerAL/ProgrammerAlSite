@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Pulumi.AzureNative.Resources;
-using Pulumi.AzureNative.Devices;
 using System.Collections.Immutable;
 using Pulumi.AzureAD.Outputs;
 
@@ -91,18 +90,6 @@ public static class AzureUtilities
             (string containerName, string accountName, string resourceGroupName) = t;
             return Output.Format($"https://{accountName}.blob.core.windows.net/{containerName}");
         });
-    }
-
-    public static Output<string> GetAzureIotHubOwnerConnectionString(ResourceGroup resourceGroup, Input<string> iotHubName)
-    {
-        return ListIotHubResourceKeysForKeyName.Invoke(
-            new ListIotHubResourceKeysForKeyNameInvokeArgs
-            {
-                KeyName = "iothubowner",
-                ResourceGroupName = resourceGroup.Name.Apply(x => x),
-                ResourceName = iotHubName
-            })
-            .Apply(x => Output.Format($"HostName={iotHubName.Apply(y => y)}.azure-devices.net;SharedAccessKeyName={x.KeyName};SharedAccessKey={x.PrimaryKey}"));
     }
 
     public static string GenerateBlobFileResourceName(FileInfo file)

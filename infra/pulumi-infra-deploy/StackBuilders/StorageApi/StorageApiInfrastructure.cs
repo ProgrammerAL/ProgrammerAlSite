@@ -16,10 +16,10 @@ public record StorageApiInfrastructure(
         Cloudflare.R2Bucket Bucket);
 
     public record ApiInfrastructure(
-        Cloudflare.WorkerScript Script,
+        Cloudflare.WorkersScript Script,
         Pulumi.Random.RandomUuid AdminAuthToken);
 
     public record DomainInfrastructure(
-        Cloudflare.WorkerDomain WorkerDomain,
+        Cloudflare.WorkersCustomDomain WorkerDomain,
         Output<string> HttpsEndpoint);
 }
