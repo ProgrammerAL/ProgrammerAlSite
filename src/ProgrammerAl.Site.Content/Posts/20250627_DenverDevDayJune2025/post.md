@@ -14,7 +14,7 @@ Presentations:
 
 ---
 
-## StirTrek Conference 2025
+## Denver Dev Day June 2025
 
 Denver Dev Day is a twice-yearly conference held in...Denver. It is a one-day software conference for developers. The 2025 June conference was held on June 27th at Red Rocks Community College. https://stirtrek.com/ with the full schedule at https://denverdevday.github.io/jun-2025/sessions.html#sessions
 
@@ -23,7 +23,7 @@ At this conference I performed two sessions. "Azure Managed Identities: Connect 
 ## Session: Azure Managed Identities: Connect Without Connection Strings
 
 <div class="post-multiple-links-div">
-  <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2025/tree/main/denver-dev-day-june-2025">View Session Content on GitHub</a>
+  <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2025/tree/main/denver-dev-day-june-2025/azure-managed-identities">View Session Content on GitHub</a>
   <a class="post-view-session-content-link" href="/posts/20250627_DenverDevDayJune2025/slides/1">View Slides in Browser</a>
 </div>
 
@@ -37,7 +37,7 @@ Let's explore Azure Managed Identities and see how easy they are to use in our c
 ## Session: Setting Up a C# Pit of Success
 
 <div class="post-multiple-links-div">
-  <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2025/tree/main/denver-dev-day-june-2025">View Session Content on GitHub</a>
+  <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2025/tree/main/denver-dev-day-june-2025/csharp-pit-of-success">View Session Content on GitHub</a>
   <a class="post-view-session-content-link" href="/posts/20250627_DenverDevDayJune2025/slides/2">View Slides in Browser</a>
 </div>
 
