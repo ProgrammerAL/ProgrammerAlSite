@@ -41,8 +41,8 @@
         <NuGetAuditLevel>low</NuGetAuditLevel>
     </PropertyGroup>
     <PropertyGroup>
-        <!--<PublishTrimmed>true</PublishTrimmed>
-        <TrimMode>full</TrimMode>-->
+        <PublishTrimmed>true</PublishTrimmed>
+        <!--<TrimMode>full</TrimMode>-->
 
         <!--Disable Localization-->
         <InvariantGlobalization>true</InvariantGlobalization>
