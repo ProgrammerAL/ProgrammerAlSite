@@ -42,6 +42,7 @@
     </PropertyGroup>
     <PropertyGroup>
         <PublishTrimmed>true</PublishTrimmed>
+        <!--Leave Trim Mode as its default value (Partial), otherwise the site errors on startup when deployed. Haven't figured out why.-->
         <!--<TrimMode>full</TrimMode>-->
 
         <!--Disable Localization-->
