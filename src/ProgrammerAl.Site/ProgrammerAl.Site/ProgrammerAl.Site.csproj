@@ -49,7 +49,7 @@
         <InvariantTimezone>true</InvariantTimezone>
         <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
 
-        <!--Disable WASM Exception Handling--><!--
-        <WasmEnableExceptionHandling>false</WasmEnableExceptionHandling>-->
+        <!--Disable WASM Exception Handling-->
+        <WasmEnableExceptionHandling>false</WasmEnableExceptionHandling>
     </PropertyGroup>
 </Project>
