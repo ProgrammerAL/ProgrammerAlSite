@@ -41,15 +41,15 @@
         <NuGetAuditLevel>low</NuGetAuditLevel>
     </PropertyGroup>
     <PropertyGroup>
-        <PublishTrimmed>true</PublishTrimmed>
-        <TrimMode>full</TrimMode>
+        <!--<PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>full</TrimMode>-->
 
-        <!--Disable Localization-->
+        <!--Disable Localization--><!--
         <InvariantGlobalization>true</InvariantGlobalization>
         <InvariantTimezone>true</InvariantTimezone>
         <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
 
-        <!--Disable WASM Exception Handling-->
-        <WasmEnableExceptionHandling>false</WasmEnableExceptionHandling>
+        --><!--Disable WASM Exception Handling--><!--
+        <WasmEnableExceptionHandling>false</WasmEnableExceptionHandling>-->
     </PropertyGroup>
 </Project>
