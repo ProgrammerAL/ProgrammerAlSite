@@ -6,7 +6,7 @@ Tags:
 - C#
 
 Presentations:
-- Id: 2
+- Id: 1
   SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2025/main/glugnet-meetup-july-2025/csharp-pit-of-success
 
 ---
