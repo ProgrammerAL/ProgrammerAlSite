@@ -4,6 +4,7 @@ Tags:
 
 - Conference
 - OpenTelemetry
+- Video
 
 Presentations:
 - Id: 1
@@ -26,4 +27,13 @@ __Session Abstract__:
 OpenTelemetry (OTel) is a vendor-neutral, open standard for observing distributed applications. With OTel, you can trace individual requests and view specific metrics about the system's current state. It's like a superset of traditional logging and can be used with or instead of log statements.
 
 In this session, we'll review the basics of OpenTelemetry, discuss why you should consider using it, and see a demo of using it across backend services.
+
+
+## Videos
+
+The full recordings of all conference sessions are on YouTube at: https://www.youtube.com/playlist?list=PLaHMqLt8nxCwHLWI1LL3yKuAvgSj_EcUe
+
+The recoding of my session is:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XNwJVhMY9-Q?si=bVmJ-4B2rlWMLcHP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 

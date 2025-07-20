@@ -1,4 +1,4 @@
-Title: A Very Opinionated ASP.NET
+Title: Youtube Series: A Very Opinionated ASP.NET
 Published: 2025/06/03
 Tags:
 

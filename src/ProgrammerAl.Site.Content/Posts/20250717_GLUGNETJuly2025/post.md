@@ -4,6 +4,7 @@ Tags:
 
 - Meetup
 - C#
+- Video
 
 Presentations:
 - Id: 1
@@ -29,3 +30,4 @@ Did you know a C# project can tell you when there's a known security vulnerabili
 
 In this session, we'll look at features like those above (and more!) that we can enable within our codebases to set us up for future success. And best of all, you can enable all of these features for free. So you can enable them whenever you're ready.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Jv7FtJiLIe8?si=U9yOpJwLd_mpJTBv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
