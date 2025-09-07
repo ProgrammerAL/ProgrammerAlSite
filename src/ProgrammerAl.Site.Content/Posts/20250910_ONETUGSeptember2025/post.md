@@ -13,7 +13,7 @@ Presentations:
 
 ## ONETUG September 2025
 
-The Orlando .NET Developers Gropu (aka ONETUG) meetup group invited me to speak in their September 2025 meetup on Nullable Reference Types in C#: https://www.meetup.com/onetug/events/310624118
+The Orlando .NET Developers Group (aka ONETUG) invited me to speak in their September 2025 meetup about Nullable Reference Types in C#: https://www.meetup.com/onetug/events/310624118
 
 ## Acount null! in C#
 
@@ -29,5 +29,4 @@ In this session we'll review (and demo!) the different ways Nullable Reference T
 - The helpful NRT C# syntax and attributes
 - How NRT code is different for object deserialization
 - Cases where NRTs aren't as helpful as we'd like them to be
-
 
