@@ -7,7 +7,7 @@ Tags:
 
 Presentations:
 - Id: 1
-  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2025/main/onetug-meetup-september-2025
+  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2025/main/boston-code-camp-38/csharp-pit-of-success
 
 ---
 
