@@ -33,7 +33,7 @@ public record RouteFilterStackBuilder(
             ScriptName = GlobalConfig.RouteFilterWorkerConfig.ServiceName,
             Content = File.ReadAllText(GlobalConfig.DeploymentPackagesConfig.RouteFilterWorkerFilePath),
             MainModule = name,
-            Bindings = new[] 
+            Bindings = new[]
             {
                 new WorkersScriptBindingArgs
                 {

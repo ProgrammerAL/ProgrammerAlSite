@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using ProgrammerAl.Site.HttpClients.FeedbackApi;
 
 namespace ProgrammerAl.Site.Components;
+
 public partial class PostFeedbackComponent : ComponentBase
 {
     [Inject, NotNull]

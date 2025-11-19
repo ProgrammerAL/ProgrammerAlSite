@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProgrammerAl.Site.IaC.Config;
+
 public record AzureConfig(
     GetClientConfigResult ClientConfig,
     string Location,
