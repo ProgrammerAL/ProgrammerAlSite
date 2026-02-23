@@ -7,9 +7,9 @@ Tags:
 
 Presentations:
 - Id: 1
-  SlidesRootUrl: https://github.com/ProgrammerAL/Presentations-2026/main/confoo-2026/csharp-pit-of-success
+  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2026/main/confoo-2026/csharp-pit-of-success
 - Id: 2
-  SlidesRootUrl: https://github.com/ProgrammerAL/Presentations-2026/main/confoo-2026/coding-csharp-with-csharp
+  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2026/main/confoo-2026/coding-csharp-with-csharp
 
 ---
 
