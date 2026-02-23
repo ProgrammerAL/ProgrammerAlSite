@@ -9,7 +9,7 @@ Presentations:
 - Id: 1
   SlidesRootUrl: https://github.com/ProgrammerAL/Presentations-2026/tree/main/confoo-2026/csharp-pit-of-success
 - Id: 2
-  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2025/main/boston-code-camp-38/csharp-pit-of-success
+  SlidesRootUrl: https://github.com/ProgrammerAL/Presentations-2026/tree/main/confoo-2026/coding-csharp-with-csharp
 
 ---
 
