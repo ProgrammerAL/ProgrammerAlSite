@@ -16,7 +16,7 @@ Presentations:
 
 The Greater Lansing User Group for .NET Developers (aka GLUGNET) meetup group invited me to speak virtually at their March 2026 meetup on "Avoiding null! in C#": https://www.meetup.com/glugnet/events/313635890
 
-## Setting Up a C# Pit of Success
+## Avoiding null! in C#
 
 <div class="post-multiple-links-div">
   <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2026/tree/main/glugnet-meetup-march-2026">View Session Content on GitHub</a>
