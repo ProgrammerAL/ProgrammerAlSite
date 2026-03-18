@@ -19,7 +19,7 @@ The Greater Lansing User Group for .NET Developers (aka GLUGNET) meetup group in
 ## Setting Up a C# Pit of Success
 
 <div class="post-multiple-links-div">
-  <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2025/tree/main/glugnet-meetup-march-2026">View Session Content on GitHub</a>
+  <a class="post-session-content-link" target="_blank" href="https://github.com/ProgrammerAL/Presentations-2026/tree/main/glugnet-meetup-march-2026">View Session Content on GitHub</a>
   <a class="post-view-session-content-link" href="/posts/20260319_GLUGNETMarch2026/slides/1">View Slides in Browser</a>
 </div>
 
