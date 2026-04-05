@@ -10,7 +10,7 @@ Presentations:
 - Id: 1
   SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2026/main/codestock/csharp-pit-of-success
 - Id: 2
-  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2026/main/codestock/coding-csharp-with-csharp
+  SlidesRootUrl: https://raw.githubusercontent.com/ProgrammerAL/Presentations-2026/main/codestock/whats-in-a-container-image
 
 ---
 
@@ -18,7 +18,7 @@ Presentations:
 
 CodeStock is a development conference held in Knoxville, Tennessee. The 2026 event was held April 9019. The full site info is at: https://www.codestock.org. 
 
-Full Schedule: https://sessionize.com/api/v2/vho4lqow/view/GridSmart
+Full Schedule: https://sessionize.com/api/v2/vho4lqow/view/GridSmart?under=True
 Speakers List: https://www.codestock.org/2026-speakers
 
 
