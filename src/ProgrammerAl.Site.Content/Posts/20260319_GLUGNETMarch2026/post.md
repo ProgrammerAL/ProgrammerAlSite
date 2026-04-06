@@ -33,3 +33,5 @@ In this session we'll review (and demo!) the different ways Nullable Reference T
 - How NRT code is different for object deserialization
 - Cases where NRTs aren't as helpful as we'd like them to be
 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3b8vUZWz5rg?si=_ASVxoLmlVnKuDIf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
