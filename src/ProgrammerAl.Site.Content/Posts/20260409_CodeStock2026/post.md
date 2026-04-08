@@ -16,11 +16,10 @@ Presentations:
 
 ## CodeStock 2026
 
-CodeStock is a development conference held in Knoxville, Tennessee. The 2026 event was held April 9019. The full site info is at: https://www.codestock.org. 
+CodeStock is a development conference held in Knoxville, Tennessee. The 2026 event was held April 9-10. The full site info is at: https://www.codestock.org. 
 
-Full Schedule: https://sessionize.com/api/v2/vho4lqow/view/GridSmart?under=True
-Speakers List: https://www.codestock.org/2026-speakers
-
+- Full Schedule: https://sessionize.com/api/v2/vho4lqow/view/GridSmart?under=True
+- Speakers List: https://www.codestock.org/2026-speakers
 
 I performed two sessions, "Setting Up Your C# Pit of Success" and "What's in a container image?".
 
