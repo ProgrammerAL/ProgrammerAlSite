@@ -14,7 +14,7 @@ Presentations:
 
 ## Scenic City Summit 2026
 
-Scenic City Summit 2026 is a conference held in Chattanooga Tennessee. The 2026 conference was held on June 5th. [The Schedule is Here](https://sessionize.com/api/v2/er10xu03/view/GridSmart?under=True)
+Scenic City Summit 2026 is a conference held in Chattanooga Tennessee. The 2026 conference was held on June 5th. [The Schedule is Here](https://sessionize.com/api/v2/dmg2cawt/view/GridSmart?under=True)
 
 ## Setting Up Your C# Pit of Success
 
