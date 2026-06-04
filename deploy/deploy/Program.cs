@@ -32,6 +32,7 @@ public class BuildContext : FrostingContext
     public string WorkspacePath { get; }
     public string PulumiPath { get; }
     public string PulumiStackName { get; }
+    public string PulumiCommand { get; }
     public string UnzippedArtifactsDir { get; }
     public string BuildArtifactsPath { get; }
 
@@ -41,6 +42,7 @@ public class BuildContext : FrostingContext
         WorkspacePath = LoadParameter(context, nameof(WorkspacePath));
         BuildArtifactsPath = LoadParameter(context, nameof(BuildArtifactsPath));
         PulumiPath = WorkspacePath + "/infra/pulumi-infra-deploy";
+        PulumiCommand = LoadParameter(context, nameof(PulumiCommand));
         UnzippedArtifactsDir = (WorkspacePath + "/unzipped_artifacts").Replace("\\", "/");
 
         PulumiStackName = LoadParameter(context, nameof(PulumiStackName));
@@ -130,17 +132,66 @@ public sealed class PulumiDeployTask : AsyncFrostingTask<BuildContext>
     public override async Task RunAsync(BuildContext context)
     {
         var fullStackName = $"ProgrammerAL/{context.PulumiStackName}";
-
         context.Log.Information($"Loading stack {fullStackName} from path '{context.PulumiPath}'");
 
         var stackArgs = new LocalProgramArgs(fullStackName, context.PulumiPath);
         var pulumiStack = await LocalWorkspace.CreateOrSelectStackAsync(stackArgs);
 
-        context.Log.Information($"Pulumi Up starting...");
+        if (string.Equals(context.PulumiCommand, "Up", StringComparison.OrdinalIgnoreCase))
+        {
+            await RunUpAsync(context, pulumiStack);
+        }
+        else if (string.Equals(context.PulumiCommand, "RefreshRunProgram", StringComparison.OrdinalIgnoreCase))
+        {
+            await RunRefreshRunProgramAsync(context, pulumiStack);
+        }
+        else
+        {
+            throw new Exception($"Unknown Pulumi command '{context.PulumiCommand}'");
+        }
+    }
 
+    private async Task RunUpAsync(BuildContext context, WorkspaceStack pulumiStack)
+    {
+        context.Log.Information($"Pulumi Up starting...");
         var result = await pulumiStack.UpAsync();
+
         context.Log.Information($"Pulumi Up completed");
-        Utilities.LogPulumiResult(context, result);
+
+        if (result.Summary.Result == UpdateState.Succeeded)
+        {
+            context.Log.Information($"Pulumi Summary Message: {result.Summary.Message}");
+        }
+        else
+        {
+            context.Log.Error($"Pulumi Summary Message: {result.Summary.Message}");
+        }
+
+        context.Log.Information($"Pulumi standard output: {result.StandardOutput}");
+        context.Log.Information($"Pulumi standard error: {result.StandardError}");
+    }
+
+    private async Task RunRefreshRunProgramAsync(BuildContext context, WorkspaceStack pulumiStack)
+    {
+        context.Log.Information($"Pulumi Refresh starting...");
+        var result = await pulumiStack.RefreshAsync(options: new RefreshOptions
+        {
+            RunProgram = true
+        });
+
+        context.Log.Information($"Pulumi Refresh completed");
+
+        if (result.Summary.Result == UpdateState.Succeeded)
+        {
+            context.Log.Information($"Pulumi Summary Message: {result.Summary.Message}");
+        }
+        else
+        {
+            context.Log.Error($"Pulumi Summary Message: {result.Summary.Message}");
+        }
+
+        context.Log.Information($"Pulumi standard output: {result.StandardOutput}");
+        context.Log.Information($"Pulumi standard error: {result.StandardError}");
     }
 }
 
