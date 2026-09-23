@@ -12,10 +12,11 @@ Presentations:
 
 ---
 
-20261112 UpdateConfPrague2026
 ## Update Conference Prague 2026
 
-Nooga Coffee & Code is an meetup primarily hosted in person in Chattanooga Tennessee. This meetup event was done as a mix, with me presenting remotely. The event link is at: https://www.meetup.com/nooga-code-coffee/events/313133434
+Update Conference Prague 2024 was hosted on November 12-13, 2026. https://www.updateconference.net/en/2026/schedule
+
+I performed a session titled, Today's "Best Practices" of User Authentication, which is an overview of the best practices developers should follow when maintaining authenticated sessions between clients, APIs, and IdPs.
 
 ## Today's "Best Practices" of User Authentication
 
