@@ -10,7 +10,7 @@
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Cake.Frosting" Version="6.2.0" />
+    <PackageReference Include="Cake.Frosting" Version="6.3.0" />
     <PackageReference Include="Cake.GitHub" Version="1.0.0" />
     <PackageReference Include="Cake.Npm" Version="5.1.0" />
     <PackageReference Include="NuGet.Packaging" Version="7.9.0" />
