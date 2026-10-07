@@ -15,7 +15,7 @@
         <PackageReference Include="CommandLineParser" Version="2.9.1" />
         <PackageReference Include="OpenTelemetry.Api" Version="1.19.1" />
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.19.1" />
-        <PackageReference Include="Pulumi.Automation" Version="3.114.0" />
+        <PackageReference Include="Pulumi.Automation" Version="3.114.2" />
     </ItemGroup>
     <PropertyGroup>
         <NuGetAudit>true</NuGetAudit>
