@@ -29,3 +29,4 @@ Remembering every step of a coding pattern opens the door to mistakes. We’re h
 In this session we’ll review the basics of those aforementioned features built into C# for codifying our code. We’ll also take time to discuss the pros and cons of those features to understand when it’s beneficial to codify our code or not.
 
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lyntUIgGW_Y?si=3QS6BU7qWV6Saf-2" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
