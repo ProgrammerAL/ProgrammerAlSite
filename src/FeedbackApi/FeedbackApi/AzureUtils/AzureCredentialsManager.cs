@@ -36,7 +36,7 @@ public class AzureCredentialsManager : IAzureCredentialsManager
         }
         else
         {
-            var managedIdCred = new ManagedIdentityCredential();
+            var managedIdCred = new ManagedIdentityCredential(new ManagedIdentityCredentialOptions(ManagedIdentityId.SystemAssigned));
             AzureTokenCredential = new ChainedTokenCredential(managedIdCred);
         }
     }
