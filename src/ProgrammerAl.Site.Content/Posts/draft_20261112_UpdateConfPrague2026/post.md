@@ -14,7 +14,7 @@ Presentations:
 
 ## Update Conference Prague 2026
 
-Update Conference Prague 2024 was hosted on November 12-13, 2026. https://www.updateconference.net/en/2026/schedule
+Update Conference Prague 2026 was hosted on November 12-13, 2026. https://www.updateconference.net/en/2026/schedule
 
 I performed a session titled, Today's "Best Practices" of User Authentication, which is an overview of the best practices developers should follow when maintaining authenticated sessions between clients, APIs, and IdPs.
 
