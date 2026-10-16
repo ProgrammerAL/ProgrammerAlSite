@@ -2,7 +2,8 @@
   "updatePathOptions": {
     "rootDirectory": "../",
     "ignorePatterns": [
-      "/code-updater/"
+      "/code-updater/",
+      "/node_modules/"
     ]
   },
   "loggingOptions": {
